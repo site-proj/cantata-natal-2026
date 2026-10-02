@@ -290,6 +290,47 @@
       .footer-inner { flex-direction: column; gap: 5px; }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } html.js .reveal:not(.is-visible) { opacity: 1; transform: none; } }
+
+    /* Apresentação ampliada: aproveita a tela e mantém a leitura no telão. */
+    .presentation-overlay { padding: 8px; }
+    .presentation-shell { width: 100%; }
+    .presentation-slide { aspect-ratio: auto; height: calc(100svh - 76px); padding: clamp(20px, 3vw, 56px); }
+    .presentation-slide:not(.cover) { padding-bottom: 54px; }
+    .slide-content { width: min(1240px, 100%); transform-origin: center; }
+    .presentation-slide p { max-width: 1100px; font-size: clamp(20px, 2.3vw, 38px); line-height: 1.45; }
+    .presentation-slide h2 { font-size: clamp(32px, 5vw, 86px); }
+    .presentation-slide.dense h2 { font-size: clamp(30px, 4.3vw, 72px); }
+    .presentation-slide.dense p { font-size: clamp(20px, 2.15vw, 34px); }
+    .slide-kicker { font-size: clamp(12px, 1.3vw, 21px); }
+    .slide-mark { font-size: clamp(13px, 1.35vw, 22px); }
+    .presentation-slide.cover h2 { font-size: clamp(36px, 5vw, 82px); }
+    .presentation-slide.cover p { font-size: clamp(20px, 2vw, 32px); }
+    .slide-song-list { max-width: 1100px; }
+    .slide-song-list span { font-size: clamp(17px, 1.65vw, 27px); }
+    .slide-team-card { min-height: 0; padding: clamp(14px, 1.5vw, 26px); }
+    .slide-team-heading h2 { font-size: clamp(30px, 3.6vw, 60px); }
+    .slide-team-card h3 { font-size: clamp(18px, 1.65vw, 28px); }
+    .slide-team-card p { font-size: clamp(17px, 1.45vw, 24px); line-height: 1.45; }
+    .slide-team-chip { font-size: clamp(13px, 1.2vw, 20px); }
+    .slide-diary-intro p { font-size: clamp(18px, 1.65vw, 28px); }
+    .slide-diary-gallery .media-card h3 { font-size: clamp(18px, 1.65vw, 27px); }
+    .slide-diary-gallery .media-card p { font-size: clamp(16px, 1.3vw, 22px); }
+    .slide-calendar-card .calendar-day { min-height: clamp(32px, 3vw, 48px); font-size: clamp(14px, 1.2vw, 20px); }
+    .slide-calendar-card .calendar-title h3 { font-size: clamp(18px, 1.6vw, 26px); }
+    .slide-calendar-card .calendar-legend, .slide-calendar-card .calendar-note { font-size: clamp(14px, 1.2vw, 20px); }
+    .presentation-controls { padding-top: 8px; }
+    @media (max-width: 700px) and (orientation: portrait) {
+      .presentation-slide { height: calc(100svh - 76px); padding: 20px 14px 48px; }
+      .slide-team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .slide-team-card img { height: 38px; }
+      .slide-team-card h3 { font-size: 16px; }
+      .slide-team-card p { font-size: 14px; }
+      .slide-team-strip { display: none; }
+      .agenda-slide .slide-content { grid-template-columns: 1fr; gap: 18px; }
+      .slide-diary-gallery { grid-template-columns: 1fr 1fr; }
+      .slide-diary-gallery .media-card:first-child { grid-row: auto; grid-column: span 2; }
+      .presentation-slide.cover .slide-mark { font-size: 13px; }
+    }
   </style>
 </head>
 <body>
@@ -523,6 +564,19 @@
     const slideCount = document.getElementById('slide-count');
     let currentSlide = 0;
     let lastFocusedElement = null;
+    function fitPresentation() {
+      const slide = slides[currentSlide];
+      const content = slide.querySelector('.slide-content');
+      if (!content || !presentation.classList.contains('open')) return;
+      content.style.transform = '';
+      const style = getComputedStyle(slide);
+      const available = slide.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
+      const scale = Math.min(1, available / content.scrollHeight);
+      content.style.transform = scale < 1 ? `scale(${scale})` : '';
+    }
+    window.addEventListener('resize', fitPresentation);
+    document.addEventListener('fullscreenchange', fitPresentation);
+    document.fonts.ready.then(fitPresentation);
     function showSlide(index) {
       currentSlide = (index + slides.length) % slides.length;
       slides.forEach((slide, slideIndex) => {
@@ -531,6 +585,7 @@
         slide.setAttribute('aria-hidden', String(!active));
       });
       slideCount.textContent = `${currentSlide + 1} / ${slides.length}`;
+      requestAnimationFrame(fitPresentation);
     }
     async function openPresentation() {
       lastFocusedElement = document.activeElement;
