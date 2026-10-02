@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#100d0a">
+  <meta name="description" content="Acompanhe os bastidores, equipes e agenda da Cantata de Natal 2026 Quando o Céu Tocou a Terra, na Renascer Jundiaí.">
+  <title>Quando o Céu Tocou a Terra | Cantata de Natal 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=DM+Sans:wght@400;500;600;700&family=Tangerine:wght@700&display=swap" rel="stylesheet">
+  <script>document.documentElement.classList.add('js')</script>
+  <style>
+    :root { color-scheme: dark; --night: #100d0a; --panel: #19130e; --gold: #dfbb77; --ivory: #f4ead5; --muted: #c3b9a8; --line: rgba(223,187,119,.24); --serif: "Cinzel", Georgia, serif; --sans: "DM Sans", Arial, sans-serif; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--night); color: var(--ivory); font-family: var(--sans); font-size: 17px; line-height: 1.72; }
+    a { color: inherit; }
+    .wrap { width: min(1120px, calc(100% - 44px)); margin-inline: auto; }
+    .nav { position: fixed; z-index: 10; inset: 0 0 auto; border-bottom: 1px solid rgba(223,187,119,.14); background: rgba(16,13,10,.76); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 13px; }
+    .brand { color: var(--gold); font-family: var(--serif); font-size: .68rem; letter-spacing: .18em; text-decoration: none; text-transform: uppercase; }
+    .nav-links { display: flex; gap: 4px; align-items: center; padding: 4px; border: 1px solid rgba(223,187,119,.16); border-radius: 999px; background: rgba(255,255,255,.035); }
+    .nav-links a { padding: 7px 13px; border-radius: 999px; color: #e9dfcc; font-size: .8rem; text-decoration: none; white-space: nowrap; transition: background .25s ease, color .25s ease; }
+    .nav-links a[aria-current="location"] { color: var(--gold); background: rgba(223,187,119,.12); }
+    .nav-links a:hover, .nav-links a:focus-visible { color: #20160c; background: var(--gold); outline: none; }
+    .hero { min-height: max(740px, 100svh); position: relative; display: grid; place-items: start center; overflow: hidden; isolation: isolate; background: #100d0a url("images/manjedoura-fundo.png") center 58% / cover no-repeat; }
+    .hero::before { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(180deg, rgba(10,8,6,.68) 0%, rgba(10,8,6,.23) 42%, rgba(10,8,6,.12) 64%, #100d0a 100%); }
+    .hero-content { width: min(100% - 36px, 1080px); padding-top: clamp(132px, 18vh, 180px); text-align: center; }
+    .eyebrow { color: var(--gold); font-size: .75rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
+    h1 { margin: 21px 0 18px; color: var(--ivory); font-family: var(--serif); font-size: clamp(2.4rem, 6.2vw, 5.7rem); font-weight: 500; line-height: .96; letter-spacing: .07em; text-transform: uppercase; text-shadow: 0 3px 28px rgba(0,0,0,.9), 0 0 50px rgba(228,192,128,.16); }
+    h1 span { display: block; }
+    h1 .terra { margin-top: 4px; color: #edc878; font-family: "Tangerine", cursive; font-size: clamp(5.4rem, 13vw, 10rem); font-weight: 700; line-height: .7; letter-spacing: .01em; text-transform: none; }
+    .hero-copy { max-width: 650px; margin: 31px auto 0; color: #eee2cc; font-size: clamp(1.1rem, 1.9vw, 1.28rem); text-shadow: 0 2px 18px #000; }
+    .hero-meta { display: flex; justify-content: center; flex-wrap: wrap; gap: 11px 24px; margin-top: 27px; color: #e8cf9e; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; }
+    .hero-meta span { display: inline-flex; align-items: center; gap: 8px; }
+    .hero-meta svg { width: 16px; height: 16px; flex: 0 0 auto; }
+    .actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .present-trigger { cursor: pointer; font-family: var(--sans); }
+    .button { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0 21px; border: 1px solid var(--gold); background: var(--gold); color: #20160c; font-size: .82rem; font-weight: 700; letter-spacing: .04em; text-decoration: none; transition: .2s ease; }
+    .button:hover { transform: translateY(-2px); background: #f0d49c; }
+    .button.outline { color: var(--ivory); background: rgba(15,11,8,.52); border-color: rgba(244,234,213,.48); }
+    .button.outline:hover { background: rgba(15,11,8,.82); border-color: var(--gold); }
+    section { padding-block: 96px; }
+    .intro { color: #251d14; background: #eee5d3; }
+    .intro-grid { display: grid; grid-template-columns: .84fr 1.16fr; gap: 78px; align-items: start; }
+    .intro .eyebrow, .teams .eyebrow, .behind .eyebrow, .agenda .eyebrow { color: #8a672f; }
+    h2 { margin: 15px 0 18px; font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.45rem); font-weight: 500; line-height: 1.14; letter-spacing: -.02em; }
+    .intro-copy { color: #51483c; font-size: 1.13rem; }
+    .intro-copy p:last-child { margin-bottom: 0; }
+    .promise { margin-top: 24px; padding-left: 17px; border-left: 2px solid #bc9655; color: #342719; font-family: var(--serif); font-size: 1.28rem; line-height: 1.5; }
+    .scenes { background: #17110c; }
+    .scenes-head { max-width: 790px; margin-bottom: 42px; }
+    .scenes-head p { margin: 0; color: var(--muted); font-size: 1.08rem; }
+    .scene-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; }
+    .scene-card { position: relative; min-height: 185px; padding: 25px 28px 25px 76px; border: 1px solid var(--line); background: linear-gradient(140deg, rgba(223,187,119,.055), rgba(255,255,255,.012)); transition: transform .3s ease, border-color .3s ease; }
+    .scene-card:hover { transform: translateY(-3px); border-color: rgba(223,187,119,.55); }
+    .scene-index { position: absolute; top: 25px; left: 24px; color: var(--gold); font-family: var(--serif); font-size: .84rem; letter-spacing: .08em; }
+    .scene-card h3 { margin: 0 0 9px; color: var(--ivory); font-family: var(--serif); font-size: 1.17rem; font-weight: 500; line-height: 1.35; }
+    .scene-card p { margin: 0; color: #d1c7b7; font-size: 1rem; line-height: 1.62; }
+    .scene-song { display: inline-block; margin-top: 12px; color: var(--gold); font-size: .75rem; font-weight: 600; letter-spacing: .07em; }
+    .scene-card.final-scene { border-color: rgba(223,187,119,.52); background: linear-gradient(120deg, rgba(223,187,119,.13), rgba(255,255,255,.018)); }
+    .teams { background: radial-gradient(ellipse at 50% 0, rgba(162,113,49,.12), transparent 46%), var(--panel); }
+    .section-heading { max-width: 710px; margin-bottom: 42px; }
+    .section-heading p { max-width: 640px; margin: 0; color: var(--muted); font-size: 1.08rem; }
+    .team-grid { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 14px; }
+    .team-card { min-height: 245px; padding: 29px; border: 1px solid var(--line); background: rgba(255,255,255,.018); }
+    .team-logo { display: block; width: min(100%, 290px); height: 86px; margin: 0 0 17px; object-fit: contain; object-position: left center; }
+    .team-mark { width: 56px; height: 56px; display: grid; place-items: center; margin-bottom: 24px; border: 1px solid rgba(223,187,119,.68); border-radius: 50%; color: var(--gold); font-family: var(--serif); font-size: 1.3rem; }
+    .team-card h3 { margin: 0 0 8px; color: var(--ivory); font-family: var(--serif); font-size: 1.22rem; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; }
+    .team-card p { margin: 0; color: var(--muted); font-size: 1rem; }
+    .team-strip { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px; margin-top: 26px; }
+    .team-chip { display: inline-flex; align-items: center; gap: 9px; padding: 9px 14px; border: 1px solid var(--line); color: #e9ddc7; font-size: .82rem; letter-spacing: .06em; }
+    .team-chip b { color: var(--gold); font-family: var(--serif); font-size: .85rem; font-weight: 500; }
+    .materials-link { display: table; margin: 24px auto 0; color: var(--gold); font-size: .76rem; font-weight: 600; letter-spacing: .08em; text-decoration: none; }
+    .materials-link:hover { color: var(--ivory); }
+    .behind { background: #eee5d3; color: #251d14; }
+    .behind-head { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 36px; }
+    .behind-head h2 { max-width: 620px; margin-bottom: 0; }
+    .behind-head p { max-width: 390px; margin: 0 0 5px; color: #5d5345; }
+    .gallery { display: grid; grid-template-columns: 1.25fr .85fr .85fr; grid-template-rows: 190px 190px; gap: 12px; }
+    .media-card { position: relative; display: flex; align-items: end; min-height: 180px; overflow: hidden; padding: 20px; color: #fff7e6; background: #21170e; isolation: isolate; }
+    .media-card::before { content: ""; position: absolute; z-index: -2; inset: 0; background: radial-gradient(ellipse at 50% 20%, rgba(213,161,79,.33), transparent 47%), linear-gradient(145deg, #41301c, #17110c 64%); transition: transform .4s ease; }
+    .media-card:hover::before { transform: scale(1.04); }
+    .media-card::after { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(0deg, rgba(12,9,6,.83), transparent 75%); }
+    .media-card:first-child { grid-row: span 2; }
+    .media-card:nth-child(2) { background: #292016; }
+    .media-card:nth-child(3) { background: #201b15; }
+    .media-card:nth-child(4) { background: #302316; }
+    .media-card:nth-child(5) { background: #191511; }
+    .media-type { position: absolute; top: 18px; right: 18px; display: grid; width: 36px; height: 36px; place-items: center; border: 1px solid rgba(244,234,213,.57); border-radius: 50%; color: var(--ivory); font-size: .78rem; }
+    .media-card h3 { margin: 0 0 3px; font-family: var(--serif); font-size: 1rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; }
+    .media-card p { margin: 0; color: #e2d4bc; font-size: .8rem; }
+    .agenda { background: #17110c; }
+    .agenda-layout { display: grid; grid-template-columns: 1fr .9fr; gap: 70px; align-items: center; }
+    .agenda .section-heading { margin: 0; }
+    .agenda .section-heading p { color: var(--muted); }
+    .calendar-card { padding: 29px; border: 1px solid var(--line); background: linear-gradient(145deg, rgba(223,187,119,.07), rgba(255,255,255,.015)); }
+    .calendar-title { display: flex; justify-content: space-between; align-items: center; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+    .calendar-title h3 { margin: 0; color: var(--ivory); font-family: var(--serif); font-size: 1rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
+    .calendar-title span { color: var(--gold); font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; }
+    .calendar-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 7px; margin-top: 18px; text-align: center; }
+    .weekday { color: #af9b78; font-size: .65rem; font-weight: 600; }
+    .calendar-day { min-height: 40px; display: grid; place-items: center; border: 1px solid rgba(223,187,119,.08); color: #bdb3a2; font-size: .84rem; }
+    .calendar-day.empty { border-color: transparent; }
+    .calendar-day.event { border-color: var(--gold); border-radius: 50%; color: #21170c; background: var(--gold); font-weight: 700; box-shadow: 0 0 0 4px rgba(223,187,119,.13); }
+    .calendar-day.dance { position: relative; border-color: rgba(223,187,119,.55); }
+    .calendar-day.dance::after { content: ""; position: absolute; bottom: 3px; width: 4px; height: 4px; border-radius: 50%; background: var(--gold); }
+    .calendar-day.worship { border-color: var(--gold); border-radius: 50%; color: #21170c; background: var(--gold); font-weight: 700; box-shadow: 0 0 0 4px rgba(223,187,119,.13); }
+    .calendar-day.worship::after { background: #21170c; }
+    .calendar-legend { display: flex; flex-wrap: wrap; gap: 13px 20px; margin-top: 17px; color: #d5c8b2; font-size: .84rem; }
+    .calendar-legend span { display: inline-flex; align-items: center; gap: 8px; }
+    .legend-dot { width: 9px; height: 9px; border: 1px solid var(--gold); border-radius: 50%; }
+    .legend-dot.solid { background: var(--gold); }
+    .calendar-note { margin: 18px 0 0; padding: 13px 15px; border-left: 2px solid var(--gold); color: #e3d3b9; background: rgba(223,187,119,.07); font-size: .94rem; }
+    .location { padding-block: 64px; background: #17110c; color: var(--ivory); }
+    .location-inner { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 28px; }
+    .location-label { display: flex; align-items: center; gap: clamp(24px, 5vw, 66px); }
+    .renascer-lockup { display: flex; flex-direction: column; align-items: flex-start; gap: 0; flex: 0 0 auto; }
+    .renascer-lockup img { display: block; width: min(280px, 31vw); max-height: 80px; object-fit: contain; object-position: left center; }
+    .renascer-lockup span { margin: -2px 0 0 4px; color: var(--gold); font-family: var(--serif); font-size: .68rem; letter-spacing: .33em; text-transform: uppercase; }
+    .location-label .eyebrow { color: var(--gold); font-size: .62rem; }
+    .location-label h2 { margin: 2px 0 7px; font-size: 1.22rem; }
+    .address { margin: 0; color: var(--muted); font-size: 1rem; }
+    .address strong { color: var(--ivory); font-weight: 500; }
+    .map-link { display: inline-flex; align-items: center; gap: 9px; padding: 12px 16px; border: 1px solid rgba(223,187,119,.42); color: var(--gold); font-size: .82rem; letter-spacing: .06em; text-decoration: none; white-space: nowrap; transition: background .2s ease, color .2s ease; }
+    .map-link:hover { background: var(--gold); color: #20160c; }
+    .presentation-overlay { position: fixed; z-index: 30; inset: 0; display: none; align-items: center; justify-content: center; padding: 20px; background: #090806; }
+    .presentation-overlay.open { display: flex; }
+    .presentation-shell { width: min(100%, calc((100svh - 92px) * 16 / 9)); }
+    .presentation-slide { position: relative; display: none; aspect-ratio: 16 / 9; overflow: hidden; align-items: center; justify-content: center; padding: clamp(24px, 6vw, 80px); border: 1px solid rgba(223,187,119,.38); background: radial-gradient(ellipse at 50% 0, rgba(194,143,69,.17), transparent 55%), #17110c; text-align: center; }
+    .presentation-slide.active { display: flex; animation: slide-in .55s cubic-bezier(.2,.65,.25,1) both; }
+    .presentation-slide.cover { align-items: flex-start; background: #100b07; }
+    .presentation-slide.cover::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, #100b07 0%, rgba(16,11,7,.98) 31%, rgba(16,11,7,.9) 39%, rgba(16,11,7,.28) 53%, rgba(16,11,7,.04) 66%), url("images/manjedoura-fundo.png") center / cover; }
+    .presentation-slide.cover .slide-content { position: relative; z-index: 1; }
+    .presentation-slide.cover h2 { margin-top: 12px; font-size: clamp(1.8rem, 4vw, 4rem); }
+    .presentation-slide.cover h2 .script { font-size: 1.55em; }
+    .presentation-slide.cover p { margin-top: 8px; font-size: clamp(.85rem, 1.45vw, 1.2rem); }
+    .presentation-slide.cover .slide-mark { margin-top: 14px; }
+    .slide-content { width: min(850px, 100%); }
+    .slide-kicker { color: var(--gold); font-size: clamp(.55rem, 1vw, .8rem); letter-spacing: .28em; text-transform: uppercase; }
+    .presentation-slide h2 { margin: 16px 0; color: var(--ivory); font-family: var(--serif); font-size: clamp(1.55rem, 4.5vw, 4.6rem); font-weight: 500; line-height: 1.1; }
+    .presentation-slide h2 .script { color: #edc878; font-family: "Tangerine", cursive; font-size: 1.7em; line-height: .75; }
+    .presentation-slide p { max-width: 760px; margin: 14px auto 0; color: #e6ddce; font-size: clamp(.95rem, 1.8vw, 1.5rem); line-height: 1.55; }
+    .slide-mark { margin: 24px auto 0; color: var(--gold); font-family: var(--serif); font-size: clamp(.65rem, 1.1vw, .9rem); letter-spacing: .19em; text-transform: uppercase; }
+    .slide-parts { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .slide-parts span { padding: 8px 14px; border: 1px solid rgba(223,187,119,.48); color: #f3e7d0; font-family: var(--serif); font-size: clamp(.58rem, 1vw, .82rem); letter-spacing: .11em; text-transform: uppercase; }
+    .presentation-slide.dense h2 { font-size: clamp(1.55rem, 3.7vw, 3.8rem); }
+    .presentation-slide.dense p { font-size: clamp(.9rem, 1.45vw, 1.25rem); }
+    .slide-logos { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); align-items: center; width: min(100%, 1320px); margin: 38px auto 0; column-gap: clamp(24px, 3.2vw, 52px); row-gap: 24px; }
+    .slide-logos img { display: block; width: 100%; height: clamp(58px, 6vw, 88px); object-fit: contain; }
+    .teams-slide .slide-content { width: min(1460px, 100%); text-align: left; }
+    .slide-team-heading { margin-bottom: clamp(14px, 2vw, 24px); }
+    .slide-team-heading h2 { margin: 9px 0 0; font-size: clamp(1.55rem, 2.8vw, 2.8rem); }
+    .slide-team-grid { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: clamp(10px, 1.2vw, 18px); }
+    .slide-team-card { display: flex; min-width: 0; min-height: clamp(255px, 44vh, 405px); flex-direction: column; align-items: flex-start; padding: clamp(15px, 2.2vw, 28px); border: 1px solid var(--line); background: rgba(255,255,255,.025); }
+    .slide-team-card img { display: block; width: 100%; height: clamp(54px, 6.3vw, 86px); margin-bottom: clamp(13px, 1.8vw, 24px); object-fit: contain; object-position: left center; }
+    .slide-team-card h3 { margin: 0 0 9px; color: var(--ivory); font-family: var(--serif); font-size: clamp(.88rem, 1.25vw, 1.18rem); font-weight: 500; letter-spacing: .07em; text-transform: uppercase; }
+    .slide-team-card p { margin: 0; color: #d1c7b7; font-size: clamp(.72rem, 1.05vw, .98rem); line-height: 1.65; }
+    .slide-team-strip { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: clamp(13px, 1.8vw, 24px); }
+    .slide-team-chip { display: inline-flex; align-items: center; gap: 9px; padding: 8px 12px; border: 1px solid var(--line); color: #e9ddc7; font-size: clamp(.65rem, .9vw, .82rem); letter-spacing: .04em; }
+    .slide-team-chip b { color: var(--gold); font-family: var(--serif); font-weight: 500; }
+    .slide-song-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 14px; max-width: 800px; margin: 26px auto 0; text-align: left; }
+    .slide-song-list span { padding: 10px 14px; border-left: 2px solid var(--gold); color: #f3e7d0; background: rgba(255,255,255,.035); font-family: var(--serif); font-size: clamp(.72rem, 1.25vw, 1rem); line-height: 1.35; }
+    .diary-slide .slide-content { width: min(1420px, 100%); text-align: left; }
+    .slide-diary-head { display: grid; grid-template-columns: 1.1fr .8fr; align-items: end; gap: clamp(28px, 5vw, 80px); margin-bottom: clamp(18px, 2.5vw, 34px); }
+    .slide-diary-head h2 { max-width: 760px; margin: 15px 0 0; font-size: clamp(1.8rem, 3.4vw, 3.7rem); }
+    .slide-diary-intro p { max-width: 530px; margin: 0; font-size: clamp(.88rem, 1.25vw, 1.15rem); }
+    .slide-diary-gallery { display: grid; grid-template-columns: 1.25fr .85fr .85fr; grid-template-rows: repeat(2, minmax(118px, 1fr)); gap: 12px; }
+    .slide-diary-gallery .media-card { min-height: 118px; padding: clamp(13px, 1.5vw, 21px); }
+    .slide-diary-gallery .media-card:first-child { grid-row: span 2; }
+    .slide-diary-gallery .media-card h3 { font-size: clamp(.82rem, 1.1vw, 1rem); }
+    .slide-diary-gallery .media-card p { font-size: clamp(.68rem, .9vw, .82rem); }
+    .slide-footer-logo { position: absolute; z-index: 2; bottom: clamp(12px, 2vw, 25px); left: 50%; display: block; width: clamp(82px, 7vw, 118px); max-height: 30px; object-fit: contain; opacity: .76; transform: translateX(-50%); filter: drop-shadow(0 1px 8px rgba(0,0,0,.45)); }
+    .presentation-slide:not(.cover) { padding-bottom: clamp(64px, 7vw, 98px); }
+    .presentation-slide.cover .slide-footer-logo { bottom: clamp(15px, 2.5vw, 34px); width: clamp(120px, 10vw, 170px); max-height: 42px; opacity: .9; }
+    .presentation-slide.cover .slide-mark { display: inline-block; margin-top: 16px; padding: 10px 18px; border: 1px solid rgba(237,200,120,.58); border-radius: 999px; color: #f4d894; background: rgba(10,7,4,.5); font-size: clamp(.88rem, 1.35vw, 1.1rem); letter-spacing: .12em; }
+    .slide-date-list { display: grid; gap: 11px; max-width: 700px; margin: 26px auto 0; text-align: left; }
+    .slide-date-list div { display: flex; justify-content: space-between; gap: 18px; padding: 13px 16px; border-bottom: 1px solid rgba(223,187,119,.35); color: #e6ddce; font-size: clamp(.72rem, 1.25vw, 1rem); }
+    .slide-date-list strong { color: var(--gold); font-weight: 600; text-align: right; }
+    .presentation-slide.agenda-slide { text-align: left; }
+    .agenda-slide .slide-content { display: grid; grid-template-columns: .92fr 1fr; align-items: center; gap: clamp(28px, 5vw, 78px); width: min(1420px, 100%); }
+    .agenda-slide .slide-agenda-copy h2 { max-width: 650px; margin: 18px 0 22px; font-size: clamp(2rem, 4.4vw, 4.4rem); }
+    .agenda-slide .slide-agenda-copy p { max-width: 650px; margin: 0; font-size: clamp(1rem, 1.7vw, 1.45rem); }
+    .slide-calendar-card { padding: clamp(16px, 2.1vw, 30px); }
+    .slide-calendar-card .calendar-title h3 { font-size: clamp(.82rem, 1.2vw, 1rem); }
+    .slide-calendar-card .calendar-title span { font-size: clamp(.6rem, .8vw, .7rem); }
+    .slide-calendar-card .calendar-grid { gap: clamp(3px, .55vw, 7px); margin-top: 14px; }
+    .slide-calendar-card .weekday { font-size: clamp(.58rem, .75vw, .65rem); }
+    .slide-calendar-card .calendar-day { min-height: clamp(27px, 3.1vw, 40px); font-size: clamp(.68rem, .95vw, .84rem); }
+    .slide-calendar-card .calendar-legend { gap: 9px 14px; margin-top: 14px; font-size: clamp(.62rem, .83vw, .8rem); }
+    .slide-calendar-card .calendar-note { margin-top: 14px; padding: 11px 13px; font-size: clamp(.67rem, .9vw, .88rem); }
+    .slide-link { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; margin-top: 22px; padding: 0 19px; border: 1px solid var(--gold); color: var(--gold); font-size: .85rem; text-decoration: none; transition: background .2s ease,color .2s ease; }
+    .slide-link:hover { color: #20160c; background: var(--gold); }
+    .slide-venue-logo { display: block; width: min(230px,45%); max-height: 54px; margin: 22px auto 0; object-fit: contain; }
+    .presentation-controls { display: flex; align-items: center; justify-content: center; gap: 14px; padding-top: 14px; }
+    .presentation-controls button { min-height: 40px; padding: 0 15px; border: 1px solid rgba(223,187,119,.5); color: var(--ivory); background: transparent; font: 600 .7rem var(--sans); letter-spacing: .08em; text-transform: uppercase; cursor: pointer; }
+    .presentation-controls button:hover { color: #20160c; background: var(--gold); }
+    .slide-count { min-width: 66px; color: #cbbda4; font-size: .75rem; text-align: center; font-variant-numeric: tabular-nums; }
+    @keyframes slide-in { from { opacity: 0; transform: translateY(8px) scale(.99); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    body.presentation-open { overflow: hidden; }
+    .reveal { transition: opacity .8s cubic-bezier(.2,.65,.25,1), transform .8s cubic-bezier(.2,.65,.25,1); }
+    .js .reveal:not(.is-visible) { opacity: 0; transform: translateY(22px); }
+    .js .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .team-card, .media-card, .calendar-card { transition: transform .35s cubic-bezier(.2,.65,.25,1), border-color .35s ease, box-shadow .35s ease; }
+    .team-card:hover, .calendar-card:hover { transform: translateY(-4px); border-color: rgba(223,187,119,.48); box-shadow: 0 18px 42px rgba(0,0,0,.16); }
+    .media-card:hover { transform: translateY(-3px); }
+    section[id] { scroll-margin-top: 82px; }
+    footer { padding-block: 23px; color: #b8ad99; background: #0b0907; font-size: .78rem; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; }
+    .footer-inner p { margin: 0; }
+    @media (max-width: 1100px) {
+      .team-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .team-card:nth-child(5) { grid-column: 1 / -1; width: 50%; justify-self: center; }
+    }
+    @media (max-width: 850px) {
+      .intro-grid, .agenda-layout { grid-template-columns: 1fr; gap: 26px; }
+      .team-grid { grid-template-columns: 1fr 1fr; }
+      .team-card:nth-child(5) { grid-column: 1 / -1; width: 50%; justify-self: center; }
+      .agenda-layout { gap: 36px; }
+    }
+    @media (max-width: 600px) {
+      .wrap { width: min(100% - 34px, 560px); }
+      .nav-inner { width: calc(100% - 28px); align-items: stretch; flex-direction: column; gap: 7px; padding-block: 9px 8px; }
+      .brand { max-width: none; font-size: .6rem; line-height: 1.3; }
+      .nav-links { width: 100%; gap: 2px; overflow-x: auto; border: 0; border-radius: 0; padding: 0; background: transparent; scrollbar-width: none; }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a { flex: 0 0 auto; padding: 6px 10px; font-size: .72rem; }
+      .hero { min-height: max(740px, 100svh); background-position: center, 51% center; }
+      .hero-content { padding-top: 142px; }
+      .eyebrow { font-size: .66rem; letter-spacing: .17em; }
+      h1 { font-size: clamp(2rem, 9vw, 3.1rem); letter-spacing: .035em; line-height: 1.04; }
+      h1 .terra { margin-top: 7px; font-size: clamp(5rem, 22vw, 7rem); }
+      .hero-copy { margin-top: 24px; font-size: 1.02rem; }
+      .hero-meta { gap: 8px 14px; font-size: .7rem; letter-spacing: .07em; }
+      .actions { gap: 9px; margin-top: 26px; }
+      .button { min-height: 46px; padding-inline: 13px; font-size: .72rem; }
+      .presentation-overlay { padding: 12px; }
+      .presentation-shell { width: 100%; }
+      .presentation-controls { gap: 7px; padding-top: 10px; }
+      .presentation-controls button { min-height: 36px; padding-inline: 9px; font-size: .59rem; }
+      .slide-count { min-width: 48px; font-size: .65rem; }
+      .slide-song-list { gap: 6px 8px; margin-top: 16px; }
+      .slide-song-list span { padding: 7px 9px; }
+      .slide-logos { grid-template-columns: repeat(3,minmax(0,1fr)); width: min(100%, 460px); margin-top: 18px; column-gap: 20px; row-gap: 12px; }
+      .slide-logos img { height: clamp(38px, 10vw, 54px); }
+      .slide-team-grid { grid-template-columns: repeat(3, minmax(0,1fr)); gap: 7px; }
+      .slide-team-card { min-height: 0; padding: 9px; }
+      .slide-team-card img { height: 32px; margin-bottom: 8px; }
+      .slide-team-card h3 { margin-bottom: 4px; font-size: .62rem; }
+      .slide-team-card p { font-size: .54rem; line-height: 1.35; }
+      .slide-team-strip { gap: 5px; margin-top: 8px; }
+      .slide-team-chip { gap: 4px; padding: 5px; font-size: .5rem; }
+      .slide-diary-head { grid-template-columns: 1fr; gap: 12px; margin-bottom: 14px; }
+      .slide-diary-gallery { grid-template-rows: repeat(2, minmax(78px, 1fr)); gap: 7px; }
+      .slide-diary-gallery .media-card { min-height: 78px; padding: 9px; }
+      .slide-diary-gallery .media-type { top: 8px; right: 8px; width: 26px; height: 26px; }
+      .slide-diary-gallery .media-card h3 { font-size: .68rem; }
+      .slide-diary-gallery .media-card p { font-size: .58rem; }
+      .presentation-slide:not(.cover) { padding-bottom: 46px; }
+      .slide-footer-logo { bottom: 8px; width: 68px; max-height: 22px; }
+      .presentation-slide.cover .slide-footer-logo { bottom: 10px; width: 92px; max-height: 26px; }
+      .slide-date-list { gap: 5px; margin-top: 16px; }
+      .slide-date-list div { padding: 8px 10px; }
+      section { padding-block: 70px; }
+      .team-grid { grid-template-columns: 1fr; }
+      .team-card:nth-child(5) { grid-column: auto; width: auto; }
+      .team-card { min-height: 0; padding: 23px; }
+      .team-mark { margin-bottom: 16px; }
+      .team-logo { height: 68px; margin-bottom: 13px; }
+      .scene-grid { grid-template-columns: 1fr; gap: 10px; }
+      .scene-card { min-height: 0; padding: 23px 19px 23px 65px; }
+      .scene-index { top: 23px; left: 19px; }
+      .scene-card h3 { font-size: 1.12rem; }
+      .scene-card p { font-size: .98rem; }
+      .team-strip { justify-content: flex-start; }
+      .behind-head, .location-inner { align-items: flex-start; flex-direction: column; }
+      .behind-head { gap: 10px; }
+      .gallery { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 155px); }
+      .media-card:first-child { grid-row: span 2; }
+      .media-card { padding: 14px; }
+      .calendar-card { padding: 18px; }
+      .calendar-day { min-height: 38px; font-size: .8rem; }
+      .location { padding-block: 45px; }
+      .location-inner { grid-template-columns: 1fr; gap: 23px; }
+      .location-label { align-items: flex-start; flex-direction: column; gap: 23px; }
+      .renascer-lockup img { width: min(250px, 76vw); max-height: 68px; }
+      .location-label h2 { font-size: 1.12rem; }
+      .map-link { width: 100%; justify-content: center; min-height: 46px; }
+      .footer-inner { flex-direction: column; gap: 5px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } html.js .reveal:not(.is-visible) { opacity: 1; transform: none; } }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#inicio">Cantata de Natal · 2026</a>
+      <nav class="nav-links" aria-label="Navegação principal">
+        <a href="#inicio" aria-current="location">Início</a>
+        <a href="#sobre">Tema</a>
+        <a href="#cenas">Cenas</a>
+        <a href="#equipes">Equipes</a>
+        <a href="#bastidores">Bastidores</a>
+        <a href="#agenda">Agenda</a>
+        <a href="#local">Local</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-content">
+        <div class="eyebrow">Uma promessa está prestes a se revelar</div>
+        <h1 aria-label="Quando o Céu Tocou a Terra"><span>Quando o Céu</span><span>Tocou a</span><span class="terra">Terra</span></h1>
+        <p class="hero-copy">Uma cantata de Natal feita de louvor, dança e encontros. Acompanhe de perto cada passo até uma noite especial.</p>
+        <div class="hero-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="1" stroke="currentColor" stroke-width="1.5"/><path d="M7.5 3v4M16.5 3v4M4 9.5h16" stroke="currentColor" stroke-width="1.5"/></svg>19 de dezembro de 2026</span>
+          <span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.2" stroke="currentColor" stroke-width="1.6"/></svg>19h00 · Renascer Jundiaí</span>
+        </div>
+        <div class="actions"><a class="button" href="#bastidores">Acompanhe os bastidores</a><a class="button outline" href="#agenda">Agenda de ensaios</a><button class="button outline present-trigger" id="open-presentation" type="button">Modo apresentação&nbsp; ⛶</button></div>
+      </div>
+    </section>
+
+    <section class="intro" id="sobre">
+      <div class="wrap intro-grid reveal">
+        <div><div class="eyebrow">Tema central · Ano Apostólico de Eliseu</div><h2>Os milagres de Eliseu apontavam para Jesus, a maior promessa de Deus.</h2></div>
+        <div class="intro-copy">
+          <p>Nas histórias de Eliseu, Deus se revela como aquele que cumpre promessas. O azeite que sustenta, o filho que chega e a vida restaurada são sinais de uma esperança ainda maior.</p>
+          <p>A jornada atravessa a espera de gerações e chega a Belém. Nada do que acontece no caminho é maior do que aquilo que estava por vir: Jesus, a promessa cumprida e o centro do Natal.</p>
+          <div class="promise">Cada milagre apontava para Ele. Cada cena nos aproxima da maior promessa.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="scenes" id="cenas">
+      <div class="wrap">
+        <div class="scenes-head reveal"><div class="eyebrow">A trajetória · do tempo de Eliseu a Belém</div><h2>Os momentos que conduzem à promessa.</h2><p>Um panorama de cada cena, sem antecipar a emoção de vê-las ganhar vida em louvor, dança e encenação.</p></div>
+        <div class="scene-grid reveal">
+          <article class="scene-card"><span class="scene-index">00</span><h3>Prólogo · Antes de Belém</h3><p>Em meio à escuridão, o narrador apresenta uma história de promessas, espera e milagres. Eliseu recorda o impossível que testemunhou e afirma que Deus continua agindo.</p><span class="scene-song">Louvor 1 · A Promessa</span></article>
+          <article class="scene-card"><span class="scene-index">01</span><h3>Quando tudo parece pouco</h3><p>Uma viúva teme perder os filhos. Com fé, entrega o pouco azeite que tem; Deus o multiplica e provê o necessário.</p><span class="scene-song">Louvor 2 · O Pouco nas Mãos de Deus</span></article>
+          <article class="scene-card"><span class="scene-index">02</span><h3>Quando a promessa parece impossível</h3><p>A mulher sunamita, que já havia deixado de esperar, recebe de Eliseu a promessa de um filho. No tempo determinado, o menino nasce.</p><span class="scene-song">Louvor 3 · No Tempo de Deus</span></article>
+          <article class="scene-card"><span class="scene-index">03</span><h3>Quando a promessa é testada</h3><p>O menino adoece e morre. A sunamita permanece firme; Eliseu ora, e a criança volta à vida. Mais uma vez, a morte não tem a última palavra.</p><span class="scene-song">Louvor 4 · A Última Palavra é de Deus</span></article>
+          <article class="scene-card"><span class="scene-index">04</span><h3>A espera de toda uma humanidade</h3><p>Eliseu compreende que o azeite, o filho e a vida restaurada apontavam para uma fonte, uma vida e um Filho ainda maiores.</p><span class="scene-song">Louvor 5 · Enquanto Esperamos</span></article>
+          <article class="scene-card"><span class="scene-index">05</span><h3>A promessa se aproxima</h3><p>Após séculos de espera, Maria e José seguem confiando. A simplicidade do caminho prepara o coração para a chegada do Rei.</p><span class="scene-song">Louvor 6 · Maranata / O Rei Está Chegando</span></article>
+          <article class="scene-card"><span class="scene-index">06</span><h3>Belém</h3><p>A promessa deixa de ser apenas esperada: Jesus nasce numa manjedoura. Naquela noite, o Céu toca a Terra.</p><span class="scene-song">Louvor 7 · Nasceu Jesus</span></article>
+          <article class="scene-card"><span class="scene-index">07</span><h3>Os pastores recebem a notícia</h3><p>Um anjo anuncia o nascimento do Salvador. Os pastores vão até Belém e encontram a criança prometida.</p></article>
+          <article class="scene-card"><span class="scene-index">08</span><h3>Agora eu entendo</h3><p>Eliseu contempla Jesus e reconhece: tudo o que Deus fez por meio de sua história apontava para uma esperança que jamais falharia.</p><span class="scene-song">Reprise opcional · Louvor 8</span></article>
+          <article class="scene-card final-scene"><span class="scene-index">09</span><h3>A maior promessa</h3><p>Todos se reúnem para declarar que Deus não se esquece de Suas promessas. O maior milagre é Deus entrar na nossa história: Jesus é a promessa cumprida.</p><span class="scene-song">Grande final · Jesus é a Nossa Esperança</span></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="teams" id="equipes">
+      <div class="wrap">
+        <div class="section-heading reveal"><div class="eyebrow">Quem está preparando tudo</div><h2>Várias equipes. Um só propósito.</h2><p>Conheça quem está colocando voz, movimento e criatividade em cada detalhe da cantata.</p></div>
+        <div class="team-grid reveal">
+          <article class="team-card"><img class="team-logo" src="images/logo-louvor.png" alt="Logo Louvor"><h3>Louvor</h3><p>Vozes e músicos preparando a trilha que vai conduzir essa noite.</p></article>
+          <article class="team-card"><img class="team-logo" src="images/logo-danca.png" alt="Logo Dança"><h3>Dança</h3><p>Movimento e expressão para dar vida a cada momento da cantata.</p></article>
+          <article class="team-card"><img class="team-logo" src="images/logo-midias.png" alt="Logo Mídias"><h3>Mídia</h3><p>Registros, imagens e novidades dos bastidores até o grande dia.</p></article>
+          <article class="team-card"><img class="team-logo" src="images/logo-kids.png" alt="Logo Kids"><h3>Kids</h3><p>As crianças também fazem parte desta celebração.</p></article>
+          <article class="team-card"><img class="team-logo" src="images/logo-teen.png" alt="Logo Teen"><h3>Teen</h3><p>A juventude se une ao louvor e à dança nesta cantata.</p></article>
+        </div>
+        <div class="team-strip reveal" aria-label="Equipes e local"><span class="team-chip"><b>♫</b> Louvor</span><span class="team-chip"><b>✧</b> Dança</span><span class="team-chip"><b>◉</b> Mídia</span><span class="team-chip"><b>✳</b> Kids</span><span class="team-chip"><b>✦</b> Teen</span><span class="team-chip"><b>⌖</b> Renascer Jundiaí</span></div>
+        <a class="materials-link reveal" href="https://drive.google.com/drive/u/1/folders/1kEyYOOMBzEmogFVMWHRJPG82QPhVeepN" target="_blank" rel="noopener noreferrer">Acessar letras, áudios e cifras no Drive ↗</a>
+      </div>
+    </section>
+
+    <section class="behind" id="bastidores">
+      <div class="wrap">
+        <div class="behind-head reveal"><div><div class="eyebrow">Diário da preparação</div><h2>Um pouco do que acontece antes das cortinas se abrirem.</h2></div><p>Ensaios, encontros e momentos espontâneos: este espaço vai crescer junto com a cantata.</p></div>
+        <div class="gallery reveal">
+          <article class="media-card"><span class="media-type" aria-hidden="true">▶</span><div><h3>Vídeos dos ensaios</h3><p>Primeiros registros em breve</p></div></article>
+          <article class="media-card"><span class="media-type" aria-hidden="true">▧</span><div><h3>Louvor</h3><p>Fotos em breve</p></div></article>
+          <article class="media-card"><span class="media-type" aria-hidden="true">▧</span><div><h3>Dança</h3><p>Fotos em breve</p></div></article>
+          <article class="media-card"><span class="media-type" aria-hidden="true">▶</span><div><h3>Bastidores</h3><p>Novidades em breve</p></div></article>
+          <article class="media-card"><span class="media-type" aria-hidden="true">▧</span><div><h3>Preparativos</h3><p>Novos momentos em breve</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="agenda" id="agenda">
+      <div class="wrap agenda-layout">
+        <div class="section-heading reveal"><div class="eyebrow">Anote aí</div><h2>Agenda de ensaios</h2><p>Dança: terças e sextas, às 19h. O próximo ensaio de louvor será em 2 de outubro, às 19h30.</p></div>
+        <div class="calendar-card reveal" aria-label="Calendário de ensaios de outubro de 2026">
+          <div class="calendar-title"><h3>Outubro 2026</h3><span>Ensaios</span></div>
+          <div class="calendar-grid">
+            <span class="weekday">D</span><span class="weekday">S</span><span class="weekday">T</span><span class="weekday">Q</span><span class="weekday">Q</span><span class="weekday">S</span><span class="weekday">S</span>
+            <span class="calendar-day empty"></span><span class="calendar-day empty"></span><span class="calendar-day empty"></span><span class="calendar-day empty"></span><span class="calendar-day">1</span><span class="calendar-day dance worship" aria-label="2 de outubro: dança às 19 horas e louvor às 19 horas e 30 minutos" title="Dança às 19h · Louvor às 19h30">2</span><span class="calendar-day">3</span>
+            <span class="calendar-day">4</span><span class="calendar-day">5</span><span class="calendar-day dance">6</span><span class="calendar-day">7</span><span class="calendar-day">8</span><span class="calendar-day dance">9</span><span class="calendar-day">10</span>
+            <span class="calendar-day">11</span><span class="calendar-day">12</span><span class="calendar-day dance">13</span><span class="calendar-day">14</span><span class="calendar-day">15</span><span class="calendar-day dance">16</span><span class="calendar-day">17</span>
+            <span class="calendar-day">18</span><span class="calendar-day">19</span><span class="calendar-day dance">20</span><span class="calendar-day">21</span><span class="calendar-day">22</span><span class="calendar-day dance">23</span><span class="calendar-day">24</span>
+            <span class="calendar-day">25</span><span class="calendar-day">26</span><span class="calendar-day dance">27</span><span class="calendar-day">28</span><span class="calendar-day">29</span><span class="calendar-day dance">30</span><span class="calendar-day">31</span>
+          </div>
+          <div class="calendar-legend"><span><i class="legend-dot" aria-hidden="true"></i> Dança · terças e sextas · 19h</span><span><i class="legend-dot solid" aria-hidden="true"></i> Próximo louvor · 02/10 · 19h30</span></div>
+          <p class="calendar-note"><strong>Cantata · 19/12/2026 · 19h00</strong> — Renascer Jundiaí.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="location" id="local">
+      <div class="wrap location-inner reveal">
+        <div class="location-label"><div class="renascer-lockup"><img src="images/logo-renascer.png" alt="Logo Renascer"><span>Jundiaí</span></div><div><div class="eyebrow">Local · data · horário</div><h2>19 de dezembro de 2026 · 19h00</h2><p class="address">Rua Abolição, 21<br><strong>Vila Torres Neves</strong> · Jundiaí</p></div></div>
+        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Rua%20Aboli%C3%A7%C3%A3o%2021%2C%20Vila%20Torres%20Neves%2C%20Jundia%C3%AD%20SP" target="_blank" rel="noopener noreferrer">Abrir no mapa ↗</a>
+      </div>
+    </section>
+  </main>
+  <footer><div class="wrap footer-inner"><p>Quando o Céu Tocou a Terra</p><p>Cantata de Natal · 2026 · Renascer Jundiaí</p></div></footer>
+  <div class="presentation-overlay" id="presentation" role="dialog" aria-modal="true" aria-label="Apresentação da cantata" aria-hidden="true">
+    <div class="presentation-shell">
+      <article class="presentation-slide cover active" aria-hidden="false">
+        <div class="slide-content"><div class="slide-kicker">Uma promessa atravessa gerações</div><h2>Quando o Céu<br> Tocou a <span class="script">Terra</span></h2><p>A esperança prometida encontra seu cumprimento em Jesus.</p><div class="slide-mark">Cantata de Natal · 19 de dezembro de 2026 · 19h00 · Renascer Jundiaí</div></div>
+      </article>
+      <article class="presentation-slide" aria-hidden="true">
+        <div class="slide-content"><div class="slide-kicker">Tema central · Ano Apostólico de Eliseu</div><h2>Os milagres de Eliseu apontavam para Jesus, a maior promessa de Deus.</h2><p>Nas histórias de Eliseu, Deus se revela como aquele que cumpre promessas. Nada do que ele viu seria maior do que Aquele que ainda estava por vir: Jesus.</p><div class="slide-mark">Quando o Céu Tocou a Terra</div></div>
+      </article>
+      <article class="presentation-slide dense" aria-hidden="true">
+        <div class="slide-content"><div class="slide-kicker">Prólogo · Antes de Belém</div><h2>Uma história de promessas, espera e milagres.</h2><p>Antes da manjedoura, Deus já preparava uma promessa. Eliseu recorda o impossível que testemunhou e afirma: Deus continua trabalhando.</p></div>
+      </article>
+      <article class="presentation-slide dense" aria-hidden="true">
+        <div class="slide-content"><div class="slide-kicker">Cena 1 · Quando tudo parece pouco</div><h2>O pouco nas mãos de Deus.</h2><p>Uma viúva teme perder os filhos por causa de uma dívida. Ela entrega o pouco azeite que tem; em resposta à fé e à obediência, o azeite se multiplica e sustenta sua família.</p></div>
+      </article>
+      <article class="presentation-slide dense" aria-hidden="true">
+        <div class="slide-content"><div class="slide-kicker">Cena 2 · Quando a promessa parece impossível</div><h2>No tempo determinado, a promessa chega.</h2><p>A mulher sunamita havia aprendido a viver sem esperar. Eliseu anuncia que ela terá um filho. O tempo passa, o menino nasce, e a esperança renasce com ele.</p></div>
+      </article>
+      <article class="presentation-slide dense" aria-hidden="true">
+        <div class="slide-content"><div class="slide-kicker">Cena 3 · Quando a promessa é testada</div><h2>A morte não terá a última palavra.</h2><p>O menino adoece e morre. A sunamita não entende o que acontecerá, mas continua confiando em Deus. Eliseu ora; a criança respira, abre os olhos e vive.</p></div>
+      </article>
+      <article class="presentation-slide dense" aria-hidden="true">
+        <div class="slide-content"><div class="slide-kicker">Cena 4 · A espera de toda uma humanidade</div><h2>Cada milagre apontava para algo maior.</h2><p>O azeite apontava para uma fonte que nunca acabaria. O menino restaurado apontava para aquele que venceria a morte. A promessa de um filho apontava para o Filho.</p></div>
+      </article>
+      <article class="presentation-slide dense" aria-hidden="true">
+        <div class="slide-content"><div class="slide-kicker">Cena 5 · A promessa se aproxima</div><h2>Depois de séculos de espera, o céu começa a se mover.</h2><p>Maria confia. José a encoraja. Juntos, caminham em direção a Belém — não rumo a um palácio, mas ao lugar humilde escolhido para receber o Rei.</p></div>
+      </article>
+      <article class="presentation-slide dense" aria-hidden="true">
+        <div class="slide-content"><div class="slide-kicker">Cena 6 · Belém</div><h2>A promessa se torna carne.</h2><p>Jesus nasce em uma manjedoura. Sem palácio ou riquezas, chega o Salvador — e naquela noite o Céu toca a Terra.</p></div>
+      </article>
+      <article class="presentation-slide dense" aria-hidden="true">
+        <div class="slide-content"><div class="slide-kicker">Cena 7 · Os pastores</div><h2>Uma notícia de grande alegria.</h2><p>Um anjo anuncia aos pastores que nasceu o Salvador. Eles vão depressa até Belém e encontram a criança deitada na manjedoura.</p><div class="slide-mark">O anúncio chega a todos</div></div>
+      </article>
+      <article class="presentation-slide dense" aria-hidden="true">
+        <div class="slide-content"><div class="slide-kicker">Cena 8 · Agora eu entendo</div><h2>Todas as promessas apontavam para Ele.</h2><p>Eliseu contempla Jesus e compreende que os milagres de sua história eram sinais: Deus preparava a humanidade para reconhecer o maior milagre.</p><div class="slide-mark">A história inteira nos trouxe até aqui</div></div>
+      </article>
+      <article class="presentation-slide dense" aria-hidden="true">
+        <div class="slide-content"><div class="slide-kicker">Cena final · A maior promessa</div><h2>O maior milagre foi Deus entrar na nossa história.</h2><p>Viúva, sunamita, Maria, José, pastores e Eliseu se unem para declarar: Jesus é a promessa cumprida, a esperança que chegou para todos.</p><div class="slide-mark">Grande final · Jesus é a Nossa Esperança</div></div>
+      </article>
+      <article class="presentation-slide dense" aria-hidden="true">
+        <div class="slide-content"><div class="slide-kicker">A trilha desta cantata</div><h2>Canções que vão conduzir a nossa história.</h2><p>Os louvores já separados para o encontro do louvor — cada voz e instrumento ajudando a contar a promessa.</p><div class="slide-song-list"><span>Agnus Dei · Novo Canto, Julliany Souza &amp; Watoto</span><span>Algo Novo Vindo · Get Worship</span><span>Jesus (autoral)</span><span>Ele veio (autoral)</span><span>Na Força do Louvor · Renascer Praise 20</span><span>Nada Se Compara · Renascer Praise 17</span><span>Oh, Quão Lindo Esse Nome É · Kemuel</span><span>Prefiro Crer · Vânia Marx</span></div><div class="slide-mark">Uma só voz · Um só propósito</div></div>
+      </article>
+      <article class="presentation-slide dense teams-slide" aria-hidden="true">
+        <div class="slide-content"><div class="slide-team-heading"><div class="slide-kicker">Um só corpo · Muitas partes</div><h2>Cada equipe tem um lugar nesta história.</h2></div><div class="slide-team-grid"><article class="slide-team-card"><img src="images/logo-louvor.png" alt="Logo Louvor"><h3>Louvor</h3><p>Vozes e músicos preparando a trilha que vai conduzir essa noite.</p></article><article class="slide-team-card"><img src="images/logo-danca.png" alt="Logo Dança"><h3>Dança</h3><p>Movimento e expressão para dar vida a cada momento da cantata.</p></article><article class="slide-team-card"><img src="images/logo-midias.png" alt="Logo Mídia"><h3>Mídia</h3><p>Registros, imagens e novidades dos bastidores até o grande dia.</p></article><article class="slide-team-card"><img src="images/logo-kids.png" alt="Logo Kids"><h3>Kids</h3><p>As crianças também fazem parte desta celebração.</p></article><article class="slide-team-card"><img src="images/logo-teen.png" alt="Logo Teen"><h3>Teen</h3><p>A juventude se une ao louvor e à dança nesta cantata.</p></article></div><div class="slide-team-strip" aria-label="Equipes e local"><span class="slide-team-chip"><b>♫</b> Louvor</span><span class="slide-team-chip"><b>✧</b> Dança</span><span class="slide-team-chip"><b>◉</b> Mídia</span><span class="slide-team-chip"><b>✳</b> Kids</span><span class="slide-team-chip"><b>✦</b> Teen</span><span class="slide-team-chip"><b>⌖</b> Renascer Jundiaí</span></div></div>
+      </article>
+      <article class="presentation-slide dense agenda-slide" aria-hidden="true">
+        <div class="slide-content">
+          <div class="slide-agenda-copy"><div class="slide-kicker">Anote aí</div><h2>Agenda de ensaios</h2><p>Dança: terças e sextas, às 19h. O próximo ensaio de louvor será em 2 de outubro, às 19h30.</p></div>
+          <div class="calendar-card slide-calendar-card" aria-label="Calendário de ensaios de outubro de 2026">
+            <div class="calendar-title"><h3>Outubro 2026</h3><span>Ensaios</span></div>
+            <div class="calendar-grid">
+              <span class="weekday">D</span><span class="weekday">S</span><span class="weekday">T</span><span class="weekday">Q</span><span class="weekday">Q</span><span class="weekday">S</span><span class="weekday">S</span>
+              <span class="calendar-day empty"></span><span class="calendar-day empty"></span><span class="calendar-day empty"></span><span class="calendar-day empty"></span><span class="calendar-day">1</span><span class="calendar-day dance worship">2</span><span class="calendar-day">3</span>
+              <span class="calendar-day">4</span><span class="calendar-day">5</span><span class="calendar-day dance">6</span><span class="calendar-day">7</span><span class="calendar-day">8</span><span class="calendar-day dance">9</span><span class="calendar-day">10</span>
+              <span class="calendar-day">11</span><span class="calendar-day">12</span><span class="calendar-day dance">13</span><span class="calendar-day">14</span><span class="calendar-day">15</span><span class="calendar-day dance">16</span><span class="calendar-day">17</span>
+              <span class="calendar-day">18</span><span class="calendar-day">19</span><span class="calendar-day dance">20</span><span class="calendar-day">21</span><span class="calendar-day">22</span><span class="calendar-day dance">23</span><span class="calendar-day">24</span>
+              <span class="calendar-day">25</span><span class="calendar-day">26</span><span class="calendar-day dance">27</span><span class="calendar-day">28</span><span class="calendar-day">29</span><span class="calendar-day dance">30</span><span class="calendar-day">31</span>
+            </div>
+            <div class="calendar-legend"><span><i class="legend-dot" aria-hidden="true"></i> Dança · terças e sextas · 19h</span><span><i class="legend-dot solid" aria-hidden="true"></i> Próximo louvor · 02/10 · 19h30</span></div>
+            <p class="calendar-note"><strong>Cantata · 19/12/2026 · 19h00</strong> — Renascer Jundiaí.</p>
+          </div>
+        </div>
+      </article>
+      <article class="presentation-slide dense diary-slide" aria-hidden="true">
+        <div class="slide-content"><div class="slide-diary-head"><div><div class="slide-kicker">Diário da preparação</div><h2>Um pouco do que acontece antes das cortinas se abrirem.</h2></div><div class="slide-diary-intro"><p>Vamos registrar toda a preparação da cantata — ensaios, louvor, dança, encontros e bastidores — em fotos e vídeos, até a noite da apresentação.</p></div></div><div class="slide-diary-gallery"><article class="media-card"><span class="media-type" aria-hidden="true">▶</span><div><h3>Vídeos dos ensaios</h3><p>Primeiros registros em breve</p></div></article><article class="media-card"><span class="media-type" aria-hidden="true">▧</span><div><h3>Louvor</h3><p>Fotos em breve</p></div></article><article class="media-card"><span class="media-type" aria-hidden="true">▧</span><div><h3>Dança</h3><p>Fotos em breve</p></div></article><article class="media-card"><span class="media-type" aria-hidden="true">▶</span><div><h3>Bastidores</h3><p>Novidades em breve</p></div></article><article class="media-card"><span class="media-type" aria-hidden="true">▧</span><div><h3>Preparativos</h3><p>Novos momentos em breve</p></div></article></div></div>
+      </article>
+      <article class="presentation-slide dense" aria-hidden="true">
+        <div class="slide-content"><div class="slide-kicker">Data e local</div><h2>Esperamos por você.</h2><p>19 de dezembro de 2026 · 19h00<br>Renascer Jundiaí<br>Rua Abolição, 21 · Vila Torres Neves · Jundiaí</p><div class="slide-mark">Quando o Céu Tocou a Terra</div></div>
+      </article>
+      <article class="presentation-slide dense" aria-hidden="true">
+        <div class="slide-content"><div class="slide-kicker">Materiais para o Louvor</div><h2>Vamos preparar cada canção juntos.</h2><p>As letras, os áudios e as cifras estão reunidos na pasta compartilhada da cantata.</p><a class="slide-link" href="https://drive.google.com/drive/u/1/folders/1kEyYOOMBzEmogFVMWHRJPG82QPhVeepN" target="_blank" rel="noopener noreferrer">Abrir materiais no Drive ↗</a><div class="slide-mark">Uma só voz · Um só corpo</div></div>
+      </article>
+      <div class="presentation-controls">
+        <button id="previous-slide" type="button" aria-label="Slide anterior">← Anterior</button>
+        <span class="slide-count" id="slide-count" aria-live="polite">1 / 18</span>
+        <button id="next-slide" type="button" aria-label="Próximo slide">Próximo →</button>
+        <button id="close-presentation" type="button" aria-label="Fechar apresentação">Sair&nbsp; Esc</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    const revealItems = document.querySelectorAll('.reveal');
+    const navTabs = [...document.querySelectorAll('.nav-links a')];
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      revealItems.forEach((item) => observer.observe(item));
+    } else revealItems.forEach((item) => item.classList.add('is-visible'));
+    const sections = [...document.querySelectorAll('main section[id]')];
+    if ('IntersectionObserver' in window) {
+      const tabObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          navTabs.forEach((tab) => {
+            if (tab.getAttribute('href') === `#${entry.target.id}`) tab.setAttribute('aria-current', 'location');
+            else tab.removeAttribute('aria-current');
+          });
+        });
+      }, { rootMargin: '-25% 0px -65% 0px' });
+      sections.forEach((section) => tabObserver.observe(section));
+    }
+    const presentation = document.getElementById('presentation');
+    const slides = [...presentation.querySelectorAll('.presentation-slide')];
+    slides.forEach((slide) => {
+      const logo = document.createElement('img');
+      logo.className = 'slide-footer-logo';
+      logo.src = 'images/logo-renascer.png';
+      logo.alt = 'Logo Renascer';
+      slide.append(logo);
+    });
+    const slideCount = document.getElementById('slide-count');
+    let currentSlide = 0;
+    let lastFocusedElement = null;
+    function showSlide(index) {
+      currentSlide = (index + slides.length) % slides.length;
+      slides.forEach((slide, slideIndex) => {
+        const active = slideIndex === currentSlide;
+        slide.classList.toggle('active', active);
+        slide.setAttribute('aria-hidden', String(!active));
+      });
+      slideCount.textContent = `${currentSlide + 1} / ${slides.length}`;
+    }
+    async function openPresentation() {
+      lastFocusedElement = document.activeElement;
+      showSlide(0);
+      presentation.classList.add('open');
+      presentation.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('presentation-open');
+      document.getElementById('close-presentation').focus();
+      try { await presentation.requestFullscreen?.(); } catch { /* The slide mode remains available without fullscreen. */ }
+    }
+    async function closePresentation() {
+      presentation.classList.remove('open');
+      presentation.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('presentation-open');
+      if (document.fullscreenElement) { try { await document.exitFullscreen(); } catch {} }
+      lastFocusedElement?.focus();
+    }
+    document.getElementById('open-presentation').addEventListener('click', openPresentation);
+    document.getElementById('close-presentation').addEventListener('click', closePresentation);
+    document.getElementById('previous-slide').addEventListener('click', () => showSlide(currentSlide - 1));
+    document.getElementById('next-slide').addEventListener('click', () => showSlide(currentSlide + 1));
+    document.addEventListener('keydown', (event) => {
+      if (!presentation.classList.contains('open')) return;
+      if (event.key === 'Escape') { event.preventDefault(); closePresentation(); }
+      else if (event.key === 'ArrowRight' || event.key === ' ') { event.preventDefault(); showSlide(currentSlide + 1); }
+      else if (event.key === 'ArrowLeft') { event.preventDefault(); showSlide(currentSlide - 1); }
+    });
+  </script>
+</body>
+</html>
+
