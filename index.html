@@ -340,6 +340,15 @@
     .slide-diary-gallery:has(.preparation-photo) .media-card { min-height: 80px; }
     .slide-diary-gallery .preparation-photo { width: min(650px, 100%); justify-self: center; }
     @media(max-width:700px) { .gallery:has(.preparation-photo), .slide-diary-gallery:has(.preparation-photo) { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+
+    .preparation-video { grid-column: 1 / -1; margin: 0; border: 1px solid var(--line); background: #100d0a; }
+    .preparation-video video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #100d0a; }
+    .preparation-video figcaption { padding: 10px 16px; color: var(--ivory); font-size: 16px; }
+    .gallery:has(.preparation-video), .slide-diary-gallery:has(.preparation-video) { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+    .gallery:has(.preparation-video) .preparation-photo, .gallery:has(.preparation-video) .preparation-video { grid-column: span 3; width: 100%; }
+    .gallery:has(.preparation-video) .media-card, .slide-diary-gallery:has(.preparation-video) .media-card { grid-column: span 2; }
+    .slide-diary-gallery:has(.preparation-video) .preparation-photo, .slide-diary-gallery:has(.preparation-video) .preparation-video { grid-column: span 3; width: 100%; max-width: 650px; justify-self: center; }
+    @media(max-width:700px) { .gallery:has(.preparation-video) .preparation-photo, .gallery:has(.preparation-video) .preparation-video, .slide-diary-gallery:has(.preparation-video) .preparation-photo, .slide-diary-gallery:has(.preparation-video) .preparation-video { grid-column: 1 / -1; } }
   </style>
 </head>
 <body>
@@ -421,7 +430,7 @@
         <div class="gallery reveal">
           <figure class="preparation-photo"><div class="preparation-photo-image" role="img" aria-label="Equipe reunida no primeiro encontro de preparação da Cantata de Natal"></div><figcaption>Nosso primeiro encontro · 2 de outubro de 2026</figcaption></figure>
           <article class="media-card"><span class="media-type" aria-hidden="true">▧</span><div><h3>Louvor</h3><p>Fotos em breve</p></div></article>
-          <article class="media-card"><span class="media-type" aria-hidden="true">▧</span><div><h3>Dança</h3><p>Fotos em breve</p></div></article>
+          <figure class="preparation-video"><video controls playsinline preload="metadata" poster="videos/ensaio-danca-02-outubro-2026.jpg" aria-label="Ensaio de dança da Cantata de Natal"><source src="videos/ensaio-danca-02-outubro-2026.mp4" type="video/mp4">Seu navegador não reproduz este vídeo. <a href="videos/ensaio-danca-02-outubro-2026.mp4">Assistir ao ensaio de dança</a>.</video><figcaption>Ensaio de dança · 2 de outubro de 2026</figcaption></figure>
           <article class="media-card"><span class="media-type" aria-hidden="true">▶</span><div><h3>Bastidores</h3><p>Novidades em breve</p></div></article>
           <article class="media-card"><span class="media-type" aria-hidden="true">▧</span><div><h3>Preparativos</h3><p>Novos momentos em breve</p></div></article>
         </div>
@@ -518,7 +527,7 @@
         </div>
       </article>
       <article class="presentation-slide dense diary-slide" aria-hidden="true">
-        <div class="slide-content"><div class="slide-diary-head"><div><div class="slide-kicker">Diário da preparação</div><h2>Um pouco do que acontece antes das cortinas se abrirem.</h2></div><div class="slide-diary-intro"><p>Vamos registrar toda a preparação da cantata — ensaios, louvor, dança, encontros e bastidores — em fotos e vídeos, até a noite da apresentação.</p></div></div><div class="slide-diary-gallery"><figure class="preparation-photo"><div class="preparation-photo-image" role="img" aria-label="Equipe reunida no primeiro encontro de preparação da Cantata de Natal"></div><figcaption>Nosso primeiro encontro · 2 de outubro de 2026</figcaption></figure><article class="media-card"><span class="media-type" aria-hidden="true">▧</span><div><h3>Louvor</h3><p>Fotos em breve</p></div></article><article class="media-card"><span class="media-type" aria-hidden="true">▧</span><div><h3>Dança</h3><p>Fotos em breve</p></div></article><article class="media-card"><span class="media-type" aria-hidden="true">▶</span><div><h3>Bastidores</h3><p>Novidades em breve</p></div></article><article class="media-card"><span class="media-type" aria-hidden="true">▧</span><div><h3>Preparativos</h3><p>Novos momentos em breve</p></div></article></div></div>
+        <div class="slide-content"><div class="slide-diary-head"><div><div class="slide-kicker">Diário da preparação</div><h2>Um pouco do que acontece antes das cortinas se abrirem.</h2></div><div class="slide-diary-intro"><p>Vamos registrar toda a preparação da cantata — ensaios, louvor, dança, encontros e bastidores — em fotos e vídeos, até a noite da apresentação.</p></div></div><div class="slide-diary-gallery"><figure class="preparation-photo"><div class="preparation-photo-image" role="img" aria-label="Equipe reunida no primeiro encontro de preparação da Cantata de Natal"></div><figcaption>Nosso primeiro encontro · 2 de outubro de 2026</figcaption></figure><article class="media-card"><span class="media-type" aria-hidden="true">▧</span><div><h3>Louvor</h3><p>Fotos em breve</p></div></article><figure class="preparation-video"><video controls playsinline preload="metadata" poster="videos/ensaio-danca-02-outubro-2026.jpg" aria-label="Ensaio de dança da Cantata de Natal"><source src="videos/ensaio-danca-02-outubro-2026.mp4" type="video/mp4">Seu navegador não reproduz este vídeo. <a href="videos/ensaio-danca-02-outubro-2026.mp4">Assistir ao ensaio de dança</a>.</video><figcaption>Ensaio de dança · 2 de outubro de 2026</figcaption></figure><article class="media-card"><span class="media-type" aria-hidden="true">▶</span><div><h3>Bastidores</h3><p>Novidades em breve</p></div></article><article class="media-card"><span class="media-type" aria-hidden="true">▧</span><div><h3>Preparativos</h3><p>Novos momentos em breve</p></div></article></div></div>
       </article>
       <article class="presentation-slide dense" aria-hidden="true">
         <div class="slide-content"><div class="slide-kicker">Data e local</div><h2>Esperamos por você.</h2><p>18 de dezembro de 2026 · 19h00<br>Renascer Jundiaí<br>Rua Abolição, 21 · Vila Torres Neves · Jundiaí</p><div class="slide-mark">Quando o Céu Tocou a Terra</div></div>
@@ -623,6 +632,14 @@
       else if (event.key === 'ArrowLeft') { event.preventDefault(); showSlide(currentSlide - 1); }
     });
   </script>
+<script>
+  document.querySelectorAll('.presentation-slide').forEach(slide => {
+    new MutationObserver(() => {
+      if (!slide.classList.contains('active')) slide.querySelectorAll('video').forEach(video => video.pause());
+    }).observe(slide, { attributes: true, attributeFilter: ['class'] });
+  });
+</script>
 </body>
 </html>
+
 
