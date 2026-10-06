@@ -162,6 +162,21 @@
     .slide-team-chip b { color: var(--gold); font-family: var(--serif); font-weight: 500; }
     .slide-song-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 14px; max-width: 800px; margin: 26px auto 0; text-align: left; }
     .slide-song-list span { padding: 10px 14px; border-left: 2px solid var(--gold); color: #f3e7d0; background: rgba(255,255,255,.035); font-family: var(--serif); font-size: clamp(.72rem, 1.25vw, 1rem); line-height: 1.35; }
+    .rehearsal-slide { text-align: left; }
+    .rehearsal-slide .slide-content { width: min(1380px, 100%); }
+    .rehearsal-heading { display: flex; align-items: end; justify-content: space-between; gap: 26px; margin-bottom: clamp(16px, 2vw, 28px); }
+    .rehearsal-heading h2 { margin: 9px 0 0; font-size: clamp(1.7rem, 3.3vw, 3.5rem); }
+    .rehearsal-date { flex: 0 0 auto; padding: 11px 16px; border: 1px solid rgba(223,187,119,.48); color: #f4ead5; background: rgba(223,187,119,.07); font-size: clamp(.76rem, 1.2vw, 1rem); letter-spacing: .05em; }
+    .rehearsal-date strong { color: var(--gold); }
+    .rehearsal-video-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: clamp(12px, 2vw, 26px); }
+    .rehearsal-video-card { min-width: 0; display: block; overflow: hidden; border: 1px solid rgba(223,187,119,.36); color: var(--ivory); background: rgba(255,255,255,.035); text-decoration: none; transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
+    .rehearsal-video-card:hover, .rehearsal-video-card:focus-visible { transform: translateY(-4px); border-color: var(--gold); box-shadow: 0 14px 34px rgba(0,0,0,.28); outline: none; }
+    .rehearsal-video-cover { position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden; background: #080706; }
+    .rehearsal-video-cover::after { content: "▶"; position: absolute; inset: 50% auto auto 50%; display: grid; width: clamp(42px, 5vw, 68px); aspect-ratio: 1; place-items: center; padding-left: 4px; border: 1px solid rgba(255,255,255,.82); border-radius: 50%; color: #20160c; background: rgba(244,234,213,.94); font-size: clamp(1rem, 1.8vw, 1.45rem); transform: translate(-50%,-50%); box-shadow: 0 4px 24px rgba(0,0,0,.4); }
+    .rehearsal-video-cover img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+    .rehearsal-video-card:hover .rehearsal-video-cover img { transform: scale(1.04); }
+    .rehearsal-video-title { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 16px; font-family: var(--serif); font-size: clamp(.78rem, 1.35vw, 1.1rem); }
+    .rehearsal-video-title span { flex: 0 0 auto; color: var(--gold); font-family: var(--sans); font-size: .72em; }
     .diary-slide .slide-content { width: min(1420px, 100%); text-align: left; }
     .slide-diary-head { display: grid; grid-template-columns: 1.1fr .8fr; align-items: end; gap: clamp(28px, 5vw, 80px); margin-bottom: clamp(18px, 2.5vw, 34px); }
     .slide-diary-head h2 { max-width: 760px; margin: 15px 0 0; font-size: clamp(1.8rem, 3.4vw, 3.7rem); }
@@ -242,6 +257,14 @@
       .slide-count { min-width: 48px; font-size: .65rem; }
       .slide-song-list { gap: 6px 8px; margin-top: 16px; }
       .slide-song-list span { padding: 7px 9px; }
+      .rehearsal-slide { padding: 7px 9px 38px; }
+      .rehearsal-heading { display: block; margin-bottom: 8px; }
+      .rehearsal-heading h2 { margin: 4px 0; font-size: clamp(1rem, 4.2vw, 1.35rem); }
+      .rehearsal-date { display: inline-block; padding: 3px 7px; font-size: .55rem; }
+      .rehearsal-video-grid { gap: 7px; }
+      .rehearsal-video-title { gap: 4px; padding: 5px 6px; font-size: .55rem; }
+      .rehearsal-video-title span { font-size: .6em; }
+      .rehearsal-video-cover::after { width: 27px; font-size: .75rem; }
       .slide-logos { grid-template-columns: repeat(3,minmax(0,1fr)); width: min(100%, 460px); margin-top: 18px; column-gap: 20px; row-gap: 12px; }
       .slide-logos img { height: clamp(38px, 10vw, 54px); }
       .slide-team-grid { grid-template-columns: repeat(3, minmax(0,1fr)); gap: 7px; }
@@ -497,6 +520,21 @@
       <article class="presentation-slide dense" aria-hidden="true">
         <div class="slide-content"><div class="slide-kicker">A trilha desta cantata</div><h2>Canções que vão conduzir a nossa história.</h2><p>Os louvores já separados para o encontro do louvor — cada voz e instrumento ajudando a contar a promessa.</p><div class="slide-song-list"><span>Agnus Dei · Novo Canto, Julliany Souza &amp; Watoto</span><span>Algo Novo Vindo · Get Worship</span><span>Jesus (autoral)</span><span>Ele veio (autoral)</span><span>Na Força do Louvor · Renascer Praise 20</span><span>Nada Se Compara · Renascer Praise 17</span><span>Oh, Quão Lindo Esse Nome É · Kemuel</span><span>Prefiro Crer · Vânia Marx</span></div><div class="slide-mark">Uma só voz · Um só propósito</div></div>
       </article>
+      <article class="presentation-slide dense rehearsal-slide" aria-hidden="true">
+        <div class="slide-content">
+          <div class="rehearsal-heading"><div><div class="slide-kicker">Ensaio de louvor</div><h2>Canções para a próxima sexta</h2></div><div class="rehearsal-date"><strong>Sexta-feira</strong> · 9 de outubro · 19h30</div></div>
+          <div class="rehearsal-video-grid" aria-label="Vídeos das músicas do ensaio">
+            <a class="rehearsal-video-card" href="https://youtu.be/V-n0FDCT2N4?si=InQfIEYUu-HC4jdG" target="_blank" rel="noopener noreferrer" aria-label="Assistir Oh quão lindo esse nome é no YouTube">
+              <span class="rehearsal-video-cover"><img src="https://img.youtube.com/vi/V-n0FDCT2N4/hqdefault.jpg" alt="Capa do vídeo Oh quão lindo esse nome é"></span>
+              <span class="rehearsal-video-title">Oh quão lindo esse nome é <span>Assistir ↗</span></span>
+            </a>
+            <a class="rehearsal-video-card" href="https://youtu.be/ODWrZ4KBlsQ?si=MD7QR1ZWHaNJ9m-Y" target="_blank" rel="noopener noreferrer" aria-label="Assistir Na força do louvor no YouTube">
+              <span class="rehearsal-video-cover"><img src="https://img.youtube.com/vi/ODWrZ4KBlsQ/hqdefault.jpg" alt="Capa do vídeo Na força do louvor"></span>
+              <span class="rehearsal-video-title">Na força do louvor <span>Assistir ↗</span></span>
+            </a>
+          </div>
+        </div>
+      </article>
       <article class="presentation-slide dense teams-slide" aria-hidden="true">
         <div class="slide-content"><div class="slide-team-heading"><div class="slide-kicker">Um só corpo · Muitas partes</div><h2>Cada equipe tem um lugar nesta história.</h2></div><div class="slide-team-grid"><article class="slide-team-card"><img src="images/logo-louvor.png" alt="Logo Louvor"><h3>Louvor</h3><p>Vozes e músicos preparando a trilha que vai conduzir essa noite.</p></article><article class="slide-team-card"><img src="images/logo-danca.png" alt="Logo Dança"><h3>Dança</h3><p>Movimento e expressão para dar vida a cada momento da cantata.</p></article><article class="slide-team-card"><img src="images/logo-midias.png" alt="Logo Mídia"><h3>Mídia</h3><p>Registros, imagens e novidades dos bastidores até o grande dia.</p></article><article class="slide-team-card"><img src="images/logo-kids.png" alt="Logo Kids"><h3>Kids</h3><p>As crianças também fazem parte desta celebração.</p></article><article class="slide-team-card"><img src="images/logo-teen.png" alt="Logo Teen"><h3>Teen</h3><p>A juventude se une ao louvor e à dança nesta cantata.</p></article></div><div class="slide-team-strip" aria-label="Equipes e local"><span class="slide-team-chip"><b>♫</b> Louvor</span><span class="slide-team-chip"><b>✧</b> Dança</span><span class="slide-team-chip"><b>◉</b> Mídia</span><span class="slide-team-chip"><b>✳</b> Kids</span><span class="slide-team-chip"><b>✦</b> Teen</span><span class="slide-team-chip"><b>⌖</b> Renascer Jundiaí</span></div></div>
       </article>
@@ -512,7 +550,7 @@
       </article>
       <div class="presentation-controls">
         <button id="previous-slide" type="button" aria-label="Slide anterior">← Anterior</button>
-        <span class="slide-count" id="slide-count" aria-live="polite">1 / 18</span>
+        <span class="slide-count" id="slide-count" aria-live="polite">1 / 21</span>
         <button id="next-slide" type="button" aria-label="Próximo slide">Próximo →</button>
         <button id="close-presentation" type="button" aria-label="Fechar apresentação">Sair&nbsp; Esc</button>
       </div>
