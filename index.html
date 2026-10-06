@@ -520,7 +520,7 @@
       <article class="presentation-slide dense" aria-hidden="true">
         <div class="slide-content"><div class="slide-kicker">A trilha desta cantata</div><h2>Canções que vão conduzir a nossa história.</h2><p>Os louvores já separados para o encontro do louvor — cada voz e instrumento ajudando a contar a promessa.</p><div class="slide-song-list"><span>Agnus Dei · Novo Canto, Julliany Souza &amp; Watoto</span><span>Algo Novo Vindo · Get Worship</span><span>Jesus (autoral)</span><span>Ele veio (autoral)</span><span>Na Força do Louvor · Renascer Praise 20</span><span>Nada Se Compara · Renascer Praise 17</span><span>Oh, Quão Lindo Esse Nome É · Kemuel</span><span>Prefiro Crer · Vânia Marx</span></div><div class="slide-mark">Uma só voz · Um só propósito</div></div>
       </article>
-      <article class="presentation-slide dense rehearsal-slide" aria-hidden="true">
+      <article id="slide-ensaio-louvor" class="presentation-slide dense rehearsal-slide" aria-hidden="true">
         <div class="slide-content">
           <div class="rehearsal-heading"><div><div class="slide-kicker">Ensaio de louvor</div><h2>Canções para a próxima sexta</h2></div><div class="rehearsal-date"><strong>Sexta-feira</strong> · 9 de outubro · 19h30</div></div>
           <div class="rehearsal-video-grid" aria-label="Vídeos das músicas do ensaio">
@@ -618,9 +618,9 @@
       slideCount.textContent = `${currentSlide + 1} / ${slides.length}`;
       requestAnimationFrame(fitPresentation);
     }
-    async function openPresentation() {
+    async function openPresentation(startSlide = 0) {
       lastFocusedElement = document.activeElement;
-      showSlide(0);
+      showSlide(startSlide);
       presentation.classList.add('open');
       presentation.setAttribute('aria-hidden', 'false');
       document.body.classList.add('presentation-open');
@@ -639,6 +639,15 @@
     document.getElementById('close-presentation').addEventListener('click', closePresentation);
     document.getElementById('previous-slide').addEventListener('click', () => showSlide(currentSlide - 1));
     document.getElementById('next-slide').addEventListener('click', () => showSlide(currentSlide + 1));
+    function openSlideFromHash() {
+      const slideId = decodeURIComponent(location.hash.slice(1));
+      const slideIndex = slides.findIndex((slide) => slide.id === slideId);
+      if (slideIndex < 0) return;
+      if (presentation.classList.contains('open')) showSlide(slideIndex);
+      else openPresentation(slideIndex);
+    }
+    window.addEventListener('hashchange', openSlideFromHash);
+    openSlideFromHash();
     document.addEventListener('keydown', (event) => {
       if (!presentation.classList.contains('open') || event.target.closest('video, input, textarea, select, button, a')) return;
       if (event.key === 'Escape') { event.preventDefault(); closePresentation(); }
