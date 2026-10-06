@@ -368,6 +368,14 @@
       .rehearsal-date-copy b { color: var(--ivory); font-family: var(--serif); font-size: clamp(.78rem, 3.4vw, .95rem); font-weight: 500; line-height: 1.35; }
       .rehearsal-date strong { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; margin: 0; padding-left: 13px; border-left: 1px solid rgba(223,187,119,.32); font-size: clamp(1.35rem, 6vw, 1.65rem); white-space: nowrap; }
       .rehearsal-date strong small { font-size: .56rem; }
+    @media (min-width: 701px) {
+      .rehearsal-date { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 18px; min-width: min(390px, 42%); padding: 14px 18px; text-align: left; }
+      .rehearsal-date-copy { display: flex; min-width: 0; flex-direction: column; gap: 5px; }
+      .rehearsal-date-copy small, .rehearsal-date strong small { color: var(--gold); font-family: var(--sans); font-size: .62rem; font-weight: 600; letter-spacing: .16em; }
+      .rehearsal-date-copy b { color: var(--ivory); font-family: var(--serif); font-size: clamp(1rem, 1.45vw, 1.3rem); font-weight: 500; line-height: 1.25; }
+      .rehearsal-date strong { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; margin: 0; padding-left: 18px; border-left: 1px solid rgba(223,187,119,.32); font-size: clamp(2.25rem, 4vw, 3.5rem); white-space: nowrap; }
+      .rehearsal-date strong small { font-size: .58rem; }
+    }
     .rehearsal-invite { max-width: 900px; margin: 0 auto clamp(12px, 1.2vw, 20px); padding: 10px 18px; border-left: 2px solid var(--gold); color: #e2d5bf; background: linear-gradient(90deg, rgba(223,187,119,.1), rgba(223,187,119,.025)); font-size: clamp(15px, 1.25vw, 20px) !important; line-height: 1.5 !important; text-align: left; }
       .rehearsal-invite { margin: 0 0 16px; padding: 10px 12px; color: #e2d5bf; font-size: clamp(.9rem, 3.8vw, 1.05rem) !important; line-height: 1.48 !important; }
       .rehearsal-video-grid { grid-template-columns: 1fr; gap: 14px; }
