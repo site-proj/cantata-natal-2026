@@ -356,6 +356,18 @@
       .slide-diary-gallery { grid-template-columns: 1fr 1fr; }
       .slide-diary-gallery .media-card:first-child { grid-row: auto; grid-column: span 2; }
       .presentation-slide.cover .slide-mark { font-size: 13px; }
+      .rehearsal-slide.active { display: block; overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; }
+      .rehearsal-slide { padding: 22px 16px 78px !important; text-align: left; }
+      .rehearsal-slide .slide-content { width: 100%; transform: none !important; }
+      .rehearsal-heading { margin-bottom: 14px; }
+      .rehearsal-heading h2 { max-width: 22ch; margin: 7px 0 12px; font-size: clamp(1.55rem, 7vw, 2.2rem); line-height: 1.12; }
+      .rehearsal-date { align-items: center; padding: 9px 12px; }
+      .rehearsal-date span { font-size: clamp(.82rem, 3.6vw, 1rem); }
+      .rehearsal-date strong { font-size: 1.6rem; }
+      .rehearsal-invite { margin: 0 0 16px; color: #e2d5bf; font-size: clamp(.9rem, 3.8vw, 1.05rem) !important; line-height: 1.5 !important; }
+      .rehearsal-video-grid { grid-template-columns: 1fr; gap: 14px; }
+      .rehearsal-video-title { padding: 10px 12px; font-size: .9rem; }
+      .rehearsal-video-title span { font-size: .76em; }
     }
 
     .preparation-photo { grid-column: 1 / -1; grid-row: auto !important; margin: 0; border: 1px solid var(--line); background: #100d0a; }
@@ -525,7 +537,8 @@
       </article>
       <article id="slide-ensaio-louvor" class="presentation-slide dense rehearsal-slide" aria-hidden="true">
         <div class="slide-content">
-          <div class="rehearsal-heading"><div><div class="slide-kicker">Ensaio de louvor</div><h2>Canções para a próxima sexta</h2></div><div class="rehearsal-date"><span>Sexta-feira · 9 de outubro</span><strong>19h30</strong></div></div>
+          <div class="rehearsal-heading"><div><div class="slide-kicker">Ensaio de louvor</div><h2>Sua voz faz parte desta noite.</h2></div><div class="rehearsal-date"><span>Sexta-feira · 9 de outubro</span><strong>19h30</strong></div></div>
+          <p class="rehearsal-invite">Nesta sexta, venha ensaiar com a gente. Cada voz e cada instrumento ajudam a preparar o louvor que vamos oferecer juntos na Cantata. Esperamos por você!</p>
           <div class="rehearsal-video-grid" aria-label="Vídeos das músicas do ensaio">
             <a class="rehearsal-video-card" href="https://youtu.be/V-n0FDCT2N4?si=InQfIEYUu-HC4jdG" target="_blank" rel="noopener noreferrer" aria-label="Assistir Oh quão lindo esse nome é no YouTube">
               <span class="rehearsal-video-cover"><img src="https://img.youtube.com/vi/V-n0FDCT2N4/hqdefault.jpg" alt="Capa do vídeo Oh quão lindo esse nome é"></span>
@@ -603,6 +616,7 @@
       const content = slide.querySelector('.slide-content');
       if (!content || !presentation.classList.contains('open')) return;
       content.style.transform = '';
+      if (slide.classList.contains('rehearsal-slide') && matchMedia('(max-width: 700px) and (orientation: portrait)').matches) return;
       const style = getComputedStyle(slide);
       const available = slide.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
       const scale = Math.min(1, available / content.scrollHeight);
