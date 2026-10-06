@@ -166,8 +166,9 @@
     .rehearsal-slide .slide-content { width: min(1380px, 100%); }
     .rehearsal-heading { display: flex; align-items: end; justify-content: space-between; gap: 26px; margin-bottom: clamp(16px, 2vw, 28px); }
     .rehearsal-heading h2 { margin: 9px 0 0; font-size: clamp(1.7rem, 3.3vw, 3.5rem); }
-    .rehearsal-date { flex: 0 0 auto; padding: 11px 16px; border: 1px solid rgba(223,187,119,.48); color: #f4ead5; background: rgba(223,187,119,.07); font-size: clamp(.76rem, 1.2vw, 1rem); letter-spacing: .05em; }
-    .rehearsal-date strong { color: var(--gold); }
+    .rehearsal-date { flex: 0 0 auto; min-width: min(360px, 38%); display: flex; flex-direction: column; align-items: center; padding: 12px 22px; border: 1px solid rgba(223,187,119,.48); color: #f4ead5; background: rgba(223,187,119,.07); text-align: center; letter-spacing: .05em; }
+    .rehearsal-date span { font-family: var(--serif); font-size: clamp(1rem, 1.8vw, 1.55rem); line-height: 1.25; }
+    .rehearsal-date strong { display: block; margin-top: 4px; color: var(--gold); font-family: var(--serif); font-size: clamp(2.25rem, 4vw, 3.7rem); font-weight: 500; line-height: 1; letter-spacing: .04em; }
     .rehearsal-video-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: clamp(12px, 2vw, 26px); }
     .rehearsal-video-card { min-width: 0; display: block; overflow: hidden; border: 1px solid rgba(223,187,119,.36); color: var(--ivory); background: rgba(255,255,255,.035); text-decoration: none; transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
     .rehearsal-video-card:hover, .rehearsal-video-card:focus-visible { transform: translateY(-4px); border-color: var(--gold); box-shadow: 0 14px 34px rgba(0,0,0,.28); outline: none; }
@@ -260,7 +261,9 @@
       .rehearsal-slide { padding: 7px 9px 38px; }
       .rehearsal-heading { display: block; margin-bottom: 8px; }
       .rehearsal-heading h2 { margin: 4px 0; font-size: clamp(1rem, 4.2vw, 1.35rem); }
-      .rehearsal-date { display: inline-block; padding: 3px 7px; font-size: .55rem; }
+      .rehearsal-date { min-width: 0; display: flex; flex-direction: row; justify-content: space-between; gap: 7px; padding: 3px 7px; text-align: left; }
+      .rehearsal-date span { font-size: .68rem; }
+      .rehearsal-date strong { margin: 0; font-size: 1.05rem; }
       .rehearsal-video-grid { gap: 7px; }
       .rehearsal-video-title { gap: 4px; padding: 5px 6px; font-size: .55rem; }
       .rehearsal-video-title span { font-size: .6em; }
@@ -522,7 +525,7 @@
       </article>
       <article id="slide-ensaio-louvor" class="presentation-slide dense rehearsal-slide" aria-hidden="true">
         <div class="slide-content">
-          <div class="rehearsal-heading"><div><div class="slide-kicker">Ensaio de louvor</div><h2>Canções para a próxima sexta</h2></div><div class="rehearsal-date"><strong>Sexta-feira</strong> · 9 de outubro · 19h30</div></div>
+          <div class="rehearsal-heading"><div><div class="slide-kicker">Ensaio de louvor</div><h2>Canções para a próxima sexta</h2></div><div class="rehearsal-date"><span>Sexta-feira · 9 de outubro</span><strong>19h30</strong></div></div>
           <div class="rehearsal-video-grid" aria-label="Vídeos das músicas do ensaio">
             <a class="rehearsal-video-card" href="https://youtu.be/V-n0FDCT2N4?si=InQfIEYUu-HC4jdG" target="_blank" rel="noopener noreferrer" aria-label="Assistir Oh quão lindo esse nome é no YouTube">
               <span class="rehearsal-video-cover"><img src="https://img.youtube.com/vi/V-n0FDCT2N4/hqdefault.jpg" alt="Capa do vídeo Oh quão lindo esse nome é"></span>
@@ -639,15 +642,17 @@
     document.getElementById('close-presentation').addEventListener('click', closePresentation);
     document.getElementById('previous-slide').addEventListener('click', () => showSlide(currentSlide - 1));
     document.getElementById('next-slide').addEventListener('click', () => showSlide(currentSlide + 1));
-    function openSlideFromHash() {
-      const slideId = decodeURIComponent(location.hash.slice(1));
+    function openSlideFromUrl() {
+      const slideSlug = new URLSearchParams(location.search).get('slide');
+      const slideId = slideSlug ? `slide-${slideSlug}` : decodeURIComponent(location.hash.slice(1));
       const slideIndex = slides.findIndex((slide) => slide.id === slideId);
       if (slideIndex < 0) return;
       if (presentation.classList.contains('open')) showSlide(slideIndex);
       else openPresentation(slideIndex);
     }
-    window.addEventListener('hashchange', openSlideFromHash);
-    openSlideFromHash();
+    window.addEventListener('hashchange', openSlideFromUrl);
+    window.addEventListener('popstate', openSlideFromUrl);
+    openSlideFromUrl();
     document.addEventListener('keydown', (event) => {
       if (!presentation.classList.contains('open') || event.target.closest('video, input, textarea, select, button, a')) return;
       if (event.key === 'Escape') { event.preventDefault(); closePresentation(); }
