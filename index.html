@@ -420,7 +420,23 @@
     .rehearsal-calendars .calendar-grid { gap: 5px; }
     .rehearsal-calendars .calendar-day { min-height: 34px; }
     @media(max-width:900px) { .rehearsal-calendars { grid-template-columns: 1fr; } }
-  </style>
+      .weekly-rehearsal-slide .slide-content { width: min(1080px, 100%); text-align: center; }
+    .presentation-slide.weekly-rehearsal-slide.dense h2 { max-width: 1000px; margin: 18px auto; font-size: clamp(34px, 5vw, 76px) !important; line-height: 1.08; }
+    .presentation-slide.weekly-rehearsal-slide.dense p { max-width: 860px; margin: 0 auto; font-size: clamp(18px, 1.8vw, 28px) !important; line-height: 1.5; }
+    .weekly-rehearsal-card { display: grid; justify-items: center; gap: 10px; width: fit-content; max-width: 100%; margin: clamp(22px, 3vw, 42px) auto 0; padding: clamp(18px, 2.4vw, 32px) clamp(24px, 5vw, 76px); border: 1px solid rgba(223,187,119,.48); background: linear-gradient(130deg, rgba(223,187,119,.13), rgba(223,187,119,.035)); }
+    .weekly-rehearsal-card span { color: var(--gold); font-family: var(--sans); font-size: clamp(11px, .95vw, 15px); font-weight: 600; letter-spacing: .19em; text-transform: uppercase; }
+    .weekly-rehearsal-card strong { color: var(--ivory); font-family: var(--serif); font-size: clamp(24px, 3.4vw, 48px); font-weight: 500; letter-spacing: .09em; }
+    .weekly-rehearsal-slide .slide-mark { margin-top: clamp(18px, 2vw, 30px); }
+    @media (max-width: 700px) and (orientation: portrait) {
+      .weekly-rehearsal-slide { padding: 22px 18px 54px; }
+      .presentation-slide.weekly-rehearsal-slide.dense h2 { margin: 14px auto; font-size: clamp(30px, 8vw, 44px) !important; }
+      .presentation-slide.weekly-rehearsal-slide.dense p { font-size: clamp(17px, 4.2vw, 20px) !important; }
+      .weekly-rehearsal-card { gap: 8px; margin-top: 22px; padding: 18px 20px; }
+      .weekly-rehearsal-card strong { font-size: clamp(23px, 7vw, 32px); letter-spacing: .05em; }
+      .weekly-rehearsal-card span { font-size: 10px; }
+      .weekly-rehearsal-slide .slide-mark { margin-top: 18px; }
+    }
+</style>
 </head>
 <body>
   <header class="nav">
@@ -573,6 +589,19 @@
             </a>
           </div>
           <a class="rehearsal-drive-link" href="https://drive.google.com/drive/u/1/folders/1kEyYOOMBzEmogFVMWHRJPG82QPhVeepN" target="_blank" rel="noopener noreferrer">Letras, áudios e cifras no Drive <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+      <article id="slide-ensaios-quartas" class="presentation-slide dense weekly-rehearsal-slide" aria-hidden="true">
+        <div class="slide-content">
+          <div class="slide-kicker">Agenda · Nova rotina</div>
+          <h2>Um novo encontro, sempre às quartas.</h2>
+          <p>A partir de 14 de outubro de 2026, todos os ensaios passam a acontecer às quartas-feiras. Semana após semana, vamos preparar juntos cada detalhe da Cantata.</p>
+          <div class="weekly-rehearsal-card">
+            <span>UMA NOVA ROTINA</span>
+            <strong>QUARTAS-FEIRAS</strong>
+            <span>A partir de 14 de outubro</span>
+          </div>
+          <div class="slide-mark">Um só encontro · Um só propósito</div>
         </div>
       </article>
       <article class="presentation-slide dense teams-slide" aria-hidden="true">
