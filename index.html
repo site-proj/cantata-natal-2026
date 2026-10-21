@@ -712,10 +712,22 @@
     document.getElementById('previous-slide').addEventListener('click', () => showSlide(currentSlide - 1));
     document.getElementById('next-slide').addEventListener('click', () => showSlide(currentSlide + 1));
     function openSlideFromUrl() {
-      const slideSlug = new URLSearchParams(location.search).get('slide');
+      const url = new URL(location.href);
+      const slideSlug = url.searchParams.get('slide');
       const slideId = slideSlug ? `slide-${slideSlug}` : decodeURIComponent(location.hash.slice(1));
       const slideIndex = slides.findIndex((slide) => slide.id === slideId);
-      if (slideIndex < 0) return;
+
+      // The query parameter is a one-time deep link. Remove it after reading
+      // so later hash navigation follows the site's regular section links.
+      if (slideSlug) {
+        url.searchParams.delete('slide');
+        history.replaceState(history.state, '', `${url.pathname}${url.search}${url.hash}`);
+      }
+
+      if (slideIndex < 0) {
+        if (presentation.classList.contains('open')) closePresentation();
+        return;
+      }
       if (presentation.classList.contains('open')) showSlide(slideIndex);
       else openPresentation(slideIndex);
     }
