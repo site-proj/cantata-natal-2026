@@ -320,13 +320,29 @@
     .location { min-height: 340px; display:flex;align-items:center; }
     .location > .wrap { width:100%; }
     @media(max-width:720px){.location{min-height:360px;}}
+  
+    /* Mobile: próxima aba aparente + seta indicativa do gesto horizontal */
+    .nav-tabs-shell { position:relative; min-width:0; }
+    .nav-swipe-cue { display:none; }
+    @media (max-width: 720px) {
+      .nav-tabs-shell { width:100%; padding-right:37px; }
+      .nav-tabs-shell .nav-links { width:100%; max-width:100%; gap:7px; overflow-x:auto; overflow-y:hidden; scrollbar-width:none; -webkit-overflow-scrolling:touch; scroll-snap-type:x proximity; border-radius:10px 0 0 10px; }
+      .nav-tabs-shell .nav-links::-webkit-scrollbar { display:none; }
+      .nav-tabs-shell .nav-links a { scroll-snap-align:start; padding:10px 15px; font-size:.81rem; flex:0 0 auto; }
+      .nav-swipe-cue { display:flex; position:absolute; right:0; top:0; bottom:0; width:39px; align-items:center; justify-content:center; border:1px solid rgba(223,187,119,.65); border-radius:0 12px 12px 0; background:linear-gradient(90deg,#392a17,#1d170e); color:#f3cd86; font-size:1.45rem; font-weight:800; pointer-events:none; box-shadow:-8px 0 15px rgba(20,14,8,.35); }
+      .nav-swipe-cue span { display:inline-block; animation:nav-swipe-arrow 1.7s ease-in-out infinite; }
+      .nav-tabs-shell.at-end .nav-swipe-cue { opacity:0; }
+      .nav-tabs-shell.at-end { padding-right:0; }
+    }
+    @keyframes nav-swipe-arrow { 0%,100%{transform:translateX(-3px);opacity:.7} 55%{transform:translateX(4px);opacity:1} }
+    @media(prefers-reduced-motion:reduce){.nav-swipe-cue span{animation:none}}
   </style>
 </head>
 <body>
   <header class="nav">
     <div class="wrap nav-inner">
       <a class="brand" href="#inicio">Cantata de Natal · 2026</a>
-      <nav class="nav-links" aria-label="Navegação principal">
+      <div class="nav-tabs-shell"><nav class="nav-links" aria-label="Navegação principal">
         <a href="#inicio" aria-current="location">Início</a>
         <a href="#ensaio-louvor">Ensaios</a>
         <a href="#roster-title">Escala</a>
@@ -337,7 +353,7 @@
         <a href="#bastidores">Bastidores</a>
         <a href="#agenda">Agenda</a>
         <a href="#local">Local</a>
-      </nav>
+      </nav><div class="nav-swipe-cue" aria-hidden="true"><span>→</span></div></div>
     </div>
   </header>
   <main>
@@ -534,6 +550,16 @@
       sections.forEach((section) => tabObserver.observe(section));
     }
 
+    // Atualiza o indicador conforme a posição horizontal do menu.
+    (() => {
+      const shell=document.querySelector('.nav-tabs-shell');
+      const tabs=shell?.querySelector('.nav-links');
+      if (!shell || !tabs) return;
+      const update=()=>shell.classList.toggle('at-end',tabs.scrollLeft + tabs.clientWidth >= tabs.scrollWidth - 6);
+      tabs.addEventListener('scroll',update,{passive:true});
+      window.addEventListener('resize',update,{passive:true});
+      update();
+    })();
     // Mede o menu fixo para evitar que ele cubra os títulos e o conteúdo.
     (() => {
       const nav = document.querySelector('header.nav');
