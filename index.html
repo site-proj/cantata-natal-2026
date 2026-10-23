@@ -313,6 +313,13 @@
     .drive-link-copy small {color:#f1e5d1;font-size:.81rem}
     .drive-link-arrow {font-size:1.35rem;color:#f5d69b;margin-left:7px}
     @media(max-width:480px){.rehearsal-drive-link{width:100%;padding:15px!important;gap:10px}.drive-brand-icon{width:36px;height:36px}.drive-link-copy strong{font-size:.91rem}.drive-link-copy small{font-size:.75rem}}
+  
+    /* Mantém o conteúdo de cada guia totalmente abaixo do menu fixo. */
+    main { padding-top: var(--nav-clearance, 100px); min-height: calc(100vh - 90px); }
+    main > section[data-tab-panel] { scroll-margin-top: var(--nav-clearance, 100px); }
+    .location { min-height: 340px; display:flex;align-items:center; }
+    .location > .wrap { width:100%; }
+    @media(max-width:720px){.location{min-height:360px;}}
   </style>
 </head>
 <body>
@@ -527,6 +534,15 @@
       sections.forEach((section) => tabObserver.observe(section));
     }
 
+    // Mede o menu fixo para evitar que ele cubra os títulos e o conteúdo.
+    (() => {
+      const nav = document.querySelector('header.nav');
+      if (!nav) return;
+      const measure = () => document.documentElement.style.setProperty('--nav-clearance', Math.ceil(nav.getBoundingClientRect().height + 20) + 'px');
+      measure();
+      window.addEventListener('resize', measure, {passive:true});
+      if (window.ResizeObserver) new ResizeObserver(measure).observe(nav);
+    })();
     // Uma guia por vez; a escala tem painel próprio, sem duplicar conteúdo.
     (() => {
       const main = document.querySelector('main');
