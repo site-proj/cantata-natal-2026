@@ -291,6 +291,19 @@
     @media(max-width:900px) { .rehearsal-calendars { grid-template-columns: 1fr; } }
 .diary-entry-image { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
     .diary-update-photo figcaption { padding: 10px 16px; color: var(--ivory); font-size: 16px; text-align: left; }
+  
+    /* Navegação em guias: destaque e convite sutil à interação */
+    .nav-links { border-color: rgba(223,187,119,.48); background: rgba(26,19,12,.96); box-shadow: 0 8px 28px rgba(0,0,0,.28); }
+    .nav-links a { position:relative; border:1px solid rgba(223,187,119,.22); background:rgba(223,187,119,.065); font-weight:700; transition: transform .24s ease, background .24s ease, box-shadow .24s ease, color .24s ease; }
+    .nav-links a:hover,.nav-links a:focus-visible { transform:translateY(-3px); box-shadow:0 5px 18px rgba(223,187,119,.22); }
+    .nav-links a[aria-current="page"] { background:var(--gold); color:#21170c; box-shadow:0 0 0 2px rgba(223,187,119,.24),0 0 20px rgba(223,187,119,.25); }
+    .nav-links a:not([aria-current="page"]):nth-child(2) { animation:tab-invite 3.8s ease-in-out 2; }
+    @keyframes tab-invite { 0%,72%,100% {transform:translateY(0);box-shadow:none} 80% {transform:translateY(-4px);box-shadow:0 0 18px rgba(223,187,119,.4)} 88% {transform:translateY(0)} }
+    .js main > section[data-tab-panel][hidden] { display:none !important; }
+    .js main > section[data-tab-panel]:not([hidden]) { animation:panel-arrive .42s ease both; }
+    @keyframes panel-arrive {from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    @media(prefers-reduced-motion:reduce){.nav-links a,.js main > section[data-tab-panel]{animation:none!important;transition:none!important}}
+
   </style>
 </head>
 <body>
@@ -497,13 +510,58 @@
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
           navTabs.forEach((tab) => {
-            if (tab.getAttribute('href') === `#${entry.target.id}`) tab.setAttribute('aria-current', 'location');
+            if (tab.getAttribute('href') === `#${entry.target.id}` && !entry.target.hidden) tab.setAttribute('aria-current', 'page');
             else tab.removeAttribute('aria-current');
           });
         });
       }, { rootMargin: '-25% 0px -65% 0px' });
       sections.forEach((section) => tabObserver.observe(section));
     }
+
+    // Uma guia por vez; a escala tem painel próprio, sem duplicar conteúdo.
+    (() => {
+      const main = document.querySelector('main');
+      const links = [...document.querySelectorAll('.nav-links a')];
+      const roster = document.querySelector('.song-roster');
+      if (roster) {
+        const panel = document.createElement('section');
+        panel.id = 'escala';
+        panel.className = 'songs escala-panel';
+        const wrap = document.createElement('div');
+        wrap.className = 'wrap';
+        roster.parentNode.insertBefore(document.createComment('Escala movida para a guia exclusiva'), roster);
+        wrap.appendChild(roster);
+        panel.appendChild(wrap);
+        const songs = document.getElementById('louvores');
+        songs?.insertAdjacentElement('afterend', panel);
+      }
+      const escalaLink = links.find(link => link.getAttribute('href') === '#roster-title');
+      if (escalaLink) escalaLink.setAttribute('href','#escala');
+      const panels = [...main.querySelectorAll(':scope > section')];
+      panels.forEach(panel => {panel.dataset.tabPanel='';});
+      const ids = new Set(panels.map(panel=>panel.id));
+      function activate(id, updateHistory) {
+        const target = ids.has(id) ? id : 'inicio';
+        panels.forEach(panel => {
+          panel.hidden = panel.id !== target;
+          if (!panel.hidden) panel.querySelectorAll('.reveal').forEach(el=>el.classList.add('is-visible'));
+        });
+        links.forEach(link => {
+          if (link.getAttribute('href') === '#'+target) link.setAttribute('aria-current','page');
+          else link.removeAttribute('aria-current');
+        });
+        if (updateHistory) history.pushState(null,'','#'+target);
+        window.scrollTo({top:0,behavior:'instant'});
+      }
+      links.forEach(link => link.addEventListener('click',event=>{
+        const id=link.getAttribute('href').slice(1);
+        if (!ids.has(id)) return;
+        event.preventDefault();
+        activate(id,true);
+      }));
+      window.addEventListener('popstate',()=>activate(location.hash.slice(1),false));
+      activate(location.hash.slice(1)==='roster-title'?'escala':location.hash.slice(1),false);
+    })();
   </script>
 </body>
 </html>
