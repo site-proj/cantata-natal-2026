@@ -466,6 +466,8 @@
     @keyframes roster-reveal { from {opacity:0;transform:translateY(-6px)} to {opacity:1;transform:translateY(0)} }
     @media(max-width:700px) { .song-roster-head { align-items:flex-start; gap:16px; } .roster-action { min-height:42px; padding:0 12px; font-size:.7rem; } .roster-intro { margin-top:12px; } }
     @media(max-width:440px) { .song-roster-head { grid-template-columns:1fr; gap:15px; } .roster-action { justify-self:start; } }
+    .song-card-opening { border-color:rgba(223,187,119,.48); background:linear-gradient(130deg,rgba(223,187,119,.13),rgba(255,255,255,.025)); }
+    .song-card-opening .song-number { font-family:var(--sans); font-size:.68rem; font-weight:700; letter-spacing:.11em; }
   </style>
 </head>
 <body>
@@ -530,14 +532,16 @@
           <p>Cada voz e instrumento ajuda a contar esta história: dos sinais na vida de Eliseu à chegada de Jesus, a promessa maior.</p>
         </div>
         <ol class="songs-grid reveal">
-          <li class="song-card"><span class="song-number">01</span><div><h3>Agnus Dei</h3><p>Novo Canto, Julliany Souza &amp; Watoto</p></div></li>
-          <li class="song-card"><span class="song-number">02</span><div><h3>Algo Novo Vindo</h3><p>Get Worship</p></div></li>
-          <li class="song-card"><span class="song-number">03</span><div><h3>Jesus</h3><p>Autoral</p></div></li>
-          <li class="song-card"><span class="song-number">04</span><div><h3>Ele veio</h3><p>Autoral</p></div></li>
-          <li class="song-card"><span class="song-number">05</span><div><h3>Na Força do Louvor</h3><p>Renascer Praise 20</p></div></li>
-          <li class="song-card"><span class="song-number">06</span><div><h3>Nada Se Compara</h3><p>Renascer Praise 17</p></div></li>
-          <li class="song-card"><span class="song-number">07</span><div><h3>Oh, Quão Lindo Esse Nome É</h3><p>Kemuel</p></div></li>
-          <li class="song-card"><span class="song-number">08</span><div><h3>Prefiro Crer</h3><p>Vânia Marx</p></div></li>
+          <li class="song-card song-card-opening"><span class="song-number">ABERTURA</span><div><h3>A Guerra Ganha Está (Trecho)</h3></div></li>
+          <li class="song-card"><span class="song-number">01</span><div><h3>A Promessa</h3></div></li>
+          <li class="song-card"><span class="song-number">02</span><div><h3>O Azeite</h3><p>Isadora Pompeo</p></div></li>
+          <li class="song-card"><span class="song-number">03</span><div><h3>Prefiro Crer</h3><p>Vânia Marx</p></div></li>
+          <li class="song-card"><span class="song-number">04</span><div><h3>Oh, Quão Lindo Esse Nome É</h3><p>Kemuel</p></div></li>
+          <li class="song-card"><span class="song-number">05</span><div><h3>Algo Novo</h3><p>Get Worship</p></div></li>
+          <li class="song-card"><span class="song-number">06</span><div><h3>Nada Se Compara</h3><p>Kids · Renascer Praise 17</p></div></li>
+          <li class="song-card"><span class="song-number">07</span><div><h3>Na Força do Louvor</h3><p>Renascer Praise 20</p></div></li>
+          <li class="song-card"><span class="song-number">08</span><div><h3>Agnus Dei</h3><p>Novo Canto, Julliany Souza &amp; Watoto</p></div></li>
+          <li class="song-card"><span class="song-number">09</span><div><h3>Ele Veio</h3><p>Autoral</p></div></li>
         </ol>
         <details class="song-roster reveal" aria-labelledby="roster-title">
           <summary class="song-roster-head">
