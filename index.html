@@ -357,6 +357,15 @@
       .hero-renascer-logo {order:0;width:100%;margin:0;padding:24px 12px 10px;background:#100d0a;}
       .hero-renascer-logo img {width:clamp(145px,43vw,205px);max-height:67px;}
     }
+  
+    /* Foto aprovada: exibição integral no celular, sem cortes ou sobreposição. */
+    @media(max-width:720px){
+      .hero-content::after {content:none!important;}
+      .hero-scene-mobile {order:3;display:block;width:100%;height:auto;object-fit:contain;background:#100d0a;}
+      .hero-content > h1 {padding-bottom:18px;}
+      .hero-copy {padding-top:22px;}
+    }
+    @media(min-width:721px){.hero-scene-mobile{display:none;}}
   </style>
 </head>
 <body>
@@ -463,6 +472,7 @@
         <div class="hero-renascer-logo"><img src="images/logo-renascer.png" alt="Renascer Jundiaí"><span>Jundiaí</span></div>
         <div class="eyebrow">Uma promessa está prestes a se revelar</div>
         <h1 aria-label="Quando o Céu Tocou a Terra"><span>Quando o Céu</span><span>Tocou a</span><span class="terra">Terra</span></h1>
+        <img class="hero-scene-mobile" src="images/manjedoura-fundo.png" alt="Cena da Natividade com céu estrelado, Maria, José e o menino Jesus" loading="eager" decoding="async">
         <p class="hero-copy">Uma cantata de Natal feita de louvor, dança e encontros. Acompanhe de perto cada passo até uma noite especial.</p>
         <div class="hero-meta">
           <span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="1" stroke="currentColor" stroke-width="1.5"/><path d="M7.5 3v4M16.5 3v4M4 9.5h16" stroke="currentColor" stroke-width="1.5"/></svg>18 de dezembro de 2026</span>
