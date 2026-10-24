@@ -554,8 +554,8 @@
       :root { --mobile-hero-height:100svh; }
       @supports(height:100dvh) { :root { --mobile-hero-height:100dvh; } }
       main > .hero#inicio { margin-top:calc(-1 * var(--nav-clearance,100px)); }
-      .hero { min-height:var(--mobile-hero-height); height:auto; overflow:visible; }
-      .hero::before { inset:0; background:url("images/cantata-mobile-hero.png") center 50% / cover no-repeat; filter:blur(8px) brightness(.48); transform:scale(1.04); opacity:.9; }
+      .hero { min-height:var(--mobile-hero-height); height:auto; overflow-x:clip; overflow-y:visible; }
+      .hero::before { inset:0; background:url("images/cantata-mobile-hero.png") center 50% / cover no-repeat; filter:blur(8px) brightness(.48); transform:none; opacity:.9; }
       .hero-content { display:block; width:100%; padding:var(--mobile-hero-height) 0 18px!important; }
       .hero-renascer-logo { position:absolute; top:calc(env(safe-area-inset-top) + 82px); left:14px; z-index:5; align-items:flex-start; width:clamp(112px,32vw,138px); padding:0!important; margin:0!important; background:transparent!important; }
       .hero-renascer-logo img { width:100%; max-height:48px; }
