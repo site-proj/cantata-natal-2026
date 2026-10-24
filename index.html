@@ -513,9 +513,10 @@
     @keyframes divine-reveal { 0% {clip-path:inset(0 50%);opacity:0;filter:brightness(1.8) blur(5px);transform:translateY(7px);letter-spacing:.22em;} 62% {opacity:1;filter:brightness(1.22) blur(1px);} 100% {clip-path:inset(0);opacity:1;filter:brightness(1) blur(0);transform:translateY(0);letter-spacing:.07em;} }
     @keyframes title-drop-reveal { 0% {clip-path:inset(0 0 100% 0);opacity:0;transform:translateY(16px) rotateX(-7deg);filter:blur(3px);} 68% {opacity:1;filter:blur(0);} 100% {clip-path:inset(0);opacity:1;transform:translateY(0) rotateX(0);filter:blur(0);} }
     @keyframes letter-arrive { 0% {opacity:0;transform:translate3d(0,.22em,0) rotateX(-38deg) scale(.96);filter:blur(3px);} 72% {opacity:1;filter:blur(0);} 100% {opacity:1;transform:translate3d(0,0,0) rotateX(0) scale(1);filter:blur(0);} }
-    @keyframes star-pulse-soft { 0% {opacity:.6;transform:translate(-50%,-50%) scale(.9);filter:drop-shadow(0 0 7px rgba(255,193,76,.42));} 55% {opacity:.84;transform:translate(-50%,-50%) scale(1.07);filter:drop-shadow(0 0 15px rgba(255,193,76,.68));} 100% {opacity:.72;transform:translate(-50%,-50%) scale(1);filter:drop-shadow(0 0 9px rgba(255,193,76,.5));} }
-    @keyframes star-beam-mobile-soft { 0% {opacity:0;transform:translateX(-50%) scaleY(.12)} 45% {opacity:.42;transform:translateX(-50%) scaleY(1.03)} 100% {opacity:.24;transform:translateX(-50%) scaleY(1)} }
-    @keyframes star-radiance-soft { 0% {opacity:0;transform:scale(.78)} 45% {opacity:.42;transform:scale(1.02)} 100% {opacity:.24;transform:scale(1.1)} }
+    @keyframes star-pulse-cinematic { 0% {opacity:.58;transform:translate(-50%,-50%) scale(.94);filter:drop-shadow(0 0 7px rgba(255,193,76,.38));} 12% {opacity:.82;transform:translate(-50%,-50%) scale(1.04);filter:drop-shadow(0 0 15px rgba(255,193,76,.64));} 27% {opacity:.66;transform:translate(-50%,-50%) scale(1);filter:drop-shadow(0 0 9px rgba(255,193,76,.44));} 58% {opacity:.68;transform:translate(-50%,-50%) scale(1);filter:drop-shadow(0 0 9px rgba(255,193,76,.44));} 70% {opacity:.92;transform:translate(-50%,-50%) scale(1.07);filter:drop-shadow(0 0 18px rgba(255,193,76,.72));} 84% {opacity:.82;transform:translate(-50%,-50%) scale(1.02);filter:drop-shadow(0 0 12px rgba(255,193,76,.54));} 100% {opacity:.76;transform:translate(-50%,-50%) scale(1);filter:drop-shadow(0 0 10px rgba(255,193,76,.48));} }
+    @keyframes star-radiance-sequence { 0% {opacity:0;transform:scale(.72)} 10% {opacity:.34;transform:scale(1.02)} 25% {opacity:.16;transform:scale(1.08)} 60% {opacity:.16;transform:scale(1.08)} 76% {opacity:.4;transform:scale(1.16)} 100% {opacity:.22;transform:scale(1.1)} }
+    @keyframes mobile-heavenly-beam { 0% {opacity:0;transform:translateX(-50%) scaleY(.08)} 68% {opacity:.4;transform:translateX(-50%) scaleY(1.02)} 88% {opacity:.32;transform:translateX(-50%) scaleY(1)} 100% {opacity:.2;transform:translateX(-50%) scaleY(1)} }
+    @keyframes mobile-manger-glow { 0% {opacity:0;transform:translate(-50%,-45%) scale(.72)} 72% {opacity:.34;transform:translate(-50%,-50%) scale(1.08)} 100% {opacity:.22;transform:translate(-50%,-50%) scale(1)} }
     @keyframes promise-intro-soft { from {opacity:0;transform:translateY(6px);filter:blur(2px)} to {opacity:1;transform:translateY(0);filter:blur(0)} }
     @keyframes divine-reveal-soft { from {clip-path:inset(0 50% 0 50%);opacity:0;filter:blur(2px);transform:translateY(4px)} to {clip-path:inset(0);opacity:1;filter:blur(0);transform:translateY(0)} }
     @keyframes title-drop-soft { from {clip-path:inset(0 0 100%);opacity:0;filter:blur(2px);transform:translateY(8px)} to {clip-path:inset(0);opacity:1;filter:blur(0);transform:translateY(0)} }
@@ -534,19 +535,40 @@
       .terra-title { width:clamp(250px,68vw,390px); margin-top:4px; }
       .terra-title-svg { display:none!important; }
       .terra-title-mobile { display:block; }
-      .hero.cinematic-play .hero-star-light { animation:star-pulse-soft 1.6s cubic-bezier(.22,.61,.36,1) 3.02s both; }
-      .hero.cinematic-play .hero-star-light::before { animation:star-beam-mobile-soft 2.15s cubic-bezier(.22,.61,.36,1) 3.08s both; }
-      .hero.cinematic-play .hero-star-light::after { animation:star-radiance-soft 1.5s ease-out 3.02s both; }
+      .hero.cinematic-play .hero-star-light { animation:star-pulse-cinematic 7.7s cubic-bezier(.22,.61,.36,1) 0s both; }
+      .hero.cinematic-play .hero-star-light::before { animation:mobile-heavenly-beam 2.75s cubic-bezier(.22,.61,.36,1) 4.78s both; }
+      .hero.cinematic-play .hero-star-light::after { animation:star-radiance-sequence 7.7s cubic-bezier(.22,.61,.36,1) 0s both; }
       .hero.cinematic-play .hero-mobile-kicker { animation:promise-intro-soft .65s cubic-bezier(.22,.61,.36,1) .1s both; }
       .hero.cinematic-play .hero-title-sky { animation:divine-reveal-soft .98s cubic-bezier(.22,.61,.36,1) .46s both; }
       .hero.cinematic-play .hero-title-earth { animation:title-drop-soft .92s cubic-bezier(.22,.61,.36,1) 1.06s both; }
       .hero.cinematic-play .hero-title-sky .hero-letter { animation:letter-arrive-soft .74s cubic-bezier(.22,.61,.36,1) both; }
       .hero.cinematic-play .hero-title-earth .hero-letter { animation:letter-arrive-soft .72s cubic-bezier(.22,.61,.36,1) both; }
-      .hero.cinematic-play .terra-title-mobile { animation-delay:1.87s; }
-      .hero.cinematic-play .terra-title-mobile .terra-writing { clip-path:inset(0 100% 0 0); animation:calligraphy-write-soft 1.04s cubic-bezier(.22,.61,.36,1) 1.87s both; }
-      .hero.cinematic-play .terra-sweep-mobile { animation-duration:1.45s; animation-delay:3.02s; }
-      .hero.cinematic-play h1 { animation:title-final-glow-soft .7s ease-out 3.85s both; }
+      .hero.cinematic-play .terra-title-mobile { animation-delay:2.08s; }
+      .hero.cinematic-play .terra-title-mobile .terra-writing { clip-path:inset(0 100% 0 0); animation:calligraphy-write-soft 1.38s cubic-bezier(.22,.61,.36,1) 2.08s both; }
+      .hero.cinematic-play .terra-sweep-mobile { animation-duration:1.35s; animation-delay:3.4s; }
+      .hero.cinematic-play .hero-manger-glow { animation:mobile-manger-glow 2.55s cubic-bezier(.22,.61,.36,1) 5.68s both; }
+      .hero.cinematic-play h1 { animation:title-final-glow-soft .9s ease-out 4.2s both; }
       .hero.cinematic-play .hero-promise-below { animation:promise-intro-soft .8s cubic-bezier(.22,.61,.36,1) 1.05s both; }
+    }
+    @media(max-width:600px) {
+      :root { --mobile-hero-height:100svh; }
+      @supports(height:100dvh) { :root { --mobile-hero-height:100dvh; } }
+      .hero { min-height:var(--mobile-hero-height); height:auto; overflow:visible; }
+      .hero::before { inset:0; background:url("images/cantata-mobile-hero.png") center 50% / cover no-repeat; filter:blur(8px) brightness(.48); transform:scale(1.04); opacity:.9; }
+      .hero-content { display:block; width:100%; padding:var(--mobile-hero-height) 0 18px!important; }
+      .hero-renascer-logo { position:absolute; top:calc(env(safe-area-inset-top) + 82px); left:14px; z-index:5; align-items:flex-start; width:clamp(112px,32vw,138px); padding:0!important; margin:0!important; background:transparent!important; }
+      .hero-renascer-logo img { width:100%; max-height:48px; }
+      .hero-renascer-logo span { font-size:.52rem; letter-spacing:.24em; }
+      .hero-art { position:absolute; inset:0 0 auto; z-index:1; width:100%; height:var(--mobile-hero-height); overflow:hidden; line-height:normal; }
+      .hero-scene-mobile { position:absolute!important; inset:0; width:100%!important; height:100%!important; object-fit:cover!important; object-position:center center!important; }
+      .hero-mobile-kicker { top:24%; left:8px; right:8px; z-index:3; font-size:clamp(.58rem,2.8vw,.72rem); }
+      .hero-art > h1 { top:31%; z-index:3; padding-inline:8px; font-size:clamp(1.72rem,7.6vw,2.45rem); }
+      .hero-art > h1 .terra { font-size:clamp(4.2rem,15vw,6.1rem); }
+      .hero-star-light { top:12.6%; z-index:2; }
+      .hero-star-light::before { height:clamp(390px,64svh,620px); }
+      .hero-manger-glow { position:absolute; z-index:2; top:76%; left:50%; width:clamp(120px,42vw,180px); height:clamp(66px,18vw,108px); border-radius:50%; background:radial-gradient(ellipse at center,rgba(255,224,164,.28),rgba(255,192,105,.14) 38%,rgba(255,170,76,.045) 68%,transparent 80%); filter:blur(9px); mix-blend-mode:screen; opacity:0; pointer-events:none; }
+      .hero-promise-below { position:relative; z-index:1; margin:0; padding:26px 16px 6px; background:transparent!important; text-shadow:0 2px 14px rgba(0,0,0,.95),0 0 24px rgba(0,0,0,.8); }
+      .hero-meta { position:relative; z-index:1; margin:0; padding:11px 22px 24px; background:transparent!important; }
     }
     @media(prefers-reduced-motion:reduce) {
       .hero-art > .eyebrow,.hero-mobile-kicker,.hero-promise-below { clip-path:none!important; opacity:1!important; transform:none!important; filter:none!important; animation:none!important; }
@@ -671,6 +693,7 @@
         <div class="hero-art">
           <img class="hero-scene-mobile" src="images/cantata-mobile-hero.png" alt="Cena da Natividade com Maria, José e o menino Jesus sob uma estrela, rodeados por palhas e animais" loading="eager" decoding="async">
           <span class="hero-star-light" aria-hidden="true"></span>
+          <span class="hero-manger-glow" aria-hidden="true"></span>
           <div class="eyebrow">Uma promessa está prestes a se revelar</div>
           <div class="hero-mobile-kicker">Cantata de Natal · 2026</div>
           <h1 aria-label="Quando o Céu Tocou a Terra"><span class="hero-title-line hero-title-sky">Quando o Céu</span><span class="hero-title-line hero-title-earth">Tocou a</span><svg class="terra-title terra-title-svg" viewBox="0 0 600 180" aria-hidden="true" focusable="false"><defs><mask id="terra-title-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="600" height="180"><text x="300" y="142" text-anchor="middle" textLength="360" lengthAdjust="spacingAndGlyphs" font-family="Tangerine, cursive" font-size="160" font-weight="700" fill="white">Terra</text></mask><linearGradient id="terra-title-shine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff2c5" stop-opacity="0"/><stop offset=".46" stop-color="#fff9e7" stop-opacity=".15"/><stop offset=".52" stop-color="#fff6d5" stop-opacity=".95"/><stop offset=".58" stop-color="#fff9e7" stop-opacity=".22"/><stop offset="1" stop-color="#fff2c5" stop-opacity="0"/></linearGradient><linearGradient id="terra-title-fill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6d98e"/><stop offset=".46" stop-color="#ffe7aa"/><stop offset=".72" stop-color="#e9c26e"/><stop offset="1" stop-color="#c28f49"/></linearGradient></defs><text class="terra-writing" x="300" y="142" text-anchor="middle" textLength="360" lengthAdjust="spacingAndGlyphs" font-family="Tangerine, cursive" font-size="160" font-weight="700" fill="url(#terra-title-fill)" stroke="#f3d58e" stroke-width="1.15" stroke-linejoin="round">Terra</text><g mask="url(#terra-title-mask)"><rect class="terra-sweep" x="-240" y="0" width="240" height="180" fill="url(#terra-title-shine)"/></g></svg><span class="terra-title terra-title-mobile" aria-hidden="true"><img class="terra-writing" src="images/terra-lettering.png" alt=""><span class="terra-sweep-mobile"></span></span></h1>
