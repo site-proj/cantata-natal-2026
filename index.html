@@ -349,6 +349,14 @@
       .hero-copy { order:4; width:100%; max-width:none; margin:0; padding:25px 22px 0; background:#100d0a; color:#eee2cc; font-size:clamp(1rem,4vw,1.13rem); line-height:1.6; text-shadow:none; }
       .hero-meta { order:5; width:100%; margin:0; padding:19px 15px 34px; background:#100d0a; gap:10px 18px; }
     }
+  
+    .hero-renascer-logo {display:flex;flex-direction:column;align-items:center;gap:2px;margin:0 auto 23px;}
+    .hero-renascer-logo img {display:block;width:clamp(145px,20vw,235px);max-height:78px;object-fit:contain;}
+    .hero-renascer-logo span {font-family:var(--serif);color:var(--gold);font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;}
+    @media(max-width:720px){
+      .hero-renascer-logo {order:0;width:100%;margin:0;padding:24px 12px 10px;background:#100d0a;}
+      .hero-renascer-logo img {width:clamp(145px,43vw,205px);max-height:67px;}
+    }
   </style>
 </head>
 <body>
@@ -452,6 +460,7 @@
 
     <section class="hero" id="inicio">
       <div class="hero-content">
+        <div class="hero-renascer-logo"><img src="images/logo-renascer.png" alt="Renascer Jundiaí"><span>Jundiaí</span></div>
         <div class="eyebrow">Uma promessa está prestes a se revelar</div>
         <h1 aria-label="Quando o Céu Tocou a Terra"><span>Quando o Céu</span><span>Tocou a</span><span class="terra">Terra</span></h1>
         <p class="hero-copy">Uma cantata de Natal feita de louvor, dança e encontros. Acompanhe de perto cada passo até uma noite especial.</p>
