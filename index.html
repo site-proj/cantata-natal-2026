@@ -470,8 +470,18 @@
     .roster-chevron { width:9px; height:9px; border-right:2px solid currentColor; border-bottom:2px solid currentColor; transform:rotate(45deg) translateY(-2px); transition:transform .2s ease; }
     .song-roster[open] .roster-chevron { transform:rotate(225deg) translate(-1px,-1px); }
     .roster-intro { position:relative; z-index:1; margin:14px 0 0; color:var(--muted); font-size:.9rem; }
-    .song-roster .roster-grid { margin-top:22px; animation:roster-reveal .24s ease both; }
+    .song-roster .roster-grid { margin-top:22px; }
+    .song-roster[open] .roster-expansion { animation:roster-reveal .24s ease both; }
     @keyframes roster-reveal { from {opacity:0;transform:translateY(-6px)} to {opacity:1;transform:translateY(0)} }
+    .song-roster-list { display:grid; gap:14px; margin-top:38px; padding:0; }
+    .song-roster-list-head { margin-bottom:8px; }
+    .song-roster-list-head h3 { margin:8px 0 6px; color:var(--ivory); font-family:var(--serif); font-size:clamp(1.45rem,3vw,2rem); font-weight:500; line-height:1.2; }
+    .song-roster-list-head p { margin:0; color:var(--muted); font-size:.92rem; }
+    .song-roster-list > .song-roster { margin:0; padding:18px 22px; }
+    .song-roster-list > .song-roster::after { display:none; }
+    .song-roster-list .song-roster-head { margin:0; }
+    .roster-pending { padding:12px 14px; border-left:2px solid rgba(223,187,119,.55); background:rgba(223,187,119,.06); }
+    @media(max-width:600px) { .song-roster-list { gap:10px; margin-top:28px; } .song-roster-list > .song-roster { padding:16px 14px; } }
     @media(max-width:700px) { .song-roster-head { align-items:flex-start; gap:16px; } .roster-action { min-height:42px; padding:0 12px; font-size:.7rem; } .roster-intro { margin-top:12px; } }
     @media(max-width:440px) { .song-roster-head { grid-template-columns:1fr; gap:15px; } .roster-action { justify-self:start; } }
     .song-card-opening { border-color:rgba(223,187,119,.48); background:linear-gradient(130deg,rgba(223,187,119,.13),rgba(255,255,255,.025)); }
@@ -639,32 +649,74 @@
           <li class="song-card"><span class="song-number">08</span><div><h3>Agnus Dei</h3><p>Novo Canto, Julliany Souza &amp; Watoto</p></div></li>
           <li class="song-card"><span class="song-number">09</span><div><h3>Ele Veio</h3><p>Autoral</p></div></li>
         </ol>
-        <details class="song-roster reveal" aria-labelledby="roster-title">
-          <summary class="song-roster-head">
-            <div class="roster-song-title"><div class="eyebrow">Escala · Louvor</div><h3 id="roster-title">Oh, Quão Lindo Esse Nome É</h3><p class="roster-artist">Kemuel</p></div>
-            <span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span>
-          </summary>
-          <p class="roster-intro">Uma canção, muitos dons e um só propósito: conduzir cada voz a adorar.</p>
-          <div class="roster-grid">
-            <section class="roster-card" aria-label="Escala da banda">
-              <h4>Banda</h4>
-              <ul class="roster-list">
-                <li><span class="roster-role">Keys</span><span class="roster-name">Matheus e Fábinho</span></li>
-                <li><span class="roster-role">Drum</span><span class="roster-name">Pb. Filipe</span></li>
-                <li><span class="roster-role">Bass</span><span class="roster-name">Tedinho</span></li>
-                <li><span class="roster-role">Guitar</span><span class="roster-name">Peterson</span></li>
-              </ul>
-            </section>
-            <section class="roster-card" aria-label="Escala vocal">
-              <h4>Vozes</h4>
-              <ul class="roster-list">
-                <li><span class="roster-role">Vocal</span><span class="roster-name">Nathy Havarth</span></li>
-                <li><span class="roster-role">Vocal</span><span class="roster-name">Ná Gaspar</span></li>
-                <li><span class="roster-role">Participação</span><span class="roster-name">Teens</span></li>
-              </ul>
-            </section>
-          </div>
-        </details>
+        <section class="song-roster-list reveal" aria-labelledby="roster-title">
+          <header class="song-roster-list-head">
+            <div class="eyebrow">Escala · Louvor</div>
+            <h3 id="roster-title">Uma escala para cada música</h3>
+            <p>Abra uma canção para consultar a banda e as vozes.</p>
+          </header>
+          <details class="song-roster" aria-label="Escala da abertura: A Guerra Ganha Está (Trecho)">
+            <summary class="song-roster-head"><div class="roster-song-title"><div class="eyebrow">Abertura</div><h3>A Guerra Ganha Está (Trecho)</h3><p class="roster-artist">Intérprete não informado</p></div><span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span></summary>
+            <div class="roster-expansion"><p class="roster-intro roster-pending">A escala de banda e vozes desta música será informada.</p></div>
+          </details>
+          <details class="song-roster" aria-label="Escala de A Promessa">
+            <summary class="song-roster-head"><div class="roster-song-title"><div class="eyebrow">01 · Louvor</div><h3>A Promessa</h3><p class="roster-artist">Artista não informado</p></div><span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span></summary>
+            <div class="roster-expansion"><p class="roster-intro roster-pending">A escala de banda e vozes desta música será informada.</p></div>
+          </details>
+          <details class="song-roster" aria-label="Escala de O Azeite">
+            <summary class="song-roster-head"><div class="roster-song-title"><div class="eyebrow">02 · Louvor</div><h3>O Azeite</h3><p class="roster-artist">Isadora Pompeo</p></div><span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span></summary>
+            <div class="roster-expansion"><p class="roster-intro roster-pending">A escala de banda e vozes desta música será informada.</p></div>
+          </details>
+          <details class="song-roster" aria-label="Escala de Prefiro Crer">
+            <summary class="song-roster-head"><div class="roster-song-title"><div class="eyebrow">03 · Louvor</div><h3>Prefiro Crer</h3><p class="roster-artist">Vânia Marx</p></div><span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span></summary>
+            <div class="roster-expansion"><p class="roster-intro roster-pending">A escala de banda e vozes desta música será informada.</p></div>
+          </details>
+          <details class="song-roster" aria-label="Escala de Oh, Quão Lindo Esse Nome É">
+            <summary class="song-roster-head"><div class="roster-song-title"><div class="eyebrow">04 · Louvor</div><h3>Oh, Quão Lindo Esse Nome É</h3><p class="roster-artist">Kemuel</p></div><span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span></summary>
+            <div class="roster-expansion">
+              <p class="roster-intro">Uma canção, muitos dons e um só propósito: conduzir cada voz a adorar.</p>
+              <div class="roster-grid">
+                <section class="roster-card" aria-label="Escala da banda">
+                  <h4>Banda</h4>
+                  <ul class="roster-list">
+                    <li><span class="roster-role">Keys</span><span class="roster-name">Matheus e Fábinho</span></li>
+                    <li><span class="roster-role">Drum</span><span class="roster-name">Pb. Filipe</span></li>
+                    <li><span class="roster-role">Bass</span><span class="roster-name">Tedinho</span></li>
+                    <li><span class="roster-role">Guitar</span><span class="roster-name">Peterson</span></li>
+                  </ul>
+                </section>
+                <section class="roster-card" aria-label="Escala vocal">
+                  <h4>Vozes</h4>
+                  <ul class="roster-list">
+                    <li><span class="roster-role">Vocal</span><span class="roster-name">Nathy Havarth</span></li>
+                    <li><span class="roster-role">Vocal</span><span class="roster-name">Ná Gaspar</span></li>
+                    <li><span class="roster-role">Participação</span><span class="roster-name">Teens</span></li>
+                  </ul>
+                </section>
+              </div>
+            </div>
+          </details>
+          <details class="song-roster" aria-label="Escala de Algo Novo">
+            <summary class="song-roster-head"><div class="roster-song-title"><div class="eyebrow">05 · Louvor</div><h3>Algo Novo</h3><p class="roster-artist">Get Worship</p></div><span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span></summary>
+            <div class="roster-expansion"><p class="roster-intro roster-pending">A escala de banda e vozes desta música será informada.</p></div>
+          </details>
+          <details class="song-roster" aria-label="Escala de Nada Se Compara">
+            <summary class="song-roster-head"><div class="roster-song-title"><div class="eyebrow">06 · Louvor</div><h3>Nada Se Compara</h3><p class="roster-artist">Kids · Renascer Praise 17</p></div><span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span></summary>
+            <div class="roster-expansion"><p class="roster-intro roster-pending">A escala de banda e vozes desta música será informada.</p></div>
+          </details>
+          <details class="song-roster" aria-label="Escala de Na Força do Louvor">
+            <summary class="song-roster-head"><div class="roster-song-title"><div class="eyebrow">07 · Louvor</div><h3>Na Força do Louvor</h3><p class="roster-artist">Renascer Praise 20</p></div><span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span></summary>
+            <div class="roster-expansion"><p class="roster-intro roster-pending">A escala de banda e vozes desta música será informada.</p></div>
+          </details>
+          <details class="song-roster" aria-label="Escala de Agnus Dei">
+            <summary class="song-roster-head"><div class="roster-song-title"><div class="eyebrow">08 · Louvor</div><h3>Agnus Dei</h3><p class="roster-artist">Novo Canto, Julliany Souza &amp; Watoto</p></div><span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span></summary>
+            <div class="roster-expansion"><p class="roster-intro roster-pending">A escala de banda e vozes desta música será informada.</p></div>
+          </details>
+          <details class="song-roster" aria-label="Escala de Ele Veio">
+            <summary class="song-roster-head"><div class="roster-song-title"><div class="eyebrow">09 · Louvor</div><h3>Ele Veio</h3><p class="roster-artist">Autoral</p></div><span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span></summary>
+            <div class="roster-expansion"><p class="roster-intro roster-pending">A escala de banda e vozes desta música será informada.</p></div>
+          </details>
+        </section>
       </div>
     </section>
 
@@ -832,7 +884,7 @@
     (() => {
       const main = document.querySelector('main');
       const links = [...document.querySelectorAll('.nav-links a')];
-      const roster = document.querySelector('.song-roster');
+      const roster = document.querySelector('.song-roster-list');
       if (roster) {
         const panel = document.createElement('section');
         panel.id = 'escala';
