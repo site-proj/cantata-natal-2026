@@ -553,6 +553,7 @@
     @media(max-width:600px) {
       :root { --mobile-hero-height:100svh; }
       @supports(height:100dvh) { :root { --mobile-hero-height:100dvh; } }
+      main > .hero#inicio { margin-top:calc(-1 * var(--nav-clearance,100px)); }
       .hero { min-height:var(--mobile-hero-height); height:auto; overflow:visible; }
       .hero::before { inset:0; background:url("images/cantata-mobile-hero.png") center 50% / cover no-repeat; filter:blur(8px) brightness(.48); transform:scale(1.04); opacity:.9; }
       .hero-content { display:block; width:100%; padding:var(--mobile-hero-height) 0 18px!important; }
