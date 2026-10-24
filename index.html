@@ -410,7 +410,7 @@
     .diary-22-photo { transition:transform .45s cubic-bezier(.2,.65,.25,1); }
     .diary-22-photo-button:hover .diary-22-photo,.diary-22-photo-button:focus-visible .diary-22-photo { transform:scale(1.035); }
     .diary-22-card figcaption { padding:12px 14px 14px; color:#e6d8be; }
-    .diary-22-video-card { grid-column:1 / -1; display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:10px 24px; padding:14px 20px; background:linear-gradient(105deg,#21180f,#0d0a08 72%); }
+    .diary-22-video-card { grid-column:1 / -1; width:min(100%,640px); justify-self:center; display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:10px 24px; padding:14px 20px; background:linear-gradient(105deg,#21180f,#0d0a08 72%); }
     .diary-22-video-card::before { content:"Vídeo do ensaio"; grid-column:1; align-self:end; color:var(--gold); font-size:.72rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
     .diary-22-video-card figcaption { grid-column:1; grid-row:2; padding:0; color:#e6d8be; }
     .diary-22-video { grid-column:2; grid-row:1 / 3; width:auto; max-width:min(100%,220px); height:280px; max-height:42svh; border-radius:8px; }
