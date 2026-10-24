@@ -474,7 +474,7 @@
     .hero-title-line { display:block; }
     .terra-title { display:block; width:clamp(260px,42vw,480px); height:auto; margin:8px auto 0; overflow:visible; text-transform:none; }
     .terra-title text { text-transform:none; }
-    .terra-writing { fill-opacity:1; stroke-dasharray:2400; stroke-dashoffset:0; }
+    .terra-writing { fill-opacity:1; clip-path:none; stroke:rgba(243,213,142,.22); stroke-width:.5; }
     .terra-sweep { opacity:0; transform:translateX(0); }
     .hero-star-light { position:absolute; z-index:1; top:7.8%; left:50%; width:clamp(34px,5vw,62px); aspect-ratio:1; border-radius:50%; pointer-events:none; opacity:.86; transform:translate(-50%,-50%); background:radial-gradient(circle,#fffdf3 0 4%,#fff0c0 7%,rgba(255,207,115,.64) 18%,rgba(238,163,45,.18) 45%,transparent 72%); filter:drop-shadow(0 0 12px rgba(255,193,76,.75)); mix-blend-mode:screen; }
     .hero-star-light::after { content:""; position:absolute; inset:-95%; border-radius:50%; background:radial-gradient(ellipse at center,rgba(255,198,90,.18),rgba(255,180,51,.07) 34%,transparent 72%); }
@@ -482,13 +482,15 @@
     .hero.cinematic-play .hero-star-light::after { animation:star-radiance 2.25s ease-out .15s both; }
     .hero.cinematic-play .hero-title-sky { clip-path:inset(0 50% 0 50%); opacity:0; animation:divine-reveal 1.25s cubic-bezier(.2,.72,.2,1) 1.05s both; }
     .hero.cinematic-play .hero-title-earth { clip-path:inset(0 0 100% 0); opacity:0; transform:translateY(10px); animation:title-drop-reveal .92s cubic-bezier(.2,.72,.2,1) 2.5s both; }
-    .hero.cinematic-play .terra-writing { fill-opacity:0; stroke-dasharray:2400; stroke-dashoffset:2400; animation:calligraphy-write 1.55s cubic-bezier(.45,0,.2,1) 3.5s both; }
+    .hero.cinematic-play .terra-title { opacity:0; animation:terra-stage .01s linear 3.5s both; }
+    .hero.cinematic-play .terra-writing { clip-path:inset(0 100% 0 0); animation:calligraphy-write 1.55s cubic-bezier(.45,0,.2,1) 3.5s both; }
     .hero.cinematic-play .terra-sweep { animation:golden-sweep .95s ease-in-out 5.05s both; }
     @keyframes star-pulse { 0% {opacity:.42;transform:translate(-50%,-50%) scale(.78);filter:brightness(.8) drop-shadow(0 0 5px rgba(255,193,76,.45));} 65% {opacity:1;transform:translate(-50%,-50%) scale(1.22);filter:brightness(1.45) drop-shadow(0 0 22px rgba(255,193,76,.95));} 100% {opacity:.76;transform:translate(-50%,-50%) scale(.94);filter:brightness(1.06) drop-shadow(0 0 12px rgba(255,193,76,.72));} }
     @keyframes star-radiance { 0% {opacity:0;transform:scale(.45);} 48% {opacity:1;transform:scale(1.15);} 100% {opacity:.38;transform:scale(1.8);} }
     @keyframes divine-reveal { from {clip-path:inset(0 50% 0 50%);opacity:0;filter:brightness(1.7) blur(4px);transform:translateY(5px);} to {clip-path:inset(0);opacity:1;filter:brightness(1) blur(0);transform:translateY(0);} }
     @keyframes title-drop-reveal { from {clip-path:inset(0 0 100% 0);opacity:0;transform:translateY(12px);} to {clip-path:inset(0);opacity:1;transform:translateY(0);} }
-    @keyframes calligraphy-write { 0% {stroke-dashoffset:2400;fill-opacity:0;} 76% {stroke-dashoffset:0;fill-opacity:0;} 100% {stroke-dashoffset:0;fill-opacity:1;} }
+    @keyframes terra-stage { to {opacity:1;} }
+    @keyframes calligraphy-write { from {clip-path:inset(0 100% 0 0);} to {clip-path:inset(0);} }
     @keyframes golden-sweep { 0% {opacity:0;transform:translateX(-20px);} 20% {opacity:1;} 100% {opacity:0;transform:translateX(880px);} }
     @media(max-width:1024px) {
       .hero-star-light { top:12.6%; width:clamp(32px,8vw,52px); }
@@ -496,7 +498,8 @@
     }
     @media(prefers-reduced-motion:reduce) {
       .hero-title-sky,.hero-title-earth { clip-path:none!important; opacity:1!important; transform:none!important; filter:none!important; }
-      .terra-writing { fill-opacity:1!important; stroke-dashoffset:0!important; }
+      .terra-title { opacity:1!important; animation:none!important; }
+      .terra-writing { fill-opacity:1!important; clip-path:none!important; stroke:none!important; }
       .terra-sweep { display:none!important; }
       .hero-star-light,.hero-star-light::after { animation:none!important; }
     }
