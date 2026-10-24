@@ -471,7 +471,7 @@
     .song-card-opening .song-number { font-family:var(--sans); font-size:.68rem; font-weight:700; letter-spacing:.11em; }
     /* Abertura tipográfica cinematográfica de 15 segundos. */
     .hero-title-line { display:block; }
-    .hero h1 { position:relative; z-index:2; }
+    .hero h1 { z-index:2; }
     .hero-art > .eyebrow { z-index:2; }
     .terra-title { display:block; width:clamp(260px,42vw,480px); height:auto; margin:8px auto 0; overflow:visible; text-transform:none; }
     .terra-title text { text-transform:none; }
@@ -500,7 +500,7 @@
     @keyframes calligraphy-write { 0% {clip-path:inset(0 100% 0 0);filter:brightness(1.5) saturate(.72);} 72% {filter:brightness(1.12) saturate(.9);} 100% {clip-path:inset(0);filter:brightness(1) saturate(1);} }
     @keyframes golden-sweep { 0% {opacity:0;transform:translateX(-35px);} 18% {opacity:1;} 100% {opacity:0;transform:translateX(880px);} }
     @keyframes title-final-glow { 0% {filter:drop-shadow(0 0 0 rgba(242,200,120,0));} 45% {filter:drop-shadow(0 0 14px rgba(242,200,120,.3));} 100% {filter:drop-shadow(0 0 5px rgba(242,200,120,.12));} }
-    @media(min-width:1025px) { .hero-art > .eyebrow { position:relative; z-index:2; } }
+    @media(min-width:1025px) { .hero-art > .eyebrow { position:relative; z-index:2; } .hero h1 { position:relative; z-index:2; } }
     @media(max-width:1024px) {
       .hero-star-light { top:12.6%; width:clamp(32px,8vw,52px); }
       .hero-star-light::before { width:clamp(220px,66vw,470px); height:clamp(260px,38svh,440px); }
