@@ -332,7 +332,7 @@
       .nav-tabs-shell.at-end .nav-swipe-cue { opacity:0; }
       .nav-tabs-shell.at-end { padding-right:0; }
     }
-    @keyframes nav-swipe-arrow { 0%,100%{transform:translateX(-3px);opacity:.7} 55%{transform:translateX(4px);opacity:1} }
+    @keyframes nav-swipe-arrow { 0%,100%{transform:translateX(3px);opacity:.7} 55%{transform:translateX(-4px);opacity:1} }
     @media(prefers-reduced-motion:reduce){.nav-swipe-cue span{animation:none}}
   
     /* Mobile: título no céu livre, cena completa e informações abaixo. */
@@ -489,7 +489,7 @@
     .terra-title-mobile .terra-writing { display:block; width:100%; height:auto; opacity:1; filter:sepia(.15) saturate(1.25) brightness(1.06) drop-shadow(0 0 10px rgba(255,195,82,.22)); }
     .terra-sweep-mobile { position:absolute; inset:0; z-index:1; background:linear-gradient(105deg,transparent 38%,rgba(255,244,213,.05) 45%,rgba(255,244,213,.24) 50%,rgba(255,224,153,.06) 55%,transparent 62%); opacity:0; transform:translateX(-110%); pointer-events:none; -webkit-mask:url("images/terra-lettering.png") center / 100% 100% no-repeat; mask:url("images/terra-lettering.png") center / 100% 100% no-repeat; }
     .terra-sweep { opacity:0; transform:translateX(-140px); }
-    .hero-scene-shade { position:absolute; z-index:1; inset:0; pointer-events:none; background:linear-gradient(180deg,rgba(5,4,3,.14) 0%,rgba(5,4,3,.3) 42%,rgba(5,4,3,.48) 100%); opacity:1; -webkit-mask-image:radial-gradient(ellipse 11% 10% at 50% 7.8%,transparent 0%,#000 100%); mask-image:radial-gradient(ellipse 11% 10% at 50% 7.8%,transparent 0%,#000 100%); }
+    .hero-scene-shade { position:absolute; z-index:1; inset:0; pointer-events:none; background:linear-gradient(180deg,rgba(5,4,3,.24) 0%,rgba(5,4,3,.4) 42%,rgba(5,4,3,.58) 100%); opacity:1; -webkit-mask-image:radial-gradient(ellipse 11% 10% at 50% 7.8%,transparent 0%,#000 100%); mask-image:radial-gradient(ellipse 11% 10% at 50% 7.8%,transparent 0%,#000 100%); }
     .hero-nativity-reveal { position:absolute; z-index:1; inset:0; pointer-events:none; opacity:0; transform:scale(.78); transform-origin:46% 76%; mix-blend-mode:screen; background:radial-gradient(ellipse 8% 5% at 46% 76%,rgba(255,246,213,.52) 0%,rgba(255,218,149,.32) 38%,rgba(255,185,104,.1) 72%,transparent 100%),radial-gradient(ellipse 29% 20% at 48% 77%,rgba(255,199,119,.2),transparent 100%),radial-gradient(ellipse 50% 34% at 48% 80%,rgba(255,174,91,.1),transparent 100%); filter:blur(8px); }
     .hero-star-light { position:absolute; z-index:1; top:7.8%; left:50%; width:clamp(34px,5vw,62px); aspect-ratio:1; overflow:visible; border-radius:50%; pointer-events:none; opacity:.86; transform:translate(-50%,-50%); background:radial-gradient(circle,#fffdf3 0 4%,#fff0c0 7%,rgba(255,207,115,.64) 18%,rgba(238,163,45,.18) 45%,transparent 72%); filter:drop-shadow(0 0 12px rgba(255,193,76,.75)); mix-blend-mode:screen; }
     .hero-star-radiance { position:absolute; z-index:-1; inset:-95%; border-radius:50%; background:radial-gradient(ellipse at center,rgba(255,198,90,.18),rgba(255,180,51,.07) 34%,transparent 72%); opacity:.18; transform:scale(1.08); }
@@ -581,7 +581,7 @@
         <a href="#bastidores">Bastidores</a>
         <a href="#agenda">Agenda</a>
         <a href="#local">Local</a>
-      </nav><div class="nav-swipe-cue" aria-hidden="true"><span>→</span></div></div>
+      </nav><div class="nav-swipe-cue" aria-hidden="true"><span>←</span></div></div>
     </div>
   </header>
   <main>
@@ -853,20 +853,21 @@
       const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
       const timeline = {
         star: {at:0, duration:.42},
-        starHomecoming: {at:2.08, duration:.56},
+        starHomecoming: {at:2.2, duration:.52},
         radiance: {at:0, duration:.9},
         kicker: {at:.12, duration:.42},
-        sky: {at:.3, duration:.9},
-        earth: {at:.88, duration:.8},
-        terra: {at:1.38, duration:.82},
-        sweep: {at:1.95, duration:.52},
-        beam: {at:2, duration:1.48},
-        nativity: {at:2.02, duration:1.48},
-        manger: {at:2.7, duration:1.08},
+        sky: {at:.3, duration:.96},
+        earth: {at:.9, duration:.86},
+        terra: {at:1.34, duration:.86},
+        sweep: {at:2.2, duration:.62},
+        scene: {at:2.2, duration:1.42},
+        beam: {at:2.2, duration:1.42},
+        nativity: {at:2.28, duration:1.46},
+        manger: {at:2.78, duration:1.08},
         promise: {at:3.3, duration:.48},
         meta: {at:3.5, duration:.36}
       };
-      const easing = 'cubic-bezier(.2,.72,.18,1)';
+      const easing = 'cubic-bezier(.42,0,.24,1)';
       const animate = (element, keyframes, phase) => {
         if (!element || typeof element.animate !== 'function') return;
         const animation = element.animate(keyframes, {duration:phase.duration*1000, delay:phase.at*1000, easing, fill:'both'});
@@ -897,6 +898,14 @@
           {offset:.34, opacity:.36, transform:'scale(1.06)'},
           {opacity:.18, transform:'scale(1.18)'}
         ], timeline.radiance);
+        const sceneShade = hero.querySelector('.hero-scene-shade');
+        const starY = matchMedia('(max-width:1024px)').matches ? '12.6%' : '7.8%';
+        const sceneMasks = [
+          {maskImage:`radial-gradient(ellipse 11% 10% at 50% ${starY},transparent 0%,#000 100%)`},
+          {offset:.48, maskImage:'radial-gradient(ellipse 17% 38% at 48% 46%,transparent 0%,rgba(0,0,0,.42) 55%,#000 100%)'},
+          {maskImage:'radial-gradient(ellipse 29% 22% at 46% 76%,transparent 0%,rgba(0,0,0,.44) 62%,#000 100%)'}
+        ];
+        animate(sceneShade, sceneMasks, timeline.scene);
         animate(hero.querySelector('.hero-star-beam'), [
           {opacity:0, transform:'translateX(-50%) scaleY(.08)'},
           {offset:.7, opacity:.36, transform:'translateX(-50%) scaleY(1.03)'},
@@ -904,8 +913,8 @@
         ], timeline.beam);
         animate(hero.querySelector('.hero-nativity-reveal'), [
           {opacity:0, transform:'scale(.78)'},
-          {offset:.52, opacity:.42, transform:'scale(.94)'},
-          {offset:.84, opacity:.76, transform:'scale(1.04)'},
+          {offset:.52, opacity:.28, transform:'scale(.9)'},
+          {offset:.84, opacity:.64, transform:'scale(1.02)'},
           {opacity:.68, transform:'scale(1)'}
         ], timeline.nativity);
         animate(hero.querySelector('.hero-manger-glow'), [
