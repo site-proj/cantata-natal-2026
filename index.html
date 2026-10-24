@@ -337,17 +337,17 @@
     @keyframes nav-swipe-arrow { 0%,100%{transform:translateX(-3px);opacity:.7} 55%{transform:translateX(4px);opacity:1} }
     @media(prefers-reduced-motion:reduce){.nav-swipe-cue span{animation:none}}
   
-    /* Mobile: título acima da cena, personagens livres e texto abaixo. */
+    /* Mobile: título no céu livre, cena completa e informações abaixo. */
     @media (max-width: 720px) {
       .hero { min-height: 0; display:block; background:none; overflow:visible; }
       .hero::before { display:none; }
       .hero-content { width:100%; padding:0; display:flex; flex-direction:column; align-items:center; }
-      .hero-content > .eyebrow { order:1; width:100%; margin:0; padding:25px 16px 0; background:#100d0a; text-align:center; font-size:clamp(.57rem,2.4vw,.72rem); letter-spacing:.12em; }
-      .hero-content > h1 { order:2; width:100%; margin:0; padding:13px 15px 20px; background:#100d0a; font-size:clamp(2.05rem,9.2vw,3.3rem); line-height:1.04; }
-      .hero-content > h1 .terra { margin-top:3px; }
-      .hero-content::after { content:""; order:3; display:block; width:100%; height:clamp(270px,89vw,540px); background: #100d0a url("images/manjedoura-fundo.png") center center / cover no-repeat; }
-      .hero-copy { order:4; width:100%; max-width:none; margin:0; padding:25px 22px 0; background:#100d0a; color:#eee2cc; font-size:clamp(1rem,4vw,1.13rem); line-height:1.6; text-shadow:none; }
-      .hero-meta { order:5; width:100%; margin:0; padding:19px 15px 34px; background:#100d0a; gap:10px 18px; }
+      .hero-art { position:relative; order:1; width:100%; line-height:0; isolation:isolate; }
+      .hero-art > .eyebrow { position:absolute; top:28%; left:0; width:100%; margin:0; padding:0 12px; color:var(--gold); text-align:center; font-size:clamp(.56rem,2.4vw,.72rem); letter-spacing:.12em; line-height:1.4; text-shadow:0 2px 12px #100900; }
+      .hero-art > h1 { position:absolute; top:35%; left:0; width:100%; margin:0; padding:0 10px; color:var(--ivory); font-size:clamp(1.65rem,7.7vw,2.8rem); line-height:1.02; text-shadow:0 3px 22px #100900,0 0 24px rgba(0,0,0,.7); }
+      .hero-art > h1 .terra { margin-top:2px; font-size:clamp(4.6rem,16vw,6.8rem); }
+      .hero-copy { order:2; width:100%; max-width:none; margin:0; padding:23px 24px 12px; background:#100d0a; color:#eee2cc; font-size:clamp(1rem,4vw,1.13rem); line-height:1.55; text-shadow:none; }
+      .hero-meta { order:3; width:100%; margin:0; padding:12px 22px 30px; background:#100d0a; gap:10px 18px; justify-content:center; }
     }
   
     .hero-renascer-logo {display:flex;flex-direction:column;align-items:center;gap:2px;margin:0 auto 23px;}
@@ -358,26 +358,35 @@
       .hero-renascer-logo img {width:clamp(145px,43vw,205px);max-height:67px;}
     }
   
-    /* Foto aprovada: exibição integral no celular, sem cortes ou sobreposição. */
-    @media(max-width:720px){
-      .hero-content::after {content:none!important;}
-      .hero-scene-mobile {order:3;display:block;width:100%;height:auto;object-fit:contain;background:#100d0a;}
-      .hero-content > h1 {padding-bottom:18px;}
-      .hero-copy {padding-top:22px;}
-    }
-    @media(min-width:721px){.hero-scene-mobile{display:none;}}
-  
-    /* Composição mobile inspirada na arte aprovada, construída com os elementos do site */
+    .hero-art { display:contents; }
     @media(max-width:720px){
       .hero {background:#100b07!important;}
       .hero-content {padding:0!important;gap:0;}
-      .hero-renascer-logo {padding:17px 12px 6px!important;margin:0!important;}
-      .hero-content > .eyebrow {padding:15px 14px 0!important;margin:0!important;line-height:1.4;}
-      .hero-content > h1 {padding:13px 14px 15px!important;margin:0!important;line-height:1.03!important;}
+      .hero-renascer-logo {padding:17px 12px 10px!important;margin:0!important;}
+      .hero-renascer-logo img {width:clamp(145px,43vw,205px);max-height:67px;}
+      .hero-art {display:block;}
       .hero-scene-mobile {display:block!important;width:100%;height:auto!important;max-height:none!important;object-fit:contain!important;object-position:center!important;}
-      .hero-copy {margin:0!important;padding:23px 24px 12px!important;max-width:none!important;line-height:1.55!important;}
-      .hero-meta {padding:12px 22px 30px!important;margin:0!important;justify-content:center;}
+      .hero-copy {margin:0!important;}
     }
+    @media(min-width:721px){.hero-scene-mobile{display:none;}}
+
+    .diary-22 { margin-top:34px; padding:clamp(20px,4vw,38px); border:1px solid rgba(223,187,119,.42); background:radial-gradient(ellipse at 12% 0,rgba(223,187,119,.12),transparent 50%),linear-gradient(145deg,#19130e,#100d0a); color:var(--ivory); }
+    .diary-22-heading { margin-bottom:24px; }
+    .diary-22-heading .eyebrow { color:var(--gold); }
+    .diary-22-heading h3 { margin:8px 0 6px; color:var(--ivory); font-family:var(--serif); font-size:clamp(1.45rem,3vw,2.1rem); font-weight:500; line-height:1.2; }
+    .diary-22-heading p { margin:0; color:#d1c7b7; }
+    .diary-22-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); align-items:start; gap:14px; }
+    .diary-22-card { min-width:0; margin:0; overflow:hidden; border:1px solid rgba(223,187,119,.25); background:#0d0a08; }
+    .diary-22-card-wide { grid-column:1 / -1; }
+    .diary-22-photo-button { display:block; width:100%; padding:0; border:0; background:#0d0a08; cursor:zoom-in; }
+    .diary-22-photo { display:block; width:100%; height:auto; object-fit:contain; }
+    .diary-22-card figcaption { padding:12px 15px 14px; color:#e6d8be; font-size:.9rem; }
+    .diary-22-video { display:block; width:auto; max-width:100%; height:auto; max-height:78svh; margin-inline:auto; background:#050403; object-fit:contain; }
+    .photo-lightbox { width:min(96vw,1400px); max-width:96vw; max-height:94svh; padding:16px; border:1px solid rgba(223,187,119,.65); background:#100d0a; color:var(--ivory); }
+    .photo-lightbox::backdrop { background:rgba(5,4,3,.88); backdrop-filter:blur(5px); }
+    .photo-lightbox img { display:block; max-width:calc(96vw - 32px); max-height:82svh; margin:auto; object-fit:contain; }
+    .photo-lightbox-close { display:block; margin:0 0 12px auto; padding:7px 12px; border:1px solid var(--line); background:#19130e; color:var(--ivory); font:inherit; cursor:pointer; }
+    @media(max-width:700px){ .diary-22-grid { grid-template-columns:1fr; gap:12px; } .diary-22-card-wide { grid-column:auto; } .diary-22 { margin-top:26px; padding:16px; } }
   </style>
 </head>
 <body>
@@ -482,9 +491,11 @@
     <section class="hero" id="inicio">
       <div class="hero-content">
         <div class="hero-renascer-logo"><img src="images/logo-renascer.png" alt="Renascer Jundiaí"><span>Jundiaí</span></div>
-        <div class="eyebrow">Uma promessa está prestes a se revelar</div>
-        <h1 aria-label="Quando o Céu Tocou a Terra"><span>Quando o Céu</span><span>Tocou a</span><span class="terra">Terra</span></h1>
-        <img class="hero-scene-mobile" src="images/manjedoura-fundo.png" alt="Cena da Natividade com céu estrelado, Maria, José e o menino Jesus" loading="eager" decoding="async">
+        <div class="hero-art">
+          <img class="hero-scene-mobile" src="images/cantata-mobile-hero.png" alt="Cena da Natividade com Maria, José e o menino Jesus sob uma estrela, rodeados por palhas e animais" loading="eager" decoding="async">
+          <div class="eyebrow">Uma promessa está prestes a se revelar</div>
+          <h1 aria-label="Quando o Céu Tocou a Terra"><span>Quando o Céu</span><span>Tocou a</span><span class="terra">Terra</span></h1>
+        </div>
         <p class="hero-copy">Uma cantata de Natal feita de louvor, dança e encontros. Acompanhe de perto cada passo até uma noite especial.</p>
         <div class="hero-meta">
           <span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="1" stroke="currentColor" stroke-width="1.5"/><path d="M7.5 3v4M16.5 3v4M4 9.5h16" stroke="currentColor" stroke-width="1.5"/></svg>18 de dezembro de 2026</span>
@@ -551,6 +562,19 @@
           <article class="media-card"><span class="media-type" aria-hidden="true">▶</span><div><h3>Bastidores</h3><p>Novidades em breve</p></div></article>
           <article class="media-card"><span class="media-type" aria-hidden="true">▧</span><div><h3>Preparativos</h3><p>Novos momentos em breve</p></div></article>
         </div>
+        <section class="diary-22 reveal" aria-labelledby="diary-22-title">
+          <header class="diary-22-heading">
+            <div class="eyebrow">Diário da preparação · 22 de outubro de 2026</div>
+            <h3 id="diary-22-title">Bastidores | Ensaio de 22.10</h3>
+            <p>Cada ensaio nos aproxima de uma noite especial.</p>
+          </header>
+          <div class="diary-22-grid" aria-label="Fotos e vídeo do ensaio de 22 de outubro">
+            <figure class="diary-22-card"><button class="diary-22-photo-button" type="button" data-lightbox-src="images/ensaio-22-10-2026-louvor.jpeg" data-lightbox-alt="Equipe de louvor reunida no palco durante o ensaio"><img class="diary-22-photo" src="images/ensaio-22-10-2026-louvor.jpeg" alt="Equipe de louvor reunida no palco durante o ensaio" loading="lazy" decoding="async"></button><figcaption>Louvor reunido para mais um ensaio.</figcaption></figure>
+            <figure class="diary-22-card"><button class="diary-22-photo-button" type="button" data-lightbox-src="images/ensaio-22-10-2026-musicos.jpeg" data-lightbox-alt="Músicos ensaiando juntos no palco"><img class="diary-22-photo" src="images/ensaio-22-10-2026-musicos.jpeg" alt="Músicos ensaiando juntos no palco" loading="lazy" decoding="async"></button><figcaption>Vozes e instrumentos em sintonia.</figcaption></figure>
+            <figure class="diary-22-card"><button class="diary-22-photo-button" type="button" data-lightbox-src="images/ensaio-22-10-2026-equipe.jpeg" data-lightbox-alt="Equipe de louvor durante o ensaio, fotografada da plateia"><img class="diary-22-photo" src="images/ensaio-22-10-2026-equipe.jpeg" alt="Equipe de louvor durante o ensaio, fotografada da plateia" loading="lazy" decoding="async"></button><figcaption>Um registro do ensaio visto da plateia.</figcaption></figure>
+            <figure class="diary-22-card diary-22-card-wide"><video class="diary-22-video" controls playsinline preload="metadata" aria-label="Vídeo do ensaio de 22 de outubro de 2026"><source src="videos/ensaio-22-10-2026.mp4" type="video/mp4">Seu navegador não reproduz este vídeo. <a href="videos/ensaio-22-10-2026.mp4">Assistir ao ensaio de 22 de outubro</a>.</video><figcaption>Ensaio de 22 de outubro de 2026.</figcaption></figure>
+          </div>
+        </section>
       </div>
     </section>
 
@@ -656,6 +680,22 @@
       }));
       window.addEventListener('popstate',()=>activate(location.hash.slice(1),false));
       activate(location.hash.slice(1)==='roster-title'?'escala':location.hash.slice(1),false);
+    })();
+
+    (() => {
+      const lightbox = document.createElement('dialog');
+      lightbox.className = 'photo-lightbox';
+      lightbox.setAttribute('aria-label','Foto ampliada do ensaio de 22 de outubro');
+      lightbox.innerHTML = '<button class="photo-lightbox-close" type="button" aria-label="Fechar foto ampliada">Fechar ✕</button><img alt="">';
+      document.body.appendChild(lightbox);
+      const image = lightbox.querySelector('img');
+      document.querySelectorAll('[data-lightbox-src]').forEach(button => button.addEventListener('click', () => {
+        image.src = button.dataset.lightboxSrc;
+        image.alt = button.dataset.lightboxAlt || '';
+        if (lightbox.showModal) lightbox.showModal(); else lightbox.setAttribute('open','');
+      }));
+      lightbox.querySelector('.photo-lightbox-close').addEventListener('click', () => lightbox.close ? lightbox.close() : lightbox.removeAttribute('open'));
+      lightbox.addEventListener('click', event => { if (event.target === lightbox) lightbox.close ? lightbox.close() : lightbox.removeAttribute('open'); });
     })();
   </script>
 </body>
