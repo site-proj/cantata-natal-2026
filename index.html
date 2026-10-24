@@ -485,7 +485,7 @@
     .terra-title text { text-transform:none; }
     .terra-writing { fill-opacity:1; clip-path:none; stroke:rgba(243,213,142,.2); stroke-width:.45; }
     .terra-title-mobile { display:none; position:relative; isolation:isolate; }
-    .terra-title-mobile .terra-writing { display:block; width:100%; height:auto; opacity:.95; }
+    .terra-title-mobile .terra-writing { display:block; width:100%; height:auto; opacity:1; filter:sepia(.15) saturate(1.25) brightness(1.06) drop-shadow(0 0 10px rgba(255,195,82,.22)); }
     .terra-sweep-mobile { position:absolute; inset:0; z-index:1; background:linear-gradient(105deg,transparent 38%,rgba(255,244,213,.05) 45%,rgba(255,244,213,.24) 50%,rgba(255,224,153,.06) 55%,transparent 62%); opacity:0; transform:translateX(-110%); pointer-events:none; -webkit-mask:url("images/terra-lettering.png") center / 100% 100% no-repeat; mask:url("images/terra-lettering.png") center / 100% 100% no-repeat; }
     .terra-sweep { opacity:0; transform:translateX(-140px); }
     .hero-scene-shade { position:absolute; z-index:1; inset:0; pointer-events:none; background:linear-gradient(180deg,rgba(5,4,3,.08) 0%,rgba(5,4,3,.19) 42%,rgba(5,4,3,.34) 100%); opacity:.88; -webkit-mask-image:radial-gradient(ellipse 11% 10% at 50% 7.8%,transparent 0%,#000 100%); mask-image:radial-gradient(ellipse 11% 10% at 50% 7.8%,transparent 0%,#000 100%); }
@@ -550,7 +550,7 @@
       .hero-title-line .hero-letter { opacity:1!important; transform:none!important; filter:none!important; animation:none!important; }
       .terra-title { opacity:1!important; animation:none!important; }
       .terra-writing { fill-opacity:1!important; clip-path:none!important; stroke:none!important; filter:none!important; }
-      .terra-title-mobile .terra-writing { clip-path:none!important; animation:none!important; }
+      .terra-title-mobile .terra-writing { clip-path:none!important; animation:none!important; filter:sepia(.15) saturate(1.25) brightness(1.06) drop-shadow(0 0 10px rgba(255,195,82,.22))!important; }
       .terra-sweep,.terra-sweep-mobile { display:none!important; }
       .hero h1 { filter:none!important; }
       .hero-star-beam { opacity:0!important; }
@@ -942,7 +942,7 @@
           {offset:1, opacity:1, clipPath:'polygon(0% 0%,10% 0%,20% 0%,30% 0%,40% 0%,50% 0%,60% 0%,70% 0%,80% 0%,90% 0%,100% 0%,100% 100%,90% 100%,80% 100%,70% 100%,60% 100%,50% 100%,40% 100%,30% 100%,20% 100%,10% 100%,0% 100%)'}
         ];
         terraWriting.forEach(element => {
-          const finalOpacity = element.closest('.terra-title-mobile') ? .95 : 1;
+          const finalOpacity = 1;
           const inkKeyframes = inkFlow.map((frame,index) => ({...frame, opacity:index === 0 ? 0 : Math.min(frame.opacity,finalOpacity)}));
           animate(element, inkKeyframes, timeline.terra);
         });
