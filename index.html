@@ -324,7 +324,7 @@
     /* Mobile: próxima aba aparente + seta indicativa do gesto horizontal */
     .nav-tabs-shell { position:relative; min-width:0; }
     .nav-swipe-cue { display:none; }
-    @media (max-width: 720px) {
+    @media (max-width: 1024px) {
       .nav-tabs-shell { width:100%; padding-right:37px; }
       .nav-tabs-shell .nav-links { width:100%; max-width:100%; gap:7px; overflow-x:auto; overflow-y:hidden; scrollbar-width:none; -webkit-overflow-scrolling:touch; scroll-snap-type:x proximity; border-radius:10px 0 0 10px; }
       .nav-tabs-shell .nav-links::-webkit-scrollbar { display:none; }
@@ -338,11 +338,11 @@
     @media(prefers-reduced-motion:reduce){.nav-swipe-cue span{animation:none}}
   
     /* Mobile: título no céu livre, cena completa e informações abaixo. */
-    @media (max-width: 720px) {
-      .hero { min-height: 0; display:block; background:none; overflow:visible; }
+    @media (max-width: 1024px) {
+      .hero { min-height: 0; display:block; background:none; overflow:visible; padding-block:0; }
       .hero::before { display:none; }
       .hero-content { width:100%; padding:0; display:flex; flex-direction:column; align-items:center; }
-      .hero-art { position:relative; order:1; display:grid; place-items:center; width:100%; min-height:calc(100svh - var(--nav-clearance,90px) - 90px); overflow:hidden; line-height:0; isolation:isolate; background:#100d0a; }
+      .hero-art { position:relative; order:1; display:grid; place-items:center; width:100%; min-height:0; overflow:hidden; line-height:0; isolation:isolate; background:#100d0a; }
       .hero-art::before { content:""; position:absolute; z-index:-1; inset:-18px; background:url("images/cantata-mobile-hero.png") center 56% / cover no-repeat; filter:blur(16px) brightness(.48); transform:scale(1.05); opacity:.82; }
       .hero-art > .eyebrow { position:absolute; top:28%; left:0; width:100%; margin:0; padding:0 12px; color:var(--gold); text-align:center; font-size:clamp(.56rem,2.4vw,.72rem); letter-spacing:.12em; line-height:1.4; text-shadow:0 2px 12px #100900; }
       .hero-art > h1 { position:absolute; top:35%; left:0; width:100%; margin:0; padding:0 10px; color:var(--ivory); font-size:clamp(1.65rem,7.7vw,2.8rem); line-height:1.02; text-shadow:0 3px 22px #100900,0 0 24px rgba(0,0,0,.7); }
@@ -354,22 +354,26 @@
     .hero-renascer-logo {display:flex;flex-direction:column;align-items:center;gap:2px;margin:0 auto 23px;}
     .hero-renascer-logo img {display:block;width:clamp(145px,20vw,235px);max-height:78px;object-fit:contain;}
     .hero-renascer-logo span {font-family:var(--serif);color:var(--gold);font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;}
-    @media(max-width:720px){
+    @media(max-width:1024px) and (min-width:601px){
+      .nav-inner { width:calc(100% - 28px); align-items:stretch; flex-direction:column; gap:7px; padding-block:9px 8px; }
+      .brand { max-width:none; font-size:.6rem; line-height:1.3; }
+    }
+    @media(max-width:1024px){
       .hero-renascer-logo {order:0;width:100%;margin:0;padding:24px 12px 10px;background:#100d0a;}
       .hero-renascer-logo img {width:clamp(145px,43vw,205px);max-height:67px;}
     }
   
     .hero-art { display:contents; }
-    @media(max-width:720px){
+    @media(max-width:1024px){
       .hero {background:#100b07!important;}
       .hero-content {padding:0!important;gap:0;}
       .hero-renascer-logo {padding:17px 12px 10px!important;margin:0!important;}
       .hero-renascer-logo img {width:clamp(145px,43vw,205px);max-height:67px;}
       .hero-art {display:block;}
-      .hero-scene-mobile {display:block!important;width:auto!important;height:auto!important;max-width:100%!important;max-height:calc(100svh - var(--nav-clearance,90px) - 90px)!important;object-fit:contain!important;object-position:center!important;}
+      .hero-scene-mobile {display:block!important;width:100%!important;height:auto!important;max-width:100%!important;max-height:none!important;object-fit:contain!important;object-position:center!important;}
       .hero-copy {margin:0!important;}
     }
-    @media(min-width:721px){.hero-scene-mobile{display:none;}}
+    @media(min-width:1025px){.hero-scene-mobile{display:none;}}
 
     .diary-22 { margin-top:34px; padding:clamp(20px,4vw,38px); border:1px solid rgba(223,187,119,.42); background:radial-gradient(ellipse at 12% 0,rgba(223,187,119,.12),transparent 50%),linear-gradient(145deg,#19130e,#100d0a); color:var(--ivory); }
     .diary-22-heading { margin-bottom:24px; }
@@ -382,7 +386,7 @@
     .diary-22-photo-button { display:block; width:100%; padding:0; border:0; background:#0d0a08; cursor:zoom-in; }
     .diary-22-photo { display:block; width:100%; height:auto; object-fit:contain; }
     .diary-22-card figcaption { padding:12px 15px 14px; color:#e6d8be; font-size:.9rem; }
-    .diary-22-video { display:block; width:auto; max-width:100%; height:auto; max-height:78svh; margin-inline:auto; background:#050403; object-fit:contain; }
+    .diary-22-video { display:block; width:auto; max-width:min(100%,420px); height:auto; max-height:min(60svh,420px); margin-inline:auto; background:#050403; object-fit:contain; }
     .photo-lightbox { width:min(96vw,1400px); max-width:96vw; max-height:94svh; padding:16px; border:1px solid rgba(223,187,119,.65); background:#100d0a; color:var(--ivory); }
     .photo-lightbox::backdrop { background:rgba(5,4,3,.88); backdrop-filter:blur(5px); }
     .photo-lightbox img { display:block; max-width:calc(96vw - 32px); max-height:82svh; margin:auto; object-fit:contain; }
@@ -559,9 +563,7 @@
         <div class="behind-head reveal"><div><div class="eyebrow">Diário da preparação</div><h2>Um pouco do que acontece antes das cortinas se abrirem.</h2></div><p>Ensaios, encontros e momentos espontâneos: este espaço vai crescer junto com a cantata.</p></div>
         <div class="gallery reveal">
           <figure class="preparation-photo"><div class="preparation-photo-image" role="img" aria-label="Equipe reunida no primeiro encontro de preparação da Cantata de Natal"></div><figcaption>Nosso primeiro encontro · 2 de outubro de 2026</figcaption></figure>
-          <figure class="preparation-photo diary-update-photo"><img class="diary-entry-image" src="images/diario-preparacao-20-outubro-2026.jpeg" alt="Equipe reunida durante a preparação da Cantata de Natal"><figcaption>Encontro de preparação · 20 de outubro de 2026</figcaption></figure><figure class="preparation-video"><video controls playsinline preload="metadata" aria-label="Vídeo dos bastidores da preparação da Cantata de Natal em 20 de outubro de 2026"><source src="videos/diario-preparacao-20-outubro-2026.mp4" type="video/mp4">Seu navegador não reproduz este vídeo. <a href="videos/diario-preparacao-20-outubro-2026.mp4">Assistir aos bastidores da preparação</a>.</video><figcaption>Bastidores da preparação · 20 de outubro de 2026</figcaption></figure><article class="media-card"><span class="media-type" aria-hidden="true">▧</span><div><h3>Louvor</h3><p>Fotos em breve</p></div></article>
-          <article class="media-card"><span class="media-type" aria-hidden="true">▶</span><div><h3>Bastidores</h3><p>Novidades em breve</p></div></article>
-          <article class="media-card"><span class="media-type" aria-hidden="true">▧</span><div><h3>Preparativos</h3><p>Novos momentos em breve</p></div></article>
+          <figure class="preparation-photo diary-update-photo"><img class="diary-entry-image" src="images/diario-preparacao-20-outubro-2026.jpeg" alt="Equipe reunida durante a preparação da Cantata de Natal"><figcaption>Encontro de preparação · 20 de outubro de 2026</figcaption></figure><figure class="preparation-video"><video controls playsinline preload="metadata" aria-label="Vídeo dos bastidores da preparação da Cantata de Natal em 20 de outubro de 2026"><source src="videos/diario-preparacao-20-outubro-2026.mp4" type="video/mp4">Seu navegador não reproduz este vídeo. <a href="videos/diario-preparacao-20-outubro-2026.mp4">Assistir aos bastidores da preparação</a>.</video><figcaption>Bastidores da preparação · 20 de outubro de 2026</figcaption></figure>
         </div>
         <section class="diary-22 reveal" aria-labelledby="diary-22-title">
           <header class="diary-22-heading">
