@@ -8,7 +8,7 @@
   <title>Quando o Céu Tocou a Terra | Cantata de Natal 2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=DM+Sans:wght@400;500;600;700&family=Tangerine:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Tangerine:wght@700&display=swap" rel="stylesheet">
   <script>document.documentElement.classList.add('js')</script>
   <style>
     :root { color-scheme: dark; --night: #100d0a; --panel: #19130e; --gold: #dfbb77; --ivory: #f4ead5; --muted: #c3b9a8; --line: rgba(223,187,119,.24); --serif: "Cinzel", Georgia, serif; --sans: "DM Sans", Arial, sans-serif; }
@@ -28,10 +28,9 @@
     .hero::before { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(180deg, rgba(10,8,6,.68) 0%, rgba(10,8,6,.23) 42%, rgba(10,8,6,.12) 64%, #100d0a 100%); }
     .hero-content { width: min(100% - 36px, 1080px); padding-top: clamp(132px, 18vh, 180px); text-align: center; }
     .eyebrow { color: var(--gold); font-size: .75rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
-    h1 { margin: 21px 0 18px; color: var(--ivory); font-family: var(--serif); font-size: clamp(2.4rem, 6.2vw, 5.7rem); font-weight: 500; line-height: .96; letter-spacing: .07em; text-transform: uppercase; text-shadow: 0 3px 28px rgba(0,0,0,.9), 0 0 50px rgba(228,192,128,.16); }
+    h1 { margin: 21px 0 18px; color: var(--ivory); font-family: "DM Serif Display", var(--serif); font-size: clamp(2.4rem, 6.2vw, 5.7rem); font-weight: 400; line-height: .96; letter-spacing: .045em; text-transform: uppercase; text-shadow: 0 3px 28px rgba(0,0,0,.9), 0 0 50px rgba(228,192,128,.16); }
     h1 span { display: block; }
     h1 .terra { margin-top: 4px; color: #edc878; font-family: "Tangerine", cursive; font-size: clamp(5.4rem, 13vw, 10rem); font-weight: 700; line-height: .7; letter-spacing: .01em; text-transform: none; }
-    .hero-copy { max-width: 650px; margin: 31px auto 0; color: #eee2cc; font-size: clamp(1.1rem, 1.9vw, 1.28rem); text-shadow: 0 2px 18px #000; }
     .hero-meta { display: flex; justify-content: center; flex-wrap: wrap; gap: 11px 24px; margin-top: 27px; color: #e8cf9e; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; }
     .hero-meta span { display: inline-flex; align-items: center; gap: 8px; }
     .hero-meta svg { width: 16px; height: 16px; flex: 0 0 auto; }
@@ -205,7 +204,6 @@
       .eyebrow { font-size: .66rem; letter-spacing: .17em; }
       h1 { font-size: clamp(2rem, 9vw, 3.1rem); letter-spacing: .035em; line-height: 1.04; }
       h1 .terra { margin-top: 7px; font-size: clamp(5rem, 22vw, 7rem); }
-      .hero-copy { margin-top: 24px; font-size: 1.02rem; }
       .hero-meta { gap: 8px 14px; font-size: .7rem; letter-spacing: .07em; }
       .actions { gap: 9px; margin-top: 26px; }
       .button { min-height: 46px; padding-inline: 13px; font-size: .72rem; }
@@ -347,8 +345,7 @@
       .hero-art > .eyebrow { position:absolute; top:28%; left:0; width:100%; margin:0; padding:0 12px; color:var(--gold); text-align:center; font-size:clamp(.56rem,2.4vw,.72rem); letter-spacing:.12em; line-height:1.4; text-shadow:0 2px 12px #100900; }
       .hero-art > h1 { position:absolute; top:35%; left:0; width:100%; margin:0; padding:0 10px; color:var(--ivory); font-size:clamp(1.65rem,7.7vw,2.8rem); line-height:1.02; text-shadow:0 3px 22px #100900,0 0 24px rgba(0,0,0,.7); }
       .hero-art > h1 .terra { margin-top:2px; font-size:clamp(4.6rem,16vw,6.8rem); }
-      .hero-copy { order:2; width:100%; max-width:none; margin:0; padding:23px 24px 12px; background:#100d0a; color:#eee2cc; font-size:clamp(1rem,4vw,1.13rem); line-height:1.55; text-shadow:none; }
-      .hero-meta { order:3; width:100%; margin:0; padding:12px 22px 30px; background:#100d0a; gap:10px 18px; justify-content:center; }
+      .hero-meta { order:2; width:100%; margin:0; padding:28px 22px 30px; background:#100d0a; gap:10px 18px; justify-content:center; }
     }
   
     .hero-renascer-logo {display:flex;flex-direction:column;align-items:center;gap:2px;margin:0 auto 23px;}
@@ -371,7 +368,6 @@
       .hero-renascer-logo img {width:clamp(145px,43vw,205px);max-height:67px;}
       .hero-art {display:block;}
       .hero-scene-mobile {display:block!important;width:100%!important;height:auto!important;max-width:100%!important;max-height:none!important;object-fit:contain!important;object-position:center!important;}
-      .hero-copy {margin:0!important;}
     }
     @media(min-width:1025px){.hero-scene-mobile{display:none;}}
 
@@ -471,6 +467,7 @@
     .song-card-opening .song-number { font-family:var(--sans); font-size:.68rem; font-weight:700; letter-spacing:.11em; }
     /* Abertura tipográfica cinematográfica de 15 segundos. */
     .hero-title-line { display:block; }
+    .hero-title-line .hero-letter { display:inline-block; white-space:pre; transform-origin:50% 85%; will-change:transform,opacity,filter; }
     .hero h1 { z-index:2; }
     .hero-art > .eyebrow { z-index:2; }
     .terra-title { display:block; width:clamp(260px,42vw,480px); height:auto; margin:8px auto 0; overflow:visible; text-transform:none; }
@@ -486,6 +483,8 @@
     .hero.cinematic-play .hero-art > .eyebrow { opacity:0; clip-path:inset(0 50%); filter:blur(5px); transform:translateY(9px); animation:promise-intro 1s cubic-bezier(.2,.72,.2,1) 1.45s both; }
     .hero.cinematic-play .hero-title-sky { clip-path:inset(0 50% 0 50%); opacity:0; filter:brightness(1.7) blur(5px); transform:translateY(7px); animation:divine-reveal 2.25s cubic-bezier(.2,.82,.2,1) 3.05s both; }
     .hero.cinematic-play .hero-title-earth { clip-path:inset(0 0 100% 0); opacity:0; transform:translateY(16px) rotateX(-7deg); transform-origin:center bottom; filter:blur(3px); animation:title-drop-reveal 1.45s cubic-bezier(.2,.72,.2,1) 6.25s both; }
+    .hero.cinematic-play .hero-title-sky .hero-letter { animation:letter-arrive .82s cubic-bezier(.2,.78,.2,1) both; }
+    .hero.cinematic-play .hero-title-earth .hero-letter { animation:letter-arrive .72s cubic-bezier(.2,.78,.2,1) both; }
     .hero.cinematic-play .terra-title { opacity:0; animation:terra-stage .01s linear 8.35s both; }
     .hero.cinematic-play .terra-writing { clip-path:inset(0 100% 0 0); animation:calligraphy-write 2.85s cubic-bezier(.4,0,.2,1) 8.35s both; }
     .hero.cinematic-play .terra-sweep { animation:golden-sweep 1.25s cubic-bezier(.35,.05,.2,1) 12.1s both; }
@@ -496,6 +495,7 @@
     @keyframes promise-intro { from {clip-path:inset(0 50%);opacity:0;filter:blur(5px);transform:translateY(9px);letter-spacing:.28em;} to {clip-path:inset(0);opacity:1;filter:blur(0);transform:translateY(0);letter-spacing:.12em;} }
     @keyframes divine-reveal { 0% {clip-path:inset(0 50%);opacity:0;filter:brightness(1.8) blur(5px);transform:translateY(7px);letter-spacing:.22em;} 62% {opacity:1;filter:brightness(1.22) blur(1px);} 100% {clip-path:inset(0);opacity:1;filter:brightness(1) blur(0);transform:translateY(0);letter-spacing:.07em;} }
     @keyframes title-drop-reveal { 0% {clip-path:inset(0 0 100% 0);opacity:0;transform:translateY(16px) rotateX(-7deg);filter:blur(3px);} 68% {opacity:1;filter:blur(0);} 100% {clip-path:inset(0);opacity:1;transform:translateY(0) rotateX(0);filter:blur(0);} }
+    @keyframes letter-arrive { 0% {opacity:0;transform:translate3d(0,.22em,0) rotateX(-38deg) scale(.96);filter:blur(3px);} 72% {opacity:1;filter:blur(0);} 100% {opacity:1;transform:translate3d(0,0,0) rotateX(0) scale(1);filter:blur(0);} }
     @keyframes terra-stage { to {opacity:1;} }
     @keyframes calligraphy-write { 0% {clip-path:inset(0 100% 0 0);filter:brightness(1.5) saturate(.72);} 72% {filter:brightness(1.12) saturate(.9);} 100% {clip-path:inset(0);filter:brightness(1) saturate(1);} }
     @keyframes golden-sweep { 0% {opacity:0;transform:translateX(-35px);} 18% {opacity:1;} 100% {opacity:0;transform:translateX(880px);} }
@@ -509,6 +509,7 @@
     @media(prefers-reduced-motion:reduce) {
       .hero-art > .eyebrow { clip-path:none!important; opacity:1!important; transform:none!important; filter:none!important; }
       .hero-title-sky,.hero-title-earth { clip-path:none!important; opacity:1!important; transform:none!important; filter:none!important; }
+      .hero-title-line .hero-letter { opacity:1!important; transform:none!important; filter:none!important; animation:none!important; }
       .terra-title { opacity:1!important; animation:none!important; }
       .terra-writing { fill-opacity:1!important; clip-path:none!important; stroke:none!important; filter:none!important; }
       .terra-sweep { display:none!important; }
@@ -630,7 +631,6 @@
           <div class="eyebrow">Uma promessa está prestes a se revelar</div>
           <h1 aria-label="Quando o Céu Tocou a Terra"><span class="hero-title-line hero-title-sky">Quando o Céu</span><span class="hero-title-line hero-title-earth">Tocou a</span><svg class="terra-title" viewBox="0 0 600 180" aria-hidden="true" focusable="false"><defs><mask id="terra-title-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="600" height="180"><text x="300" y="142" text-anchor="middle" textLength="360" lengthAdjust="spacingAndGlyphs" font-family="Tangerine, cursive" font-size="160" font-weight="700" fill="white">Terra</text></mask><linearGradient id="terra-title-shine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff2c5" stop-opacity="0"/><stop offset=".46" stop-color="#fff9e7" stop-opacity=".15"/><stop offset=".52" stop-color="#fff6d5" stop-opacity=".95"/><stop offset=".58" stop-color="#fff9e7" stop-opacity=".22"/><stop offset="1" stop-color="#fff2c5" stop-opacity="0"/></linearGradient><linearGradient id="terra-title-fill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6d98e"/><stop offset=".46" stop-color="#ffe7aa"/><stop offset=".72" stop-color="#e9c26e"/><stop offset="1" stop-color="#c28f49"/></linearGradient></defs><text class="terra-writing" x="300" y="142" text-anchor="middle" textLength="360" lengthAdjust="spacingAndGlyphs" font-family="Tangerine, cursive" font-size="160" font-weight="700" fill="url(#terra-title-fill)" stroke="#f3d58e" stroke-width="1.15" stroke-linejoin="round">Terra</text><g mask="url(#terra-title-mask)"><rect class="terra-sweep" x="-240" y="0" width="240" height="180" fill="url(#terra-title-shine)"/></g></svg></h1>
         </div>
-        <p class="hero-copy">Uma cantata de Natal feita de louvor, dança e encontros. Acompanhe de perto cada passo até uma noite especial.</p>
         <div class="hero-meta">
           <span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="1" stroke="currentColor" stroke-width="1.5"/><path d="M7.5 3v4M16.5 3v4M4 9.5h16" stroke="currentColor" stroke-width="1.5"/></svg>18 de dezembro de 2026</span>
           <span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.2" stroke="currentColor" stroke-width="1.6"/></svg>19h00 · Renascer Jundiaí</span>
@@ -814,6 +814,20 @@
         if (target === 'inicio') {
           const hero = document.querySelector('.hero');
           if (hero && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            hero.querySelectorAll('.hero-title-line').forEach(line => {
+              if (line.dataset.kineticReady) return;
+              line.setAttribute('aria-hidden', 'true');
+              line.replaceChildren(...Array.from(line.textContent, (character, index) => {
+                const letter = document.createElement('span');
+                letter.className = 'hero-letter';
+                const start = line.classList.contains('hero-title-sky') ? 3.12 : 6.3;
+                const stagger = line.classList.contains('hero-title-sky') ? .035 : .045;
+                letter.style.animationDelay = `${start + index * stagger}s`;
+                letter.textContent = character;
+                return letter;
+              }));
+              line.dataset.kineticReady = 'true';
+            });
             hero.classList.remove('cinematic-play');
             void hero.offsetWidth;
             hero.classList.add('cinematic-play');
