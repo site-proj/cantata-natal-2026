@@ -469,6 +469,36 @@
     @media(max-width:440px) { .song-roster-head { grid-template-columns:1fr; gap:15px; } .roster-action { justify-self:start; } }
     .song-card-opening { border-color:rgba(223,187,119,.48); background:linear-gradient(130deg,rgba(223,187,119,.13),rgba(255,255,255,.025)); }
     .song-card-opening .song-number { font-family:var(--sans); font-size:.68rem; font-weight:700; letter-spacing:.11em; }
+
+    /* Sequência cinematográfica do título; o texto continua como HTML/SVG acessível. */
+    .hero-title-line { display:block; }
+    .terra-title { display:block; width:clamp(260px,42vw,480px); height:auto; margin:8px auto 0; overflow:visible; }
+    .terra-writing { fill-opacity:1; stroke-dasharray:2400; stroke-dashoffset:0; }
+    .terra-sweep { opacity:0; transform:translateX(0); }
+    .hero-star-light { position:absolute; z-index:1; top:7.8%; left:50%; width:clamp(34px,5vw,62px); aspect-ratio:1; border-radius:50%; pointer-events:none; opacity:.86; transform:translate(-50%,-50%); background:radial-gradient(circle,#fffdf3 0 4%,#fff0c0 7%,rgba(255,207,115,.64) 18%,rgba(238,163,45,.18) 45%,transparent 72%); filter:drop-shadow(0 0 12px rgba(255,193,76,.75)); mix-blend-mode:screen; }
+    .hero-star-light::after { content:""; position:absolute; inset:-95%; border-radius:50%; background:radial-gradient(ellipse at center,rgba(255,198,90,.18),rgba(255,180,51,.07) 34%,transparent 72%); }
+    .hero.cinematic-play .hero-star-light { animation:star-pulse 1.15s ease-in-out 0s 2 alternate both; }
+    .hero.cinematic-play .hero-star-light::after { animation:star-radiance 2.25s ease-out .15s both; }
+    .hero.cinematic-play .hero-title-sky { clip-path:inset(0 50% 0 50%); opacity:0; animation:divine-reveal 1.25s cubic-bezier(.2,.72,.2,1) 1.05s both; }
+    .hero.cinematic-play .hero-title-earth { clip-path:inset(0 0 100% 0); opacity:0; transform:translateY(10px); animation:title-drop-reveal .92s cubic-bezier(.2,.72,.2,1) 2.5s both; }
+    .hero.cinematic-play .terra-writing { fill-opacity:0; stroke-dasharray:2400; stroke-dashoffset:2400; animation:calligraphy-write 1.55s cubic-bezier(.45,0,.2,1) 3.5s both; }
+    .hero.cinematic-play .terra-sweep { animation:golden-sweep .95s ease-in-out 5.05s both; }
+    @keyframes star-pulse { 0% {opacity:.42;transform:translate(-50%,-50%) scale(.78);filter:brightness(.8) drop-shadow(0 0 5px rgba(255,193,76,.45));} 65% {opacity:1;transform:translate(-50%,-50%) scale(1.22);filter:brightness(1.45) drop-shadow(0 0 22px rgba(255,193,76,.95));} 100% {opacity:.76;transform:translate(-50%,-50%) scale(.94);filter:brightness(1.06) drop-shadow(0 0 12px rgba(255,193,76,.72));} }
+    @keyframes star-radiance { 0% {opacity:0;transform:scale(.45);} 48% {opacity:1;transform:scale(1.15);} 100% {opacity:.38;transform:scale(1.8);} }
+    @keyframes divine-reveal { from {clip-path:inset(0 50% 0 50%);opacity:0;filter:brightness(1.7) blur(4px);transform:translateY(5px);} to {clip-path:inset(0);opacity:1;filter:brightness(1) blur(0);transform:translateY(0);} }
+    @keyframes title-drop-reveal { from {clip-path:inset(0 0 100% 0);opacity:0;transform:translateY(12px);} to {clip-path:inset(0);opacity:1;transform:translateY(0);} }
+    @keyframes calligraphy-write { 0% {stroke-dashoffset:2400;fill-opacity:0;} 76% {stroke-dashoffset:0;fill-opacity:0;} 100% {stroke-dashoffset:0;fill-opacity:1;} }
+    @keyframes golden-sweep { 0% {opacity:0;transform:translateX(-20px);} 20% {opacity:1;} 100% {opacity:0;transform:translateX(880px);} }
+    @media(max-width:1024px) {
+      .hero-star-light { top:12.6%; width:clamp(32px,8vw,52px); }
+      .terra-title { width:clamp(250px,68vw,390px); margin-top:4px; }
+    }
+    @media(prefers-reduced-motion:reduce) {
+      .hero-title-sky,.hero-title-earth { clip-path:none!important; opacity:1!important; transform:none!important; filter:none!important; }
+      .terra-writing { fill-opacity:1!important; stroke-dashoffset:0!important; }
+      .terra-sweep { display:none!important; }
+      .hero-star-light,.hero-star-light::after { animation:none!important; }
+    }
   </style>
 </head>
 <body>
@@ -578,8 +608,9 @@
         <div class="hero-renascer-logo"><img src="images/logo-renascer.png" alt="Renascer Jundiaí"><span>Jundiaí</span></div>
         <div class="hero-art">
           <img class="hero-scene-mobile" src="images/cantata-mobile-hero.png" alt="Cena da Natividade com Maria, José e o menino Jesus sob uma estrela, rodeados por palhas e animais" loading="eager" decoding="async">
+          <span class="hero-star-light" aria-hidden="true"></span>
           <div class="eyebrow">Uma promessa está prestes a se revelar</div>
-          <h1 aria-label="Quando o Céu Tocou a Terra"><span>Quando o Céu</span><span>Tocou a</span><span class="terra">Terra</span></h1>
+          <h1 aria-label="Quando o Céu Tocou a Terra"><span class="hero-title-line hero-title-sky">Quando o Céu</span><span class="hero-title-line hero-title-earth">Tocou a</span><svg class="terra-title" viewBox="0 0 600 180" aria-hidden="true" focusable="false"><defs><mask id="terra-title-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="600" height="180"><text x="300" y="142" text-anchor="middle" textLength="360" lengthAdjust="spacingAndGlyphs" font-family="Tangerine, cursive" font-size="160" font-weight="700" fill="white">Terra</text></mask><linearGradient id="terra-title-shine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff2c5" stop-opacity="0"/><stop offset=".46" stop-color="#fff9e7" stop-opacity=".15"/><stop offset=".52" stop-color="#fff6d5" stop-opacity=".95"/><stop offset=".58" stop-color="#fff9e7" stop-opacity=".22"/><stop offset="1" stop-color="#fff2c5" stop-opacity="0"/></linearGradient></defs><text class="terra-writing" x="300" y="142" text-anchor="middle" textLength="360" lengthAdjust="spacingAndGlyphs" font-family="Tangerine, cursive" font-size="160" font-weight="700" fill="#edc878" stroke="#f3d58e" stroke-width="1.15" stroke-linejoin="round">Terra</text><g mask="url(#terra-title-mask)"><rect class="terra-sweep" x="-240" y="0" width="240" height="180" fill="url(#terra-title-shine)"/></g></svg></h1>
         </div>
         <p class="hero-copy">Uma cantata de Natal feita de louvor, dança e encontros. Acompanhe de perto cada passo até uma noite especial.</p>
         <div class="hero-meta">
@@ -762,6 +793,14 @@
           else link.removeAttribute('aria-current');
         });
         if (updateHistory) history.pushState(null,'','#'+target);
+        if (target === 'inicio') {
+          const hero = document.querySelector('.hero');
+          if (hero && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            hero.classList.remove('cinematic-play');
+            void hero.offsetWidth;
+            hero.classList.add('cinematic-play');
+          }
+        }
         window.scrollTo({top:0,behavior:'instant'});
       }
       links.forEach(link => link.addEventListener('click',event=>{
