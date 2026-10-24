@@ -477,8 +477,9 @@
     .song-card-opening { border-color:rgba(223,187,119,.48); background:linear-gradient(130deg,rgba(223,187,119,.13),rgba(255,255,255,.025)); }
     .song-card-opening .song-number { font-family:var(--sans); font-size:.68rem; font-weight:700; letter-spacing:.11em; }
     /* Um palco desktop largo e uma única sequência cinematográfica controlada em JS. */
-    .hero-title-line { display:block; }
-    .hero-title-line .hero-letter { display:inline-block; white-space:pre; transform-origin:50% 85%; }
+    .hero-title-line { display:block; clip-path:polygon(50% 0,50% 0,50% 0,50% 0,50% 0,50% 0,50% 0,50% 0); }
+    .terra-title-mobile .terra-writing { clip-path:polygon(0 0,0 0,0 32%,0 67%,0 100%,0 100%,0 67%,0 32%); }
+    .js .terra-title-svg { visibility:hidden; }
     .hero h1 { z-index:2; }
     .hero-art > .eyebrow { z-index:2; }
     .terra-title { display:block; width:clamp(260px,42vw,480px); height:auto; margin:8px auto 0; overflow:visible; text-transform:none; }
@@ -488,7 +489,7 @@
     .terra-title-mobile .terra-writing { display:block; width:100%; height:auto; opacity:1; filter:sepia(.15) saturate(1.25) brightness(1.06) drop-shadow(0 0 10px rgba(255,195,82,.22)); }
     .terra-sweep-mobile { position:absolute; inset:0; z-index:1; background:linear-gradient(105deg,transparent 38%,rgba(255,244,213,.05) 45%,rgba(255,244,213,.24) 50%,rgba(255,224,153,.06) 55%,transparent 62%); opacity:0; transform:translateX(-110%); pointer-events:none; -webkit-mask:url("images/terra-lettering.png") center / 100% 100% no-repeat; mask:url("images/terra-lettering.png") center / 100% 100% no-repeat; }
     .terra-sweep { opacity:0; transform:translateX(-140px); }
-    .hero-scene-shade { position:absolute; z-index:1; inset:0; pointer-events:none; background:linear-gradient(180deg,rgba(5,4,3,.08) 0%,rgba(5,4,3,.19) 42%,rgba(5,4,3,.34) 100%); opacity:.88; -webkit-mask-image:radial-gradient(ellipse 11% 10% at 50% 7.8%,transparent 0%,#000 100%); mask-image:radial-gradient(ellipse 11% 10% at 50% 7.8%,transparent 0%,#000 100%); }
+    .hero-scene-shade { position:absolute; z-index:1; inset:0; pointer-events:none; background:linear-gradient(180deg,rgba(5,4,3,.14) 0%,rgba(5,4,3,.3) 42%,rgba(5,4,3,.48) 100%); opacity:1; -webkit-mask-image:radial-gradient(ellipse 11% 10% at 50% 7.8%,transparent 0%,#000 100%); mask-image:radial-gradient(ellipse 11% 10% at 50% 7.8%,transparent 0%,#000 100%); }
     .hero-nativity-reveal { position:absolute; z-index:1; inset:0; pointer-events:none; opacity:0; transform:scale(.78); transform-origin:46% 76%; mix-blend-mode:screen; background:radial-gradient(ellipse 8% 5% at 46% 76%,rgba(255,246,213,.52) 0%,rgba(255,218,149,.32) 38%,rgba(255,185,104,.1) 72%,transparent 100%),radial-gradient(ellipse 29% 20% at 48% 77%,rgba(255,199,119,.2),transparent 100%),radial-gradient(ellipse 50% 34% at 48% 80%,rgba(255,174,91,.1),transparent 100%); filter:blur(8px); }
     .hero-star-light { position:absolute; z-index:1; top:7.8%; left:50%; width:clamp(34px,5vw,62px); aspect-ratio:1; overflow:visible; border-radius:50%; pointer-events:none; opacity:.86; transform:translate(-50%,-50%); background:radial-gradient(circle,#fffdf3 0 4%,#fff0c0 7%,rgba(255,207,115,.64) 18%,rgba(238,163,45,.18) 45%,transparent 72%); filter:drop-shadow(0 0 12px rgba(255,193,76,.75)); mix-blend-mode:screen; }
     .hero-star-radiance { position:absolute; z-index:-1; inset:-95%; border-radius:50%; background:radial-gradient(ellipse at center,rgba(255,198,90,.18),rgba(255,180,51,.07) 34%,transparent 72%); opacity:.18; transform:scale(1.08); }
@@ -851,21 +852,21 @@
       const ids = new Set(panels.map(panel=>panel.id));
       const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
       const timeline = {
-        star: {at:0, duration:.56},
-        starHomecoming: {at:2.16, duration:.62},
-        radiance: {at:.02, duration:.82},
-        kicker: {at:.15, duration:.5},
-        sky: {at:.36, duration:.54, stagger:.026},
-        earth: {at:.68, duration:.53, stagger:.031},
-        terra: {at:1.23, duration:.9},
-        sweep: {at:1.96, duration:.58},
-        beam: {at:2.2, duration:1.28},
-        nativity: {at:2.22, duration:1.56},
-        manger: {at:2.72, duration:1.05},
+        star: {at:0, duration:.42},
+        starHomecoming: {at:2.08, duration:.56},
+        radiance: {at:0, duration:.9},
+        kicker: {at:.12, duration:.42},
+        sky: {at:.3, duration:.9},
+        earth: {at:.88, duration:.8},
+        terra: {at:1.38, duration:.82},
+        sweep: {at:1.95, duration:.52},
+        beam: {at:2, duration:1.48},
+        nativity: {at:2.02, duration:1.48},
+        manger: {at:2.7, duration:1.08},
         promise: {at:3.3, duration:.48},
         meta: {at:3.5, duration:.36}
       };
-      const easing = 'cubic-bezier(.22,.61,.36,1)';
+      const easing = 'cubic-bezier(.2,.72,.18,1)';
       const animate = (element, keyframes, phase) => {
         if (!element || typeof element.animate !== 'function') return;
         const animation = element.animate(keyframes, {duration:phase.duration*1000, delay:phase.at*1000, easing, fill:'both'});
@@ -914,40 +915,23 @@
         ], timeline.manger);
 
         const titleLines = [...hero.querySelectorAll('.hero-title-line')];
-        titleLines.forEach(line => {
-          if (!line.dataset.kineticReady) {
-            line.setAttribute('aria-hidden','true');
-            line.replaceChildren(...Array.from(line.textContent, character => {
-              const letter = document.createElement('span');
-              letter.className = 'hero-letter';
-              letter.textContent = character;
-              return letter;
-            }));
-            line.dataset.kineticReady = 'true';
-          }
-          const isSky = line.classList.contains('hero-title-sky');
-          const phase = isSky ? timeline.sky : timeline.earth;
-          line.querySelectorAll('.hero-letter').forEach((letter,index) => animate(letter, [
-            {opacity:0, clipPath:'inset(0 48% 16% 48%)', transform:'translate3d(0,.13em,0) rotateX(-18deg) scale(.985)'},
-            {opacity:.86, clipPath:'inset(0 18% 4% 18%)', transform:'translate3d(0,.025em,0) rotateX(-3deg) scale(.998)'},
-            {opacity:1, clipPath:'inset(0)', transform:'translate3d(0,0,0) rotateX(0) scale(1)'}
-          ], {...phase, at:phase.at + index*phase.stagger}));
-        });
+        const titleMask = [
+          {clipPath:'polygon(50% 0,50% 0,50% 0,50% 0,50% 0,50% 0,50% 0,50% 0)'},
+          {offset:.36, clipPath:'polygon(50% 0,66% 0,63% 28%,57% 70%,50% 100%,43% 70%,37% 28%,34% 0)'},
+          {offset:.72, clipPath:'polygon(16% 0,84% 0,92% 28%,78% 70%,50% 100%,22% 70%,8% 28%,16% 0)'},
+          {clipPath:'polygon(0 0,100% 0,100% 28%,100% 70%,100% 100%,0 100%,0 70%,0 28%)'}
+        ];
+        titleLines.forEach(line => animate(line, titleMask, line.classList.contains('hero-title-sky') ? timeline.sky : timeline.earth));
 
         const terraSvg = hero.querySelector('.terra-title-svg');
-        const terraWriting = [...hero.querySelectorAll('.terra-writing')];
-        animate(terraSvg, [{opacity:0},{opacity:1}], {...timeline.terra, duration:.24});
-        const inkFlow = [
-          {offset:0, opacity:0, clipPath:'polygon(0% 100%,10% 96%,20% 100%,30% 100%,40% 100%,50% 100%,60% 100%,70% 100%,80% 100%,90% 100%,100% 100%,100% 100%,90% 100%,80% 100%,70% 100%,60% 100%,50% 100%,40% 100%,30% 100%,20% 100%,10% 100%,0% 100%)'},
-          {offset:.34, opacity:.82, clipPath:'polygon(0% 66%,10% 78%,20% 67%,30% 84%,40% 70%,50% 79%,60% 57%,70% 72%,80% 53%,90% 64%,100% 43%,100% 100%,90% 100%,80% 100%,70% 100%,60% 100%,50% 100%,40% 100%,30% 100%,20% 100%,10% 100%,0% 100%)'},
-          {offset:.72, opacity:1, clipPath:'polygon(0% 27%,10% 43%,20% 24%,30% 44%,40% 19%,50% 38%,60% 16%,70% 33%,80% 13%,90% 28%,100% 11%,100% 100%,90% 100%,80% 100%,70% 100%,60% 100%,50% 100%,40% 100%,30% 100%,20% 100%,10% 100%,0% 100%)'},
-          {offset:1, opacity:1, clipPath:'polygon(0% 0%,10% 0%,20% 0%,30% 0%,40% 0%,50% 0%,60% 0%,70% 0%,80% 0%,90% 0%,100% 0%,100% 100%,90% 100%,80% 100%,70% 100%,60% 100%,50% 100%,40% 100%,30% 100%,20% 100%,10% 100%,0% 100%)'}
-        ];
-        terraWriting.forEach(element => {
-          const finalOpacity = 1;
-          const inkKeyframes = inkFlow.map((frame,index) => ({...frame, opacity:index === 0 ? 0 : Math.min(frame.opacity,finalOpacity)}));
-          animate(element, inkKeyframes, timeline.terra);
-        });
+        const terraWriting = hero.querySelector('.terra-title-mobile .terra-writing');
+        if (terraSvg) terraSvg.style.visibility = 'hidden';
+        animate(terraWriting, [
+          {clipPath:'polygon(0 0,0 0,0 32%,0 67%,0 100%,0 100%,0 67%,0 32%)'},
+          {offset:.28, clipPath:'polygon(0 0,26% 0,20% 32%,31% 67%,24% 100%,0 100%,0 67%,0 32%)'},
+          {offset:.68, clipPath:'polygon(0 0,72% 0,66% 32%,78% 67%,70% 100%,0 100%,0 67%,0 32%)'},
+          {clipPath:'polygon(0 0,100% 0,100% 32%,100% 67%,100% 100%,0 100%,0 67%,0 32%)'}
+        ], timeline.terra);
         animate(hero.querySelector('.terra-sweep'), [
           {opacity:0, transform:'translateX(-140px)'},
           {offset:.28, opacity:.84, transform:'translateX(170px)'},
