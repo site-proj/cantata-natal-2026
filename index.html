@@ -342,10 +342,13 @@
       .hero-content { width:100%; padding:0; display:flex; flex-direction:column; align-items:center; }
       .hero-art { position:relative; order:1; display:grid; place-items:center; width:100%; min-height:0; overflow:hidden; line-height:0; isolation:isolate; background:#100d0a; }
       .hero-art::before { content:""; position:absolute; z-index:-1; inset:-18px; background:url("images/cantata-mobile-hero.png") center 56% / cover no-repeat; filter:blur(16px) brightness(.48); transform:scale(1.05); opacity:.82; }
-      .hero-art > .eyebrow { position:absolute; top:28%; left:0; width:100%; margin:0; padding:0 12px; color:var(--gold); text-align:center; font-size:clamp(.56rem,2.4vw,.72rem); letter-spacing:.12em; line-height:1.4; text-shadow:0 2px 12px #100900; }
-      .hero-art > h1 { position:absolute; top:35%; left:0; width:100%; margin:0; padding:0 10px; color:var(--ivory); font-size:clamp(1.65rem,7.7vw,2.8rem); line-height:1.02; text-shadow:0 3px 22px #100900,0 0 24px rgba(0,0,0,.7); }
-      .hero-art > h1 .terra { margin-top:2px; font-size:clamp(4.6rem,16vw,6.8rem); }
-      .hero-meta { order:2; width:100%; margin:0; padding:28px 22px 30px; background:#100d0a; gap:10px 18px; justify-content:center; }
+      .hero-art > .eyebrow { display:none; }
+      .hero-mobile-kicker { display:block; position:absolute; z-index:2; top:26%; left:10px; right:10px; color:#f4cf7e; text-align:center; font-size:clamp(.58rem,2.8vw,.72rem); font-weight:700; letter-spacing:.17em; line-height:1.4; text-shadow:0 2px 14px #100900; text-transform:uppercase; }
+      .hero-art > h1 { position:absolute; top:32%; left:0; width:100%; margin:0; padding:0 10px; color:var(--ivory); font-size:clamp(1.58rem,7.3vw,2.65rem); line-height:1.02; letter-spacing:.035em; text-shadow:0 3px 22px #100900,0 0 24px rgba(0,0,0,.7); }
+      .hero-art > h1 .terra { margin-top:1px; font-size:clamp(4.4rem,15.5vw,6.5rem); }
+      .hero-promise-below { order:2; display:block; width:100%; padding:24px 24px 8px; color:#f0d493; background:#100d0a; text-align:center; font-size:.76rem; font-weight:700; letter-spacing:.14em; line-height:1.65; text-shadow:0 2px 16px #000; text-transform:uppercase; }
+      .hero-promise-below::after { content:"✦"; display:block; width:136px; margin:13px auto 0; border-bottom:1px solid rgba(223,187,119,.58); color:#e8c476; font-size:.85rem; line-height:1.4; }
+      .hero-meta { order:3; width:100%; margin:0; padding:14px 22px 30px; background:#100d0a; gap:10px 18px; justify-content:center; }
     }
   
     .hero-renascer-logo {display:flex;flex-direction:column;align-items:center;gap:2px;margin:0 auto 23px;}
@@ -361,7 +364,9 @@
     }
   
     .hero-art { display:contents; }
+    .hero-mobile-kicker,.hero-promise-below { display:none; }
     @media(max-width:1024px){
+      .hero-mobile-kicker,.hero-promise-below {display:block;}
       .hero {background:#100b07!important;}
       .hero-content {padding:0!important;gap:0;}
       .hero-renascer-logo {padding:17px 12px 10px!important;margin:0!important;}
@@ -465,7 +470,7 @@
     @media(max-width:440px) { .song-roster-head { grid-template-columns:1fr; gap:15px; } .roster-action { justify-self:start; } }
     .song-card-opening { border-color:rgba(223,187,119,.48); background:linear-gradient(130deg,rgba(223,187,119,.13),rgba(255,255,255,.025)); }
     .song-card-opening .song-number { font-family:var(--sans); font-size:.68rem; font-weight:700; letter-spacing:.11em; }
-    /* Abertura tipográfica cinematográfica de 15 segundos. */
+    /* Abertura tipográfica cinematográfica breve, com leitura fluida. */
     .hero-title-line { display:block; }
     .hero-title-line .hero-letter { display:inline-block; white-space:pre; transform-origin:50% 85%; will-change:transform,opacity,filter; }
     .hero h1 { z-index:2; }
@@ -473,6 +478,9 @@
     .terra-title { display:block; width:clamp(260px,42vw,480px); height:auto; margin:8px auto 0; overflow:visible; text-transform:none; }
     .terra-title text { text-transform:none; }
     .terra-writing { fill-opacity:1; clip-path:none; stroke:rgba(243,213,142,.2); stroke-width:.45; }
+    .terra-title-mobile { display:none; position:relative; isolation:isolate; }
+    .terra-title-mobile .terra-writing { display:block; width:100%; height:auto; filter:sepia(.72) saturate(1.2) hue-rotate(-8deg); }
+    .terra-sweep-mobile { position:absolute; inset:0; z-index:1; background:linear-gradient(105deg,transparent 35%,rgba(255,255,225,.12) 43%,rgba(255,255,231,.94) 50%,rgba(255,224,153,.2) 57%,transparent 65%); opacity:0; transform:translateX(-110%); pointer-events:none; -webkit-mask:url("images/terra-lettering.png") center / 100% 100% no-repeat; mask:url("images/terra-lettering.png") center / 100% 100% no-repeat; }
     .terra-sweep { opacity:0; transform:translateX(0); }
     .hero-star-light { position:absolute; z-index:1; top:7.8%; left:50%; width:clamp(34px,5vw,62px); aspect-ratio:1; border-radius:50%; pointer-events:none; opacity:.86; transform:translate(-50%,-50%); background:radial-gradient(circle,#fffdf3 0 4%,#fff0c0 7%,rgba(255,207,115,.64) 18%,rgba(238,163,45,.18) 45%,transparent 72%); filter:drop-shadow(0 0 12px rgba(255,193,76,.75)); mix-blend-mode:screen; }
     .hero-star-light::before { content:""; position:absolute; z-index:-1; top:48%; left:50%; width:clamp(220px,42vw,560px); height:clamp(280px,54vh,620px); transform:translateX(-50%) scaleY(.16); transform-origin:top center; clip-path:polygon(48% 0,52% 0,100% 100%,0 100%); background:linear-gradient(180deg,rgba(255,212,131,.28),rgba(244,184,79,.075) 48%,transparent 100%); filter:blur(11px); opacity:0; }
@@ -481,6 +489,7 @@
     .hero.cinematic-play .hero-star-light::before { animation:star-beam 4.9s cubic-bezier(.2,.72,.2,1) .2s both; }
     .hero.cinematic-play .hero-star-light::after { animation:star-radiance 4.2s ease-out .15s both; }
     .hero.cinematic-play .hero-art > .eyebrow { opacity:0; clip-path:inset(0 50%); filter:blur(5px); transform:translateY(9px); animation:promise-intro 1s cubic-bezier(.2,.72,.2,1) 1.45s both; }
+    .hero.cinematic-play .hero-mobile-kicker { opacity:0; transform:translateY(7px); filter:blur(3px); animation:promise-intro .48s cubic-bezier(.2,.72,.2,1) .1s both; }
     .hero.cinematic-play .hero-title-sky { clip-path:inset(0 50% 0 50%); opacity:0; filter:brightness(1.7) blur(5px); transform:translateY(7px); animation:divine-reveal 2.25s cubic-bezier(.2,.82,.2,1) 3.05s both; }
     .hero.cinematic-play .hero-title-earth { clip-path:inset(0 0 100% 0); opacity:0; transform:translateY(16px) rotateX(-7deg); transform-origin:center bottom; filter:blur(3px); animation:title-drop-reveal 1.45s cubic-bezier(.2,.72,.2,1) 6.25s both; }
     .hero.cinematic-play .hero-title-sky .hero-letter { animation:letter-arrive .82s cubic-bezier(.2,.78,.2,1) both; }
@@ -488,7 +497,9 @@
     .hero.cinematic-play .terra-title { opacity:0; animation:terra-stage .01s linear 8.35s both; }
     .hero.cinematic-play .terra-writing { clip-path:inset(0 100% 0 0); animation:calligraphy-write 2.85s cubic-bezier(.4,0,.2,1) 8.35s both; }
     .hero.cinematic-play .terra-sweep { animation:golden-sweep 1.25s cubic-bezier(.35,.05,.2,1) 12.1s both; }
+    .hero.cinematic-play .terra-sweep-mobile { animation:golden-sweep-mobile .72s cubic-bezier(.35,.05,.2,1) 2.66s both; }
     .hero.cinematic-play h1 { animation:title-final-glow .9s ease-out 14.05s both; }
+    .hero.cinematic-play .hero-promise-below { animation:promise-intro .52s cubic-bezier(.2,.72,.2,1) 1.05s both; }
     @keyframes star-pulse { 0% {opacity:.28;transform:translate(-50%,-50%) scale(.72);filter:brightness(.72) drop-shadow(0 0 5px rgba(255,193,76,.38));} 42% {opacity:1;transform:translate(-50%,-50%) scale(1.18);filter:brightness(1.5) drop-shadow(0 0 25px rgba(255,193,76,.95));} 72% {opacity:.72;transform:translate(-50%,-50%) scale(.92);filter:brightness(1.02) drop-shadow(0 0 11px rgba(255,193,76,.68));} 100% {opacity:.9;transform:translate(-50%,-50%) scale(1);filter:brightness(1.12) drop-shadow(0 0 15px rgba(255,193,76,.78));} }
     @keyframes star-beam { 0% {opacity:0;transform:translateX(-50%) scaleY(.16);} 32% {opacity:.26;transform:translateX(-50%) scaleY(1.04);} 100% {opacity:.1;transform:translateX(-50%) scaleY(1);} }
     @keyframes star-radiance { 0% {opacity:0;transform:scale(.42);} 32% {opacity:.9;transform:scale(1.2);} 68% {opacity:.3;transform:scale(1.7);} 100% {opacity:.56;transform:scale(1.18);} }
@@ -499,20 +510,36 @@
     @keyframes terra-stage { to {opacity:1;} }
     @keyframes calligraphy-write { 0% {clip-path:inset(0 100% 0 0);filter:brightness(1.5) saturate(.72);} 72% {filter:brightness(1.12) saturate(.9);} 100% {clip-path:inset(0);filter:brightness(1) saturate(1);} }
     @keyframes golden-sweep { 0% {opacity:0;transform:translateX(-35px);} 18% {opacity:1;} 100% {opacity:0;transform:translateX(880px);} }
+    @keyframes golden-sweep-mobile { 0% {opacity:0;transform:translateX(-110%);} 18% {opacity:1;} 100% {opacity:0;transform:translateX(110%);} }
     @keyframes title-final-glow { 0% {filter:drop-shadow(0 0 0 rgba(242,200,120,0));} 45% {filter:drop-shadow(0 0 14px rgba(242,200,120,.3));} 100% {filter:drop-shadow(0 0 5px rgba(242,200,120,.12));} }
     @media(min-width:1025px) { .hero-art > .eyebrow { position:relative; z-index:2; } .hero h1 { position:relative; z-index:2; } }
     @media(max-width:1024px) {
       .hero-star-light { top:12.6%; width:clamp(32px,8vw,52px); }
       .hero-star-light::before { width:clamp(220px,66vw,470px); height:clamp(260px,38svh,440px); }
       .terra-title { width:clamp(250px,68vw,390px); margin-top:4px; }
+      .terra-title-svg { display:none!important; }
+      .terra-title-mobile { display:block; }
+      .hero.cinematic-play .hero-star-light { animation-duration:1.2s; }
+      .hero.cinematic-play .hero-star-light::before { animation-duration:1.25s; animation-delay:.08s; }
+      .hero.cinematic-play .hero-star-light::after { animation-duration:1.15s; animation-delay:.05s; }
+      .hero.cinematic-play .hero-title-sky { animation-duration:.82s; animation-delay:.48s; }
+      .hero.cinematic-play .hero-title-earth { animation-duration:.72s; animation-delay:1.02s; }
+      .hero.cinematic-play .hero-title-sky .hero-letter { animation-duration:.52s; }
+      .hero.cinematic-play .hero-title-earth .hero-letter { animation-duration:.46s; }
+      .hero.cinematic-play .terra-title-mobile { animation-delay:1.84s; }
+      .hero.cinematic-play .terra-title-mobile .terra-writing { clip-path:inset(0 100% 0 0); animation:calligraphy-write .82s cubic-bezier(.4,0,.2,1) 1.84s both; }
+      .hero.cinematic-play .terra-sweep-mobile { animation-delay:2.66s; }
+      .hero.cinematic-play h1 { animation-duration:.55s; animation-delay:3.38s; }
+      .hero.cinematic-play .hero-promise-below { animation-delay:1.05s; }
     }
     @media(prefers-reduced-motion:reduce) {
-      .hero-art > .eyebrow { clip-path:none!important; opacity:1!important; transform:none!important; filter:none!important; }
+      .hero-art > .eyebrow,.hero-mobile-kicker,.hero-promise-below { clip-path:none!important; opacity:1!important; transform:none!important; filter:none!important; animation:none!important; }
       .hero-title-sky,.hero-title-earth { clip-path:none!important; opacity:1!important; transform:none!important; filter:none!important; }
       .hero-title-line .hero-letter { opacity:1!important; transform:none!important; filter:none!important; animation:none!important; }
       .terra-title { opacity:1!important; animation:none!important; }
       .terra-writing { fill-opacity:1!important; clip-path:none!important; stroke:none!important; filter:none!important; }
-      .terra-sweep { display:none!important; }
+      .terra-title-mobile .terra-writing { clip-path:none!important; animation:none!important; }
+      .terra-sweep,.terra-sweep-mobile { display:none!important; }
       .hero h1 { filter:none!important; }
       .hero-star-light::before { opacity:0!important; }
       .hero-star-light,.hero-star-light::after { animation:none!important; }
@@ -629,8 +656,10 @@
           <img class="hero-scene-mobile" src="images/cantata-mobile-hero.png" alt="Cena da Natividade com Maria, José e o menino Jesus sob uma estrela, rodeados por palhas e animais" loading="eager" decoding="async">
           <span class="hero-star-light" aria-hidden="true"></span>
           <div class="eyebrow">Uma promessa está prestes a se revelar</div>
-          <h1 aria-label="Quando o Céu Tocou a Terra"><span class="hero-title-line hero-title-sky">Quando o Céu</span><span class="hero-title-line hero-title-earth">Tocou a</span><svg class="terra-title" viewBox="0 0 600 180" aria-hidden="true" focusable="false"><defs><mask id="terra-title-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="600" height="180"><text x="300" y="142" text-anchor="middle" textLength="360" lengthAdjust="spacingAndGlyphs" font-family="Tangerine, cursive" font-size="160" font-weight="700" fill="white">Terra</text></mask><linearGradient id="terra-title-shine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff2c5" stop-opacity="0"/><stop offset=".46" stop-color="#fff9e7" stop-opacity=".15"/><stop offset=".52" stop-color="#fff6d5" stop-opacity=".95"/><stop offset=".58" stop-color="#fff9e7" stop-opacity=".22"/><stop offset="1" stop-color="#fff2c5" stop-opacity="0"/></linearGradient><linearGradient id="terra-title-fill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6d98e"/><stop offset=".46" stop-color="#ffe7aa"/><stop offset=".72" stop-color="#e9c26e"/><stop offset="1" stop-color="#c28f49"/></linearGradient></defs><text class="terra-writing" x="300" y="142" text-anchor="middle" textLength="360" lengthAdjust="spacingAndGlyphs" font-family="Tangerine, cursive" font-size="160" font-weight="700" fill="url(#terra-title-fill)" stroke="#f3d58e" stroke-width="1.15" stroke-linejoin="round">Terra</text><g mask="url(#terra-title-mask)"><rect class="terra-sweep" x="-240" y="0" width="240" height="180" fill="url(#terra-title-shine)"/></g></svg></h1>
+          <div class="hero-mobile-kicker">Cantata de Natal · 2026</div>
+          <h1 aria-label="Quando o Céu Tocou a Terra"><span class="hero-title-line hero-title-sky">Quando o Céu</span><span class="hero-title-line hero-title-earth">Tocou a</span><svg class="terra-title terra-title-svg" viewBox="0 0 600 180" aria-hidden="true" focusable="false"><defs><mask id="terra-title-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="600" height="180"><text x="300" y="142" text-anchor="middle" textLength="360" lengthAdjust="spacingAndGlyphs" font-family="Tangerine, cursive" font-size="160" font-weight="700" fill="white">Terra</text></mask><linearGradient id="terra-title-shine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff2c5" stop-opacity="0"/><stop offset=".46" stop-color="#fff9e7" stop-opacity=".15"/><stop offset=".52" stop-color="#fff6d5" stop-opacity=".95"/><stop offset=".58" stop-color="#fff9e7" stop-opacity=".22"/><stop offset="1" stop-color="#fff2c5" stop-opacity="0"/></linearGradient><linearGradient id="terra-title-fill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6d98e"/><stop offset=".46" stop-color="#ffe7aa"/><stop offset=".72" stop-color="#e9c26e"/><stop offset="1" stop-color="#c28f49"/></linearGradient></defs><text class="terra-writing" x="300" y="142" text-anchor="middle" textLength="360" lengthAdjust="spacingAndGlyphs" font-family="Tangerine, cursive" font-size="160" font-weight="700" fill="url(#terra-title-fill)" stroke="#f3d58e" stroke-width="1.15" stroke-linejoin="round">Terra</text><g mask="url(#terra-title-mask)"><rect class="terra-sweep" x="-240" y="0" width="240" height="180" fill="url(#terra-title-shine)"/></g></svg><span class="terra-title terra-title-mobile" aria-hidden="true"><img class="terra-writing" src="images/terra-lettering.png" alt=""><span class="terra-sweep-mobile"></span></span></h1>
         </div>
+        <p class="hero-promise-below">Uma promessa está prestes a se revelar.</p>
         <div class="hero-meta">
           <span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="1" stroke="currentColor" stroke-width="1.5"/><path d="M7.5 3v4M16.5 3v4M4 9.5h16" stroke="currentColor" stroke-width="1.5"/></svg>18 de dezembro de 2026</span>
           <span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.2" stroke="currentColor" stroke-width="1.6"/></svg>19h00 · Renascer Jundiaí</span>
@@ -820,8 +849,10 @@
               line.replaceChildren(...Array.from(line.textContent, (character, index) => {
                 const letter = document.createElement('span');
                 letter.className = 'hero-letter';
-                const start = line.classList.contains('hero-title-sky') ? 3.12 : 6.3;
-                const stagger = line.classList.contains('hero-title-sky') ? .035 : .045;
+                const skyLine = line.classList.contains('hero-title-sky');
+                const compact = window.matchMedia('(max-width: 1024px)').matches;
+                const start = skyLine ? (compact ? .52 : 3.12) : (compact ? 1.06 : 6.3);
+                const stagger = skyLine ? .035 : .045;
                 letter.style.animationDelay = `${start + index * stagger}s`;
                 letter.textContent = character;
                 return letter;
