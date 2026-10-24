@@ -446,6 +446,26 @@
       .gallery:has(.preparation-photo):has(.preparation-video) { grid-template-columns:1fr; }
       .gallery:has(.preparation-video) .preparation-video { grid-column:auto; }
     }
+
+    /* Escala compacta e expansível por música. */
+    .song-roster { cursor:default; }
+    .song-roster-head { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:22px; margin-bottom:0; cursor:pointer; list-style:none; }
+    .song-roster-head::-webkit-details-marker { display:none; }
+    .song-roster-head:focus-visible { outline:2px solid var(--gold); outline-offset:6px; }
+    .roster-song-title { min-width:0; }
+    .roster-song-title h3 { margin:8px 0 0; }
+    .roster-action { display:inline-flex; min-height:48px; align-items:center; justify-content:center; gap:12px; padding:0 16px; border:1px solid rgba(223,187,119,.52); border-radius:999px; background:rgba(223,187,119,.1); color:#f3d38c; font-size:.78rem; font-weight:700; letter-spacing:.045em; white-space:nowrap; transition:background .2s ease,transform .2s ease,box-shadow .2s ease; }
+    .song-roster-head:hover .roster-action { transform:translateY(-2px); background:rgba(223,187,119,.18); box-shadow:0 6px 18px rgba(223,187,119,.12); }
+    .roster-action-open { display:none; }
+    .song-roster[open] .roster-action-closed { display:none; }
+    .song-roster[open] .roster-action-open { display:inline; }
+    .roster-chevron { width:9px; height:9px; border-right:2px solid currentColor; border-bottom:2px solid currentColor; transform:rotate(45deg) translateY(-2px); transition:transform .2s ease; }
+    .song-roster[open] .roster-chevron { transform:rotate(225deg) translate(-1px,-1px); }
+    .roster-intro { position:relative; z-index:1; margin:14px 0 0; color:var(--muted); font-size:.9rem; }
+    .song-roster .roster-grid { margin-top:22px; animation:roster-reveal .24s ease both; }
+    @keyframes roster-reveal { from {opacity:0;transform:translateY(-6px)} to {opacity:1;transform:translateY(0)} }
+    @media(max-width:700px) { .song-roster-head { align-items:flex-start; gap:16px; } .roster-action { min-height:42px; padding:0 12px; font-size:.7rem; } .roster-intro { margin-top:12px; } }
+    @media(max-width:440px) { .song-roster-head { grid-template-columns:1fr; gap:15px; } .roster-action { justify-self:start; } }
   </style>
 </head>
 <body>
@@ -519,11 +539,12 @@
           <li class="song-card"><span class="song-number">07</span><div><h3>Oh, Quão Lindo Esse Nome É</h3><p>Kemuel</p></div></li>
           <li class="song-card"><span class="song-number">08</span><div><h3>Prefiro Crer</h3><p>Vânia Marx</p></div></li>
         </ol>
-        <div class="song-roster reveal" aria-labelledby="roster-title">
-          <div class="song-roster-head">
-            <div><div class="eyebrow">Escala · Louvor</div><h3 id="roster-title">Oh, Quão Lindo Esse Nome É</h3></div>
-            <p>Uma canção, muitos dons e um só propósito: conduzir cada voz a adorar.</p>
-          </div>
+        <details class="song-roster reveal" aria-labelledby="roster-title">
+          <summary class="song-roster-head">
+            <div class="roster-song-title"><div class="eyebrow">Escala · Louvor</div><h3 id="roster-title">Oh, Quão Lindo Esse Nome É</h3></div>
+            <span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span>
+          </summary>
+          <p class="roster-intro">Uma canção, muitos dons e um só propósito: conduzir cada voz a adorar.</p>
           <div class="roster-grid">
             <section class="roster-card" aria-label="Escala da banda">
               <h4>Banda</h4>
@@ -543,7 +564,7 @@
               </ul>
             </section>
           </div>
-        </div>
+        </details>
       </div>
     </section>
 
