@@ -489,11 +489,11 @@
     .terra-sweep-mobile { position:absolute; inset:0; z-index:1; background:linear-gradient(105deg,transparent 38%,rgba(255,244,213,.05) 45%,rgba(255,244,213,.24) 50%,rgba(255,224,153,.06) 55%,transparent 62%); opacity:0; transform:translateX(-110%); pointer-events:none; -webkit-mask:url("images/terra-lettering.png") center / 100% 100% no-repeat; mask:url("images/terra-lettering.png") center / 100% 100% no-repeat; }
     .terra-sweep { opacity:0; transform:translateX(-140px); }
     .hero-scene-shade { position:absolute; z-index:1; inset:0; pointer-events:none; background:linear-gradient(180deg,rgba(5,4,3,.08) 0%,rgba(5,4,3,.19) 42%,rgba(5,4,3,.34) 100%); opacity:.88; -webkit-mask-image:radial-gradient(ellipse 11% 10% at 50% 7.8%,transparent 0%,#000 100%); mask-image:radial-gradient(ellipse 11% 10% at 50% 7.8%,transparent 0%,#000 100%); }
-    .hero-nativity-reveal { position:absolute; z-index:1; inset:0; pointer-events:none; opacity:0; transform:scale(.78); transform-origin:46% 76%; mix-blend-mode:screen; background:radial-gradient(ellipse 8% 5% at 46% 76%,rgba(255,246,213,.78) 0%,rgba(255,218,149,.48) 38%,rgba(255,185,104,.12) 72%,transparent 100%),radial-gradient(ellipse 29% 20% at 48% 77%,rgba(255,199,119,.27),transparent 100%),radial-gradient(ellipse 50% 34% at 48% 80%,rgba(255,174,91,.12),transparent 100%); filter:blur(8px); }
+    .hero-nativity-reveal { position:absolute; z-index:1; inset:0; pointer-events:none; opacity:0; transform:scale(.78); transform-origin:46% 76%; mix-blend-mode:screen; background:radial-gradient(ellipse 8% 5% at 46% 76%,rgba(255,246,213,.52) 0%,rgba(255,218,149,.32) 38%,rgba(255,185,104,.1) 72%,transparent 100%),radial-gradient(ellipse 29% 20% at 48% 77%,rgba(255,199,119,.2),transparent 100%),radial-gradient(ellipse 50% 34% at 48% 80%,rgba(255,174,91,.1),transparent 100%); filter:blur(8px); }
     .hero-star-light { position:absolute; z-index:1; top:7.8%; left:50%; width:clamp(34px,5vw,62px); aspect-ratio:1; overflow:visible; border-radius:50%; pointer-events:none; opacity:.86; transform:translate(-50%,-50%); background:radial-gradient(circle,#fffdf3 0 4%,#fff0c0 7%,rgba(255,207,115,.64) 18%,rgba(238,163,45,.18) 45%,transparent 72%); filter:drop-shadow(0 0 12px rgba(255,193,76,.75)); mix-blend-mode:screen; }
     .hero-star-radiance { position:absolute; z-index:-1; inset:-95%; border-radius:50%; background:radial-gradient(ellipse at center,rgba(255,198,90,.18),rgba(255,180,51,.07) 34%,transparent 72%); opacity:.18; transform:scale(1.08); }
     .hero-star-beam { position:absolute; z-index:-1; top:48%; left:50%; width:clamp(220px,42vw,560px); height:clamp(280px,54vh,620px); transform:translateX(-50%) scaleY(.08); transform-origin:top center; clip-path:polygon(48% 0,52% 0,100% 100%,0 100%); background:linear-gradient(180deg,rgba(255,220,153,.27),rgba(244,184,79,.09) 48%,transparent 100%); filter:blur(11px); opacity:0; }
-    .hero-manger-glow { position:absolute; z-index:2; top:75%; left:46%; width:clamp(190px,30vw,390px); height:clamp(110px,22vh,220px); border-radius:50%; background:radial-gradient(ellipse at center,rgba(255,238,195,.34),rgba(255,201,122,.2) 38%,rgba(255,170,76,.065) 68%,transparent 84%); filter:blur(14px); mix-blend-mode:screen; opacity:0; transform:translate(-50%,-45%) scale(.72); pointer-events:none; }
+    .hero-manger-glow { position:absolute; z-index:2; top:75%; left:46%; width:clamp(190px,30vw,390px); height:clamp(110px,22vh,220px); border-radius:50%; background:radial-gradient(ellipse at center,rgba(255,238,195,.22),rgba(255,201,122,.16) 38%,rgba(255,170,76,.055) 68%,transparent 84%); filter:blur(14px); mix-blend-mode:screen; opacity:0; transform:translate(-50%,-45%) scale(.72); pointer-events:none; }
     @media (min-width:1025px) {
       .hero { display:block; height:max(740px,100svh); min-height:max(740px,100svh); overflow:hidden; background:#100d0a url("images/manjedoura-fundo.png") center center / cover no-repeat; }
       .hero::before { z-index:0; background:linear-gradient(180deg,rgba(16,13,10,.24) 0%,rgba(16,13,10,.08) 28%,rgba(16,13,10,.14) 60%,rgba(16,13,10,.42) 100%); pointer-events:none; }
@@ -503,8 +503,8 @@
       .hero-art { position:absolute; display:block; inset:0 0 auto; top:calc(-1 * var(--nav-clearance,100px)); bottom:auto; width:100%; height:100svh; overflow:visible; line-height:normal; pointer-events:none; isolation:isolate; }
       .hero-scene-mobile { display:none; }
       .hero-art > .eyebrow { display:none; }
-      .hero-mobile-kicker { display:block; position:absolute; top:8%; left:10px; right:10px; z-index:3; color:#f4cf7e; text-align:center; font-size:clamp(.68rem,1vw,.88rem); font-weight:700; letter-spacing:.2em; line-height:1.4; text-shadow:0 2px 18px #100900; text-transform:uppercase; }
-      .hero-art > h1 { position:absolute; top:13%; left:50%; width:min(100%,1120px); margin:0; padding:0 16px; transform:translateX(-50%); color:var(--ivory); font-family:"Cormorant Garamond",var(--serif); font-size:clamp(3rem,5.2vw,5.5rem); font-weight:500; line-height:.9; letter-spacing:.045em; text-shadow:0 3px 28px rgba(0,0,0,.86),0 0 42px rgba(228,192,128,.14); }
+      .hero-mobile-kicker { display:block; position:absolute; top:13%; left:10px; right:10px; z-index:3; color:#f4cf7e; text-align:center; font-size:clamp(.68rem,1vw,.88rem); font-weight:700; letter-spacing:.2em; line-height:1.4; text-shadow:0 2px 18px #100900; text-transform:uppercase; }
+      .hero-art > h1 { position:absolute; top:18%; left:50%; width:min(100%,1120px); margin:0; padding:0 16px; transform:translateX(-50%); color:var(--ivory); font-family:"Cormorant Garamond",var(--serif); font-size:clamp(3rem,5.2vw,5.5rem); font-weight:500; line-height:.9; letter-spacing:.045em; text-shadow:0 3px 28px rgba(0,0,0,.86),0 0 42px rgba(228,192,128,.14); }
       .hero-art > h1 .terra-title { width:clamp(330px,34vw,560px); margin:0 auto; }
       .hero-promise-below { position:absolute; top:83%; left:50%; z-index:4; display:block; width:min(92%,760px); margin:0; padding:0 18px; transform:translateX(-50%); color:#e7c577; text-align:center; font-family:"Cormorant Garamond",var(--serif); font-size:clamp(.9rem,1.35vw,1.08rem); font-weight:500; letter-spacing:.11em; line-height:1.4; text-shadow:0 2px 16px #000; text-transform:uppercase; }
       .hero-promise-below::after { content:""; display:block; width:min(74%,420px); height:17px; margin:8px auto 0; background:linear-gradient(180deg,transparent 47%,rgba(223,187,119,.48) 47%,rgba(223,187,119,.48) 53%,transparent 53%); }
@@ -519,8 +519,8 @@
       .terra-title-mobile { display:block; }
     }
     @media (min-width:1025px) and (max-height:800px) {
-      .hero-mobile-kicker { top:8%; }
-      .hero-art > h1 { top:16%; font-size:clamp(2.5rem,3.8vw,4.1rem); }
+      .hero-mobile-kicker { top:14%; }
+      .hero-art > h1 { top:22%; font-size:clamp(2.5rem,3.8vw,4.1rem); }
       .hero-art > h1 .terra-title { width:clamp(260px,26vw,380px); }
     }
     @media(max-width:600px) {
@@ -557,8 +557,8 @@
       .hero-star-light,.hero-star-radiance,.hero-star-beam { animation:none!important; }
       .hero-manger-glow { animation:none!important; opacity:0!important; }
       .hero-scene-shade { opacity:.62!important; }
-      .hero-nativity-reveal { opacity:.82!important; transform:none!important; }
-      .hero-manger-glow { opacity:.34!important; transform:translate(-50%,-50%) scale(1)!important; }
+      .hero-nativity-reveal { opacity:.68!important; transform:none!important; }
+      .hero-manger-glow { opacity:.22!important; transform:translate(-50%,-50%) scale(1)!important; }
     }
 
   </style>
@@ -901,14 +901,14 @@
         ], timeline.beam);
         animate(hero.querySelector('.hero-nativity-reveal'), [
           {opacity:0, transform:'scale(.78)'},
-          {offset:.52, opacity:.52, transform:'scale(.94)'},
-          {offset:.84, opacity:.9, transform:'scale(1.04)'},
-          {opacity:.82, transform:'scale(1)'}
+          {offset:.52, opacity:.42, transform:'scale(.94)'},
+          {offset:.84, opacity:.76, transform:'scale(1.04)'},
+          {opacity:.68, transform:'scale(1)'}
         ], timeline.nativity);
         animate(hero.querySelector('.hero-manger-glow'), [
           {opacity:0, transform:'translate(-50%,-45%) scale(.72)'},
-          {offset:.72, opacity:.42, transform:'translate(-50%,-50%) scale(1.06)'},
-          {opacity:.34, transform:'translate(-50%,-50%) scale(1)'}
+          {offset:.72, opacity:.3, transform:'translate(-50%,-50%) scale(1.06)'},
+          {opacity:.22, transform:'translate(-50%,-50%) scale(1)'}
         ], timeline.manger);
 
         const titleLines = [...hero.querySelectorAll('.hero-title-line')];
