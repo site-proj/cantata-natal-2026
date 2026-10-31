@@ -125,8 +125,7 @@
     .rehearsal-feature-time { flex: 0 0 auto; min-width: 250px; padding: 18px 24px; border: 1px solid rgba(223,187,119,.48); background: linear-gradient(135deg, rgba(223,187,119,.12), rgba(255,255,255,.025)); text-align: center; }
     .rehearsal-feature-time span { display: block; color: var(--gold); font-size: .75rem; font-weight: 700; letter-spacing: .15em; }
     .rehearsal-feature-time strong { display: block; margin-top: 2px; color: var(--ivory); font-family: var(--serif); font-size: clamp(2.5rem, 4vw, 3.6rem); font-weight: 500; line-height: 1.15; }
-    .rehearsal-feature .rehearsal-video-grid { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 20px; }
-    .rehearsal-feature .rehearsal-video-grid > :last-child:nth-child(4) { grid-column: 2; }
+    .rehearsal-feature .rehearsal-video-grid { grid-template-columns: repeat(4,minmax(0,1fr)); gap: 20px; }
     .rehearsal-setlist-head { display: flex; align-items: center; gap: 14px; margin: 34px 0 16px; }
     .rehearsal-setlist-head::before { content: ""; width: 30px; height: 1px; flex: 0 0 auto; background: var(--gold); }
     .rehearsal-setlist-head h3 { margin: 0; color: var(--ivory); font-family: var(--serif); font-size: clamp(1.15rem, 1.7vw, 1.55rem); font-weight: 500; }
@@ -219,6 +218,7 @@
     }
     @media (max-width: 850px) {
       .intro-grid, .agenda-layout { grid-template-columns: 1fr; gap: 26px; }
+      .rehearsal-feature .rehearsal-video-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
       .team-grid { grid-template-columns: 1fr 1fr; }
       .team-card:nth-child(5) { grid-column: 1 / -1; width: 50%; justify-self: center; }
       .agenda-layout { gap: 36px; }
@@ -254,7 +254,6 @@
       .rehearsal-feature-time { min-width: 0; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px; text-align: left; }
       .rehearsal-feature-time strong { margin: 0; font-size: 2rem; }
       .rehearsal-feature .rehearsal-video-grid { grid-template-columns: 1fr; gap: 13px; }
-      .rehearsal-feature .rehearsal-video-grid > :last-child:nth-child(4) { grid-column: auto; }
       .rehearsal-setlist-head { margin-top: 28px; }
       .rehearsal-feature .rehearsal-video-title { padding: 10px 12px; font-size: .9rem; }
       section { padding-block: 70px; }
@@ -642,7 +641,27 @@
           </div>
         </div>
         <div class="rehearsal-setlist-head"><h3>Repertório do próximo ensaio</h3></div>
-        <div class="rehearsal-video-grid reveal" aria-label="Vídeos das músicas do próximo ensaio de louvor">
+        <div class="rehearsal-video-grid reveal" aria-label="Músicas do próximo ensaio de louvor">
+          <article class="rehearsal-video-card rehearsal-audio-card">
+            <div class="rehearsal-video-cover rehearsal-audio-cover" role="img" aria-label="Capa da música Ele Veio, autoral">
+              <div class="rehearsal-audio-cover-copy"><span>Cantata de Natal · 2026</span><strong>ELE VEIO</strong><em>AUTORAL</em></div>
+            </div>
+            <audio controls preload="none" aria-label="Ouvir Ele Veio — autoral">
+              <source src="audio/ele-veio.mp3" type="audio/mpeg">
+              Seu navegador não oferece suporte à reprodução de áudio.
+            </audio>
+            <div class="rehearsal-video-title">Ele Veio <span>ÁUDIO</span></div>
+            <div class="rehearsal-resources">
+              <details class="rehearsal-resource">
+                <summary>ACOMPANHE A LETRA</summary>
+                <div class="rehearsal-resource-view"><iframe src="https://drive.google.com/file/d/1LoooLc6K5kGkMblOMY-Ap9COk5c4Huhw/preview" title="Letra de Ele Veio" loading="lazy" allow="autoplay"></iframe><p class="rehearsal-resource-fallback">A prévia depende do acesso ao arquivo. <a href="https://drive.google.com/file/d/1LoooLc6K5kGkMblOMY-Ap9COk5c4Huhw/view" target="_blank" rel="noopener noreferrer">Abrir letra no Drive</a></p></div>
+              </details>
+              <details class="rehearsal-resource">
+                <summary>VER CIFRA</summary>
+                <div class="rehearsal-resource-view"><iframe src="https://drive.google.com/file/d/1P-Q5FYchv9U7IU0-uyyks5R7VHMlIoC9/preview" title="Cifra de Ele Veio" loading="lazy" allow="autoplay"></iframe><p class="rehearsal-resource-fallback">A prévia depende do acesso ao arquivo. <a href="https://drive.google.com/document/d/1P-Q5FYchv9U7IU0-uyyks5R7VHMlIoC9/preview" target="_blank" rel="noopener noreferrer">Abrir cifra no Drive</a></p></div>
+              </details>
+            </div>
+          </article>
           <article class="rehearsal-video-card">
             <div class="rehearsal-video-cover"><iframe src="https://www.youtube.com/embed/V-n0FDCT2N4?rel=0&amp;origin=https%3A%2F%2Fsite-proj.github.io" title="Oh, Quão Lindo Esse Nome É" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
             <div class="rehearsal-video-title">Oh, Quão Lindo Esse Nome É</div>
@@ -684,16 +703,6 @@
                 <div class="rehearsal-resource-view"><iframe src="https://drive.google.com/file/d/1yqz-KQA_8EPDBnCFWHMbyNSeBc2eZie6/preview" title="Cifra de Prefiro Crer" loading="lazy" allow="autoplay"></iframe><p class="rehearsal-resource-fallback">A prévia depende do acesso ao arquivo. <a href="https://drive.google.com/file/d/1yqz-KQA_8EPDBnCFWHMbyNSeBc2eZie6/view" target="_blank" rel="noopener noreferrer">Abrir cifra no Drive</a></p></div>
               </details>
             </div>
-          </article>
-          <article class="rehearsal-video-card rehearsal-audio-card">
-            <div class="rehearsal-video-cover rehearsal-audio-cover" role="img" aria-label="Capa da música Ele Veio, autoral">
-              <div class="rehearsal-audio-cover-copy"><span>Cantata de Natal · 2026</span><strong>ELE VEIO</strong><em>AUTORAL</em></div>
-            </div>
-            <audio controls preload="none" aria-label="Ouvir Ele Veio — autoral">
-              <source src="audio/ele-veio.mp3" type="audio/mpeg">
-              Seu navegador não oferece suporte à reprodução de áudio.
-            </audio>
-            <div class="rehearsal-video-title">Ele Veio <span>ÁUDIO</span></div>
           </article>
         </div>
         <section class="rehearsal-library" aria-labelledby="rehearsal-library-title">
