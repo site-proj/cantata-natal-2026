@@ -35,6 +35,7 @@
     .hero-meta { display: flex; justify-content: center; flex-wrap: wrap; gap: 11px 24px; margin-top: 27px; color: #e8cf9e; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; }
     .hero-meta span { display: inline-flex; align-items: center; gap: 8px; }
     .hero-meta svg { width: 16px; height: 16px; flex: 0 0 auto; }
+    .hero-meta-number { color:#f6dfa9; font-family:var(--sans); font-size:1.08em; font-weight:700; font-variant-numeric:lining-nums tabular-nums; letter-spacing:.025em; }
     .actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
     .button { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0 21px; border: 1px solid var(--gold); background: var(--gold); color: #20160c; font-size: .82rem; font-weight: 700; letter-spacing: .04em; text-decoration: none; transition: .2s ease; }
     .button:hover { transform: translateY(-2px); background: #f0d49c; }
@@ -553,6 +554,7 @@
     @media(min-width:1025px) { .hero-about { min-height:36px; } }
     .hero-about:hover,.hero-about:focus-visible { border-color:rgba(223,187,119,.7); background:rgba(16,13,10,.5); }
     .hero-about:focus-visible { outline:2px solid var(--gold); outline-offset:4px; }
+    .hero-scroll-cue { display:none; }
     @media (min-width:1025px) {
       main > .hero#inicio { margin-top:-20px; }
       .hero { display:block; height:max(740px,100svh); min-height:max(740px,100svh); padding:0; overflow:hidden; background:#100d0a url("images/manjedoura-fundo.png") center center / cover no-repeat; }
@@ -605,8 +607,18 @@
       .hero-manger-glow { top:75%; left:46%; width:clamp(150px,48vw,220px); height:clamp(95px,25vw,150px); }
       .hero-promise-below { position:relative; z-index:1; margin:0; padding:26px 16px 6px; background:transparent!important; text-shadow:0 2px 14px rgba(0,0,0,.95),0 0 24px rgba(0,0,0,.8); }
       .hero-meta { position:relative; z-index:1; margin:0; padding:11px 22px 24px; background:transparent!important; }
+      .nav-tabs-shell { padding-right:0; }
+      .nav-tabs-shell .nav-links { gap:2px; }
+      .nav-tabs-shell .nav-links a { padding:7px clamp(4px,1.45vw,8px); font-size:clamp(.65rem,2.7vw,.72rem); }
+      .hero-scroll-cue { position:absolute; right:0; bottom:12px; left:0; z-index:5; display:grid; width:40px; height:40px; place-items:center; margin-inline:auto; padding:0; border:1px solid rgba(223,187,119,.48); border-radius:50%; color:#f2ce83; background:rgba(16,13,10,.38); box-shadow:0 0 18px rgba(16,13,10,.32); cursor:pointer; pointer-events:auto; }
+      .hero-scroll-cue svg { width:21px; height:21px; overflow:visible; animation:hero-scroll-up 1.65s cubic-bezier(.42,0,.24,1) infinite; }
+      @keyframes hero-scroll-up { 0%,100% { transform:translateY(3px); opacity:.68; } 55% { transform:translateY(-4px); opacity:1; } }
+      .hero-scroll-cue:focus-visible { outline:2px solid var(--gold); outline-offset:4px; }
+      .hero-meta { scroll-margin-top:calc(var(--nav-clearance,90px) + 16px); font-size:clamp(.94rem,4vw,1.08rem); font-family:var(--sans); font-weight:500; font-variant-numeric:lining-nums tabular-nums; letter-spacing:.08em; }
+      .hero-meta-number { font-size:1.08em; }
     }
     @media(prefers-reduced-motion:reduce) {
+      .hero-scroll-cue svg { animation:none!important; transform:none!important; }
       .hero-about { transition:none; }
       .hero-art > .eyebrow,.hero-mobile-kicker,.hero-promise-below { clip-path:none!important; opacity:1!important; transform:none!important; filter:none!important; animation:none!important; }
       .hero-title-sky,.hero-title-earth { clip-path:none!important; opacity:1!important; transform:none!important; filter:none!important; }
@@ -635,7 +647,6 @@
         <a href="#ensaio-louvor">Ensaios</a>
         <a href="#roster-title">Escala</a>
         <a href="#louvores">Louvores</a>
-        <a href="#equipes">Equipes</a>
         <a href="#bastidores">Bastidores</a>
       </nav><div class="nav-swipe-cue" aria-hidden="true"><span>←</span></div></div>
     </div>
@@ -1042,11 +1053,14 @@
           <div class="hero-mobile-kicker">Cantata de Natal · 2026</div>
           <h1 aria-label="Quando o Céu Tocou a Terra"><span class="hero-title-line hero-title-sky">Quando o Céu</span><span class="hero-title-line hero-title-earth">Tocou a</span><svg class="terra-title terra-title-svg" viewBox="0 0 600 180" aria-hidden="true" focusable="false"><defs><mask id="terra-title-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="600" height="180"><text x="300" y="142" text-anchor="middle" textLength="360" lengthAdjust="spacingAndGlyphs" font-family="Tangerine, cursive" font-size="160" font-weight="700" fill="white">Terra</text></mask><linearGradient id="terra-title-shine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff2c5" stop-opacity="0"/><stop offset=".46" stop-color="#fff9e7" stop-opacity=".15"/><stop offset=".52" stop-color="#fff6d5" stop-opacity=".95"/><stop offset=".58" stop-color="#fff9e7" stop-opacity=".22"/><stop offset="1" stop-color="#fff2c5" stop-opacity="0"/></linearGradient><linearGradient id="terra-title-fill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6d98e"/><stop offset=".46" stop-color="#ffe7aa"/><stop offset=".72" stop-color="#e9c26e"/><stop offset="1" stop-color="#c28f49"/></linearGradient></defs><text class="terra-writing" x="300" y="142" text-anchor="middle" textLength="360" lengthAdjust="spacingAndGlyphs" font-family="Tangerine, cursive" font-size="160" font-weight="700" fill="url(#terra-title-fill)" stroke="#f3d58e" stroke-width="1.15" stroke-linejoin="round">Terra</text><g mask="url(#terra-title-mask)"><rect class="terra-sweep" x="-240" y="0" width="240" height="180" fill="url(#terra-title-shine)"/></g></svg><span class="terra-title terra-title-mobile" aria-hidden="true"><img class="terra-writing" src="images/terra-lettering.png" alt=""><span class="terra-sweep-mobile"></span></span></h1>
           <a class="hero-about" href="#sobre">Sobre a Cantata</a>
+          <button class="hero-scroll-cue" type="button" aria-label="Descer até a data e o horário do evento">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V6m-6 6 6-6 6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
         </div>
         <p class="hero-promise-below">Uma promessa está prestes a se revelar.</p>
-        <div class="hero-meta">
-          <span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="1" stroke="currentColor" stroke-width="1.5"/><path d="M7.5 3v4M16.5 3v4M4 9.5h16" stroke="currentColor" stroke-width="1.5"/></svg>18 de dezembro de 2026</span>
-          <span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.2" stroke="currentColor" stroke-width="1.6"/></svg>19h00 · Renascer Jundiaí</span>
+        <div class="hero-meta" id="hero-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="1" stroke="currentColor" stroke-width="1.5"/><path d="M7.5 3v4M16.5 3v4M4 9.5h16" stroke="currentColor" stroke-width="1.5"/></svg><strong class="hero-meta-number">18</strong> de dezembro de <strong class="hero-meta-number">2026</strong></span>
+          <span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.2" stroke="currentColor" stroke-width="1.6"/></svg><strong class="hero-meta-number">19h00</strong> · Renascer Jundiaí</span>
         </div>
         
       </div>
@@ -1370,7 +1384,7 @@
         hero.classList.remove('cinematic-play');
         hero.classList.add('hero-ready');
       });
-      function activate(id, updateHistory) {
+      function activate(id, updateHistory, scrollToTop = true) {
         const target = ids.has(id) ? id : 'inicio';
         panels.forEach(panel => {
           panel.hidden = panel.id !== target;
@@ -1385,7 +1399,7 @@
           placeHeroAbout();
           playHeroTimeline(hero);
         }
-        window.scrollTo({top:0,behavior:'instant'});
+        if (scrollToTop) window.scrollTo({top:0,behavior:'instant'});
       }
       [...links,document.querySelector('.hero-about'),document.querySelector('.brand')].forEach(link => link.addEventListener('click',event=>{
         const id=link.getAttribute('href').slice(1);
@@ -1393,6 +1407,10 @@
         event.preventDefault();
         activate(id,true);
       }));
+      document.querySelector('.hero-scroll-cue')?.addEventListener('click',()=>{
+        activate('inicio',location.hash!=='#inicio',false);
+        requestAnimationFrame(()=>document.querySelector('#hero-meta').scrollIntoView({behavior:motionPreference.matches?'instant':'smooth',block:'center'}));
+      });
       window.addEventListener('popstate',()=>activate(location.hash.slice(1),false));
       activate(location.hash.slice(1)==='roster-title'?'escala':location.hash.slice(1),false);
     })();
