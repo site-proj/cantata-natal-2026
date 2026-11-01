@@ -171,11 +171,11 @@
     @keyframes location-pulse { 0% { transform: scale(.72); opacity: .75; } 85%,100% { transform: scale(1.45); opacity: 0; } }
     .location-intro h2 { max-width: 12ch; margin: 0 0 12px; color: var(--ivory); font-family: var(--serif); font-size: clamp(2rem,4vw,3.4rem); font-weight: 500; line-height: 1.08; }
     .location-lead { max-width: 38ch; margin: 0 0 26px; color: var(--muted); line-height: 1.7; }
-    .location-event { display: grid; gap: 12px; margin: 0 0 22px; padding: 18px 0; border-block: 1px solid var(--line); }
+    .location-event { display: grid; gap: 12px; margin: 0 0 22px; padding: 17px 18px; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,.025); }
     .location-event-date { color: var(--gold); font-family: var(--serif); font-size: clamp(.95rem,1.4vw,1.15rem); letter-spacing: .05em; }
     .location-address { margin: 0; color: var(--ivory); font-size: 1rem; line-height: 1.55; font-style: normal; }
     .location-address span { color: var(--muted); }
-    .location-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    .location-actions { display: grid; grid-template-columns: minmax(0,1fr); gap: 10px; }
     .map-link { display: inline-flex; min-height: 46px; align-items: center; justify-content: center; gap: 9px; padding: 12px 16px; border: 1px solid rgba(223,187,119,.42); border-radius: 999px; color: var(--gold); font-size: .78rem; font-weight: 700; letter-spacing: .04em; text-decoration: none; transition: background .2s ease, color .2s ease, transform .2s ease; }
     .map-link:hover { transform: translateY(-2px); background: var(--gold); color: #20160c; }
     .map-link-primary { background: linear-gradient(120deg,#dfbb77,#c79546); color: #20160c; }
@@ -298,10 +298,12 @@
       .calendar-day { min-height: 38px; font-size: .8rem; }
       .location { padding-block: 45px; }
       .location-inner { grid-template-columns: minmax(0,1fr); gap: 28px; }
-      .location-intro h2 { max-width: 14ch; font-size: clamp(2.15rem,9vw,3rem); }
-      .location-actions { display: grid; grid-template-columns: 1fr 1fr; }
+      .location-intro h2 { max-width: 14ch; font-size: clamp(2rem,8vw,2.6rem); }
+      .location-actions { grid-template-columns: minmax(0,1fr); }
       .map-link { width: 100%; padding-inline: 9px; text-align: center; }
       .location-map-frame { height: clamp(280px,78vw,390px); }
+      .location-map-head { align-items: flex-start; flex-direction: column; gap: 4px; }
+      .location-event { padding: 15px; }
       .footer-inner { flex-direction: column; gap: 5px; }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } html.js .reveal:not(.is-visible) { opacity: 1; transform: none; } }
@@ -359,8 +361,8 @@
     main { padding-top: var(--nav-clearance, 100px); min-height: calc(100vh - 90px); }
     main > section[data-tab-panel] { scroll-margin-top: var(--nav-clearance, 100px); }
     .location { min-height: 340px; display:flex;align-items:center; }
-    .location > .wrap { width:100%; }
-    @media(max-width:720px){.location{min-height:360px;}}
+    .location > .wrap { width:min(1120px,calc(100% - 44px)); }
+    @media(max-width:720px){.location{min-height:360px;}.location > .wrap{width:min(100% - 34px,560px)}}
   
     /* Mobile: próxima aba aparente + seta indicativa do gesto horizontal */
     .nav-tabs-shell { position:relative; min-width:0; }
@@ -1145,7 +1147,6 @@
           </div>
           <div class="location-actions">
             <a class="map-link map-link-primary" href="https://www.google.com/maps/dir/?api=1&destination=Rua%20Aboli%C3%A7%C3%A3o%2C%2021%2C%20Vila%20Torres%20Neves%2C%20Jundia%C3%AD%2C%20SP" target="_blank" rel="noopener noreferrer">Traçar rota <span aria-hidden="true">↗</span></a>
-            <a class="map-link" href="https://earth.google.com/web/search/Rua+Aboli%C3%A7%C3%A3o,+21,+Vila+Torres+Neves,+Jundia%C3%AD,+SP" target="_blank" rel="noopener noreferrer">Ver no Google Earth <span aria-hidden="true">↗</span></a>
           </div>
         </div>
         <div class="location-map-card">
