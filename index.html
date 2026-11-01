@@ -414,7 +414,7 @@
     .hero-mobile-kicker,.hero-promise-below { display:none; }
     @media(max-width:1024px){
       .hero-mobile-kicker,.hero-promise-below {display:block;}
-      .hero {position:relative;isolation:isolate;background:transparent!important;}
+      .hero {position:relative;isolation:isolate;overflow-x:clip;background:transparent!important;}
       .hero::before {display:block!important;content:"";position:absolute;z-index:0;inset:-10px;pointer-events:none;background:url("images/cantata-mobile-hero.png") center 53% / cover no-repeat;filter:blur(7px) brightness(.53);transform:scale(1.035);opacity:.96;}
       .hero-content {position:relative;z-index:1;padding:0!important;gap:0;}
       .hero-renascer-logo {padding:17px 12px 10px!important;margin:0!important;background:transparent!important;}
@@ -445,27 +445,27 @@
     .photo-lightbox-close { display:block; margin:0 0 12px auto; padding:7px 12px; border:1px solid var(--line); background:#19130e; color:var(--ivory); font:inherit; cursor:pointer; }
     @media(max-width:700px){ .diary-22-grid { grid-template-columns:1fr; gap:12px; } .diary-22-card-wide { grid-column:auto; } .diary-22 { margin-top:26px; padding:16px; } }
 
-    /* Bastidores: diário organizado por data, com destaque para o registro mais recente. */
+    /* Bastidores: registros agrupados por momentos da preparação. */
     .behind { background:linear-gradient(180deg,#f2eadb 0%,#e9deca 100%); }
     .behind-head { margin-bottom:30px; }
     .behind-head h2 { max-width:670px; }
     .behind-feed { display:grid; gap:22px; }
     .diary-22,.diary-archive { margin:0; padding:clamp(20px,3.3vw,34px); border:1px solid rgba(166,126,61,.32); border-radius:18px; background:linear-gradient(145deg,#19130e,#100d0a 74%); color:var(--ivory); box-shadow:0 18px 48px rgba(43,31,16,.13); }
-    .diary-22-heading { position:relative; display:grid; grid-template-columns:1fr auto; align-items:center; gap:7px 20px; margin-bottom:22px; padding-bottom:19px; border-bottom:1px solid rgba(223,187,119,.2); }
+    .diary-22-heading { position:relative; display:grid; grid-template-columns:1fr; align-items:center; gap:7px; margin-bottom:22px; padding-bottom:19px; border-bottom:1px solid rgba(223,187,119,.2); }
     .diary-22-heading .eyebrow { grid-column:1; margin:0; letter-spacing:.13em; }
     .diary-22-heading h3 { grid-column:1; margin:0; }
     .diary-22-heading p { grid-column:1; }
-    .diary-22-heading::after { content:"22 OUT"; grid-column:2; grid-row:1 / 4; display:grid; width:72px; height:72px; place-items:center; border:1px solid rgba(223,187,119,.5); border-radius:50%; color:var(--gold); font-size:.76rem; font-weight:700; letter-spacing:.12em; }
+    .gallery-hint { display:block; margin-top:8px; color:#bcb09d; font-size:.76rem; }
     .diary-22-grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
     .diary-22-card { border-color:rgba(223,187,119,.28); border-radius:12px; background:#0b0907; box-shadow:0 8px 24px rgba(0,0,0,.18); }
     .diary-22-photo-button { overflow:hidden; }
     .diary-22-photo { transition:transform .45s cubic-bezier(.2,.65,.25,1); }
     .diary-22-photo-button:hover .diary-22-photo,.diary-22-photo-button:focus-visible .diary-22-photo { transform:scale(1.035); }
     .diary-22-card figcaption { padding:12px 14px 14px; color:#e6d8be; }
-    .diary-22-video-card { grid-column:1 / -1; width:min(100%,640px); justify-self:center; display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:10px 24px; padding:14px 20px; background:linear-gradient(105deg,#21180f,#0d0a08 72%); }
-    .diary-22-video-card::before { content:"Vídeo do ensaio"; grid-column:1; align-self:end; color:var(--gold); font-size:.72rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
-    .diary-22-video-card figcaption { grid-column:1; grid-row:2; padding:0; color:#e6d8be; }
-    .diary-22-video { grid-column:2; grid-row:1 / 3; width:auto; max-width:min(100%,220px); height:280px; max-height:42svh; border-radius:8px; }
+    .diary-22-video-card { grid-column:1 / -1; width:min(100%,640px); justify-self:center; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,220px); align-items:center; gap:16px 24px; padding:20px; background:linear-gradient(105deg,#21180f,#0d0a08 72%); }
+    .diary-22-video-card figcaption { grid-column:1; grid-row:1; display:grid; gap:10px; padding:0; color:#e6d8be; }
+    .diary-22-video-card figcaption strong { color:var(--gold); font-size:.72rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
+    .diary-22-video { grid-column:2; grid-row:1; width:auto; max-width:min(100%,220px); height:280px; max-height:42svh; border-radius:8px; }
     .diary-archive-heading { margin-bottom:20px; }
     .diary-archive-heading .eyebrow { color:var(--gold); }
     .diary-archive-heading h3 { margin:7px 0 5px; color:var(--ivory); font-family:var(--serif); font-size:clamp(1.35rem,2.5vw,1.8rem); font-weight:500; }
@@ -478,11 +478,10 @@
     @media(max-width:760px) {
       .behind-head { margin-bottom:22px; }
       .diary-22,.diary-archive { padding:18px; border-radius:15px; }
-      .diary-22-heading { grid-template-columns:1fr auto; gap:7px 12px; }
-      .diary-22-heading::after { width:58px; height:58px; font-size:.68rem; }
+      .diary-22-heading { gap:7px; }
       .diary-22-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
       .diary-22-card-wide { grid-column:1 / -1; }
-      .diary-22-video-card { grid-template-columns:1fr auto; padding:12px; gap:8px 14px; }
+      .diary-22-video-card { grid-template-columns:minmax(0,1fr) minmax(0,140px); padding:12px; gap:12px 14px; }
       .diary-22-video { height:230px; max-height:40svh; max-width:140px; }
       .gallery:has(.preparation-photo):has(.preparation-video) { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
       .gallery:has(.preparation-video) .preparation-video { grid-column:1 / -1; }
@@ -491,10 +490,9 @@
       .diary-22-grid { grid-template-columns:1fr; }
       .diary-22-card-wide { grid-column:auto; }
       .diary-22-video-card { grid-template-columns:1fr; }
-      .diary-22-video-card::before,.diary-22-video-card figcaption,.diary-22-video { grid-column:1; }
-      .diary-22-video-card::before { grid-row:1; }
+      .diary-22-video-card figcaption,.diary-22-video { grid-column:1; }
       .diary-22-video { grid-row:2; justify-self:center; width:auto; max-width:min(100%,180px); height:230px; }
-      .diary-22-video-card figcaption { grid-row:3; }
+      .diary-22-video-card figcaption { grid-row:1; }
       .gallery:has(.preparation-photo):has(.preparation-video) { grid-template-columns:1fr; }
       .gallery:has(.preparation-video) .preparation-video { grid-column:auto; }
     }
@@ -550,17 +548,23 @@
     .hero-star-radiance { position:absolute; z-index:-1; inset:-95%; border-radius:50%; background:radial-gradient(ellipse at center,rgba(255,198,90,.18),rgba(255,180,51,.07) 34%,transparent 72%); opacity:.18; transform:scale(1.08); }
     .hero-star-beam { position:absolute; z-index:-1; top:48%; left:50%; width:clamp(220px,42vw,560px); height:clamp(280px,54vh,620px); transform:translateX(-50%) scaleY(.08); transform-origin:top center; clip-path:polygon(48% 0,52% 0,100% 100%,0 100%); background:linear-gradient(180deg,rgba(255,220,153,.27),rgba(244,184,79,.09) 48%,transparent 100%); filter:blur(11px); opacity:0; }
     .hero-manger-glow { position:absolute; z-index:2; top:75%; left:46%; width:clamp(190px,30vw,390px); height:clamp(110px,22vh,220px); border-radius:50%; background:radial-gradient(ellipse at center,rgba(255,238,195,.22),rgba(255,201,122,.16) 38%,rgba(255,170,76,.055) 68%,transparent 84%); filter:blur(14px); mix-blend-mode:screen; opacity:0; transform:translate(-50%,-45%) scale(.72); pointer-events:none; }
+    .hero-about { position:absolute; top:var(--hero-about-top,60%); left:50%; z-index:4; display:inline-flex; align-items:center; justify-content:center; min-height:44px; padding:7px 15px; border:1px solid rgba(223,187,119,.28); border-radius:999px; color:#e4d2ad; background:rgba(16,13,10,.16); font-family:var(--sans); font-size:.66rem; font-weight:500; line-height:1.3; letter-spacing:.1em; text-transform:uppercase; text-decoration:none; white-space:nowrap; transform:translateX(-50%); pointer-events:auto; text-shadow:0 2px 9px #000; transition:opacity .55s ease,border-color .25s ease,background .25s ease; }
+    .js .hero:not(.hero-ready) .hero-about { visibility:hidden; opacity:0; pointer-events:none; }
+    @media(min-width:1025px) { .hero-about { min-height:36px; } }
+    .hero-about:hover,.hero-about:focus-visible { border-color:rgba(223,187,119,.7); background:rgba(16,13,10,.5); }
+    .hero-about:focus-visible { outline:2px solid var(--gold); outline-offset:4px; }
     @media (min-width:1025px) {
-      .hero { display:block; height:max(740px,100svh); min-height:max(740px,100svh); overflow:hidden; background:#100d0a url("images/manjedoura-fundo.png") center center / cover no-repeat; }
+      main > .hero#inicio { margin-top:-20px; }
+      .hero { display:block; height:max(740px,100svh); min-height:max(740px,100svh); padding:0; overflow:hidden; background:#100d0a url("images/manjedoura-fundo.png") center center / cover no-repeat; }
       .hero::before { z-index:0; background:linear-gradient(180deg,rgba(16,13,10,.24) 0%,rgba(16,13,10,.08) 28%,rgba(16,13,10,.14) 60%,rgba(16,13,10,.42) 100%); pointer-events:none; }
-      .hero-content { position:relative; width:100%; max-width:none; height:max(740px,100svh); min-height:0; padding:0; z-index:1; }
+      .hero-content { position:relative; width:100%; max-width:none; height:100%; min-height:0; padding:0; z-index:1; }
       .hero-renascer-logo { position:absolute; z-index:4; top:clamp(66px,8vh,88px); left:clamp(28px,5.5vw,96px); width:clamp(112px,10vw,152px); margin:0; padding:0; background:transparent; }
       .hero-renascer-logo img { width:100%; max-height:56px; }
-      .hero-art { position:absolute; display:block; inset:0 0 auto; top:calc(-1 * var(--nav-clearance,100px)); bottom:auto; width:100%; height:100svh; overflow:visible; line-height:normal; pointer-events:none; isolation:isolate; }
+      .hero-art { position:absolute; display:block; inset:0; width:100%; height:100%; overflow:hidden; line-height:normal; pointer-events:none; isolation:isolate; }
       .hero-scene-mobile { display:none; }
       .hero-art > .eyebrow { display:none; }
       .hero-mobile-kicker { display:block; position:absolute; top:13%; left:10px; right:10px; z-index:3; color:#f4cf7e; text-align:center; font-size:clamp(.68rem,1vw,.88rem); font-weight:700; letter-spacing:.2em; line-height:1.4; text-shadow:0 2px 18px #100900; text-transform:uppercase; }
-      .hero-art > h1 { position:absolute; top:18%; left:50%; width:min(100%,1120px); margin:0; padding:0 16px; transform:translateX(-50%); color:var(--ivory); font-family:"Cormorant Garamond",var(--serif); font-size:clamp(3rem,5.2vw,5.5rem); font-weight:500; line-height:.9; letter-spacing:.045em; text-shadow:0 3px 28px rgba(0,0,0,.86),0 0 42px rgba(228,192,128,.14); }
+      .hero-art > h1 { position:absolute; top:16%; left:50%; width:min(100%,1120px); margin:0; padding:0 16px; transform:translateX(-50%); color:var(--ivory); font-family:"Cormorant Garamond",var(--serif); font-size:clamp(3rem,5.2vw,5.5rem); font-weight:500; line-height:.9; letter-spacing:.045em; text-shadow:0 3px 28px rgba(0,0,0,.86),0 0 42px rgba(228,192,128,.14); }
       .hero-art > h1 .terra-title { width:clamp(330px,34vw,560px); margin:0 auto; }
       .hero-art > h1 .terra-title-svg { display:none!important; }
       .hero-art > h1 .terra-title-mobile { display:block; width:clamp(330px,34vw,560px); margin:0 auto; }
@@ -578,7 +582,7 @@
     }
     @media (min-width:1025px) and (max-height:800px) {
       .hero-mobile-kicker { top:14%; }
-      .hero-art > h1 { top:22%; font-size:clamp(2.5rem,3.8vw,4.1rem); }
+      .hero-art > h1 { top:18%; font-size:clamp(2.5rem,3.8vw,4.1rem); }
       .hero-art > h1 .terra-title { width:clamp(260px,26vw,380px); }
     }
     @media(max-width:600px) {
@@ -603,6 +607,7 @@
       .hero-meta { position:relative; z-index:1; margin:0; padding:11px 22px 24px; background:transparent!important; }
     }
     @media(prefers-reduced-motion:reduce) {
+      .hero-about { transition:none; }
       .hero-art > .eyebrow,.hero-mobile-kicker,.hero-promise-below { clip-path:none!important; opacity:1!important; transform:none!important; filter:none!important; animation:none!important; }
       .hero-title-sky,.hero-title-earth { clip-path:none!important; opacity:1!important; transform:none!important; filter:none!important; }
       .hero-title-line .hero-letter { opacity:1!important; transform:none!important; filter:none!important; animation:none!important; }
@@ -630,12 +635,8 @@
         <a href="#ensaio-louvor">Ensaios</a>
         <a href="#roster-title">Escala</a>
         <a href="#louvores">Louvores</a>
-        <a href="#sobre">Tema</a>
-        <a href="#cenas">Cenas</a>
         <a href="#equipes">Equipes</a>
         <a href="#bastidores">Bastidores</a>
-        <a href="#agenda">Agenda</a>
-        <a href="#local">Local</a>
       </nav><div class="nav-swipe-cue" aria-hidden="true"><span>←</span></div></div>
     </div>
   </header>
@@ -1040,6 +1041,7 @@
           <div class="eyebrow">Uma promessa está prestes a se revelar</div>
           <div class="hero-mobile-kicker">Cantata de Natal · 2026</div>
           <h1 aria-label="Quando o Céu Tocou a Terra"><span class="hero-title-line hero-title-sky">Quando o Céu</span><span class="hero-title-line hero-title-earth">Tocou a</span><svg class="terra-title terra-title-svg" viewBox="0 0 600 180" aria-hidden="true" focusable="false"><defs><mask id="terra-title-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="600" height="180"><text x="300" y="142" text-anchor="middle" textLength="360" lengthAdjust="spacingAndGlyphs" font-family="Tangerine, cursive" font-size="160" font-weight="700" fill="white">Terra</text></mask><linearGradient id="terra-title-shine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff2c5" stop-opacity="0"/><stop offset=".46" stop-color="#fff9e7" stop-opacity=".15"/><stop offset=".52" stop-color="#fff6d5" stop-opacity=".95"/><stop offset=".58" stop-color="#fff9e7" stop-opacity=".22"/><stop offset="1" stop-color="#fff2c5" stop-opacity="0"/></linearGradient><linearGradient id="terra-title-fill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6d98e"/><stop offset=".46" stop-color="#ffe7aa"/><stop offset=".72" stop-color="#e9c26e"/><stop offset="1" stop-color="#c28f49"/></linearGradient></defs><text class="terra-writing" x="300" y="142" text-anchor="middle" textLength="360" lengthAdjust="spacingAndGlyphs" font-family="Tangerine, cursive" font-size="160" font-weight="700" fill="url(#terra-title-fill)" stroke="#f3d58e" stroke-width="1.15" stroke-linejoin="round">Terra</text><g mask="url(#terra-title-mask)"><rect class="terra-sweep" x="-240" y="0" width="240" height="180" fill="url(#terra-title-shine)"/></g></svg><span class="terra-title terra-title-mobile" aria-hidden="true"><img class="terra-writing" src="images/terra-lettering.png" alt=""><span class="terra-sweep-mobile"></span></span></h1>
+          <a class="hero-about" href="#sobre">Sobre a Cantata</a>
         </div>
         <p class="hero-promise-below">Uma promessa está prestes a se revelar.</p>
         <div class="hero-meta">
@@ -1100,30 +1102,30 @@
 
     <section class="behind" id="bastidores">
       <div class="wrap">
-        <div class="behind-head reveal"><div><div class="eyebrow">Diário da preparação</div><h2>Um pouco do que acontece antes das cortinas se abrirem.</h2></div><p>Ensaios, encontros e momentos espontâneos: este espaço vai crescer junto com a cantata.</p></div>
+        <div class="behind-head reveal"><div><div class="eyebrow">Por trás de cada momento</div><h2>Bastidores da Cantata</h2></div><p>Ensaios, encontros e a alegria de preparar uma noite especial, juntos.</p></div>
         <div class="behind-feed">
         <section class="diary-22 reveal" aria-labelledby="diary-22-title">
           <header class="diary-22-heading">
-            <div class="eyebrow">Diário da preparação · 22 de outubro de 2026</div>
-            <h3 id="diary-22-title">Bastidores | Ensaio de 22.10</h3>
-            <p>Cada ensaio nos aproxima de uma noite especial.</p>
+            <div class="eyebrow">Nosso louvor</div>
+            <h3 id="diary-22-title">Em sintonia para uma noite especial</h3>
+            <p>Cada ensaio nos aproxima de uma noite especial.<span class="gallery-hint">Toque nas fotos para ampliar.</span></p>
           </header>
-          <div class="diary-22-grid" aria-label="Fotos e vídeo do ensaio de 22 de outubro">
+          <div class="diary-22-grid" aria-label="Fotos e vídeo do ensaio de louvor">
             <figure class="diary-22-card"><button class="diary-22-photo-button" type="button" data-lightbox-src="images/ensaio-22-10-2026-louvor.jpeg" data-lightbox-alt="Equipe de louvor reunida no palco durante o ensaio"><img class="diary-22-photo" src="images/ensaio-22-10-2026-louvor.jpeg" alt="Equipe de louvor reunida no palco durante o ensaio" loading="lazy" decoding="async"></button><figcaption>Louvor reunido para mais um ensaio.</figcaption></figure>
             <figure class="diary-22-card"><button class="diary-22-photo-button" type="button" data-lightbox-src="images/ensaio-22-10-2026-musicos.jpeg" data-lightbox-alt="Músicos ensaiando juntos no palco"><img class="diary-22-photo" src="images/ensaio-22-10-2026-musicos.jpeg" alt="Músicos ensaiando juntos no palco" loading="lazy" decoding="async"></button><figcaption>Vozes e instrumentos em sintonia.</figcaption></figure>
             <figure class="diary-22-card"><button class="diary-22-photo-button" type="button" data-lightbox-src="images/ensaio-22-10-2026-equipe.jpeg" data-lightbox-alt="Equipe de louvor durante o ensaio, fotografada da plateia"><img class="diary-22-photo" src="images/ensaio-22-10-2026-equipe.jpeg" alt="Equipe de louvor durante o ensaio, fotografada da plateia" loading="lazy" decoding="async"></button><figcaption>Um registro do ensaio visto da plateia.</figcaption></figure>
-            <figure class="diary-22-card diary-22-card-wide diary-22-video-card"><video class="diary-22-video" controls playsinline preload="metadata" aria-label="Vídeo do ensaio de 22 de outubro de 2026"><source src="videos/ensaio-22-10-2026.mp4" type="video/mp4">Seu navegador não reproduz este vídeo. <a href="videos/ensaio-22-10-2026.mp4">Assistir ao ensaio de 22 de outubro</a>.</video><figcaption>Ensaio de 22 de outubro de 2026.</figcaption></figure>
+            <figure class="diary-22-card diary-22-card-wide diary-22-video-card"><video class="diary-22-video" controls playsinline preload="metadata" poster="images/ensaio-22-10-2026-louvor.jpeg" aria-label="Vídeo do ensaio de louvor"><source src="videos/ensaio-22-10-2026.mp4" type="video/mp4">Seu navegador não reproduz este vídeo. <a href="videos/ensaio-22-10-2026.mp4">Assistir ao ensaio</a>.</video><figcaption><strong>Vídeo do ensaio</strong><span>Um pouco da música ganhando vida.</span></figcaption></figure>
           </div>
         </section>
           <section class="diary-archive reveal" aria-labelledby="diary-archive-title">
             <header class="diary-archive-heading">
-              <div class="eyebrow">Registros anteriores</div>
-              <h3 id="diary-archive-title">Outros momentos da preparação</h3>
+              <div class="eyebrow">Nossa caminhada</div>
+              <h3 id="diary-archive-title">Encontros que nos unem</h3>
               <p>Encontros e bastidores que já fazem parte dessa caminhada.</p>
             </header>
         <div class="gallery">
-          <figure class="preparation-photo"><div class="preparation-photo-image" role="img" aria-label="Equipe reunida no primeiro encontro de preparação da Cantata de Natal"></div><figcaption>Nosso primeiro encontro · 2 de outubro de 2026</figcaption></figure>
-          <figure class="preparation-photo diary-update-photo"><img class="diary-entry-image" src="images/diario-preparacao-20-outubro-2026.jpeg" alt="Equipe reunida durante a preparação da Cantata de Natal"><figcaption>Encontro de preparação · 20 de outubro de 2026</figcaption></figure><figure class="preparation-video"><video controls playsinline preload="metadata" aria-label="Vídeo dos bastidores da preparação da Cantata de Natal em 20 de outubro de 2026"><source src="videos/diario-preparacao-20-outubro-2026.mp4" type="video/mp4">Seu navegador não reproduz este vídeo. <a href="videos/diario-preparacao-20-outubro-2026.mp4">Assistir aos bastidores da preparação</a>.</video><figcaption>Bastidores da preparação · 20 de outubro de 2026</figcaption></figure>
+          <figure class="preparation-photo"><div class="preparation-photo-image" role="img" aria-label="Equipe reunida no primeiro encontro de preparação da Cantata de Natal"></div><figcaption>Nosso primeiro encontro.</figcaption></figure>
+          <figure class="preparation-photo diary-update-photo"><img class="diary-entry-image" src="images/diario-preparacao-20-outubro-2026.jpeg" alt="Equipe reunida durante a preparação da Cantata de Natal" loading="lazy" decoding="async"><figcaption>Juntos na preparação.</figcaption></figure><figure class="preparation-video"><video controls playsinline preload="metadata" poster="images/diario-preparacao-20-outubro-2026.jpeg" aria-label="Vídeo dos bastidores da preparação da Cantata de Natal"><source src="videos/diario-preparacao-20-outubro-2026.mp4" type="video/mp4">Seu navegador não reproduz este vídeo. <a href="videos/diario-preparacao-20-outubro-2026.mp4">Assistir aos bastidores da preparação</a>.</video><figcaption>Momentos da nossa caminhada.</figcaption></figure>
         </div>
           </section>
         </div>
@@ -1227,6 +1229,23 @@
       panels.forEach(panel => {panel.dataset.tabPanel='';});
       const ids = new Set(panels.map(panel=>panel.id));
       const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const hero = document.querySelector('.hero');
+      const heroArt = hero.querySelector('.hero-art');
+      const heroTitle = hero.querySelector('h1');
+      // O botão acompanha a altura real do lettering, inclusive após carregar a fonte.
+      const placeHeroAbout = () => {
+        if (hero.hidden) return;
+        const title = heroTitle.getBoundingClientRect();
+        const art = heroArt.getBoundingClientRect();
+        heroArt.style.setProperty('--hero-about-top', Math.round(title.bottom - art.top + 6) + 'px');
+      };
+      if (window.ResizeObserver) {
+        const observer = new ResizeObserver(placeHeroAbout);
+        observer.observe(heroTitle);
+        observer.observe(heroArt);
+      }
+      window.addEventListener('resize',placeHeroAbout,{passive:true});
+      document.fonts?.ready.then(placeHeroAbout);
       const timeline = {
         star: {at:0, duration:.42},
         starHomecoming: {at:2.2, duration:.52},
@@ -1255,7 +1274,7 @@
       function playHeroTimeline(hero) {
         if (!hero || hero.dataset.cinematicStarted === 'true') return;
         hero.dataset.cinematicStarted = 'true';
-        if (motionPreference.matches) return;
+        if (motionPreference.matches) { hero.classList.add('hero-ready'); return; }
         hero.classList.add('cinematic-play');
 
         const star = hero.querySelector('.hero-star-light');
@@ -1339,6 +1358,9 @@
           {opacity:0},
           {opacity:1}
         ], timeline.meta);
+        // Aguarda a sequência original inteira; não altera os tempos do lettering.
+        Promise.allSettled(hero.getAnimations({subtree:true}).map(animation => animation.finished))
+          .then(() => hero.classList.add('hero-ready'));
       }
       motionPreference.addEventListener?.('change', event => {
         if (!event.matches) return;
@@ -1346,6 +1368,7 @@
         if (!hero) return;
         hero.getAnimations({subtree:true}).forEach(animation => animation.cancel());
         hero.classList.remove('cinematic-play');
+        hero.classList.add('hero-ready');
       });
       function activate(id, updateHistory) {
         const target = ids.has(id) ? id : 'inicio';
@@ -1358,10 +1381,13 @@
           else link.removeAttribute('aria-current');
         });
         if (updateHistory) history.pushState(null,'','#'+target);
-        if (target === 'inicio') playHeroTimeline(document.querySelector('.hero'));
+        if (target === 'inicio') {
+          placeHeroAbout();
+          playHeroTimeline(hero);
+        }
         window.scrollTo({top:0,behavior:'instant'});
       }
-      links.forEach(link => link.addEventListener('click',event=>{
+      [...links,document.querySelector('.hero-about'),document.querySelector('.brand')].forEach(link => link.addEventListener('click',event=>{
         const id=link.getAttribute('href').slice(1);
         if (!ids.has(id)) return;
         event.preventDefault();
@@ -1374,7 +1400,7 @@
     (() => {
       const lightbox = document.createElement('dialog');
       lightbox.className = 'photo-lightbox';
-      lightbox.setAttribute('aria-label','Foto ampliada do ensaio de 22 de outubro');
+      lightbox.setAttribute('aria-label','Foto ampliada do ensaio');
       lightbox.innerHTML = '<button class="photo-lightbox-close" type="button" aria-label="Fechar foto ampliada">Fechar ✕</button><img alt="">';
       document.body.appendChild(lightbox);
       const image = lightbox.querySelector('img');
