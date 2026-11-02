@@ -1326,7 +1326,7 @@
           {opacity:1}
         ], timeline.meta);
         // Aguarda a sequência original inteira; não altera os tempos do lettering.
-        Promise.allSettled(hero.getAnimations({subtree:true}).map(animation => animation.finished))
+        Promise.allSettled(hero.getAnimations({subtree:true}).filter(animation => animation.effect?.getTiming().iterations !== Infinity).map(animation => animation.finished))
           .then(() => hero.classList.add('hero-ready'));
       }
       motionPreference.addEventListener?.('change', event => {
