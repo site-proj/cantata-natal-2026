@@ -639,8 +639,7 @@
       <div class="nav-tabs-shell"><nav class="nav-links" aria-label="Navegação principal">
         <a href="#inicio" aria-current="location">Início</a>
         <a href="#ensaio-louvor">Ensaios</a>
-        <a href="#roster-title">Escala</a>
-        <a href="#louvores">Louvores</a>
+        <a href="#escala">Escala</a>
         <a href="#bastidores">Bastidores</a>
       </nav></div>
     </div>
@@ -783,25 +782,8 @@
 
 
 
-    <section class="songs" id="louvores">
+    <section class="songs escala-panel" id="escala">
       <div class="wrap">
-        <div class="section-heading reveal">
-          <div class="eyebrow">A trilha desta cantata</div>
-          <h2>Canções que conduzem à promessa.</h2>
-          <p>Cada voz e instrumento ajuda a contar esta história: dos sinais na vida de Eliseu à chegada de Jesus, a promessa maior.</p>
-        </div>
-        <ol class="songs-grid reveal">
-          <li class="song-card song-card-opening"><span class="song-number">ABERTURA</span><div><h3>A Guerra Ganha Está (Trecho)</h3></div></li>
-          <li class="song-card"><span class="song-number">01</span><div><h3>A Promessa</h3><p>Autoral · Fabinho</p></div></li>
-          <li class="song-card"><span class="song-number">02</span><div><h3>O Azeite</h3><p>Isadora Pompeo</p></div></li>
-          <li class="song-card"><span class="song-number">03</span><div><h3>Prefiro Crer</h3><p>Vânia Marx</p></div></li>
-          <li class="song-card"><span class="song-number">04</span><div><h3>Oh, Quão Lindo Esse Nome É</h3><p>Kemuel</p></div></li>
-          <li class="song-card"><span class="song-number">05</span><div><h3>Algo Novo</h3><p>Get Worship</p></div></li>
-          <li class="song-card"><span class="song-number">06</span><div><h3>Nada Se Compara</h3><p>Kids · Renascer Praise 17</p></div></li>
-          <li class="song-card"><span class="song-number">07</span><div><h3>Na Força do Louvor</h3><p>Renascer Praise 20</p></div></li>
-          <li class="song-card"><span class="song-number">08</span><div><h3>Agnus Dei</h3><p>Novo Canto, Julliany Souza &amp; Watoto</p></div></li>
-          <li class="song-card"><span class="song-number">09</span><div><h3>Ele Veio</h3><p>Versão de “Every Praise” · Hezekiah Walker</p></div></li>
-        </ol>
         <section class="song-roster-list reveal" aria-labelledby="roster-title">
           <header class="song-roster-list-head">
             <div class="eyebrow">Escala · Louvor</div>
@@ -1210,21 +1192,6 @@
     (() => {
       const main = document.querySelector('main');
       const links = [...document.querySelectorAll('.nav-links a')];
-      const roster = document.querySelector('.song-roster-list');
-      if (roster) {
-        const panel = document.createElement('section');
-        panel.id = 'escala';
-        panel.className = 'songs escala-panel';
-        const wrap = document.createElement('div');
-        wrap.className = 'wrap';
-        roster.parentNode.insertBefore(document.createComment('Escala movida para a guia exclusiva'), roster);
-        wrap.appendChild(roster);
-        panel.appendChild(wrap);
-        const songs = document.getElementById('louvores');
-        songs?.insertAdjacentElement('afterend', panel);
-      }
-      const escalaLink = links.find(link => link.getAttribute('href') === '#roster-title');
-      if (escalaLink) escalaLink.setAttribute('href','#escala');
       const panels = [...main.querySelectorAll(':scope > section')];
       panels.forEach(panel => {panel.dataset.tabPanel='';});
       const ids = new Set(panels.map(panel=>panel.id));
@@ -1371,7 +1338,7 @@
         hero.classList.add('hero-ready');
       });
       function activate(id, updateHistory, scrollToTop = true) {
-        const target = ids.has(id) ? id : 'inicio';
+        const target = ids.has(id) ? id : (id === 'louvores' || id === 'roster-title' ? 'escala' : 'inicio');
         panels.forEach(panel => {
           panel.hidden = panel.id !== target;
           if (!panel.hidden) panel.querySelectorAll('.reveal').forEach(el=>el.classList.add('is-visible'));
@@ -1398,7 +1365,7 @@
         requestAnimationFrame(()=>document.querySelector('#hero-meta').scrollIntoView({behavior:motionPreference.matches?'instant':'smooth',block:'center'}));
       });
       window.addEventListener('popstate',()=>activate(location.hash.slice(1),false));
-      activate(location.hash.slice(1)==='roster-title'?'escala':location.hash.slice(1),false);
+      activate(location.hash.slice(1),false);
     })();
 
     (() => {
