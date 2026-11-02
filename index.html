@@ -36,9 +36,6 @@
     .hero-meta span { display: inline-flex; align-items: center; gap: 8px; }
     .hero-meta svg { width: 16px; height: 16px; flex: 0 0 auto; }
     .hero-meta-number { color:#f6dfa9; font-family:var(--sans); font-size:1.08em; font-weight:700; font-variant-numeric:lining-nums tabular-nums; letter-spacing:.025em; }
-    .hero-map-link { display:inline-flex; align-items:center; gap:6px; padding:7px 12px; border:1px solid rgba(223,187,119,.42); border-radius:999px; color:#f2d18d; font:600 .76rem/1.2 var(--sans); letter-spacing:.04em; text-decoration:none; transition:background .2s ease,border-color .2s ease; }
-    .hero-map-link:hover,.hero-map-link:focus-visible { border-color:var(--gold); background:rgba(223,187,119,.14); }
-    .hero-map-link:focus-visible { outline:2px solid var(--gold); outline-offset:3px; }
     .actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
     .button { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0 21px; border: 1px solid var(--gold); background: var(--gold); color: #20160c; font-size: .82rem; font-weight: 700; letter-spacing: .04em; text-decoration: none; transition: .2s ease; }
     .button:hover { transform: translateY(-2px); background: #f0d49c; }
@@ -503,7 +500,6 @@
     .roster-song-title { min-width:0; }
     .roster-song-title h3 { margin:8px 0 0; }
     .roster-artist { margin:6px 0 0; color:#d1c7b7; font-size:.92rem; letter-spacing:.02em; }
-    .roster-preview { margin:7px 0 0; color:#c9b995; font-size:.76rem; line-height:1.4; letter-spacing:.015em; }
     .roster-action { display:inline-flex; min-height:48px; align-items:center; justify-content:center; gap:12px; padding:0 16px; border:1px solid rgba(223,187,119,.52); border-radius:999px; background:rgba(223,187,119,.1); color:#f3d38c; font-size:.78rem; font-weight:700; letter-spacing:.045em; white-space:nowrap; transition:background .2s ease,transform .2s ease,box-shadow .2s ease; }
     .song-roster-head:hover .roster-action { transform:translateY(-2px); background:rgba(223,187,119,.18); box-shadow:0 6px 18px rgba(223,187,119,.12); }
     .roster-action-open { display:none; }
@@ -797,7 +793,7 @@
             <p>Abra uma canção para consultar a banda e as vozes.</p>
           </header>
           <details class="song-roster" aria-label="Escala da abertura: A Guerra Ganha Está (Trecho)">
-            <summary class="song-roster-head"><div class="roster-song-title"><div class="eyebrow">Abertura</div><h3>A Guerra Ganha Está (Trecho)</h3><p class="roster-artist">Renascer Praise 13</p><p class="roster-preview">Banda · Keys Matheus e Fábinho · Drum Pb. Filipe · Bass Tedinho · Guitar Peterson</p></div><span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span></summary>
+            <summary class="song-roster-head"><div class="roster-song-title"><div class="eyebrow">Abertura</div><h3>A Guerra Ganha Está (Trecho)</h3><p class="roster-artist">Renascer Praise 13</p></div><span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span></summary>
             <div class="roster-expansion">
               <div class="roster-grid">
                 <section class="roster-card" aria-label="Instrumentos da banda">
@@ -819,7 +815,7 @@
             </div>
           </details>
           <details class="song-roster" aria-label="Escala de A Promessa">
-            <summary class="song-roster-head"><div class="roster-song-title"><div class="eyebrow">01 · Louvor</div><h3>A Promessa</h3><p class="roster-artist">Autoral · Fabinho</p><p class="roster-preview">Banda · Keys Matheus e Fábinho · Drum Pb. Filipe · Bass Tedinho · Guitar Peterson</p></div><span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span></summary>
+            <summary class="song-roster-head"><div class="roster-song-title"><div class="eyebrow">01 · Louvor</div><h3>A Promessa</h3><p class="roster-artist">Autoral · Fabinho</p></div><span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span></summary>
             <div class="roster-expansion">
               <div class="roster-grid">
                 <section class="roster-card" aria-label="Instrumentos da banda">
@@ -842,7 +838,7 @@
             </div>
           </details>
           <details class="song-roster" aria-label="Escala de O Azeite">
-            <summary class="song-roster-head"><div class="roster-song-title"><div class="eyebrow">02 · Louvor</div><h3>O Azeite</h3><p class="roster-artist">Isadora Pompeo</p><p class="roster-preview">Banda · Keys Matheus e Fábinho · Drum Pb. Filipe · Bass Tedinho · Guitar Peterson</p></div><span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span></summary>
+            <summary class="song-roster-head"><div class="roster-song-title"><div class="eyebrow">02 · Louvor</div><h3>O Azeite</h3><p class="roster-artist">Isadora Pompeo</p></div><span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span></summary>
             <div class="roster-expansion">
               <div class="roster-grid">
                 <section class="roster-card" aria-label="Instrumentos da banda">
@@ -864,7 +860,7 @@
             </div>
           </details>
           <details class="song-roster" aria-label="Escala de Prefiro Crer">
-            <summary class="song-roster-head"><div class="roster-song-title"><div class="eyebrow">03 · Louvor</div><h3>Prefiro Crer</h3><p class="roster-artist">Vânia Marx</p><p class="roster-preview">Banda · Keys Matheus e Fábinho · Drum Pb. Filipe · Bass Tedinho · Guitar Peterson</p></div><span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span></summary>
+            <summary class="song-roster-head"><div class="roster-song-title"><div class="eyebrow">03 · Louvor</div><h3>Prefiro Crer</h3><p class="roster-artist">Vânia Marx</p></div><span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span></summary>
             <div class="roster-expansion">
               <div class="roster-grid">
                 <section class="roster-card" aria-label="Instrumentos da banda">
@@ -886,7 +882,7 @@
             </div>
           </details>
           <details class="song-roster" aria-label="Escala de Oh, Quão Lindo Esse Nome É">
-            <summary class="song-roster-head"><div class="roster-song-title"><div class="eyebrow">04 · Louvor</div><h3>Oh, Quão Lindo Esse Nome É</h3><p class="roster-artist">Kemuel</p><p class="roster-preview">Banda · Keys Matheus e Fábinho · Drum Pb. Filipe · Bass Tedinho · Guitar Peterson</p></div><span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span></summary>
+            <summary class="song-roster-head"><div class="roster-song-title"><div class="eyebrow">04 · Louvor</div><h3>Oh, Quão Lindo Esse Nome É</h3><p class="roster-artist">Kemuel</p></div><span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span></summary>
             <div class="roster-expansion">
               <p class="roster-intro">Uma canção, muitos dons e um só propósito: conduzir cada voz a adorar.</p>
               <div class="roster-grid">
@@ -911,7 +907,7 @@
             </div>
           </details>
           <details class="song-roster" aria-label="Escala de Algo Novo">
-            <summary class="song-roster-head"><div class="roster-song-title"><div class="eyebrow">05 · Louvor</div><h3>Algo Novo</h3><p class="roster-artist">Get Worship</p><p class="roster-preview">Banda · Keys Matheus e Fábinho · Drum Gabriel · Bass Tedinho · Guitar Peterson</p></div><span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span></summary>
+            <summary class="song-roster-head"><div class="roster-song-title"><div class="eyebrow">05 · Louvor</div><h3>Algo Novo</h3><p class="roster-artist">Get Worship</p></div><span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span></summary>
             <div class="roster-expansion">
               <div class="roster-grid">
                 <section class="roster-card" aria-label="Instrumentos da banda">
@@ -933,7 +929,7 @@
             </div>
           </details>
           <details class="song-roster" aria-label="Escala de Nada Se Compara">
-            <summary class="song-roster-head"><div class="roster-song-title"><div class="eyebrow">06 · Louvor</div><h3>Nada Se Compara</h3><p class="roster-artist">Kids · Renascer Praise 17</p><p class="roster-preview">Banda · Keys Matheus e Fábinho · Drum Pb. Filipe · Bass Tedinho · Guitar Leandro</p></div><span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span></summary>
+            <summary class="song-roster-head"><div class="roster-song-title"><div class="eyebrow">06 · Louvor</div><h3>Nada Se Compara</h3><p class="roster-artist">Kids · Renascer Praise 17</p></div><span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span></summary>
             <div class="roster-expansion">
               <div class="roster-grid">
                 <section class="roster-card" aria-label="Instrumentos da banda">
@@ -955,7 +951,7 @@
             </div>
           </details>
           <details class="song-roster" aria-label="Escala de Na Força do Louvor">
-            <summary class="song-roster-head"><div class="roster-song-title"><div class="eyebrow">07 · Louvor</div><h3>Na Força do Louvor</h3><p class="roster-artist">Renascer Praise 20</p><p class="roster-preview">Banda · Keys Matheus e Fábinho · Drum Pb. Filipe · Bass Tedinho · Guitar Leandro</p></div><span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span></summary>
+            <summary class="song-roster-head"><div class="roster-song-title"><div class="eyebrow">07 · Louvor</div><h3>Na Força do Louvor</h3><p class="roster-artist">Renascer Praise 20</p></div><span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span></summary>
             <div class="roster-expansion">
               <div class="roster-grid">
                 <section class="roster-card" aria-label="Instrumentos da banda">
@@ -977,7 +973,7 @@
             </div>
           </details>
           <details class="song-roster" aria-label="Escala de Agnus Dei">
-            <summary class="song-roster-head"><div class="roster-song-title"><div class="eyebrow">08 · Louvor</div><h3>Agnus Dei</h3><p class="roster-artist">Novo Canto, Julliany Souza &amp; Watoto</p><p class="roster-preview">Banda · Keys Matheus e Fábinho · Drum Pb. Filipe · Bass Tedinho · Guitar Leandro</p></div><span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span></summary>
+            <summary class="song-roster-head"><div class="roster-song-title"><div class="eyebrow">08 · Louvor</div><h3>Agnus Dei</h3><p class="roster-artist">Novo Canto, Julliany Souza &amp; Watoto</p></div><span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span></summary>
             <div class="roster-expansion">
               <div class="roster-grid">
                 <section class="roster-card" aria-label="Instrumentos da banda">
@@ -999,7 +995,7 @@
             </div>
           </details>
           <details class="song-roster" aria-label="Escala de Ele Veio">
-            <summary class="song-roster-head"><div class="roster-song-title"><div class="eyebrow">09 · Louvor</div><h3>Ele Veio</h3><p class="roster-artist">Adpt. Fabinho de “Every Praise” · Hezekiah Walker</p><p class="roster-preview">Banda · Keys Matheus e Fábinho · Drum Pb. Filipe · Bass Tedinho · Guitar Leandro</p></div><span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span></summary>
+            <summary class="song-roster-head"><div class="roster-song-title"><div class="eyebrow">09 · Louvor</div><h3>Ele Veio</h3><p class="roster-artist">Adpt. Fabinho de “Every Praise” · Hezekiah Walker</p></div><span class="roster-action"><span class="roster-action-closed">Ver banda e vozes</span><span class="roster-action-open">Ocultar escala</span><i class="roster-chevron" aria-hidden="true"></i></span></summary>
             <div class="roster-expansion">
               <div class="roster-grid">
                 <section class="roster-card" aria-label="Instrumentos da banda">
@@ -1045,7 +1041,6 @@
         <div class="hero-meta" id="hero-meta">
           <span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="1" stroke="currentColor" stroke-width="1.5"/><path d="M7.5 3v4M16.5 3v4M4 9.5h16" stroke="currentColor" stroke-width="1.5"/></svg><strong class="hero-meta-number">18</strong> de dezembro de <strong class="hero-meta-number">2026</strong></span>
           <span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.2" stroke="currentColor" stroke-width="1.6"/></svg><strong class="hero-meta-number">19h00</strong> · Renascer Jundiaí</span>
-          <a class="hero-map-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Rua%20Aboli%C3%A7%C3%A3o%2C%2021%2C%20Vila%20Torres%20Neves%2C%20Jundia%C3%AD%2C%20SP" target="_blank" rel="noopener noreferrer">Como chegar <span aria-hidden="true">↗</span></a>
         </div>
         
       </div>
