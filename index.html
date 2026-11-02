@@ -602,7 +602,7 @@
       .hero-meta { position:relative; z-index:1; margin:0; padding:11px 22px 24px; background:transparent!important; }
       .nav-tabs-shell { padding-right:0; }
       .nav-tabs-shell .nav-links { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:4px; overflow:visible; border-radius:999px; }
-      .nav-tabs-shell .nav-links a { min-width:0; justify-content:center; padding:9px clamp(2px,1.1vw,6px); font-size:clamp(.68rem,2.8vw,.78rem); text-align:center; }
+      .nav-tabs-shell .nav-links a { min-width:0; justify-content:center; padding:9px clamp(2px,1.1vw,6px); font-size:clamp(.72rem,3.2vw,.88rem); text-align:center; }
       .hero-scroll-cue { position:absolute; right:0; bottom:calc(clamp(84px,11svh,112px) + 12px); left:0; z-index:6; display:grid; width:40px; height:40px; place-items:center; margin-inline:auto; padding:0; border:1px solid rgba(223,187,119,.48); border-radius:50%; color:#f2ce83; background:rgba(16,13,10,.38); box-shadow:0 0 18px rgba(16,13,10,.32); cursor:pointer; pointer-events:auto; }
       .hero-scroll-cue svg { width:21px; height:21px; overflow:visible; animation:hero-scroll-up 1.65s cubic-bezier(.42,0,.24,1) infinite; }
       @keyframes hero-scroll-up { 0%,100% { transform:translateY(3px); opacity:.68; } 55% { transform:translateY(-4px); opacity:1; } }
@@ -610,7 +610,7 @@
       .hero-meta { scroll-margin-top:calc(var(--nav-clearance,90px) + 16px); font-size:clamp(.94rem,4vw,1.08rem); font-family:var(--sans); font-weight:500; font-variant-numeric:lining-nums tabular-nums; letter-spacing:.08em; }
       .hero-meta-number { font-size:1.08em; }
     }
-    @media(max-width:340px){.nav-tabs-shell .nav-links{gap:2px}.nav-tabs-shell .nav-links a{padding:8px 2px;font-size:.52rem}}
+    @media(max-width:340px){.nav-tabs-shell .nav-links{gap:2px}.nav-tabs-shell .nav-links a{padding:8px 2px;font-size:clamp(.72rem,3.2vw,.88rem)}}
     @media(prefers-reduced-motion:reduce) {
       .hero-scroll-cue svg { animation:none!important; transform:none!important; }
       .hero-about { transition:none; }
