@@ -492,6 +492,33 @@
       .gallery:has(.preparation-video) .preparation-video { grid-column:auto; }
     }
 
+    /* Bastidores: contornos dourados sutis inspirados na prévia, preservando a identidade oficial. */
+    #bastidores .diary-22-card,
+    #bastidores .gallery .preparation-photo,
+    #bastidores .gallery .preparation-video {
+      border: 1px solid rgba(223,187,119,.68);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(223,187,119,.08), 0 10px 28px rgba(10,7,4,.22);
+      transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+    }
+    #bastidores .diary-22-card:hover,
+    #bastidores .diary-22-card:focus-within,
+    #bastidores .gallery .preparation-photo:hover,
+    #bastidores .gallery .preparation-video:hover {
+      border-color: rgba(238,198,127,.98);
+      box-shadow: 0 0 0 1px rgba(223,187,119,.2), 0 0 18px rgba(223,187,119,.13), 0 14px 30px rgba(10,7,4,.24);
+    }
+    #bastidores .diary-22,
+    #bastidores .diary-archive {
+      border-color: rgba(223,187,119,.38);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #bastidores .diary-22-card,
+      #bastidores .gallery .preparation-photo,
+      #bastidores .gallery .preparation-video { transition: none; }
+    }
+
     /* Escala compacta e expansível por música. */
     .song-roster { cursor:default; }
     .song-roster-head { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:22px; margin-bottom:0; cursor:pointer; list-style:none; }
