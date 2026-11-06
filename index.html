@@ -125,7 +125,7 @@
     .rehearsal-feature-copy p { max-width: 700px; margin: 0; color: #e2d8c8; font-size: clamp(1rem, 1.5vw, 1.2rem); }
     .rehearsal-feature-time { flex: 0 0 auto; min-width: 250px; padding: 18px 24px; border: 1px solid rgba(223,187,119,.48); background: linear-gradient(135deg, rgba(223,187,119,.12), rgba(255,255,255,.025)); text-align: center; }
     .rehearsal-feature-time span { display: block; color: var(--gold); font-size: .75rem; font-weight: 700; letter-spacing: .15em; }
-    .rehearsal-feature-time strong { display: block; margin-top: 2px; color: var(--ivory); font-family: var(--serif); font-size: clamp(2.5rem, 4vw, 3.6rem); font-weight: 500; line-height: 1.15; }
+    .rehearsal-feature-time strong { display: block; text-align: center; white-space: pre-line; margin-top: 2px; color: var(--ivory); font-family: var(--serif); font-size: clamp(2.5rem, 4vw, 3.6rem); font-weight: 500; line-height: 1.15; }
     .rehearsal-feature-time small { display:block; margin-top:3px; color:#d5c5a6; font-size:.72rem; font-weight:700; letter-spacing:.09em; text-transform:uppercase; }
     .rehearsal-feature .rehearsal-video-grid { grid-template-columns: repeat(4,minmax(0,1fr)); gap: 20px; }
     .rehearsal-setlist-head { display: flex; align-items: center; gap: 14px; margin: 34px 0 16px; }
@@ -704,7 +704,8 @@
           </div>
           <div class="rehearsal-feature-time" aria-label="Ensaios de louvor às quartas-feiras, às 19h30">
             <span>PRÓXIMO ENSAIO</span>
-            <strong id="next-rehearsal-date">04 NOV</strong>
+            <strong id="next-rehearsal-date">04
+NOV</strong>
             <small>QUARTA-FEIRA · 19H30</small>
           </div>
         </div>
@@ -1257,10 +1258,27 @@
       const day = dateParts.find(part => part.type === 'day')?.value;
       const month = dateParts.find(part => part.type === 'month')?.value.replace('.', '').toLocaleUpperCase('pt-BR');
       const fullDate = new Intl.DateTimeFormat('pt-BR', { timeZone: 'UTC', weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).format(nextDate);
-      dateElement.textContent = `${day} ${month}`;
+      dateElement.textContent = `${day}\n${month}`;
       dateElement.setAttribute('aria-label', `Próximo ensaio: ${fullDate}, às 19h30`);
       dateElement.title = `Próximo ensaio: ${fullDate}, às 19h30`;
     })();
+
+    if ('IntersectionObserver' in window) {
+      const rehearsalAudioObserver = new IntersectionObserver((entries, observer) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const audio = entry.target;
+          observer.unobserve(audio);
+
+          if (!audio.paused || audio.readyState > HTMLMediaElement.HAVE_NOTHING || audio.error) continue;
+          audio.preload = 'metadata';
+          if (audio.networkState !== HTMLMediaElement.NETWORK_LOADING) audio.load();
+        }
+      }, { rootMargin: '160px 0px' });
+
+      document.querySelectorAll('#ensaio-louvor audio[preload="none"]')
+        .forEach(audio => rehearsalAudioObserver.observe(audio));
+    }
 
     const revealItems = document.querySelectorAll('.reveal');
     const navTabs = [...document.querySelectorAll('.nav-links a')];
