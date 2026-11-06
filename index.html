@@ -1263,6 +1263,23 @@ NOV</strong>
       dateElement.title = `Próximo ensaio: ${fullDate}, às 19h30`;
     })();
 
+    if ('IntersectionObserver' in window) {
+      const rehearsalAudioObserver = new IntersectionObserver((entries, observer) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const audio = entry.target;
+          observer.unobserve(audio);
+
+          if (!audio.paused || audio.readyState > HTMLMediaElement.HAVE_NOTHING || audio.error) continue;
+          audio.preload = 'metadata';
+          if (audio.networkState !== HTMLMediaElement.NETWORK_LOADING) audio.load();
+        }
+      }, { rootMargin: '160px 0px' });
+
+      document.querySelectorAll('#ensaio-louvor audio[preload="none"]')
+        .forEach(audio => rehearsalAudioObserver.observe(audio));
+    }
+
     const revealItems = document.querySelectorAll('.reveal');
     const navTabs = [...document.querySelectorAll('.nav-links a')];
     if ('IntersectionObserver' in window) {
