@@ -42,22 +42,25 @@ Os convidados **não** precisam de conta Google: só você.
 4. Clique em **Implantar** e copie o **URL do app da Web** (termina em `/exec`).
 5. **Envie esse link para o Claude.** Ele não dá acesso à sua conta; só permite pedir envios para aquela pasta, com as regras do script.
 
-## 5. Testar
+## 5. Antes e durante o evento
 
-Depois que o link estiver no site:
+- **Antes de 18/12:** a aba mostra uma contagem regressiva e o botão de envio bloqueado (com cadeado).
+  O site não tem mais atalho de teste: o botão só libera sozinho à 00h00 de 18/12 (horário de Brasília).
+- **De 18 a 20/12:** o botão libera e os convidados enviam.
+- **Depois de 20/12:** a aba mostra um agradecimento.
 
-1. No celular, abra o site com `?teste=1` no endereço:
-   `https://site-proj.github.io/cantata-natal-2026/?teste=1#seu-olhar`
-2. Envie uma foto e um vídeo curto e confira se chegaram na pasta do Drive.
-3. Apague os arquivos de teste da pasta.
+O envio já foi testado de ponta a ponta (foto e vídeo chegaram na pasta) com `MODO_TESTE = true`.
 
-## 6. Desligar o modo de teste (importante)
+## 6. Opcional: desligar o modo de teste no script
+
+O site já bloqueia o botão até 18/12. Desligar o modo de teste acrescenta a mesma trava no script do
+Google, para que nem alguém com conhecimento técnico consiga enviar fora do período:
 
 1. No script, troque `const MODO_TESTE = true;` por `const MODO_TESTE = false;` e salve.
 2. Clique em **Implantar → Gerenciar implantações**, no lápis (editar), em **Versão** escolha **Nova versão** e clique em **Implantar**.
    O link continua o mesmo; não precisa mandar de novo.
 
-A partir daí, o envio só funciona de **18/12 às 00:00 até 20/12 às 23:59** (horário de Brasília), mesmo que alguém use `?teste=1`.
+Para testar de novo no futuro, volte `MODO_TESTE` para `true` e mude temporariamente a data `INICIO` do site.
 
 ## Regras do envio
 

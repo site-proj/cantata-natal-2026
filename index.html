@@ -848,6 +848,15 @@
     @keyframes olhar-draw { to { stroke-dashoffset:0; } }
     @keyframes olhar-in { from { opacity:0; transform:translateY(10px) scale(.97); } to { opacity:1; transform:none; } }
     @media (prefers-reduced-motion: reduce) { .olhar-done, .olhar-check circle, .olhar-check path { animation:none !important; stroke-dashoffset:0 !important; } .olhar-form, .olhar-tips, .olhar-item { transition:none !important; } }
+
+    /* Seu Olhar antes do dia 18: contagem ao vivo e botão com cadeado. */
+    .olhar-countdown { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:clamp(6px,2vw,12px); max-width:420px; margin:14px auto 20px; }
+    .olhar-countdown div { padding:12px 4px 10px; border:1px solid rgba(223,187,119,.4); border-radius:12px; background:rgba(0,0,0,.25); }
+    .olhar-countdown b { display:block; color:#f6dfa9; font-family:var(--serif); font-size:clamp(1.6rem,7vw,2.3rem); font-weight:500; line-height:1.1; font-variant-numeric:tabular-nums; }
+    .olhar-countdown span { display:block; margin-top:4px; color:var(--muted); font-size:.68rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
+    .olhar-pick.is-locked { color:#9c8f78; background:rgba(223,187,119,.08); border:1px dashed rgba(223,187,119,.4); box-shadow:none; cursor:not-allowed; }
+    .olhar-pick.is-locked:hover { transform:none; box-shadow:none; }
+    .olhar-lock-note { margin:10px 0 16px; color:var(--gold); font-size:.85rem; font-weight:700; letter-spacing:.06em; }
   </style>
 </head>
 <body>
@@ -1426,7 +1435,14 @@ NOV</strong>
             <span class="olhar-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h1.6l1.2-1.7A1.5 1.5 0 0 1 10.5 3.7h3a1.5 1.5 0 0 1 1.2.6L15.9 6h1.6A2.5 2.5 0 0 1 20 8.5v8a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5v-8Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="12.5" r="3.6" stroke="currentColor" stroke-width="1.6"/></svg></span>
             <p class="olhar-kicker">O envio abre no dia da Cantata</p>
             <p class="olhar-date"><strong>18</strong> a <strong>20</strong> de dezembro</p>
-            <p class="olhar-count" data-olhar-count></p>
+            <div class="olhar-countdown" role="timer" aria-label="Tempo até o envio abrir" data-olhar-contagem>
+              <div><b data-cd="d">--</b><span>dias</span></div>
+              <div><b data-cd="h">--</b><span>horas</span></div>
+              <div><b data-cd="m">--</b><span>min</span></div>
+              <div><b data-cd="s">--</b><span>seg</span></div>
+            </div>
+            <div class="olhar-pick is-locked" aria-disabled="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span>Escolher fotos e vídeos</span></div>
+            <p class="olhar-lock-note">Liberado em 18 de dezembro, à 00h00</p>
             <p class="olhar-text">Volte aqui na noite da Cantata, ou até o dia 20, para enviar o que você registrou. Não precisa de cadastro nem de aplicativo.</p>
           </div>
           <div class="olhar-state" data-olhar-state="aberto" hidden>
@@ -1839,15 +1855,22 @@ NOV</strong>
       if (!root) return;
       const INICIO = Date.UTC(2026, 11, 18, 3), FIM = Date.UTC(2026, 11, 21, 3);   // 18/12 00:00 a 20/12 23:59 (Brasília)
       const LIMITE = 300 * 1024 * 1024, PARTE = 8 * 1024 * 1024;
-      const teste = new URLSearchParams(location.search).has('teste');
       const estados = [...root.querySelectorAll('[data-olhar-state]')];
       const mostrar = nome => estados.forEach(e => { e.hidden = e.dataset.olharState !== nome; });
       const agora = Date.now();
-      const estado = teste ? 'aberto' : agora < INICIO ? 'antes' : agora < FIM ? 'aberto' : 'depois';
+      const estado = agora < INICIO ? 'antes' : agora < FIM ? 'aberto' : 'depois';
       mostrar(estado);
       if (estado === 'antes') {
-        const dias = Math.ceil((INICIO - agora) / 86400000);
-        root.querySelector('[data-olhar-count]').textContent = dias > 1 ? `Faltam ${dias} dias` : 'Abre amanhã';
+        // Contagem regressiva ao vivo; à 00h00 de 18/12 a página recarrega e o botão libera.
+        const cd = k => root.querySelector(`[data-cd="${k}"]`), dois = n => String(n).padStart(2, '0');
+        const tique = () => {
+          const falta = INICIO - Date.now();
+          if (falta <= 0) { location.reload(); return; }
+          const s = Math.floor(falta / 1000);
+          cd('d').textContent = Math.floor(s / 86400); cd('h').textContent = dois(Math.floor(s / 3600) % 24);
+          cd('m').textContent = dois(Math.floor(s / 60) % 60); cd('s').textContent = dois(s % 60);
+        };
+        tique(); setInterval(tique, 1000);
         return;
       }
       if (estado !== 'aberto') return;
