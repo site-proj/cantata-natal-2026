@@ -16,9 +16,12 @@ Os convidados **não** precisam de conta Google: só você.
 2. Clique em "Projeto sem título" e dê o nome **Cantata — Seu Olhar**.
 3. Apague todo o código que aparece e cole o conteúdo do arquivo `seu-olhar-apps-script.gs`.
 4. Na linha `const PASTA_ID = 'COLE_AQUI_O_ID_DA_PASTA';`, troque `COLE_AQUI_O_ID_DA_PASTA` pelo ID que você copiou (mantenha as aspas).
-5. Na coluna da esquerda, em **Serviços**, clique no **+**, escolha **Drive API** e clique em **Adicionar**.
-   (Isso ativa a API do Google Drive no projeto; sem ela, o Drive recusa os envios.)
-6. Clique em **Salvar** (ícone de disquete).
+5. Clique em **Salvar** (ícone de disquete).
+6. **Permissão de gravação no Drive** (sem isso o Drive recusa os envios com "insufficient authentication scopes"):
+   1. Clique em **Configurações do projeto** (engrenagem, na coluna da esquerda) e marque
+      **Mostrar arquivo de manifesto "appsscript.json" no editor**.
+   2. Volte ao **Editor** (ícone `< >`), abra o arquivo **appsscript.json**, apague tudo e cole o conteúdo de
+      `seu-olhar-appsscript.json`. Salve.
 
 ## 3. Autorizar (uma vez)
 
