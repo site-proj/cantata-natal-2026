@@ -716,6 +716,40 @@
       .nav-tabs-shell .nav-links a { padding-inline:2px; font-size:clamp(.62rem,2.85vw,.84rem); }
     }
     @media (prefers-reduced-motion: reduce) { .look-person img, .look-dim { transition:none !important; } }
+
+    /* Chamada para tocar: selo pulsante, indicador sobre a imagem e onda de brilho nas pessoas. */
+    .look-tap-hint { display:flex; width:fit-content; max-width:100%; align-items:center; gap:10px; margin:0 auto 16px; padding:11px 20px; border:1px solid rgba(223,187,119,.65); border-radius:999px; color:#f6d48f; background:linear-gradient(135deg,rgba(223,187,119,.2),rgba(223,187,119,.07)); font-size:.82rem; font-weight:700; letter-spacing:.08em; line-height:1.3; text-align:center; text-transform:uppercase; animation:tap-hint-glow 2.6s ease-in-out infinite; }
+    .look-tap-hint svg { width:22px; height:22px; flex:0 0 auto; animation:tap-hand 1.6s ease-in-out infinite; }
+    @keyframes tap-hint-glow { 0%,100% { box-shadow:0 0 0 0 rgba(223,187,119,0); } 50% { box-shadow:0 0 24px 2px rgba(223,187,119,.38); } }
+    @keyframes tap-hand { 0%,100% { transform:translateY(0) rotate(-8deg); } 45% { transform:translateY(3px) rotate(-8deg) scale(.92); } }
+    .look-tap-pulse { position:absolute; z-index:4; display:grid; width:clamp(46px,14%,76px); aspect-ratio:1; place-items:center; color:#fff7e3; pointer-events:none; transform:translate(-50%,-50%); transition:opacity .35s ease; }
+    .look-tap-pulse::before, .look-tap-pulse::after { content:""; position:absolute; inset:0; border:2px solid rgba(246,212,143,.9); border-radius:50%; background:rgba(223,187,119,.16); animation:tap-ring 1.8s ease-out infinite; }
+    .look-tap-pulse::after { animation-delay:.9s; }
+    .look-tap-pulse svg { position:relative; z-index:1; width:58%; height:58%; filter:drop-shadow(0 2px 6px rgba(0,0,0,.7)); animation:tap-hand 1.6s ease-in-out infinite; }
+    @keyframes tap-ring { 0% { transform:scale(.55); opacity:1; } 100% { transform:scale(1.45); opacity:0; } }
+    .look-stage.was-touched .look-tap-pulse, .look-stage.has-front .look-tap-pulse { opacity:0; }
+    .look-person.is-wave img { opacity:1; filter:drop-shadow(0 0 1px rgba(255,236,190,.9)) drop-shadow(0 0 6px rgba(240,200,120,.65)) drop-shadow(0 0 0 rgba(223,187,119,0)) drop-shadow(0 0 0 rgba(0,0,0,0)); transition:filter .3s ease, opacity 0s; }
+    @media (max-width:600px) { .look-tap-hint { font-size:.74rem; padding:10px 16px; } }
+    @media (prefers-reduced-motion: reduce) { .look-tap-hint, .look-tap-hint svg, .look-tap-pulse::before, .look-tap-pulse::after, .look-tap-pulse svg { animation:none !important; } }
+
+    /* Layout da aba Figurino: compacto no celular; no desktop, texto à esquerda e imagem inteira à direita. */
+    .figurino { padding-block:clamp(26px,5vw,64px) clamp(40px,6vw,80px); }
+    @media (min-width:900px) {
+      .figurino > .wrap { display:grid; grid-template-columns:minmax(0,1fr) auto; grid-template-rows:auto auto 1fr; grid-template-areas:"head stage" "hint stage" "caption stage"; column-gap:clamp(36px,5vw,80px); align-items:start; }
+      .figurino-head { grid-area:head; display:block; margin:clamp(12px,4vh,48px) 0 22px; }
+      .figurino-head p { max-width:440px; margin-top:12px; font-size:1.05rem; }
+      .look-tap-hint { grid-area:hint; margin:0 0 22px; }
+      .figurino { padding-top:clamp(24px,4vh,44px); }
+      .look-stage { grid-area:stage; width:min(640px,calc((100svh - var(--nav-clearance,100px) - clamp(24px,4vh,44px) - 28px) * 1024 / 1536)); min-width:360px; margin:0; }
+      .look-caption { grid-area:caption; width:auto; max-width:440px; min-height:6.5em; margin:0; padding:16px 18px; border-left:2px solid rgba(223,187,119,.6); background:rgba(223,187,119,.06); text-align:left; }
+    }
+    @media (max-width:600px) {
+      .figurino { padding-top:22px; }
+      .figurino-head { margin-bottom:14px; }
+      .figurino-head h2 { margin-top:6px; font-size:clamp(1.9rem,8vw,2.3rem); }
+      .figurino-head p { margin-top:6px; font-size:.95rem; line-height:1.55; }
+      .look-tap-hint { margin-bottom:12px; }
+    }
   </style>
 </head>
 <body>
@@ -1159,10 +1193,12 @@ NOV</strong>
     </section>
     <section class="figurino" id="figurino" aria-labelledby="figurino-title">
       <div class="wrap">
-        <div class="figurino-head reveal"><div><div class="eyebrow">Guia de looks</div><h2 id="figurino-title">Figurino</h2></div><p>Sport chic all black, com acessórios dourados. Toque em uma pessoa para ver o look de perto.</p></div>
+        <div class="figurino-head reveal"><div><div class="eyebrow">Guia de looks</div><h2 id="figurino-title">Figurino</h2></div><p>Sport chic all black, com acessórios dourados. Inspire-se nos looks abaixo para a noite da Cantata.</p></div>
+        <p class="look-tap-hint reveal"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 11.5V5.75a1.75 1.75 0 1 1 3.5 0V11m0-1.25a1.75 1.75 0 1 1 3.5 0V12m0-.75a1.75 1.75 0 1 1 3.5 0v3.5A6.25 6.25 0 0 1 13.25 21h-1.1a6 6 0 0 1-4.6-2.15l-3.03-3.62a1.6 1.6 0 0 1 2.32-2.2L9 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Toque nas pessoas para ver cada look</span></p>
         <div class="look-stage reveal" data-look-stage>
           <img class="look-base" src="images/figurino/guia-looks.webp" alt="Guia de looks Sport Chic All Black da Cantata de Natal: seis mulheres e seis homens vestidos de preto. Mulheres: tênis branco ou salto. Homens: tênis claro ou preto. Acessórios dourados." width="1024" height="1536" loading="lazy" decoding="async">
           <span class="look-dim" aria-hidden="true"></span>
+          <span class="look-tap-pulse" aria-hidden="true" style="left:44.04%;top:35.07%"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 11.5V5.75a1.75 1.75 0 1 1 3.5 0V11m0-1.25a1.75 1.75 0 1 1 3.5 0V12m0-.75a1.75 1.75 0 1 1 3.5 0v3.5A6.25 6.25 0 0 1 13.25 21h-1.1a6 6 0 0 1-4.6-2.15l-3.03-3.62a1.6 1.6 0 0 1 2.32-2.2L9 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           <button class="look-person" type="button" style="left:2.344%;top:18.945%;width:17.090%;height:36.133%;--ox:22.3%" aria-pressed="false" data-look="Mulheres · Look 1" data-desc="Blazer, blusa e calça pantalona, cinto e acessórios dourados, tênis branco" aria-label="Mulheres, look 1: Blazer, blusa e calça pantalona, cinto e acessórios dourados, tênis branco"><img src="images/figurino/mulheres-1.webp" alt="" width="175" height="555" loading="lazy" decoding="async"></button>
           <button class="look-person" type="button" style="left:19.531%;top:22.005%;width:17.383%;height:32.617%;--ox:50.0%" aria-pressed="false" data-look="Mulheres · Look 2" data-desc="Vestido midi com manga bufante e sandália de salto" aria-label="Mulheres, look 2: Vestido midi com manga bufante e sandália de salto"><img src="images/figurino/mulheres-2.webp" alt="" width="178" height="501" loading="lazy" decoding="async"></button>
           <button class="look-person" type="button" style="left:37.207%;top:21.094%;width:13.672%;height:33.268%;--ox:50.0%" aria-pressed="false" data-look="Mulheres · Look 3" data-desc="Blusa sem manga de gola alta, calça pantalona com faixa na cintura e tênis branco" aria-label="Mulheres, look 3: Blusa sem manga de gola alta, calça pantalona com faixa na cintura e tênis branco"><img src="images/figurino/mulheres-3.webp" alt="" width="140" height="511" loading="lazy" decoding="async"></button>
@@ -1176,7 +1212,7 @@ NOV</strong>
           <button class="look-person" type="button" style="left:68.262%;top:62.891%;width:13.281%;height:30.729%;--ox:50.0%" aria-pressed="false" data-look="Homens · Look 5" data-desc="Blusa de gola alta, calça de sarja e tênis claro" aria-label="Homens, look 5: Blusa de gola alta, calça de sarja e tênis claro"><img src="images/figurino/homens-5.webp" alt="" width="136" height="472" loading="lazy" decoding="async"></button>
           <button class="look-person" type="button" style="left:81.543%;top:61.003%;width:16.602%;height:32.943%;--ox:86.8%" aria-pressed="false" data-look="Homens · Look 6" data-desc="Camisa de botão, calça jeans escura e tênis preto" aria-label="Homens, look 6: Camisa de botão, calça jeans escura e tênis preto"><img src="images/figurino/homens-6.webp" alt="" width="170" height="506" loading="lazy" decoding="async"></button>
         </div>
-        <p class="look-caption" aria-live="polite"><span class="look-caption-hint">Toque em uma pessoa para ela dar um passo à frente.</span></p>
+        <p class="look-caption" aria-live="polite"><span class="look-caption-hint">A descrição do look escolhido aparece aqui. Toque de novo, ou fora da pessoa, para ela voltar ao lugar.</span></p>
       </div>
     </section>
 
@@ -1590,12 +1626,22 @@ NOV</strong>
       const select = person => {
         people.forEach(p => { const on = p === person; p.classList.toggle('is-front', on); p.setAttribute('aria-pressed', on); });
         stage.classList.toggle('has-front', !!person);
+        if (person) stage.classList.add('was-touched');
         caption.innerHTML = person ? `<strong>${person.dataset.look}</strong>${person.dataset.desc}` : hint;
       };
       people.forEach(p => p.addEventListener('click', () => select(p.classList.contains('is-front') ? null : p)));
       // Clique em qualquer lugar fora das pessoas (na imagem ou fora dela) devolve quem está à frente.
       document.addEventListener('click', event => { if (stage.classList.contains('has-front') && !event.target.closest('.look-person')) select(null); });
       document.addEventListener('keydown', event => { if (event.key === 'Escape' && stage.classList.contains('has-front')) select(null); });
+      // Onda de brilho: quando a imagem aparece na tela, as pessoas acendem em sequência (convite para tocar).
+      const wave = () => {
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches || stage.classList.contains('was-touched')) return;
+        people.forEach((p, i) => setTimeout(() => { p.classList.add('is-wave'); setTimeout(() => p.classList.remove('is-wave'), 520); }, 350 + i * 110));
+      };
+      if ('IntersectionObserver' in window) {
+        const seen = new IntersectionObserver(entries => { if (entries.some(e => e.isIntersecting)) { seen.disconnect(); wave(); } }, { threshold: .45 });
+        seen.observe(stage);
+      }
     })();
   </script>
 </body>
