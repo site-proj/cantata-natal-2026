@@ -1397,7 +1397,7 @@ NOV</strong>
         </div>
       </div>
     </section>
-    <section class="olhar" id="seu-olhar" aria-labelledby="olhar-title" data-olhar data-endpoint="https://script.google.com/macros/s/AKfycbyOhs_c3s5JIsw9ujxabzsdyDk-MwsfeJs9X0L2uiZf9JaayhZUf4paia0k2nBi71gMRg/exec">
+    <section class="olhar" id="seu-olhar" aria-labelledby="olhar-title" data-olhar data-endpoint="https://script.google.com/macros/s/AKfycbySnkarzJ6161NbHyS52oPXxFHq80cm9nddRDZ-_HsNBhsDCvhNoQquGCHNMSInUK0AFg/exec">
       <div class="wrap">
         <div class="olhar-head reveal">
           <div class="eyebrow">Seu olhar</div>
@@ -1418,10 +1418,9 @@ NOV</strong>
             <p class="olhar-summary" aria-live="polite" data-olhar-resumo></p>
             <ul class="olhar-list" data-olhar-lista></ul>
             <ul class="olhar-tips">
-              <li>Use o Wi-Fi da igreja, se puder.</li>
               <li>Vídeos curtos (até 1 minuto) enviam mais rápido.</li>
               <li>Deixe esta tela aberta até aparecer “Enviado”.</li>
-              <li>Até 1 GB por arquivo.</li>
+              <li>Até 300 MB por arquivo.</li>
             </ul>
           </div>
           <div class="olhar-state" data-olhar-state="depois" hidden>
@@ -1814,7 +1813,7 @@ NOV</strong>
       const root = document.querySelector('[data-olhar]');
       if (!root) return;
       const INICIO = Date.UTC(2026, 11, 18, 3), FIM = Date.UTC(2026, 11, 21, 3);   // 18/12 00:00 a 20/12 23:59 (Brasília)
-      const LIMITE = 1024 * 1024 * 1024, PARTE = 8 * 1024 * 1024;
+      const LIMITE = 300 * 1024 * 1024, PARTE = 8 * 1024 * 1024;
       const teste = new URLSearchParams(location.search).has('teste');
       const estados = [...root.querySelectorAll('[data-olhar-state]')];
       const mostrar = nome => estados.forEach(e => { e.hidden = e.dataset.olharState !== nome; });
@@ -1834,7 +1833,7 @@ NOV</strong>
       const nome = root.querySelector('[data-olhar-nome]');
       const fila = []; let enviando = false, travaTela = null;
       const VIDEO = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="m16 10 5-3v10l-5-3" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>';
-      const ERROS = { fechado: 'O envio está fechado no momento.', tamanho: 'Arquivo maior que 1 GB.', tipo: 'Envie apenas fotos ou vídeos.' };
+      const ERROS = { fechado: 'O envio está fechado no momento.', tamanho: 'Arquivo maior que 300 MB. Envie um vídeo mais curto.', tipo: 'Envie apenas fotos ou vídeos.' };
       const tamanhoTexto = b => b > 1048576 ? (b / 1048576).toFixed(b > 104857600 ? 0 : 1).replace('.', ',') + ' MB' : Math.max(1, Math.round(b / 1024)) + ' KB';
       const esperar = ms => new Promise(r => setTimeout(r, ms));
       const atualizarResumo = () => {
