@@ -23,7 +23,7 @@ const INICIO = new Date('2026-12-18T00:00:00-03:00');
 const FIM = new Date('2026-12-21T00:00:00-03:00');
 
 // Limites.
-const TAMANHO_MAXIMO = 1024 * 1024 * 1024; // 1 GB por arquivo
+const TAMANHO_MAXIMO = 300 * 1024 * 1024; // 300 MB por arquivo
 const ORIGENS_PERMITIDAS = ['https://site-proj.github.io'];
 const EXTENSOES = ['jpg', 'jpeg', 'png', 'heic', 'heif', 'webp', 'gif', 'mp4', 'mov', 'm4v', '3gp', 'webm', 'avi'];
 
@@ -71,10 +71,13 @@ function doGet(e) {
       }
     );
     const link = resposta.getHeaders()['Location'] || resposta.getHeaders()['location'];
-    if (resposta.getResponseCode() !== 200 || !link) return responder({ ok: false, erro: 'drive' });
+    if (resposta.getResponseCode() !== 200 || !link) {
+      // Devolve o motivo (sem dados da conta) para facilitar o diagnóstico.
+      return responder({ ok: false, erro: 'drive', codigo: resposta.getResponseCode(), detalhe: resposta.getContentText().slice(0, 400) });
+    }
     return responder({ ok: true, link: link });
   } catch (erro) {
-    return responder({ ok: false, erro: 'interno' });
+    return responder({ ok: false, erro: 'interno', detalhe: String(erro).slice(0, 300) });
   }
 }
 

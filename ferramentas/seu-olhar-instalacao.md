@@ -16,7 +16,9 @@ Os convidados **não** precisam de conta Google: só você.
 2. Clique em "Projeto sem título" e dê o nome **Cantata — Seu Olhar**.
 3. Apague todo o código que aparece e cole o conteúdo do arquivo `seu-olhar-apps-script.gs`.
 4. Na linha `const PASTA_ID = 'COLE_AQUI_O_ID_DA_PASTA';`, troque `COLE_AQUI_O_ID_DA_PASTA` pelo ID que você copiou (mantenha as aspas).
-5. Clique em **Salvar** (ícone de disquete).
+5. Na coluna da esquerda, em **Serviços**, clique no **+**, escolha **Drive API** e clique em **Adicionar**.
+   (Isso ativa a API do Google Drive no projeto; sem ela, o Drive recusa os envios.)
+6. Clique em **Salvar** (ícone de disquete).
 
 ## 3. Autorizar (uma vez)
 
@@ -56,6 +58,6 @@ A partir daí, o envio só funciona de **18/12 às 00:00 até 20/12 às 23:59** 
 
 ## Regras do envio
 
-- Só fotos e vídeos, até **1 GB por arquivo**.
+- Só fotos e vídeos, até **300 MB por arquivo**.
 - O nome do arquivo no Drive fica assim: `2026-12-18 20.15.03 - Ana Souza - IMG_1234.jpg`.
 - Quem envia não vê nem apaga o que os outros enviaram.
