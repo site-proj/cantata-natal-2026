@@ -856,7 +856,8 @@
     .olhar-countdown span { display:block; margin-top:4px; color:var(--muted); font-size:.68rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
     .olhar-pick.is-locked { color:#9c8f78; background:rgba(223,187,119,.08); border:1px dashed rgba(223,187,119,.4); box-shadow:none; cursor:not-allowed; }
     .olhar-pick.is-locked:hover { transform:none; box-shadow:none; }
-    .olhar-lock-note { margin:10px 0 16px; color:var(--gold); font-size:.85rem; font-weight:700; letter-spacing:.06em; }
+    .olhar-lock-note { margin:10px 0 16px; color:var(--gold); font-size:clamp(.74rem,3.6vw,.85rem); font-weight:700; letter-spacing:.04em; line-height:1.6; }
+    .olhar-lock-note span { white-space:nowrap; }
   </style>
 </head>
 <body>
@@ -1433,7 +1434,7 @@ NOV</strong>
         <div class="olhar-card reveal">
           <div class="olhar-state" data-olhar-state="antes">
             <span class="olhar-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h1.6l1.2-1.7A1.5 1.5 0 0 1 10.5 3.7h3a1.5 1.5 0 0 1 1.2.6L15.9 6h1.6A2.5 2.5 0 0 1 20 8.5v8a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5v-8Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="12.5" r="3.6" stroke="currentColor" stroke-width="1.6"/></svg></span>
-            <p class="olhar-kicker">O envio abre no dia da Cantata</p>
+            <p class="olhar-kicker">Envie fotos e vídeos da Cantata</p>
             <p class="olhar-date"><strong>18</strong> a <strong>20</strong> de dezembro</p>
             <div class="olhar-countdown" role="timer" aria-label="Tempo até o envio abrir" data-olhar-contagem>
               <div><b data-cd="d">--</b><span>dias</span></div>
@@ -1442,8 +1443,8 @@ NOV</strong>
               <div><b data-cd="s">--</b><span>seg</span></div>
             </div>
             <div class="olhar-pick is-locked" aria-disabled="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span>Escolher fotos e vídeos</span></div>
-            <p class="olhar-lock-note">Liberado em 18 de dezembro, à 00h00</p>
-            <p class="olhar-text">Volte aqui na noite da Cantata, ou até o dia 20, para enviar o que você registrou. Não precisa de cadastro nem de aplicativo.</p>
+            <p class="olhar-lock-note">Abre em <span>18/12, à 00h00</span><br>Você pode enviar até <span>20/12, às 23h59</span></p>
+            <p class="olhar-text">Na noite da Cantata e nos dois dias seguintes, envie o que você registrou. Não precisa de cadastro nem de aplicativo.</p>
           </div>
           <div class="olhar-state" data-olhar-state="aberto" hidden>
             <div class="olhar-done" data-olhar-done role="status" tabindex="-1" hidden>
