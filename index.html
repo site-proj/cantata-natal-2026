@@ -831,6 +831,23 @@
       .olhar-card { margin-top:20px; }
       .olhar-head p { font-size:.95rem; }
     }
+
+    /* Seu Olhar: tela de confirmação quando o envio termina. */
+    .olhar-form, .olhar-tips, .olhar-item { transition:opacity .35s ease, transform .35s ease; }
+    .olhar-tips[hidden], .olhar-form[hidden], .olhar-done[hidden] { display:none !important; }
+    .is-leaving { opacity:0 !important; transform:translateY(-8px) scale(.98) !important; }
+    .olhar-done { padding:8px 0 4px; text-align:center; animation:olhar-in .5s cubic-bezier(.2,.8,.2,1) both; outline:none; }
+    .olhar-check { display:block; width:96px; height:96px; margin:0 auto 14px; overflow:visible; filter:drop-shadow(0 0 18px rgba(223,187,119,.45)); }
+    .olhar-check circle { fill:rgba(223,187,119,.1); stroke:var(--gold); stroke-width:2.5; stroke-dasharray:183; stroke-dashoffset:183; animation:olhar-draw .7s ease-out .1s forwards; }
+    .olhar-check path { fill:none; stroke:#f6dfa9; stroke-width:4; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:40; stroke-dashoffset:40; animation:olhar-draw .45s ease-out .7s forwards; }
+    .olhar-done h3 { margin:0 0 8px; color:var(--ivory); font-family:var(--serif); font-size:clamp(1.7rem,6vw,2.3rem); font-weight:500; letter-spacing:.04em; }
+    .olhar-done p { max-width:420px; margin:0 auto 20px; color:#e3d6bf; font-size:1rem; line-height:1.6; }
+    .olhar-done p small { display:block; margin-top:8px; color:#f0a090; font-size:.86rem; }
+    .olhar-again { min-height:50px; padding:0 22px; border:1px solid rgba(223,187,119,.7); border-radius:999px; color:var(--gold); background:rgba(223,187,119,.08); font:inherit; font-size:.95rem; font-weight:700; cursor:pointer; transition:background .2s ease; }
+    .olhar-again:hover, .olhar-again:focus-visible { background:rgba(223,187,119,.2); outline:none; }
+    @keyframes olhar-draw { to { stroke-dashoffset:0; } }
+    @keyframes olhar-in { from { opacity:0; transform:translateY(10px) scale(.97); } to { opacity:1; transform:none; } }
+    @media (prefers-reduced-motion: reduce) { .olhar-done, .olhar-check circle, .olhar-check path { animation:none !important; stroke-dashoffset:0 !important; } .olhar-form, .olhar-tips, .olhar-item { transition:none !important; } }
   </style>
 </head>
 <body>
@@ -1413,11 +1430,19 @@ NOV</strong>
             <p class="olhar-text">Volte aqui na noite da Cantata, ou até o dia 20, para enviar o que você registrou. Não precisa de cadastro nem de aplicativo.</p>
           </div>
           <div class="olhar-state" data-olhar-state="aberto" hidden>
+            <div class="olhar-done" data-olhar-done role="status" tabindex="-1" hidden>
+              <svg class="olhar-check" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="29"/><path d="M19 33.5l8.5 8.5L45 24"/></svg>
+              <h3>Recebemos!</h3>
+              <p data-olhar-done-texto></p>
+              <button type="button" class="olhar-again" data-olhar-mais>Enviar mais fotos e vídeos</button>
+            </div>
+            <div class="olhar-form" data-olhar-form>
             <label class="olhar-name">Seu nome <span>(opcional)</span><input type="text" maxlength="40" autocomplete="name" placeholder="Ex.: Ana Souza" data-olhar-nome></label>
             <label class="olhar-pick"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h1.6l1.2-1.7A1.5 1.5 0 0 1 10.5 3.7h3a1.5 1.5 0 0 1 1.2.6L15.9 6h1.6A2.5 2.5 0 0 1 20 8.5v8a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5v-8Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="12.5" r="3.6" stroke="currentColor" stroke-width="1.6"/></svg><span>Escolher fotos e vídeos</span><input type="file" multiple accept="image/*,video/*" data-olhar-arquivos></label>
             <p class="olhar-summary" aria-live="polite" data-olhar-resumo></p>
+            </div>
             <ul class="olhar-list" data-olhar-lista></ul>
-            <ul class="olhar-tips">
+            <ul class="olhar-tips" data-olhar-dicas>
               <li>Vídeos curtos (até 1 minuto) enviam mais rápido.</li>
               <li>Deixe esta tela aberta até aparecer “Enviado”.</li>
               <li>Até 300 MB por arquivo.</li>
@@ -1831,6 +1856,9 @@ NOV</strong>
       const lista = root.querySelector('[data-olhar-lista]');
       const resumo = root.querySelector('[data-olhar-resumo]');
       const nome = root.querySelector('[data-olhar-nome]');
+      const form = root.querySelector('[data-olhar-form]'), dicas = root.querySelector('[data-olhar-dicas]');
+      const pronto = root.querySelector('[data-olhar-done]'), prontoTexto = root.querySelector('[data-olhar-done-texto]');
+      let lote = { fotos: 0, videos: 0 };
       const fila = []; let enviando = false, travaTela = null;
       const VIDEO = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="m16 10 5-3v10l-5-3" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>';
       const ERROS = { fechado: 'O envio está fechado no momento.', tamanho: 'Arquivo maior que 300 MB. Envie um vídeo mais curto.', tipo: 'Envie apenas fotos ou vídeos.' };
@@ -1911,7 +1939,33 @@ NOV</strong>
         }
         enviando = false; atualizarResumo();
         try { await travaTela?.release(); } catch (e) {}
+        concluir();
       };
+      const plural = (n, um, varios) => `${n} ${n === 1 ? um : varios}`;
+      const ehFoto = a => a.type.startsWith('image/') || /\.(jpe?g|png|hei[cf]|webp|gif)$/i.test(a.name);
+      // Quando a fila termina: os itens enviados e o formulário saem, e aparece a confirmação.
+      const concluir = () => {
+        if (fila.some(i => i.estado === 'fila' || i.estado === 'enviando')) return;
+        const novos = fila.filter(i => i.estado === 'ok');
+        if (!novos.length) return;
+        novos.forEach(i => { if (ehFoto(i.arquivo)) lote.fotos++; else lote.videos++; });
+        const partes = [lote.fotos && plural(lote.fotos, 'foto', 'fotos'), lote.videos && plural(lote.videos, 'vídeo', 'vídeos')].filter(Boolean);
+        const total = lote.fotos + lote.videos, erros = fila.filter(i => i.estado === 'erro').length;
+        prontoTexto.innerHTML = `${partes.join(' e ')} ${total === 1 ? 'chegou' : 'chegaram'} à equipe. Obrigado por compartilhar o seu olhar!`
+          + (erros ? `<small>${erros === 1 ? '1 arquivo não foi enviado' : erros + ' arquivos não foram enviados'}: veja abaixo.</small>` : '');
+        const saindo = [form, dicas, ...novos.map(i => i.el)];
+        if (pronto.hidden) saindo.forEach(el => el.classList.add('is-leaving'));
+        setTimeout(() => {
+          novos.forEach(i => { i.el.remove(); fila.splice(fila.indexOf(i), 1); });
+          form.hidden = dicas.hidden = true; saindo.forEach(el => el.classList.remove('is-leaving'));
+          resumo.textContent = '';
+          if (pronto.hidden) { pronto.hidden = false; pronto.focus({ preventScroll: true }); pronto.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+        }, pronto.hidden ? 380 : 0);
+      };
+      root.querySelector('[data-olhar-mais]').addEventListener('click', () => {
+        pronto.hidden = true; form.hidden = dicas.hidden = false; lote = { fotos: 0, videos: 0 };
+        atualizarResumo(); entrada.focus();
+      });
       entrada.addEventListener('change', () => { [...entrada.files].forEach(adicionar); entrada.value = ''; atualizarResumo(); processar(); });
       window.addEventListener('beforeunload', e => { if (enviando) { e.preventDefault(); e.returnValue = ''; } });
     })();
