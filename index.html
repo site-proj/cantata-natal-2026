@@ -702,7 +702,8 @@
     @media (hover:hover) and (pointer:fine) { .look-person:not(.is-front):hover img { opacity:1; filter:drop-shadow(0 0 1px rgba(255,236,190,.8)) drop-shadow(0 0 4px rgba(240,200,120,.5)) drop-shadow(0 0 0 rgba(223,187,119,0)) drop-shadow(0 0 0 rgba(0,0,0,0)); transition:filter .25s ease, opacity 0s; } }
     .look-person.is-front { z-index:3; }
     /* Contorno dourado iluminado que acompanha a silhueta e disfarça a borda do recorte. */
-    .look-person.is-front img { opacity:1; transform:translateY(3%) scale(1.22);
+    .look-stage { --look-scale:1.22; }
+    .look-person.is-front img { opacity:1; transform:translateY(3%) scale(var(--look-scale));
       filter:drop-shadow(0 0 1px rgba(255,236,190,.95)) drop-shadow(0 0 5px rgba(240,200,120,.7)) drop-shadow(0 0 14px rgba(223,187,119,.45)) drop-shadow(0 16px 16px rgba(0,0,0,.45));
       transition:transform .55s cubic-bezier(.2,.8,.2,1), filter .55s ease, opacity 0s; }
     .look-person:focus-visible { outline:2px solid var(--gold); outline-offset:3px; border-radius:8px; }
@@ -712,7 +713,7 @@
       .figurino-head { display:block; margin-bottom:20px; }
       .figurino-head p { margin-top:10px; }
       .look-stage { border-radius:10px; }
-      .look-person.is-front img { transform:translateY(3%) scale(1.3); }
+      .look-stage { --look-scale:1.3; }
       .nav-tabs-shell .nav-links a { padding-inline:2px; font-size:clamp(.62rem,2.85vw,.84rem); }
     }
     @media (prefers-reduced-motion: reduce) { .look-person img, .look-dim { transition:none !important; } }
@@ -750,6 +751,33 @@
       .figurino-head p { margin-top:6px; font-size:.95rem; line-height:1.55; }
       .look-tap-hint { margin-bottom:12px; }
     }
+
+    /* Cartão do look: abre ao lado da pessoa, do lado com mais espaço, com setinha apontando para ela. */
+    .look-card { position:absolute; z-index:6; top:0; left:0; width:180px; padding:12px 14px 13px; border:1px solid rgba(223,187,119,.6); border-radius:12px; color:var(--ivory); background:linear-gradient(160deg,rgba(34,26,18,.94),rgba(16,13,10,.94)); box-shadow:0 14px 34px rgba(0,0,0,.5), 0 0 18px rgba(223,187,119,.16); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); pointer-events:none;
+      opacity:0; visibility:hidden; transform:translateX(var(--card-from,10px)); transition:opacity .3s ease, transform .35s cubic-bezier(.2,.8,.2,1), visibility 0s linear .35s; }
+    .look-card[data-side="left"] { --card-from:-10px; }
+    .look-card.is-open { opacity:1; visibility:visible; transform:none; transition:opacity .3s ease .2s, transform .4s cubic-bezier(.2,.8,.2,1) .2s, visibility 0s; }
+    .look-card::before { content:""; position:absolute; top:var(--arrow-y,40px); width:12px; height:12px; border:1px solid rgba(223,187,119,.6); background:#1f1810; transform:translateY(-50%) rotate(45deg); }
+    .look-card[data-side="right"]::before { left:-7px; border-top:0; border-right:0; }
+    .look-card[data-side="left"]::before { right:-7px; border-bottom:0; border-left:0; }
+    .look-card-close { position:absolute; top:4px; right:4px; z-index:1; pointer-events:auto; display:grid; width:30px; height:30px; place-items:center; padding:0; border:0; border-radius:50%; color:var(--muted); background:none; font-size:1.2rem; line-height:1; cursor:pointer; }
+    .look-card-close:hover, .look-card-close:focus-visible { color:var(--gold); background:rgba(223,187,119,.12); outline:none; }
+    .look-card-title { margin:0 26px 8px 0; color:var(--gold); font-family:var(--serif); font-size:1.02rem; font-weight:500; letter-spacing:.06em; line-height:1.2; white-space:nowrap; }
+    .look-card-title span { display:block; margin-bottom:2px; color:var(--muted); font-family:var(--sans); font-size:.62rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; }
+    .look-card-items { display:grid; gap:5px; margin:0; padding:0; list-style:none; }
+    .look-card-items li { position:relative; padding-left:13px; color:#efe3cc; font-size:.86rem; line-height:1.35; }
+    .look-card-items li::before { content:""; position:absolute; top:.52em; left:0; width:5px; height:5px; border-radius:50%; background:var(--gold); box-shadow:0 0 6px rgba(223,187,119,.8); }
+    @media (max-width:899px) { .look-caption { display:none; } }
+    @media (max-width:600px) {
+      .look-card { padding:9px 10px 10px; border-radius:10px; }
+      .look-card-title { margin:0 22px 6px 0; font-size:.86rem; }
+      .look-card-title span { font-size:.54rem; letter-spacing:.14em; }
+      .look-card-items { gap:4px; }
+      .look-card-items li { padding-left:10px; font-size:.72rem; line-height:1.3; }
+      .look-card-items li::before { width:4px; height:4px; }
+      .look-card-close { width:26px; height:26px; top:2px; right:2px; font-size:1.05rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { .look-card { transition:none !important; } }
   </style>
 </head>
 <body>
@@ -1211,8 +1239,13 @@ NOV</strong>
           <button class="look-person" type="button" style="left:49.805%;top:61.458%;width:18.164%;height:32.292%;--ox:50.0%" aria-pressed="false" data-look="Homens · Look 4" data-desc="Jaqueta sobre camiseta, calça de sarja e tênis preto" aria-label="Homens, look 4: Jaqueta sobre camiseta, calça de sarja e tênis preto"><img src="images/figurino/homens-4.webp" alt="" width="186" height="496" loading="lazy" decoding="async"></button>
           <button class="look-person" type="button" style="left:68.262%;top:62.891%;width:13.281%;height:30.729%;--ox:50.0%" aria-pressed="false" data-look="Homens · Look 5" data-desc="Blusa de gola alta, calça de sarja e tênis claro" aria-label="Homens, look 5: Blusa de gola alta, calça de sarja e tênis claro"><img src="images/figurino/homens-5.webp" alt="" width="136" height="472" loading="lazy" decoding="async"></button>
           <button class="look-person" type="button" style="left:81.543%;top:61.003%;width:16.602%;height:32.943%;--ox:86.8%" aria-pressed="false" data-look="Homens · Look 6" data-desc="Camisa de botão, calça jeans escura e tênis preto" aria-label="Homens, look 6: Camisa de botão, calça jeans escura e tênis preto"><img src="images/figurino/homens-6.webp" alt="" width="170" height="506" loading="lazy" decoding="async"></button>
+          <div class="look-card" data-look-card aria-live="polite">
+            <button class="look-card-close" type="button" data-card-close aria-label="Fechar descrição do look">×</button>
+            <p class="look-card-title"></p>
+            <ul class="look-card-items"></ul>
+          </div>
         </div>
-        <p class="look-caption" aria-live="polite"><span class="look-caption-hint">A descrição do look escolhido aparece aqui. Toque de novo, ou fora da pessoa, para ela voltar ao lugar.</span></p>
+        <p class="look-caption"><span class="look-caption-hint">Toque em uma pessoa para abrir o look dela. Toque nela de novo para fechar, ou toque em outra pessoa para trocar.</span></p>
       </div>
     </section>
 
@@ -1616,23 +1649,64 @@ NOV</strong>
       lightbox.addEventListener('click', event => { if (event.target === lightbox) lightbox.close ? lightbox.close() : lightbox.removeAttribute('open'); });
     })();
 
-    // Figurino: tocar numa pessoa a traz para frente; tocar de novo, fora dela ou Esc devolve.
+    // Figurino: tocar numa pessoa a traz para frente e abre o cartão do look ao lado dela;
+    // cada pessoa abre e fecha o próprio cartão: tocar nela de novo, fora, no × ou Esc fecha; tocar em outra troca.
     (() => {
       const stage = document.querySelector('[data-look-stage]');
       if (!stage) return;
       const people = [...stage.querySelectorAll('.look-person')];
-      const caption = document.querySelector('.look-caption');
-      const hint = caption.innerHTML;
+      const card = stage.querySelector('[data-look-card]');
+      const title = card.querySelector('.look-card-title');
+      const list = card.querySelector('.look-card-items');
+      let current = null;
+      // "A, B e C" vira a lista [A, B, C]
+      const items = desc => {
+        const parts = desc.split(', ');
+        const last = parts.pop(); const k = last.lastIndexOf(' e ');
+        if (k > 0) parts.push(last.slice(0, k), last.slice(k + 3)); else parts.push(last);
+        return parts.map(t => t.charAt(0).toUpperCase() + t.slice(1));
+      };
+      // Posiciona o cartão ao lado da pessoa já ampliada, do lado com mais espaço, sem sair do quadro.
+      const place = person => {
+        const S = stage.getBoundingClientRect(), b = person.getBoundingClientRect();
+        const s = parseFloat(getComputedStyle(stage).getPropertyValue('--look-scale')) || 1.22;
+        const ox = (parseFloat(person.style.getPropertyValue('--ox')) || 50) / 100;
+        const x = b.left - S.left, y = b.top - S.top, w = b.width, h = b.height;
+        const left = x + ox * w * (1 - s), right = left + s * w;
+        const bottom = y + h * 1.03, top = bottom - s * h;
+        const gap = Math.max(6, S.width * .015), margin = Math.max(6, S.width * .02);
+        const side = (S.width - right) >= left ? 'right' : 'left';
+        const space = side === 'right' ? S.width - right : left;
+        const width = Math.min(Math.max(space - gap - margin, S.width * .34), S.width * .48, 240);
+        card.style.width = width + 'px';
+        let cx = side === 'right' ? right + gap : left - gap - width;
+        cx = Math.min(Math.max(cx, margin), S.width - width - margin);
+        card.dataset.side = side;
+        card.style.left = cx + 'px';
+        const ch = card.offsetHeight, torso = top + (bottom - top) * .3;
+        const cy = Math.min(Math.max(torso - ch * .3, margin), S.height - ch - margin);
+        card.style.top = cy + 'px';
+        card.style.setProperty('--arrow-y', Math.min(Math.max(torso - cy, 16), ch - 16) + 'px');
+      };
       const select = person => {
+        current = person;
         people.forEach(p => { const on = p === person; p.classList.toggle('is-front', on); p.setAttribute('aria-pressed', on); });
         stage.classList.toggle('has-front', !!person);
-        if (person) stage.classList.add('was-touched');
-        caption.innerHTML = person ? `<strong>${person.dataset.look}</strong>${person.dataset.desc}` : hint;
+        if (!person) { card.classList.remove('is-open'); return; }
+        stage.classList.add('was-touched');
+        const [grupo, look] = person.dataset.look.split(' · ');
+        title.innerHTML = `<span>${grupo}</span>${look}`;
+        list.innerHTML = items(person.dataset.desc).map(t => `<li>${t}</li>`).join('');
+        place(person);
+        card.classList.add('is-open');
       };
-      people.forEach(p => p.addEventListener('click', () => select(p.classList.contains('is-front') ? null : p)));
-      // Clique em qualquer lugar fora das pessoas (na imagem ou fora dela) devolve quem está à frente.
-      document.addEventListener('click', event => { if (stage.classList.contains('has-front') && !event.target.closest('.look-person')) select(null); });
-      document.addEventListener('keydown', event => { if (event.key === 'Escape' && stage.classList.contains('has-front')) select(null); });
+      people.forEach(p => p.addEventListener('click', () => select(p === current ? null : p)));
+      card.querySelector('[data-card-close]').addEventListener('click', () => select(null));
+      // O cartão deixa o toque passar (só o × é clicável): tocar numa pessoa atrás dele abre essa pessoa;
+      // tocar fora das pessoas fecha.
+      document.addEventListener('click', event => { if (current && !event.target.closest('.look-person, [data-card-close]')) select(null); });
+      document.addEventListener('keydown', event => { if (current && event.key === 'Escape') select(null); });
+      window.addEventListener('resize', () => current && place(current), {passive:true});
       // Onda de brilho: quando a imagem aparece na tela, as pessoas acendem em sequência (convite para tocar).
       const wave = () => {
         if (matchMedia('(prefers-reduced-motion: reduce)').matches || stage.classList.contains('was-touched')) return;
