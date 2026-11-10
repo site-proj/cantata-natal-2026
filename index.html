@@ -634,8 +634,8 @@
       .hero-art > h1 .terra-title { width:clamp(260px,26vw,380px); }
     }
     @media(max-width:600px) {
+      /* Altura fixa (svh): não acompanha a barra do navegador, então a abertura não "salta" ao rolar. */
       :root { --mobile-hero-height:100svh; }
-      @supports(height:100dvh) { :root { --mobile-hero-height:100dvh; } }
       main > .hero#inicio { margin-top:calc(-1 * var(--nav-clearance,100px)); }
       .hero { min-height:var(--mobile-hero-height); height:auto; overflow-x:clip; overflow-y:visible; background:#100d0a; }
       .hero::before { inset:0; background:#100d0a; filter:none; transform:none; opacity:1; }
