@@ -753,36 +753,29 @@
     }
 
     /* Cartão do look: abre ao lado da pessoa, do lado com mais espaço, com setinha apontando para ela. */
-    .look-card { position:absolute; z-index:6; top:0; left:0; width:180px; padding:12px 14px 10px; border:1px solid rgba(223,187,119,.6); border-radius:12px; color:var(--ivory); background:linear-gradient(160deg,rgba(34,26,18,.94),rgba(16,13,10,.94)); box-shadow:0 14px 34px rgba(0,0,0,.5), 0 0 18px rgba(223,187,119,.16); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+    .look-card { position:absolute; z-index:6; top:0; left:0; width:180px; padding:12px 14px 13px; border:1px solid rgba(223,187,119,.6); border-radius:12px; color:var(--ivory); background:linear-gradient(160deg,rgba(34,26,18,.94),rgba(16,13,10,.94)); box-shadow:0 14px 34px rgba(0,0,0,.5), 0 0 18px rgba(223,187,119,.16); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); pointer-events:none;
       opacity:0; visibility:hidden; transform:translateX(var(--card-from,10px)); transition:opacity .3s ease, transform .35s cubic-bezier(.2,.8,.2,1), visibility 0s linear .35s; }
     .look-card[data-side="left"] { --card-from:-10px; }
     .look-card.is-open { opacity:1; visibility:visible; transform:none; transition:opacity .3s ease .2s, transform .4s cubic-bezier(.2,.8,.2,1) .2s, visibility 0s; }
     .look-card::before { content:""; position:absolute; top:var(--arrow-y,40px); width:12px; height:12px; border:1px solid rgba(223,187,119,.6); background:#1f1810; transform:translateY(-50%) rotate(45deg); }
     .look-card[data-side="right"]::before { left:-7px; border-top:0; border-right:0; }
     .look-card[data-side="left"]::before { right:-7px; border-bottom:0; border-left:0; }
-    .look-card-close { position:absolute; top:4px; right:4px; display:grid; width:30px; height:30px; place-items:center; padding:0; border:0; border-radius:50%; color:var(--muted); background:none; font-size:1.2rem; line-height:1; cursor:pointer; }
+    .look-card-close { position:absolute; top:4px; right:4px; z-index:1; pointer-events:auto; display:grid; width:30px; height:30px; place-items:center; padding:0; border:0; border-radius:50%; color:var(--muted); background:none; font-size:1.2rem; line-height:1; cursor:pointer; }
     .look-card-close:hover, .look-card-close:focus-visible { color:var(--gold); background:rgba(223,187,119,.12); outline:none; }
     .look-card-title { margin:0 26px 8px 0; color:var(--gold); font-family:var(--serif); font-size:1.02rem; font-weight:500; letter-spacing:.06em; line-height:1.2; white-space:nowrap; }
     .look-card-title span { display:block; margin-bottom:2px; color:var(--muted); font-family:var(--sans); font-size:.62rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; }
     .look-card-items { display:grid; gap:5px; margin:0; padding:0; list-style:none; }
     .look-card-items li { position:relative; padding-left:13px; color:#efe3cc; font-size:.86rem; line-height:1.35; }
     .look-card-items li::before { content:""; position:absolute; top:.52em; left:0; width:5px; height:5px; border-radius:50%; background:var(--gold); box-shadow:0 0 6px rgba(223,187,119,.8); }
-    .look-card-nav { display:flex; align-items:center; justify-content:space-between; gap:6px; margin-top:10px; padding-top:8px; border-top:1px solid rgba(223,187,119,.2); }
-    .look-card-nav button { display:grid; width:34px; height:30px; place-items:center; padding:0; border:1px solid rgba(223,187,119,.4); border-radius:999px; color:var(--gold); background:rgba(223,187,119,.08); font-size:1.15rem; line-height:1; cursor:pointer; }
-    .look-card-nav button:hover, .look-card-nav button:focus-visible { background:rgba(223,187,119,.22); outline:none; }
-    .look-card-count { color:var(--muted); font-size:.72rem; letter-spacing:.08em; font-variant-numeric:tabular-nums; }
     @media (max-width:899px) { .look-caption { display:none; } }
     @media (max-width:600px) {
-      .look-card { padding:9px 10px 8px; border-radius:10px; }
+      .look-card { padding:9px 10px 10px; border-radius:10px; }
       .look-card-title { margin:0 22px 6px 0; font-size:.86rem; }
       .look-card-title span { font-size:.54rem; letter-spacing:.14em; }
       .look-card-items { gap:4px; }
       .look-card-items li { padding-left:10px; font-size:.72rem; line-height:1.3; }
       .look-card-items li::before { width:4px; height:4px; }
       .look-card-close { width:26px; height:26px; top:2px; right:2px; font-size:1.05rem; }
-      .look-card-nav { margin-top:7px; padding-top:6px; }
-      .look-card-nav button { width:30px; height:28px; }
-      .look-card-count { font-size:.64rem; }
     }
     @media (prefers-reduced-motion: reduce) { .look-card { transition:none !important; } }
   </style>
@@ -1250,10 +1243,9 @@ NOV</strong>
             <button class="look-card-close" type="button" data-card-close aria-label="Fechar descrição do look">×</button>
             <p class="look-card-title"></p>
             <ul class="look-card-items"></ul>
-            <div class="look-card-nav"><button type="button" data-step="-1" aria-label="Look anterior">‹</button><span class="look-card-count"></span><button type="button" data-step="1" aria-label="Próximo look">›</button></div>
           </div>
         </div>
-        <p class="look-caption"><span class="look-caption-hint">A descrição de cada look aparece ao lado da pessoa. Use ‹ › no quadro para passar pelos looks, ou toque fora para voltar.</span></p>
+        <p class="look-caption"><span class="look-caption-hint">Toque em uma pessoa para abrir o look dela. Toque nela de novo para fechar, ou toque em outra pessoa para trocar.</span></p>
       </div>
     </section>
 
@@ -1658,7 +1650,7 @@ NOV</strong>
     })();
 
     // Figurino: tocar numa pessoa a traz para frente e abre o cartão do look ao lado dela;
-    // tocar de novo, fora dela, no × ou Esc devolve. As setas do cartão passam pelos looks.
+    // cada pessoa abre e fecha o próprio cartão: tocar nela de novo, fora, no × ou Esc fecha; tocar em outra troca.
     (() => {
       const stage = document.querySelector('[data-look-stage]');
       if (!stage) return;
@@ -1666,7 +1658,6 @@ NOV</strong>
       const card = stage.querySelector('[data-look-card]');
       const title = card.querySelector('.look-card-title');
       const list = card.querySelector('.look-card-items');
-      const count = card.querySelector('.look-card-count');
       let current = null;
       // "A, B e C" vira a lista [A, B, C]
       const items = desc => {
@@ -1706,25 +1697,15 @@ NOV</strong>
         const [grupo, look] = person.dataset.look.split(' · ');
         title.innerHTML = `<span>${grupo}</span>${look}`;
         list.innerHTML = items(person.dataset.desc).map(t => `<li>${t}</li>`).join('');
-        count.textContent = `${people.indexOf(person) + 1}/${people.length}`;
         place(person);
         card.classList.add('is-open');
       };
-      const step = d => select(people[(people.indexOf(current) + d + people.length) % people.length]);
       people.forEach(p => p.addEventListener('click', () => select(p === current ? null : p)));
-      card.addEventListener('click', event => {
-        const btn = event.target.closest('button');
-        if (btn?.hasAttribute('data-card-close')) select(null);
-        else if (btn?.dataset.step) step(Number(btn.dataset.step));
-      });
-      // Clique fora das pessoas e do cartão devolve quem está à frente.
-      document.addEventListener('click', event => { if (current && !event.target.closest('.look-person, [data-look-card]')) select(null); });
-      document.addEventListener('keydown', event => {
-        if (!current) return;
-        if (event.key === 'Escape') select(null);
-        else if (event.key === 'ArrowRight') step(1);
-        else if (event.key === 'ArrowLeft') step(-1);
-      });
+      card.querySelector('[data-card-close]').addEventListener('click', () => select(null));
+      // O cartão deixa o toque passar (só o × é clicável): tocar numa pessoa atrás dele abre essa pessoa;
+      // tocar fora das pessoas fecha.
+      document.addEventListener('click', event => { if (current && !event.target.closest('.look-person, [data-card-close]')) select(null); });
+      document.addEventListener('keydown', event => { if (current && event.key === 'Escape') select(null); });
       window.addEventListener('resize', () => current && place(current), {passive:true});
       // Onda de brilho: quando a imagem aparece na tela, as pessoas acendem em sequência (convite para tocar).
       const wave = () => {
