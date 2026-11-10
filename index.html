@@ -373,7 +373,7 @@
     @media (max-width: 1024px) {
       .nav-inner { width:100%; align-items:stretch; flex-direction:column; gap:7px; padding:9px 8px 8px; }
       .nav-tabs-shell { width:100%; min-width:0; padding-right:0; }
-      .nav-tabs-shell .nav-links { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); width:100%; max-width:100%; gap:clamp(3px,.8vw,8px); overflow:visible; scroll-snap-type:none; }
+      .nav-tabs-shell .nav-links { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); width:100%; max-width:100%; gap:clamp(3px,.8vw,8px); overflow:visible; scroll-snap-type:none; }
       .nav-tabs-shell .nav-links a { width:100%; min-width:0; padding:10px clamp(2px,.7vw,8px); font-size:clamp(.62rem,1.35vw,.81rem); text-align:center; scroll-snap-align:none; }
     }
   
@@ -654,7 +654,7 @@
       .hero-promise-below { position:relative; z-index:1; margin:0; padding:26px 16px 6px; background:transparent!important; text-shadow:0 2px 14px rgba(0,0,0,.95),0 0 24px rgba(0,0,0,.8); }
       .hero-meta { position:relative; z-index:1; margin:0; padding:11px 22px 24px; background:transparent!important; }
       .nav-tabs-shell { padding-right:0; }
-      .nav-tabs-shell .nav-links { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:4px; overflow:visible; border-radius:999px; }
+      .nav-tabs-shell .nav-links { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:4px; overflow:visible; border-radius:999px; }
       .nav-tabs-shell .nav-links a { min-width:0; justify-content:center; padding:9px clamp(2px,1.1vw,6px); font-size:clamp(.72rem,3.2vw,.88rem); text-align:center; }
       .hero-scroll-cue { position:absolute; right:0; bottom:calc(clamp(84px,11svh,112px) + 12px); left:0; z-index:6; display:grid; width:40px; height:40px; place-items:center; margin-inline:auto; padding:0; border:1px solid rgba(223,187,119,.48); border-radius:50%; color:#f2ce83; background:rgba(16,13,10,.38); box-shadow:0 0 18px rgba(16,13,10,.32); cursor:pointer; pointer-events:auto; }
       .hero-scroll-cue svg { width:21px; height:21px; overflow:visible; animation:hero-scroll-down 1.65s cubic-bezier(.42,0,.24,1) infinite; }
@@ -778,6 +778,59 @@
       .look-card-close { width:26px; height:26px; top:2px; right:2px; font-size:1.05rem; }
     }
     @media (prefers-reduced-motion: reduce) { .look-card { transition:none !important; } }
+
+    /* Seu Olhar: envio de fotos e vídeos dos convidados. */
+    .olhar { background:radial-gradient(ellipse at 50% 0%,rgba(223,187,119,.12),transparent 60%),#100d0a; padding-block:clamp(28px,5vw,72px) clamp(44px,6vw,88px); }
+    .olhar .wrap { max-width:720px; }
+    .olhar-head { text-align:center; }
+    .olhar-head h2 { margin:10px 0 12px; color:var(--ivory); }
+    .olhar-head p { max-width:560px; margin:0 auto; color:var(--muted); font-size:1.02rem; }
+    .olhar-card { margin-top:26px; padding:clamp(20px,4vw,34px); border:1px solid rgba(223,187,119,.38); border-radius:16px; background:linear-gradient(160deg,rgba(223,187,119,.09),rgba(255,255,255,.015)); box-shadow:0 24px 60px rgba(0,0,0,.4); text-align:center; }
+    .olhar-icon { display:inline-grid; width:64px; height:64px; place-items:center; margin-bottom:12px; border:1px solid rgba(223,187,119,.6); border-radius:50%; color:var(--gold); box-shadow:0 0 26px rgba(223,187,119,.22); }
+    .olhar-icon svg { width:30px; height:30px; }
+    .olhar-kicker { margin:0 0 6px; color:var(--gold); font-size:.8rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; }
+    .olhar-date { margin:4px 0; color:var(--ivory); font-family:var(--serif); font-size:clamp(1.5rem,5vw,2.2rem); line-height:1.2; }
+    .olhar-date strong { color:#f6dfa9; font-weight:500; }
+    .olhar-count { min-height:1.4em; margin:6px 0 12px; color:#e8cf9e; font-size:.95rem; letter-spacing:.04em; }
+    .olhar-text { max-width:480px; margin:0 auto; color:var(--muted); font-size:.98rem; line-height:1.6; }
+    .olhar-name { display:block; max-width:420px; margin:0 auto 16px; color:#e9dfcc; font-size:.85rem; font-weight:600; text-align:left; }
+    .olhar-name span { color:var(--muted); font-weight:400; }
+    .olhar-name input { display:block; width:100%; min-height:48px; margin-top:6px; padding:0 14px; border:1px solid rgba(223,187,119,.38); border-radius:10px; color:var(--ivory); background:rgba(0,0,0,.25); font:inherit; font-size:1rem; font-weight:400; }
+    .olhar-name input:focus { border-color:var(--gold); outline:none; box-shadow:0 0 0 3px rgba(223,187,119,.2); }
+    .olhar-pick { position:relative; display:flex; width:min(100%,420px); min-height:64px; align-items:center; justify-content:center; gap:12px; margin:0 auto; border-radius:14px; color:#20160c; background:linear-gradient(180deg,#f0d49c,var(--gold)); box-shadow:0 10px 28px rgba(223,187,119,.28); font-size:1.02rem; font-weight:700; letter-spacing:.03em; cursor:pointer; transition:transform .2s ease, box-shadow .2s ease; }
+    .olhar-pick:hover { transform:translateY(-2px); box-shadow:0 14px 32px rgba(223,187,119,.38); }
+    .olhar-pick:focus-within { outline:2px solid var(--ivory); outline-offset:3px; }
+    .olhar-pick svg { width:26px; height:26px; }
+    .olhar-pick input { position:absolute; inset:0; width:100%; height:100%; opacity:0; cursor:pointer; }
+    .olhar-summary { min-height:1.4em; margin:14px 0 0; color:#e8cf9e; font-size:.92rem; }
+    .olhar-list { display:grid; gap:10px; margin:12px 0 0; padding:0; list-style:none; text-align:left; }
+    .olhar-item { display:grid; grid-template-columns:52px minmax(0,1fr); gap:12px; align-items:center; padding:10px; border:1px solid rgba(223,187,119,.2); border-radius:12px; background:rgba(0,0,0,.22); }
+    .olhar-thumb { width:52px; height:52px; overflow:hidden; border-radius:8px; background:#1d1712; display:grid; place-items:center; color:var(--gold); }
+    .olhar-thumb img, .olhar-thumb video { width:100%; height:100%; object-fit:cover; display:block; }
+    .olhar-thumb svg { width:24px; height:24px; }
+    .olhar-file { min-width:0; }
+    .olhar-file-name { overflow:hidden; color:var(--ivory); font-size:.88rem; text-overflow:ellipsis; white-space:nowrap; }
+    .olhar-bar { height:6px; margin:7px 0 5px; overflow:hidden; border-radius:999px; background:rgba(255,255,255,.08); }
+    .olhar-bar i { display:block; width:0; height:100%; border-radius:inherit; background:linear-gradient(90deg,#c9a35e,#f6dfa9); transition:width .25s ease; }
+    .olhar-status { display:flex; justify-content:space-between; gap:8px; color:var(--muted); font-size:.76rem; }
+    .olhar-item.is-done .olhar-bar i { background:#8fcf8f; }
+    .olhar-item.is-done .olhar-status b { color:#a6dfa6; }
+    .olhar-item.is-error { border-color:rgba(230,120,100,.5); }
+    .olhar-item.is-error .olhar-status b { color:#f0a090; }
+    .olhar-retry { padding:0; border:0; color:var(--gold); background:none; font:inherit; font-size:.76rem; font-weight:700; text-decoration:underline; cursor:pointer; }
+    .olhar-tips { display:grid; gap:6px; max-width:420px; margin:20px auto 0; padding:14px 16px; border-left:2px solid rgba(223,187,119,.55); border-radius:0 10px 10px 0; background:rgba(223,187,119,.06); list-style:none; color:#d8ccb6; font-size:.86rem; text-align:left; }
+    .olhar-tips li::before { content:"✦ "; color:var(--gold); }
+    .olhar-privacy { margin:18px auto 0; max-width:560px; color:#a99d88; font-size:.82rem; text-align:center; }
+    @media (max-width:600px) {
+      /* 6 abas em 2 fileiras de 3, com letra legível. Sem a linha do nome (já está na abertura) e com botões
+         mais baixos, o menu mantém a altura de antes e não cobre a estrela da abertura. */
+      .nav .brand { display:none; }
+      .nav-inner { padding-block:6px !important; }
+      .nav-tabs-shell .nav-links { grid-template-columns:repeat(3,minmax(0,1fr)) !important; gap:5px !important; }
+      .nav-tabs-shell .nav-links a { padding:6px 4px !important; font-size:clamp(.74rem,3.4vw,.86rem) !important; line-height:1.25; }
+      .olhar-card { margin-top:20px; }
+      .olhar-head p { font-size:.95rem; }
+    }
   </style>
 </head>
 <body>
@@ -790,6 +843,7 @@
         <a href="#escala">Escala</a>
         <a href="#figurino">Figurino</a>
         <a href="#bastidores">Bastidores</a>
+        <a href="#seu-olhar">Seu Olhar</a>
       </nav></div>
     </div>
   </header>
@@ -1343,6 +1397,42 @@ NOV</strong>
         </div>
       </div>
     </section>
+    <section class="olhar" id="seu-olhar" aria-labelledby="olhar-title" data-olhar data-endpoint="">
+      <div class="wrap">
+        <div class="olhar-head reveal">
+          <div class="eyebrow">Seu olhar</div>
+          <h2 id="olhar-title">A Cantata pelos seus olhos</h2>
+          <p>Cada pessoa viu esta noite de um jeito único. Envie suas fotos e vídeos da Cantata: eles chegam direto para a equipe de Mídias, em qualidade original.</p>
+        </div>
+        <div class="olhar-card reveal">
+          <div class="olhar-state" data-olhar-state="antes">
+            <span class="olhar-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h1.6l1.2-1.7A1.5 1.5 0 0 1 10.5 3.7h3a1.5 1.5 0 0 1 1.2.6L15.9 6h1.6A2.5 2.5 0 0 1 20 8.5v8a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5v-8Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="12.5" r="3.6" stroke="currentColor" stroke-width="1.6"/></svg></span>
+            <p class="olhar-kicker">O envio abre no dia da Cantata</p>
+            <p class="olhar-date"><strong>18</strong> a <strong>20</strong> de dezembro</p>
+            <p class="olhar-count" data-olhar-count></p>
+            <p class="olhar-text">Volte aqui na noite da Cantata, ou até o dia 20, para enviar o que você registrou. Não precisa de cadastro nem de aplicativo.</p>
+          </div>
+          <div class="olhar-state" data-olhar-state="aberto" hidden>
+            <label class="olhar-name">Seu nome <span>(opcional)</span><input type="text" maxlength="40" autocomplete="name" placeholder="Ex.: Ana Souza" data-olhar-nome></label>
+            <label class="olhar-pick"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h1.6l1.2-1.7A1.5 1.5 0 0 1 10.5 3.7h3a1.5 1.5 0 0 1 1.2.6L15.9 6h1.6A2.5 2.5 0 0 1 20 8.5v8a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5v-8Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="12.5" r="3.6" stroke="currentColor" stroke-width="1.6"/></svg><span>Escolher fotos e vídeos</span><input type="file" multiple accept="image/*,video/*" data-olhar-arquivos></label>
+            <p class="olhar-summary" aria-live="polite" data-olhar-resumo></p>
+            <ul class="olhar-list" data-olhar-lista></ul>
+            <ul class="olhar-tips">
+              <li>Use o Wi-Fi da igreja, se puder.</li>
+              <li>Vídeos curtos (até 1 minuto) enviam mais rápido.</li>
+              <li>Deixe esta tela aberta até aparecer “Enviado”.</li>
+              <li>Até 1 GB por arquivo.</li>
+            </ul>
+          </div>
+          <div class="olhar-state" data-olhar-state="depois" hidden>
+            <span class="olhar-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h1.6l1.2-1.7A1.5 1.5 0 0 1 10.5 3.7h3a1.5 1.5 0 0 1 1.2.6L15.9 6h1.6A2.5 2.5 0 0 1 20 8.5v8a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5v-8Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="12.5" r="3.6" stroke="currentColor" stroke-width="1.6"/></svg></span>
+            <p class="olhar-kicker">Obrigado por compartilhar!</p>
+            <p class="olhar-text">O envio foi encerrado em 20 de dezembro. Em breve, algumas das fotos e vídeos que vocês enviaram vão aparecer em Bastidores.</p>
+          </div>
+        </div>
+        <p class="olhar-privacy reveal">Suas fotos e vídeos não ficam públicos: vão para uma pasta privada da equipe, que escolhe o que publicar em Bastidores.</p>
+      </div>
+    </section>
 
     <section class="agenda" id="agenda"><div class="wrap"><div class="section-heading reveal"><div class="eyebrow">Anote aí</div><h2>Agenda de ensaios</h2><p>Dança: terças e sextas, às 19h. Louvor: quartas-feiras, às 19h30, a partir de 14 de outubro de 2026. Em 18 de dezembro, nos reunimos para o evento às 19h.</p></div><div class="rehearsal-calendars"><div class="calendar-card " aria-label="Calendário de ensaios de outubro de 2026"><div class="calendar-title"><h3>Outubro 2026</h3><span>Ensaios</span></div><div class="calendar-grid"><span class="weekday">D</span><span class="weekday">S</span><span class="weekday">T</span><span class="weekday">Q</span><span class="weekday">Q</span><span class="weekday">S</span><span class="weekday">S</span><span class="calendar-day empty" aria-hidden="true"></span><span class="calendar-day empty" aria-hidden="true"></span><span class="calendar-day empty" aria-hidden="true"></span><span class="calendar-day empty" aria-hidden="true"></span><span class="calendar-day" aria-label="1 de outubro: sem ensaio programado" title="1 de outubro: sem ensaio programado">1</span><span class="calendar-day dance worship" aria-label="2 de outubro: dança às 19h e louvor às 19h30" title="2 de outubro: dança às 19h e louvor às 19h30">2</span><span class="calendar-day" aria-label="3 de outubro: sem ensaio programado" title="3 de outubro: sem ensaio programado">3</span><span class="calendar-day" aria-label="4 de outubro: sem ensaio programado" title="4 de outubro: sem ensaio programado">4</span><span class="calendar-day" aria-label="5 de outubro: sem ensaio programado" title="5 de outubro: sem ensaio programado">5</span><span class="calendar-day dance" aria-label="6 de outubro: dança às 19h" title="6 de outubro: dança às 19h">6</span><span class="calendar-day" aria-label="7 de outubro: sem ensaio programado" title="7 de outubro: sem ensaio programado">7</span><span class="calendar-day" aria-label="8 de outubro: sem ensaio programado" title="8 de outubro: sem ensaio programado">8</span><span class="calendar-day dance worship" aria-label="9 de outubro: dança às 19h e louvor às 19h30" title="9 de outubro: dança às 19h e louvor às 19h30">9</span><span class="calendar-day" aria-label="10 de outubro: sem ensaio programado" title="10 de outubro: sem ensaio programado">10</span><span class="calendar-day" aria-label="11 de outubro: sem ensaio programado" title="11 de outubro: sem ensaio programado">11</span><span class="calendar-day" aria-label="12 de outubro: sem ensaio programado" title="12 de outubro: sem ensaio programado">12</span><span class="calendar-day dance" aria-label="13 de outubro: dança às 19h" title="13 de outubro: dança às 19h">13</span><span class="calendar-day worship" aria-label="14 de outubro: ensaio de louvor às 19h30" title="14 de outubro: ensaio de louvor às 19h30">14</span><span class="calendar-day" aria-label="15 de outubro: sem ensaio programado" title="15 de outubro: sem ensaio programado">15</span><span class="calendar-day dance" aria-label="16 de outubro: dança às 19h" title="16 de outubro: dança às 19h">16</span><span class="calendar-day" aria-label="17 de outubro: sem ensaio programado" title="17 de outubro: sem ensaio programado">17</span><span class="calendar-day" aria-label="18 de outubro: sem ensaio programado" title="18 de outubro: sem ensaio programado">18</span><span class="calendar-day" aria-label="19 de outubro: sem ensaio programado" title="19 de outubro: sem ensaio programado">19</span><span class="calendar-day dance" aria-label="20 de outubro: dança às 19h" title="20 de outubro: dança às 19h">20</span><span class="calendar-day worship" aria-label="21 de outubro: ensaio de louvor às 19h30" title="21 de outubro: ensaio de louvor às 19h30">21</span><span class="calendar-day" aria-label="22 de outubro: sem ensaio programado" title="22 de outubro: sem ensaio programado">22</span><span class="calendar-day dance" aria-label="23 de outubro: dança às 19h" title="23 de outubro: dança às 19h">23</span><span class="calendar-day" aria-label="24 de outubro: sem ensaio programado" title="24 de outubro: sem ensaio programado">24</span><span class="calendar-day" aria-label="25 de outubro: sem ensaio programado" title="25 de outubro: sem ensaio programado">25</span><span class="calendar-day" aria-label="26 de outubro: sem ensaio programado" title="26 de outubro: sem ensaio programado">26</span><span class="calendar-day dance" aria-label="27 de outubro: dança às 19h" title="27 de outubro: dança às 19h">27</span><span class="calendar-day worship" aria-label="28 de outubro: ensaio de louvor às 19h30" title="28 de outubro: ensaio de louvor às 19h30">28</span><span class="calendar-day" aria-label="29 de outubro: sem ensaio programado" title="29 de outubro: sem ensaio programado">29</span><span class="calendar-day dance" aria-label="30 de outubro: dança às 19h" title="30 de outubro: dança às 19h">30</span><span class="calendar-day" aria-label="31 de outubro: sem ensaio programado" title="31 de outubro: sem ensaio programado">31</span></div><div class="calendar-legend"><span><i class="legend-dot" aria-hidden="true"></i> Dança · terças e sextas · 19h</span><span><i class="legend-dot solid" aria-hidden="true"></i> Louvor · quartas · 19h30</span></div><p class="calendar-note"><strong>Cantata · 18/12 · 19h00</strong></p></div><div class="calendar-card " aria-label="Calendário de ensaios de novembro de 2026"><div class="calendar-title"><h3>Novembro 2026</h3><span>Ensaios</span></div><div class="calendar-grid"><span class="weekday">D</span><span class="weekday">S</span><span class="weekday">T</span><span class="weekday">Q</span><span class="weekday">Q</span><span class="weekday">S</span><span class="weekday">S</span><span class="calendar-day" aria-label="1 de novembro: sem ensaio programado" title="1 de novembro: sem ensaio programado">1</span><span class="calendar-day" aria-label="2 de novembro: sem ensaio programado" title="2 de novembro: sem ensaio programado">2</span><span class="calendar-day dance" aria-label="3 de novembro: dança às 19h" title="3 de novembro: dança às 19h">3</span><span class="calendar-day worship" aria-label="4 de novembro: ensaio de louvor às 19h30" title="4 de novembro: ensaio de louvor às 19h30">4</span><span class="calendar-day" aria-label="5 de novembro: sem ensaio programado" title="5 de novembro: sem ensaio programado">5</span><span class="calendar-day dance" aria-label="6 de novembro: dança às 19h" title="6 de novembro: dança às 19h">6</span><span class="calendar-day" aria-label="7 de novembro: sem ensaio programado" title="7 de novembro: sem ensaio programado">7</span><span class="calendar-day" aria-label="8 de novembro: sem ensaio programado" title="8 de novembro: sem ensaio programado">8</span><span class="calendar-day" aria-label="9 de novembro: sem ensaio programado" title="9 de novembro: sem ensaio programado">9</span><span class="calendar-day dance" aria-label="10 de novembro: dança às 19h" title="10 de novembro: dança às 19h">10</span><span class="calendar-day worship" aria-label="11 de novembro: ensaio de louvor às 19h30" title="11 de novembro: ensaio de louvor às 19h30">11</span><span class="calendar-day" aria-label="12 de novembro: sem ensaio programado" title="12 de novembro: sem ensaio programado">12</span><span class="calendar-day dance" aria-label="13 de novembro: dança às 19h" title="13 de novembro: dança às 19h">13</span><span class="calendar-day" aria-label="14 de novembro: sem ensaio programado" title="14 de novembro: sem ensaio programado">14</span><span class="calendar-day" aria-label="15 de novembro: sem ensaio programado" title="15 de novembro: sem ensaio programado">15</span><span class="calendar-day" aria-label="16 de novembro: sem ensaio programado" title="16 de novembro: sem ensaio programado">16</span><span class="calendar-day dance" aria-label="17 de novembro: dança às 19h" title="17 de novembro: dança às 19h">17</span><span class="calendar-day worship" aria-label="18 de novembro: ensaio de louvor às 19h30" title="18 de novembro: ensaio de louvor às 19h30">18</span><span class="calendar-day" aria-label="19 de novembro: sem ensaio programado" title="19 de novembro: sem ensaio programado">19</span><span class="calendar-day dance" aria-label="20 de novembro: dança às 19h" title="20 de novembro: dança às 19h">20</span><span class="calendar-day" aria-label="21 de novembro: sem ensaio programado" title="21 de novembro: sem ensaio programado">21</span><span class="calendar-day" aria-label="22 de novembro: sem ensaio programado" title="22 de novembro: sem ensaio programado">22</span><span class="calendar-day" aria-label="23 de novembro: sem ensaio programado" title="23 de novembro: sem ensaio programado">23</span><span class="calendar-day dance" aria-label="24 de novembro: dança às 19h" title="24 de novembro: dança às 19h">24</span><span class="calendar-day worship" aria-label="25 de novembro: ensaio de louvor às 19h30" title="25 de novembro: ensaio de louvor às 19h30">25</span><span class="calendar-day" aria-label="26 de novembro: sem ensaio programado" title="26 de novembro: sem ensaio programado">26</span><span class="calendar-day dance" aria-label="27 de novembro: dança às 19h" title="27 de novembro: dança às 19h">27</span><span class="calendar-day" aria-label="28 de novembro: sem ensaio programado" title="28 de novembro: sem ensaio programado">28</span><span class="calendar-day" aria-label="29 de novembro: sem ensaio programado" title="29 de novembro: sem ensaio programado">29</span><span class="calendar-day" aria-label="30 de novembro: sem ensaio programado" title="30 de novembro: sem ensaio programado">30</span></div><div class="calendar-legend"><span><i class="legend-dot" aria-hidden="true"></i> Dança · terças e sextas · 19h</span><span><i class="legend-dot solid" aria-hidden="true"></i> Louvor · quartas · 19h30</span></div><p class="calendar-note"><strong>Cantata · 18/12 · 19h00</strong></p></div><div class="calendar-card " aria-label="Calendário de ensaios de dezembro de 2026"><div class="calendar-title"><h3>Dezembro 2026</h3><span>Ensaios</span></div><div class="calendar-grid"><span class="weekday">D</span><span class="weekday">S</span><span class="weekday">T</span><span class="weekday">Q</span><span class="weekday">Q</span><span class="weekday">S</span><span class="weekday">S</span><span class="calendar-day empty" aria-hidden="true"></span><span class="calendar-day empty" aria-hidden="true"></span><span class="calendar-day dance" aria-label="1 de dezembro: dança às 19h" title="1 de dezembro: dança às 19h">1</span><span class="calendar-day worship" aria-label="2 de dezembro: ensaio de louvor às 19h30" title="2 de dezembro: ensaio de louvor às 19h30">2</span><span class="calendar-day" aria-label="3 de dezembro: sem ensaio programado" title="3 de dezembro: sem ensaio programado">3</span><span class="calendar-day dance" aria-label="4 de dezembro: dança às 19h" title="4 de dezembro: dança às 19h">4</span><span class="calendar-day" aria-label="5 de dezembro: sem ensaio programado" title="5 de dezembro: sem ensaio programado">5</span><span class="calendar-day" aria-label="6 de dezembro: sem ensaio programado" title="6 de dezembro: sem ensaio programado">6</span><span class="calendar-day" aria-label="7 de dezembro: sem ensaio programado" title="7 de dezembro: sem ensaio programado">7</span><span class="calendar-day dance" aria-label="8 de dezembro: dança às 19h" title="8 de dezembro: dança às 19h">8</span><span class="calendar-day worship" aria-label="9 de dezembro: ensaio de louvor às 19h30" title="9 de dezembro: ensaio de louvor às 19h30">9</span><span class="calendar-day" aria-label="10 de dezembro: sem ensaio programado" title="10 de dezembro: sem ensaio programado">10</span><span class="calendar-day dance" aria-label="11 de dezembro: dança às 19h" title="11 de dezembro: dança às 19h">11</span><span class="calendar-day" aria-label="12 de dezembro: sem ensaio programado" title="12 de dezembro: sem ensaio programado">12</span><span class="calendar-day" aria-label="13 de dezembro: sem ensaio programado" title="13 de dezembro: sem ensaio programado">13</span><span class="calendar-day" aria-label="14 de dezembro: sem ensaio programado" title="14 de dezembro: sem ensaio programado">14</span><span class="calendar-day dance" aria-label="15 de dezembro: dança às 19h" title="15 de dezembro: dança às 19h">15</span><span class="calendar-day worship" aria-label="16 de dezembro: ensaio de louvor às 19h30" title="16 de dezembro: ensaio de louvor às 19h30">16</span><span class="calendar-day" aria-label="17 de dezembro: sem ensaio programado" title="17 de dezembro: sem ensaio programado">17</span><span class="calendar-day event" aria-label="18 de dezembro: Cantata às 19h" title="18 de dezembro: Cantata às 19h">18</span><span class="calendar-day" aria-label="19 de dezembro: sem ensaio programado" title="19 de dezembro: sem ensaio programado">19</span><span class="calendar-day" aria-label="20 de dezembro: sem ensaio programado" title="20 de dezembro: sem ensaio programado">20</span><span class="calendar-day" aria-label="21 de dezembro: sem ensaio programado" title="21 de dezembro: sem ensaio programado">21</span><span class="calendar-day" aria-label="22 de dezembro: sem ensaio programado" title="22 de dezembro: sem ensaio programado">22</span><span class="calendar-day" aria-label="23 de dezembro: sem ensaio programado" title="23 de dezembro: sem ensaio programado">23</span><span class="calendar-day" aria-label="24 de dezembro: sem ensaio programado" title="24 de dezembro: sem ensaio programado">24</span><span class="calendar-day" aria-label="25 de dezembro: sem ensaio programado" title="25 de dezembro: sem ensaio programado">25</span><span class="calendar-day" aria-label="26 de dezembro: sem ensaio programado" title="26 de dezembro: sem ensaio programado">26</span><span class="calendar-day" aria-label="27 de dezembro: sem ensaio programado" title="27 de dezembro: sem ensaio programado">27</span><span class="calendar-day" aria-label="28 de dezembro: sem ensaio programado" title="28 de dezembro: sem ensaio programado">28</span><span class="calendar-day" aria-label="29 de dezembro: sem ensaio programado" title="29 de dezembro: sem ensaio programado">29</span><span class="calendar-day" aria-label="30 de dezembro: sem ensaio programado" title="30 de dezembro: sem ensaio programado">30</span><span class="calendar-day" aria-label="31 de dezembro: sem ensaio programado" title="31 de dezembro: sem ensaio programado">31</span></div><div class="calendar-legend"><span><i class="legend-dot" aria-hidden="true"></i> Dança · terças e sextas · 19h</span><span><i class="legend-dot solid" aria-hidden="true"></i> Louvor · quartas · 19h30</span></div><p class="calendar-note"><strong>Cantata · 18/12 · 19h00</strong> · 18/12 é o evento.</p></div></div></div></section>
 
@@ -1716,6 +1806,115 @@ NOV</strong>
         const seen = new IntersectionObserver(entries => { if (entries.some(e => e.isIntersecting)) { seen.disconnect(); wave(); } }, { threshold: .45 });
         seen.observe(stage);
       }
+    })();
+
+    // Seu Olhar: os convidados enviam fotos e vídeos direto para uma pasta do Google Drive
+    // (via um script do Google na conta da equipe). Envio em partes, com progresso e novas tentativas.
+    (() => {
+      const root = document.querySelector('[data-olhar]');
+      if (!root) return;
+      const INICIO = Date.UTC(2026, 11, 18, 3), FIM = Date.UTC(2026, 11, 21, 3);   // 18/12 00:00 a 20/12 23:59 (Brasília)
+      const LIMITE = 1024 * 1024 * 1024, PARTE = 8 * 1024 * 1024;
+      const teste = new URLSearchParams(location.search).has('teste');
+      const estados = [...root.querySelectorAll('[data-olhar-state]')];
+      const mostrar = nome => estados.forEach(e => { e.hidden = e.dataset.olharState !== nome; });
+      const agora = Date.now();
+      const estado = teste ? 'aberto' : agora < INICIO ? 'antes' : agora < FIM ? 'aberto' : 'depois';
+      mostrar(estado);
+      if (estado === 'antes') {
+        const dias = Math.ceil((INICIO - agora) / 86400000);
+        root.querySelector('[data-olhar-count]').textContent = dias > 1 ? `Faltam ${dias} dias` : 'Abre amanhã';
+        return;
+      }
+      if (estado !== 'aberto') return;
+
+      const entrada = root.querySelector('[data-olhar-arquivos]');
+      const lista = root.querySelector('[data-olhar-lista]');
+      const resumo = root.querySelector('[data-olhar-resumo]');
+      const nome = root.querySelector('[data-olhar-nome]');
+      const fila = []; let enviando = false, travaTela = null;
+      const VIDEO = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="m16 10 5-3v10l-5-3" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>';
+      const ERROS = { fechado: 'O envio está fechado no momento.', tamanho: 'Arquivo maior que 1 GB.', tipo: 'Envie apenas fotos ou vídeos.' };
+      const tamanhoTexto = b => b > 1048576 ? (b / 1048576).toFixed(b > 104857600 ? 0 : 1).replace('.', ',') + ' MB' : Math.max(1, Math.round(b / 1024)) + ' KB';
+      const esperar = ms => new Promise(r => setTimeout(r, ms));
+      const atualizarResumo = () => {
+        const total = fila.length, prontos = fila.filter(i => i.estado === 'ok').length, erros = fila.filter(i => i.estado === 'erro').length;
+        if (!total) { resumo.textContent = ''; return; }
+        resumo.textContent = prontos === total ? (total > 1 ? `Pronto! ${total} arquivos enviados. Obrigado!` : 'Pronto! Arquivo enviado. Obrigado!')
+          : `${prontos} de ${total} enviados` + (erros ? ` · ${erros} com erro` : '') + (enviando ? ' · enviando…' : '');
+      };
+      const pintar = (item, fracao, texto, classe) => {
+        item.barra.style.width = Math.round(fracao * 100) + '%';
+        item.texto.innerHTML = texto;
+        item.el.classList.toggle('is-done', classe === 'ok'); item.el.classList.toggle('is-error', classe === 'erro');
+      };
+      const adicionar = arquivo => {
+        const el = document.createElement('li'); el.className = 'olhar-item';
+        const thumb = document.createElement('div'); thumb.className = 'olhar-thumb';
+        if (arquivo.type.startsWith('image/') && !/hei[cf]/i.test(arquivo.type)) { const img = new Image(); img.alt = ''; img.src = URL.createObjectURL(arquivo); img.onload = () => URL.revokeObjectURL(img.src); thumb.append(img); }
+        else thumb.innerHTML = VIDEO;
+        el.innerHTML = '<div class="olhar-file"><div class="olhar-file-name"></div><div class="olhar-bar"><i></i></div><div class="olhar-status"><b>Na fila</b><span></span></div></div>';
+        el.prepend(thumb);
+        el.querySelector('.olhar-file-name').textContent = arquivo.name;
+        el.querySelector('.olhar-status span').textContent = tamanhoTexto(arquivo.size);
+        lista.append(el);
+        const item = { arquivo, el, barra: el.querySelector('.olhar-bar i'), texto: el.querySelector('.olhar-status b'), estado: 'fila' };
+        if (arquivo.size > LIMITE) { item.estado = 'erro'; pintar(item, 0, ERROS.tamanho, 'erro'); }
+        fila.push(item);
+      };
+      // Envia um trecho do arquivo para o link do Drive; resolve com o status HTTP.
+      const enviarParte = (link, arquivo, inicio, fim, item) => new Promise((ok, falha) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('PUT', link);
+        xhr.setRequestHeader('Content-Range', `bytes ${inicio}-${fim - 1}/${arquivo.size}`);
+        xhr.upload.onprogress = e => pintar(item, (inicio + e.loaded) / arquivo.size, 'Enviando… ' + Math.floor((inicio + e.loaded) / arquivo.size * 100) + '%');
+        xhr.onload = () => ok(xhr.status);
+        xhr.onerror = xhr.ontimeout = () => falha(new Error('rede'));
+        xhr.send(arquivo.slice(inicio, fim));
+      });
+      const enviar = async item => {
+        const endpoint = root.dataset.endpoint;
+        if (!endpoint) throw new Error('O envio ainda está sendo configurado. Tente mais tarde.');
+        pintar(item, 0, 'Preparando…');
+        const q = new URLSearchParams({ acao: 'iniciar', origem: location.origin, tamanho: item.arquivo.size, tipo: item.arquivo.type, arquivo: item.arquivo.name, nome: nome.value.trim() });
+        const r = await fetch(endpoint + (endpoint.includes('?') ? '&' : '?') + q).then(x => x.json());
+        if (!r.ok) throw new Error(ERROS[r.erro] || 'Não foi possível enviar agora.');
+        let inicio = 0;
+        while (inicio < item.arquivo.size) {
+          const fim = Math.min(inicio + PARTE, item.arquivo.size);
+          let status = 0;
+          for (let tentativa = 0; tentativa < 4; tentativa++) {
+            try { status = await enviarParte(r.link, item.arquivo, inicio, fim, item); if (status < 500) break; } catch (e) { status = 0; }
+            pintar(item, inicio / item.arquivo.size, 'Conexão instável, tentando de novo…');
+            await esperar(1500 * 2 ** tentativa);
+          }
+          if (status === 308) { inicio = fim; continue; }
+          if (status === 200 || status === 201) return;
+          throw new Error('A conexão caiu. Toque em “Tentar de novo”.');
+        }
+      };
+      const processar = async () => {
+        if (enviando) return;
+        enviando = true; atualizarResumo();
+        try { travaTela = await navigator.wakeLock?.request('screen'); } catch (e) {}
+        for (const item of fila) {
+          if (item.estado !== 'fila') continue;
+          item.estado = 'enviando';
+          try { await enviar(item); item.estado = 'ok'; pintar(item, 1, 'Enviado ✓', 'ok'); }
+          catch (e) {
+            item.estado = 'erro'; pintar(item, 0, e.message, 'erro');
+            if (Object.values(ERROS).includes(e.message)) { atualizarResumo(); continue; }   // tipo/tamanho/fechado: tentar de novo não resolve
+            const b = document.createElement('button'); b.type = 'button'; b.className = 'olhar-retry'; b.textContent = 'Tentar de novo';
+            b.onclick = () => { b.remove(); item.estado = 'fila'; pintar(item, 0, 'Na fila'); processar(); };
+            item.texto.after(b);
+          }
+          atualizarResumo();
+        }
+        enviando = false; atualizarResumo();
+        try { await travaTela?.release(); } catch (e) {}
+      };
+      entrada.addEventListener('change', () => { [...entrada.files].forEach(adicionar); entrada.value = ''; atualizarResumo(); processar(); });
+      window.addEventListener('beforeunload', e => { if (enviando) { e.preventDefault(); e.returnValue = ''; } });
     })();
   </script>
 </body>
