@@ -576,7 +576,11 @@
     .song-card-opening .song-number { font-family:var(--sans); font-size:.68rem; font-weight:700; letter-spacing:.11em; }
     /* Um palco desktop largo e uma única sequência cinematográfica controlada em JS. */
     .hero-title-line { display:block; }
-    .js .hero-title-line { clip-path:polygon(50% 0,50% 0,50% 0,50% 0,50% 0,50% 0,50% 0,50% 0); }
+    /* Título montado em faixas: antes da sequência começar, as linhas ficam ocultas. */
+    .js .hero:not(.cinematic-play):not(.hero-ready) .hero-title-line { visibility:hidden; }
+    .hero-title-line { position:relative; }
+    .hero-title-line.is-sliced > .ht-orig { visibility:hidden; }
+    .ht-slice { position:absolute; inset:0; display:block; pointer-events:none; white-space:nowrap; }
     .js .hero:not(.cinematic-play):not(.hero-ready) :is(.hero-promise-below,.hero-meta,.hero-mobile-kicker) { opacity:0; }
     .js .terra-title-mobile .terra-writing { clip-path:polygon(0 0,0 0,0 32%,0 67%,0 100%,0 100%,0 67%,0 32%); }
     .js .terra-title-svg { visibility:hidden; }
@@ -858,6 +862,14 @@
     .olhar-pick.is-locked:hover { transform:none; box-shadow:none; }
     .olhar-lock-note { margin:10px 0 16px; color:var(--gold); font-size:clamp(.74rem,3.6vw,.85rem); font-weight:700; letter-spacing:.04em; line-height:1.6; }
     .olhar-lock-note span { white-space:nowrap; }
+
+    /* Fio de luz que desce da estrela e toca o lugar de "Terra". */
+    .hero-art > h1 { z-index:3; }
+    .hero-light-line { position:absolute; z-index:2; left:50%; top:0; width:2px; height:0; opacity:0; pointer-events:none; transform-origin:50% 0;
+      background:linear-gradient(to bottom, rgba(255,246,220,0), #fff6dc 18%, #f6d48f 82%, rgba(246,212,143,.15)); box-shadow:0 0 10px 1px rgba(246,212,143,.6), 0 0 26px 4px rgba(223,187,119,.25); }
+    .hero-light-touch { position:absolute; z-index:2; left:50%; top:0; width:clamp(120px,22vw,300px); height:clamp(14px,2.2vw,26px); opacity:0; pointer-events:none; border-radius:50%;
+      background:radial-gradient(ellipse at center, rgba(255,246,220,.95) 0%, rgba(246,212,143,.55) 35%, rgba(223,187,119,0) 70%); transform:translate(-50%,-50%) scaleX(0); }
+    @media (prefers-reduced-motion: reduce) { .hero-light-line, .hero-light-touch { display:none !important; } }
   </style>
 </head>
 <body>
@@ -883,6 +895,7 @@
           <span class="hero-scene-shade" aria-hidden="true"></span><span class="hero-nativity-reveal" aria-hidden="true"></span>
           <span class="hero-star-light" aria-hidden="true"><span class="hero-star-radiance"></span><span class="hero-star-beam"></span></span>
           <span class="hero-manger-glow" aria-hidden="true"></span>
+          <span class="hero-light-line" aria-hidden="true"></span><span class="hero-light-touch" aria-hidden="true"></span>
           <div class="eyebrow">Uma promessa está prestes a se revelar</div>
           <div class="hero-mobile-kicker">Cantata de Natal · 2026</div>
           <h1 aria-label="Quando o Céu Tocou a Terra"><span class="hero-title-line hero-title-sky">Quando o Céu</span><span class="hero-title-line hero-title-earth">Tocou a</span><svg class="terra-title terra-title-svg" viewBox="0 0 600 180" aria-hidden="true" focusable="false"><defs><mask id="terra-title-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="600" height="180"><text x="300" y="142" text-anchor="middle" textLength="360" lengthAdjust="spacingAndGlyphs" font-family="Tangerine, cursive" font-size="160" font-weight="700" fill="white">Terra</text></mask><linearGradient id="terra-title-shine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff2c5" stop-opacity="0"/><stop offset=".46" stop-color="#fff9e7" stop-opacity=".15"/><stop offset=".52" stop-color="#fff6d5" stop-opacity=".95"/><stop offset=".58" stop-color="#fff9e7" stop-opacity=".22"/><stop offset="1" stop-color="#fff2c5" stop-opacity="0"/></linearGradient><linearGradient id="terra-title-fill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6d98e"/><stop offset=".46" stop-color="#ffe7aa"/><stop offset=".72" stop-color="#e9c26e"/><stop offset="1" stop-color="#c28f49"/></linearGradient></defs><text class="terra-writing" x="300" y="142" text-anchor="middle" textLength="360" lengthAdjust="spacingAndGlyphs" font-family="Tangerine, cursive" font-size="160" font-weight="700" fill="url(#terra-title-fill)" stroke="#f3d58e" stroke-width="1.15" stroke-linejoin="round">Terra</text><g mask="url(#terra-title-mask)"><rect class="terra-sweep" x="-240" y="0" width="240" height="180" fill="url(#terra-title-shine)"/></g></svg><span class="terra-title terra-title-mobile" aria-hidden="true"><img class="terra-writing" src="images/terra-lettering.webp" alt=""><span class="terra-sweep-mobile"></span></span></h1>
@@ -1606,10 +1619,12 @@ NOV</strong>
         star: {at:0, duration:.42},
         starHomecoming: {at:2.2, duration:.52},
         radiance: {at:0, duration:.9},
-        kicker: {at:.12, duration:.42},
-        sky: {at:.3, duration:1.02, easing:'cubic-bezier(.38,.06,.2,1)'},
-        earth: {at:.84, duration:.9, easing:'cubic-bezier(.38,.06,.2,1)'},
-        terra: {at:1.26, duration:.94, easing:'cubic-bezier(.38,.06,.2,1)'},
+        kicker: {at:.08, duration:.7, easing:'cubic-bezier(.16,1,.3,1)'},
+        light: {at:.18, duration:2.15},
+        touch: {at:1.3, duration:.8, easing:'cubic-bezier(.16,1,.3,1)'},
+        sky: {at:.42, duration:.78, easing:'cubic-bezier(.16,1,.3,1)'},
+        earth: {at:.8, duration:.74, easing:'cubic-bezier(.16,1,.3,1)'},
+        terra: {at:1.36, duration:.94, easing:'cubic-bezier(.38,.06,.2,1)'},
         sweep: {at:2.2, duration:.62},
         scene: {at:2.2, duration:1.42},
         beam: {at:2.2, duration:1.42},
@@ -1681,14 +1696,54 @@ NOV</strong>
           {opacity:.22, transform:'translate(-50%,-50%) scale(1)'}
         ], timeline.manger);
 
-        const titleLines = [...hero.querySelectorAll('.hero-title-line')];
-        const titleMask = [
-          {clipPath:'polygon(50% 0,50% 0,50% 0,50% 0,50% 0,50% 0,50% 0,50% 0)'},
-          {offset:.36, clipPath:'polygon(50% 0,66% 0,63% 28%,57% 70%,50% 100%,43% 70%,37% 28%,34% 0)'},
-          {offset:.72, clipPath:'polygon(16% 0,84% 0,92% 28%,78% 70%,50% 100%,22% 70%,8% 28%,16% 0)'},
-          {clipPath:'polygon(0 0,100% 0,100% 28%,100% 70%,100% 100%,0 100%,0 70%,0 28%)'}
-        ];
-        titleLines.forEach(line => animate(line, titleMask, line.classList.contains('hero-title-sky') ? timeline.sky : timeline.earth));
+        // Título montado em faixas horizontais: cada faixa entra de um lado, com desfoque, e encaixa sem quicar.
+        const FAIXAS = 6;
+        [...hero.querySelectorAll('.hero-title-line')].forEach((line, n) => {
+          if (!line.classList.contains('is-sliced')) {
+            const texto = line.textContent;
+            line.textContent = '';
+            const orig = document.createElement('span'); orig.className = 'ht-orig'; orig.textContent = texto; line.append(orig);
+            for (let i = 0; i < FAIXAS; i++) {
+              const faixa = document.createElement('span'); faixa.className = 'ht-slice'; faixa.setAttribute('aria-hidden', 'true'); faixa.textContent = texto;
+              const topo = i === 0 ? -60 : i * 100 / FAIXAS, base = i === FAIXAS - 1 ? -60 : 100 - (i + 1) * 100 / FAIXAS;
+              faixa.style.clipPath = `inset(${topo}% -20% ${base}% -20%)`;
+              line.append(faixa);
+            }
+            line.classList.add('is-sliced');
+          }
+          const fase = line.classList.contains('hero-title-sky') ? timeline.sky : timeline.earth;
+          const largura = line.getBoundingClientRect().width || 300;
+          [...line.querySelectorAll('.ht-slice')].forEach((faixa, i) => {
+            const lado = (i + n) % 2 ? 1 : -1, distancia = largura * (.28 + (i % 3) * .07);
+            animate(faixa, [
+              {opacity:0, transform:`translateX(${lado * distancia}px)`, filter:'blur(7px)'},
+              {offset:.55, opacity:1, filter:'blur(1.5px)'},
+              {opacity:1, transform:'translateX(0)', filter:'blur(0)'}
+            ], {...fase, at:fase.at + i * .045});
+          });
+        });
+
+        // Fio de luz: desce da estrela até "Terra" (o céu toca a terra) e se dissolve no feixe da estrela.
+        const fio = hero.querySelector('.hero-light-line'), toque = hero.querySelector('.hero-light-touch');
+        const arte = hero.querySelector('.hero-art').getBoundingClientRect();
+        const estrela = star.getBoundingClientRect();
+        const terraAlvo = (hero.querySelector('.terra-title-mobile .terra-writing') || hero.querySelector('h1')).getBoundingClientRect();
+        const yTopo = estrela.top + estrela.height / 2 - arte.top, yToque = terraAlvo.top + terraAlvo.height * .55 - arte.top;
+        if (fio && yToque > yTopo) {
+          fio.style.top = yTopo + 'px'; fio.style.height = (yToque - yTopo) + 'px';
+          toque.style.top = yToque + 'px';
+          animate(fio, [
+            {opacity:0, transform:'translateX(-50%) scaleY(0)', easing:'cubic-bezier(.55,0,.25,1)'},
+            {offset:.52, opacity:1, transform:'translateX(-50%) scaleY(1)'},
+            {offset:.7, opacity:.9, transform:'translateX(-50%) scaleY(1)'},
+            {opacity:0, transform:'translateX(-50%) scaleY(1)'}
+          ], {...timeline.light, easing:'linear'});
+          animate(toque, [
+            {opacity:0, transform:'translate(-50%,-50%) scaleX(0)'},
+            {offset:.3, opacity:.95, transform:'translate(-50%,-50%) scaleX(1)'},
+            {opacity:0, transform:'translate(-50%,-50%) scaleX(1.35)'}
+          ], timeline.touch);
+        }
 
         const terraSvg = hero.querySelector('.terra-title-svg');
         const terraWriting = hero.querySelector('.terra-title-mobile .terra-writing');
@@ -1709,10 +1764,15 @@ NOV</strong>
           {offset:.3, opacity:.32, transform:'translateX(-18%)'},
           {opacity:0, transform:'translateX(110%)'}
         ], timeline.sweep);
-        animate(hero.querySelector('.hero-mobile-kicker'), [
-          {opacity:0, clipPath:'inset(0 50%)', transform:'translateY(5px)'},
-          {opacity:1, clipPath:'inset(0)', transform:'translateY(0)'}
-        ], timeline.kicker);
+        const kicker = hero.querySelector('.hero-mobile-kicker');
+        if (kicker) {
+          const espacamento = getComputedStyle(kicker).letterSpacing;
+          animate(kicker, [
+            {opacity:0, letterSpacing:'.62em', filter:'blur(6px)'},
+            {offset:.45, opacity:1},
+            {opacity:1, letterSpacing:espacamento, filter:'blur(0)'}
+          ], timeline.kicker);
+        }
         animate(hero.querySelector('.hero-promise-below'), [
           {opacity:0},
           {opacity:1}
