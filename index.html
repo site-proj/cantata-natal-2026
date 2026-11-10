@@ -879,6 +879,68 @@
       .hero h1 .kt-serif { font-size:.52em; }
       .hero h1 .kt-bold { font-size:1.3em; }
     }
+
+    /* Ensaios: lista de músicas moderna e player que cresce a partir do cartão. */
+    .ens-list { display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr)); gap:12px; margin:6px 0 4px; }
+    .ens-card { position:relative; display:grid; grid-template-columns:64px minmax(0,1fr) 44px; align-items:center; gap:14px; width:100%; padding:12px; border:1px solid rgba(223,187,119,.22); border-radius:20px; color:var(--ivory); background:linear-gradient(160deg,#17110c,#0d0a07); text-align:left; font:inherit; cursor:pointer; box-shadow:0 10px 26px rgba(0,0,0,.35); transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
+    .ens-card:hover { transform:translateY(-2px); border-color:rgba(223,187,119,.5); box-shadow:0 16px 34px rgba(0,0,0,.45); }
+    .ens-card:focus-visible { outline:2px solid var(--gold); outline-offset:3px; }
+    .ens-cover { position:relative; display:grid; aspect-ratio:1; place-items:center; overflow:hidden; border-radius:14px; background:var(--ens-grad); box-shadow:inset 0 0 0 1px rgba(255,255,255,.08); }
+    .ens-cover::after { content:"✦"; color:rgba(255,248,230,.85); font-size:1.15em; text-shadow:0 0 14px rgba(255,236,190,.9); }
+    .ens-card .ens-cover { width:64px; }
+    .ens-card-title { display:block; overflow:hidden; color:var(--ivory); font-size:1.02rem; font-weight:700; line-height:1.25; text-overflow:ellipsis; white-space:nowrap; }
+    .ens-card-artist { display:block; overflow:hidden; margin-top:3px; color:#a99d88; font-size:.86rem; text-overflow:ellipsis; white-space:nowrap; }
+    .ens-card-play { display:grid; width:44px; height:44px; place-items:center; border-radius:50%; color:#20160c; background:var(--gold); box-shadow:0 6px 16px rgba(223,187,119,.3); }
+    .ens-card-play svg { width:18px; height:18px; }
+    .ens-eq { display:none; gap:2px; align-items:flex-end; height:14px; }
+    .ens-eq i { width:3px; height:100%; border-radius:2px; background:#20160c; animation:ens-eq 1s ease-in-out infinite; }
+    .ens-eq i:nth-child(2) { animation-delay:-.35s; } .ens-eq i:nth-child(3) { animation-delay:-.7s; }
+    @keyframes ens-eq { 0%,100% { transform:scaleY(.35); } 50% { transform:scaleY(1); } }
+    .ens-card.is-playing .ens-eq { display:flex; } .ens-card.is-playing .ens-play-icon { display:none; }
+    .ens-card.is-playing { border-color:rgba(223,187,119,.6); }
+
+    .ens-sheet { position:fixed; inset:0; z-index:60; display:grid; place-items:center; }
+    .ens-sheet[hidden] { display:none; }
+    .ens-backdrop { position:absolute; inset:0; background:rgba(5,4,3,.72); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
+    .ens-panel { position:relative; display:grid; grid-template-rows:auto minmax(0,1fr) auto; width:min(100%,520px); height:min(100dvh,860px); overflow:hidden; border:1px solid rgba(223,187,119,.3); border-radius:28px; color:var(--ivory); background:linear-gradient(180deg,#14100b 0%,#090705 100%); box-shadow:0 30px 80px rgba(0,0,0,.6); transform-origin:0 0; }
+    @media (max-width:600px) { .ens-panel { width:100%; height:100dvh; border:0; border-radius:0; } }
+    .ens-top { position:relative; display:flex; align-items:center; justify-content:center; min-height:56px; padding:10px 56px; touch-action:none; cursor:grab; }
+    .ens-grip { position:absolute; top:8px; left:50%; width:40px; height:4px; border-radius:4px; background:rgba(255,255,255,.22); transform:translateX(-50%); }
+    .ens-group { margin-top:6px; color:var(--gold); font-size:.7rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; }
+    .ens-close { position:absolute; top:10px; right:12px; display:grid; width:40px; height:40px; place-items:center; border:0; border-radius:50%; color:var(--ivory); background:rgba(255,255,255,.08); font-size:1.4rem; line-height:1; cursor:pointer; }
+    .ens-close:hover, .ens-close:focus-visible { background:rgba(223,187,119,.25); outline:none; }
+    .ens-slides { display:flex; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory; scrollbar-width:none; overscroll-behavior-x:contain; }
+    .ens-slides::-webkit-scrollbar { display:none; }
+    .ens-slide { flex:0 0 100%; overflow-y:auto; scroll-snap-align:center; scroll-snap-stop:always; padding:4px 22px 18px; overscroll-behavior-y:contain; }
+    .ens-slide .ens-cover { width:min(62vw,230px); margin:6px auto 0; border-radius:26px; font-size:2.4rem; box-shadow:0 18px 40px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,255,255,.08); }
+    .ens-slide-title { margin:18px 0 2px; color:var(--ivory); font-size:1.45rem; font-weight:700; line-height:1.2; text-align:center; }
+    .ens-slide-artist { margin:0; color:#a99d88; font-size:.98rem; text-align:center; }
+    .ens-tabs { display:flex; justify-content:center; gap:6px; margin:18px auto 12px; padding:4px; width:fit-content; max-width:100%; border:1px solid rgba(223,187,119,.25); border-radius:999px; background:rgba(255,255,255,.03); }
+    .ens-tab { min-height:38px; padding:0 16px; border:0; border-radius:999px; color:#d9cdb6; background:none; font:inherit; font-size:.86rem; font-weight:700; cursor:pointer; }
+    .ens-tab[aria-selected="true"] { color:#20160c; background:var(--gold); }
+    .ens-view { border:1px solid rgba(223,187,119,.18); border-radius:16px; overflow:hidden; background:#0f0c09; }
+    .ens-view iframe { display:block; width:100%; height:min(62vh,560px); border:0; background:#fff; }
+    .ens-view .rehearsal-resource-fallback { margin:0; padding:10px 14px; color:var(--muted); font-size:.82rem; }
+    .ens-view .rehearsal-resource-fallback a { color:var(--gold); }
+    .ens-controls { padding:12px 22px calc(18px + env(safe-area-inset-bottom)); border-top:1px solid rgba(223,187,119,.14); background:rgba(9,7,5,.92); }
+    .ens-progress { --p:0%; width:100%; height:22px; margin:0; background:none; -webkit-appearance:none; appearance:none; cursor:pointer; }
+    .ens-progress::-webkit-slider-runnable-track { height:5px; border-radius:5px; background:linear-gradient(90deg,#f3e3bf var(--p),rgba(255,255,255,.14) var(--p)); }
+    .ens-progress::-moz-range-track { height:5px; border-radius:5px; background:linear-gradient(90deg,#f3e3bf var(--p),rgba(255,255,255,.14) var(--p)); }
+    .ens-progress::-webkit-slider-thumb { width:14px; height:14px; margin-top:-4.5px; border:0; border-radius:50%; background:#fff6dc; -webkit-appearance:none; }
+    .ens-progress::-moz-range-thumb { width:14px; height:14px; border:0; border-radius:50%; background:#fff6dc; }
+    .ens-times { display:flex; justify-content:space-between; color:#8f8574; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.78rem; }
+    .ens-buttons { display:flex; align-items:center; justify-content:center; gap:34px; margin-top:6px; }
+    .ens-btn { display:grid; width:52px; height:52px; place-items:center; border:0; border-radius:50%; color:var(--ivory); background:none; cursor:pointer; }
+    .ens-btn svg { width:26px; height:26px; }
+    .ens-btn.ens-main { width:66px; height:66px; color:#20160c; background:var(--gold); box-shadow:0 10px 26px rgba(223,187,119,.35); }
+    .ens-btn.ens-main svg { width:28px; height:28px; }
+    .ens-btn:disabled { opacity:.3; cursor:default; }
+    .ens-btn:focus-visible { outline:2px solid var(--gold); outline-offset:3px; }
+    .ens-dots { display:flex; justify-content:center; gap:6px; margin-top:10px; }
+    .ens-dots i { width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,.2); transition:background .2s, transform .2s; }
+    .ens-dots i.on { background:var(--gold); transform:scale(1.3); }
+    .ens-on [data-ens-original] { display:none !important; }
+    @media (prefers-reduced-motion: reduce) { .ens-eq i { animation:none; } .ens-card { transition:none; } }
   </style>
 </head>
 <body>
@@ -2039,6 +2101,142 @@ NOV</strong>
       });
       entrada.addEventListener('change', () => { [...entrada.files].forEach(adicionar); entrada.value = ''; atualizarResumo(); processar(); });
       window.addEventListener('beforeunload', e => { if (enviando) { e.preventDefault(); e.returnValue = ''; } });
+    })();
+
+    // Ensaios: lista moderna de músicas e player que cresce a partir do cartão tocado.
+    // Tudo é montado a partir dos cartões existentes (áudio, nome, artista, letra, cifra, original).
+    (() => {
+      const secao = document.getElementById('ensaio-louvor');
+      if (!secao || !('animate' in Element.prototype)) return;
+      const cartoes = [...secao.querySelectorAll('.rehearsal-audio-card')];
+      if (!cartoes.length) return;
+      const GRADS = ['linear-gradient(140deg,#f6d48f,#c8862f 55%,#5a2f12)', 'linear-gradient(150deg,#ffe3a8,#e09a3e 50%,#7a3418)', 'linear-gradient(135deg,#f3c97a,#a8642a 60%,#2e1a10)',
+        'linear-gradient(160deg,#fff0c9,#d8a24f 45%,#6d3d1a)', 'linear-gradient(140deg,#f8d9a0,#bf7c3c 55%,#3a2214)', 'linear-gradient(130deg,#ffd58a,#d9822b 50%,#5e2614)',
+        'linear-gradient(150deg,#f1e2bd,#b8893e 55%,#3d2a14)', 'linear-gradient(140deg,#fbd38d,#c56f2d 55%,#4a1f12)', 'linear-gradient(160deg,#ffe9b8,#cf9446 50%,#57301a)'];
+      const ICON = { play:'<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.2v13.6a1 1 0 0 0 1.5.86l11-6.8a1 1 0 0 0 0-1.72l-11-6.8A1 1 0 0 0 8 5.2Z"/></svg>',
+        pause:'<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4.5" width="4.2" height="15" rx="1.2"/><rect x="13.8" y="4.5" width="4.2" height="15" rx="1.2"/></svg>',
+        prev:'<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="4" y="5" width="2.6" height="14" rx="1"/><path d="M20 5.9v12.2a.9.9 0 0 1-1.38.76L9.5 13.06a1.25 1.25 0 0 1 0-2.12l9.12-5.8A.9.9 0 0 1 20 5.9Z"/></svg>',
+        next:'<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="17.4" y="5" width="2.6" height="14" rx="1"/><path d="M4 5.9v12.2a.9.9 0 0 0 1.38.76l9.12-5.8a1.25 1.25 0 0 0 0-2.12l-9.12-5.8A.9.9 0 0 0 4 5.9Z"/></svg>' };
+      const grupoDe = card => { const g = card.parentElement; if (g.closest('.rehearsal-library')) return 'Outras canções da Cantata';
+        return /repassar/i.test(g.getAttribute('aria-label') || '') ? 'Repassar' : 'Próximo ensaio'; };
+      const rotulo = t => /letra/i.test(t) ? 'Letra' : /cifra/i.test(t) ? 'Cifra' : /original/i.test(t) ? 'Original' : t;
+      // 1) dados de cada música
+      const musicas = cartoes.map((card, i) => {
+        const audio = card.querySelector('audio');
+        const [titulo, ...resto] = (audio.getAttribute('aria-label') || '').replace(/^Ouvir\s+/, '').split(' — ');
+        return { i, card, titulo, artista: resto.join(' — '), src: audio.querySelector('source')?.src || audio.src, grupo: grupoDe(card), grad: GRADS[i % GRADS.length],
+          recursos: [...card.querySelectorAll('.rehearsal-resource')].map(d => ({ nome: rotulo(d.querySelector('summary').textContent.trim()), html: d.querySelector('.rehearsal-resource-view')?.innerHTML || '' })) };
+      });
+      // 2) lista nova no lugar de cada grade antiga
+      const grades = [...new Set(cartoes.map(c => c.parentElement))];
+      grades.forEach(grade => {
+        const lista = document.createElement('div'); lista.className = 'ens-list';
+        musicas.filter(m => m.card.parentElement === grade).forEach(m => {
+          const b = document.createElement('button'); b.type = 'button'; b.className = 'ens-card'; b.dataset.i = m.i;
+          b.setAttribute('aria-label', `Abrir ${m.titulo}, ${m.artista}`);
+          b.innerHTML = `<span class="ens-cover" style="--ens-grad:${m.grad}"></span><span><span class="ens-card-title"></span><span class="ens-card-artist"></span></span><span class="ens-card-play" data-play><span class="ens-play-icon">${ICON.play}</span><span class="ens-eq"><i></i><i></i><i></i></span></span>`;
+          b.querySelector('.ens-card-title').textContent = m.titulo; b.querySelector('.ens-card-artist').textContent = m.artista;
+          m.lista = b; lista.append(b);
+        });
+        grade.dataset.ensOriginal = ''; grade.after(lista);
+      });
+      secao.classList.add('ens-on');
+      // 3) player
+      const sheet = document.createElement('div'); sheet.className = 'ens-sheet'; sheet.hidden = true;
+      sheet.setAttribute('role', 'dialog'); sheet.setAttribute('aria-modal', 'true'); sheet.setAttribute('aria-label', 'Player das músicas do ensaio');
+      sheet.innerHTML = `<div class="ens-backdrop" data-fechar></div><div class="ens-panel"><div class="ens-top"><span class="ens-grip"></span><span class="ens-group"></span><button class="ens-close" type="button" aria-label="Fechar player" data-fechar>×</button></div>
+        <div class="ens-slides"></div>
+        <div class="ens-controls"><input class="ens-progress" type="range" min="0" max="1000" value="0" step="1" aria-label="Posição da música"><div class="ens-times"><span data-atual>0:00</span><span data-resta>-0:00</span></div>
+        <div class="ens-buttons"><button class="ens-btn" type="button" data-ant aria-label="Música anterior">${ICON.prev}</button><button class="ens-btn ens-main" type="button" data-tocar aria-label="Tocar">${ICON.play}</button><button class="ens-btn" type="button" data-prox aria-label="Próxima música">${ICON.next}</button></div>
+        <div class="ens-dots">${musicas.map(() => '<i></i>').join('')}</div></div></div>`;
+      document.body.append(sheet);
+      const painel = sheet.querySelector('.ens-panel'), slides = sheet.querySelector('.ens-slides'), grupoEl = sheet.querySelector('.ens-group');
+      const barra = sheet.querySelector('.ens-progress'), atualEl = sheet.querySelector('[data-atual]'), restaEl = sheet.querySelector('[data-resta]');
+      const btTocar = sheet.querySelector('[data-tocar]'), btAnt = sheet.querySelector('[data-ant]'), btProx = sheet.querySelector('[data-prox]'), pontos = [...sheet.querySelectorAll('.ens-dots i')];
+      musicas.forEach(m => {
+        const s = document.createElement('section'); s.className = 'ens-slide'; s.setAttribute('aria-label', m.titulo);
+        s.innerHTML = `<div class="ens-cover" style="--ens-grad:${m.grad}"></div><h3 class="ens-slide-title"></h3><p class="ens-slide-artist"></p>`
+          + (m.recursos.length ? `<div class="ens-tabs" role="tablist">${m.recursos.map((r, k) => `<button class="ens-tab" type="button" role="tab" aria-selected="false" data-k="${k}">${r.nome}</button>`).join('')}</div><div class="ens-view"></div>` : '');
+        s.querySelector('.ens-slide-title').textContent = m.titulo; s.querySelector('.ens-slide-artist').textContent = m.artista;
+        s.querySelectorAll('.ens-tab').forEach(t => t.addEventListener('click', () => mostrarRecurso(m, Number(t.dataset.k))));
+        m.slide = s; slides.append(s);
+      });
+      function mostrarRecurso(m, k) {
+        m.slide.querySelectorAll('.ens-tab').forEach(t => t.setAttribute('aria-selected', String(Number(t.dataset.k) === k)));
+        m.slide.querySelector('.ens-view').innerHTML = m.recursos[k].html;   // o iframe só carrega quando a aba é aberta
+        m.aba = k;
+      }
+      const audio = new Audio(); audio.preload = 'metadata';
+      let atual = 0, aberto = false, origem = null;
+      const tempo = s => !isFinite(s) ? '0:00' : `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+      const pintarTempo = () => {
+        const d = audio.duration || 0, t = audio.currentTime || 0, p = d ? t / d : 0;
+        barra.value = Math.round(p * 1000); barra.style.setProperty('--p', (p * 100) + '%');
+        atualEl.textContent = tempo(t); restaEl.textContent = '-' + tempo(Math.max(0, d - t));
+      };
+      const pintarBotao = () => {
+        const tocando = !audio.paused; btTocar.innerHTML = tocando ? ICON.pause : ICON.play; btTocar.setAttribute('aria-label', tocando ? 'Pausar' : 'Tocar');
+        musicas.forEach(m => m.lista.classList.toggle('is-playing', tocando && m.i === atual));
+      };
+      function selecionar(i, { tocar = null, rolar = true } = {}) {
+        i = Math.max(0, Math.min(musicas.length - 1, i));
+        const m = musicas[i], mudou = i !== atual || !audio.src, continuar = tocar ?? !audio.paused;
+        atual = i; grupoEl.textContent = m.grupo;
+        pontos.forEach((p, k) => p.classList.toggle('on', k === i));
+        btAnt.disabled = i === 0; btProx.disabled = i === musicas.length - 1;
+        if (m.recursos.length && m.aba === undefined) mostrarRecurso(m, Math.max(0, m.recursos.findIndex(r => r.nome === 'Letra')));
+        if (mudou) { audio.src = m.src; pintarTempo(); }
+        if (continuar) audio.play().catch(() => {}); else if (mudou) audio.pause();
+        if (rolar) slides.scrollTo({ left: i * slides.clientWidth, behavior: aberto ? 'smooth' : 'instant' });
+        if ('mediaSession' in navigator) navigator.mediaSession.metadata = new MediaMetadata({ title: m.titulo, artist: m.artista, album: 'Cantata de Natal 2026 · ' + m.grupo });
+        pintarBotao();
+      }
+      // arrastar para o lado: o carrossel nativo encaixa e a música troca quando ele para
+      let parada;
+      slides.addEventListener('scroll', () => { clearTimeout(parada); parada = setTimeout(() => {
+        const i = Math.round(slides.scrollLeft / slides.clientWidth); if (i !== atual) selecionar(i, { rolar: false }); }, 120); }, { passive: true });
+      const reduzir = matchMedia('(prefers-reduced-motion: reduce)');
+      function abrir(m, tocar) {
+        origem = m.lista; sheet.hidden = false; aberto = true; document.documentElement.style.overflow = 'hidden';
+        selecionar(m.i, { tocar: tocar || (m.i === atual && !audio.paused) });
+        slides.scrollLeft = m.i * slides.clientWidth;
+        if (!reduzir.matches) {
+          const de = m.lista.getBoundingClientRect(), para = painel.getBoundingClientRect();
+          painel.animate([{ transform: `translate(${de.left - para.left}px,${de.top - para.top}px) scale(${de.width / para.width},${de.height / para.height})`, borderRadius: '20px', opacity: .6 }, { transform: 'none', opacity: 1 }], { duration: 420, easing: 'cubic-bezier(.2,.9,.25,1)' });
+          sheet.querySelector('.ens-backdrop').animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300 });
+        }
+        sheet.querySelector('.ens-close').focus({ preventScroll: true });
+      }
+      function fechar() {
+        if (!aberto) return; aberto = false;
+        const fim = () => { sheet.hidden = true; document.documentElement.style.overflow = ''; painel.style.transform = ''; musicas[atual].lista.focus({ preventScroll: true }); };
+        if (reduzir.matches) return fim();
+        const de = painel.getBoundingClientRect(), para = musicas[atual].lista.getBoundingClientRect();
+        sheet.querySelector('.ens-backdrop').animate([{ opacity: 1 }, { opacity: 0 }], { duration: 260, fill: 'forwards' });
+        painel.animate([{ transform: painel.style.transform || 'none', opacity: 1 }, { transform: `translate(${para.left - de.left}px,${para.top - de.top}px) scale(${para.width / de.width},${para.height / de.height})`, borderRadius: '20px', opacity: 0 }], { duration: 300, easing: 'cubic-bezier(.4,0,.2,1)' }).finished.then(fim);
+      }
+      musicas.forEach(m => m.lista.addEventListener('click', e => abrir(m, !!e.target.closest('[data-play]'))));
+      sheet.addEventListener('click', e => { if (e.target.closest('[data-fechar]')) fechar(); });
+      btTocar.addEventListener('click', () => audio.paused ? audio.play().catch(() => {}) : audio.pause());
+      btAnt.addEventListener('click', () => selecionar(atual - 1)); btProx.addEventListener('click', () => selecionar(atual + 1));
+      barra.addEventListener('input', () => { if (audio.duration) audio.currentTime = barra.value / 1000 * audio.duration; pintarTempo(); });
+      audio.addEventListener('timeupdate', pintarTempo); audio.addEventListener('loadedmetadata', pintarTempo);
+      ['play', 'pause'].forEach(ev => audio.addEventListener(ev, pintarBotao));
+      audio.addEventListener('ended', () => { if (atual < musicas.length - 1) selecionar(atual + 1, { tocar: true }); else pintarBotao(); });
+      document.addEventListener('keydown', e => { if (!aberto) return;
+        if (e.key === 'Escape') fechar(); else if (e.key === 'ArrowRight' && !e.target.closest('input')) selecionar(atual + 1); else if (e.key === 'ArrowLeft' && !e.target.closest('input')) selecionar(atual - 1); });
+      // arrastar para baixo (pela parte de cima) fecha
+      const topo = sheet.querySelector('.ens-top'); let y0 = null;
+      topo.addEventListener('pointerdown', e => { if (e.target.closest('button')) return; y0 = e.clientY; topo.setPointerCapture(e.pointerId); });
+      topo.addEventListener('pointermove', e => { if (y0 === null) return; const dy = Math.max(0, e.clientY - y0); painel.style.transform = `translateY(${dy}px)`; });
+      const soltar = e => { if (y0 === null) return; const dy = e.clientY - y0; y0 = null; if (dy > 110) fechar(); else painel.animate([{ transform: painel.style.transform }, { transform: 'none' }], { duration: 200 }).finished.then(() => { painel.style.transform = ''; }); if (dy <= 110) painel.style.transform = ''; };
+      topo.addEventListener('pointerup', soltar); topo.addEventListener('pointercancel', soltar);
+      if ('mediaSession' in navigator) {
+        navigator.mediaSession.setActionHandler('previoustrack', () => selecionar(atual - 1));
+        navigator.mediaSession.setActionHandler('nexttrack', () => selecionar(atual + 1));
+      }
+      // os áudios antigos (ocultos) param se o player novo começar a tocar
+      audio.addEventListener('play', () => secao.querySelectorAll('[data-ens-original] audio').forEach(a => a.pause()));
     })();
   </script>
 </body>
