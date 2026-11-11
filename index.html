@@ -2276,7 +2276,17 @@ NOV</strong>
         if (r.nome === 'Cifra') {
           return `<pre class="ens-cifra">${corpo.split('\n').map(l => linhaDeAcordes(l) ? `<b>${esc(l)}</b>` : esc(l)).join('\n')}</pre>`;
         }
-        return `<div class="ens-letra">${corpo.split(/\n\s*\n/).map(est => {
+        // na letra, some com as linhas só de acordes (quando a música só tem a cifra)
+        // (e rótulos de seção: "Refrão", "Ponte", "Final: Am7 Bm7…", "sol, fa#, re…")
+        const soAcordes = l => {
+          const t = l.trim(), semRotulo = t.replace(/\([^)]*\)/g, ' ').replace(/^[^:]{1,20}:/, ' ').replace(/\S+:/g, ' ').replace(/\bBus(\d)/g, 'Bsus$1');
+          if (/^(cifras?|composi[cç][aã]o)\b/i.test(t) && t.includes(':')) return /^cifras?/i.test(t);
+          if (/^(refr[aã]o|ponte|coro|intro|final|verso|pr[eé].?refr[aã]o|solo|instrumental|interl[uú]dio|tag)\s*\d*x?:?$/i.test(t)) return true;
+          const notas = t.split(/[\s,]+/).filter(Boolean);
+          if (notas.length >= 4 && notas.every(n => /^(do|re|mi|fa|sol|la|si)[#b]?$/i.test(n))) return true;
+          return linhaDeAcordes(semRotulo) || (!semRotulo.trim() && t.endsWith(':'));
+        };
+        return `<div class="ens-letra">${corpo.split(/\n\s*\n/).map(est => est.split('\n').filter(l => !soAcordes(l)).join('\n')).filter(est => est.trim()).map(est => {
           const comp = /^composi[cç][aã]o/i.test(est.trim());
           return `<p${comp ? ' class="ens-comp"' : ''}>${est.trim().split('\n').map(l => comp ? esc(l.trim()) : `<span class="ens-l">${esc(l.trim())}</span>`).join('<br>')}</p>`; }).join('')}</div>`;
       }
@@ -2320,7 +2330,9 @@ NOV</strong>
         const linhas = m.linhasEls && m.linhasEls[0]?.isConnected ? m.linhasEls : (m.linhasEls = [...doc.querySelectorAll('.ens-l')]);
         let destino = null;
         if (m.modoMontado === 'Letra' && Array.isArray(r.tempos) && linhas.length) {
-          let k = -1; r.tempos.forEach((tt, i) => { if (tt != null && tt <= t + .2) k = i; });
+          // cada linha tem um tempo ou uma lista (refrão escrito uma vez e cantado várias): acende a que começou por último
+          let k = -1, ult = -1;
+          r.tempos.forEach((tt, i) => { [].concat(tt ?? []).forEach(v => { if (v <= t + .2 && v >= ult) { ult = v; k = i; } }); });
           linhas.forEach((el, i) => { el.classList.toggle('on', i === k); el.classList.toggle('foi', i < k); });
           const el = linhas[Math.max(0, k)]; destino = k < 0 ? 0 : el.offsetTop + el.offsetHeight / 2 - doc.clientHeight * .42;
         } else if (d) {
