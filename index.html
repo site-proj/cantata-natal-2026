@@ -2276,7 +2276,9 @@ NOV</strong>
         if (r.nome === 'Cifra') {
           return `<pre class="ens-cifra">${corpo.split('\n').map(l => linhaDeAcordes(l) ? `<b>${esc(l)}</b>` : esc(l)).join('\n')}</pre>`;
         }
-        return `<div class="ens-letra">${corpo.split(/\n\s*\n/).map(est => {
+        // na letra, some com as linhas só de acordes (quando a música só tem a cifra)
+        const soAcordes = l => linhaDeAcordes(l.replace(/\([^)]*\)/g, ' ')) || /^cifras?:/i.test(l.trim());
+        return `<div class="ens-letra">${corpo.split(/\n\s*\n/).map(est => est.split('\n').filter(l => !soAcordes(l)).join('\n')).filter(est => est.trim()).map(est => {
           const comp = /^composi[cç][aã]o/i.test(est.trim());
           return `<p${comp ? ' class="ens-comp"' : ''}>${est.trim().split('\n').map(l => comp ? esc(l.trim()) : `<span class="ens-l">${esc(l.trim())}</span>`).join('<br>')}</p>`; }).join('')}</div>`;
       }

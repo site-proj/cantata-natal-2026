@@ -15,6 +15,17 @@ def norm(p):
     return re.sub(r'[^a-z0-9]', '', p)
 
 
+ACORDE = re.compile(r'^[(\[|]*[A-G](#|b)?(m|M|maj|min|dim|aug|sus|add|º|°|\+)?\d*(\(?[#b+-]?\d+\)?)*(/[A-G](#|b)?)?[)\]|]*$')
+
+
+def so_acordes(l):
+    """Igual ao player: linha só de acordes (ou 'Cifras:') não entra na letra."""
+    if re.match(r'^\s*cifras?:', l, re.I):
+        return True
+    toks = [t for t in re.sub(r'\([^)]*\)', ' ', l).split() if not re.match(r'^(\d+x|x\d+|-+|\|+|\.+)$', t, re.I)]
+    return bool(toks) and sum(1 for t in toks if ACORDE.match(t)) / len(toks) >= .7
+
+
 def linhas_da_letra(texto):
     """Mesmas linhas que o player mostra (sem cabeçalho de título/artista e sem 'Composição')."""
     ls = texto.replace('\r', '').rstrip().split('\n')
@@ -26,7 +37,7 @@ def linhas_da_letra(texto):
     for est in re.split(r'\n\s*\n', corpo):
         if re.match(r'^\s*composi[cç][aã]o', est.strip(), re.I):
             continue
-        out += [l.strip() for l in est.strip().split('\n') if l.strip()]
+        out += [l.strip() for l in est.strip().split('\n') if l.strip() and not so_acordes(l)]
     return out
 
 
