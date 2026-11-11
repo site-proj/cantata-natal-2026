@@ -956,7 +956,6 @@
     .ens-leitura[hidden] { display:none; }
     .ens-ferramentas { display:flex; align-items:center; gap:6px; padding:8px 10px; border-bottom:1px solid rgba(223,187,119,.14); background:#14100b; }
     .ens-ferramentas button, .ens-ferramentas a { display:inline-grid; min-width:42px; min-height:36px; place-items:center; padding:0 10px; border:1px solid rgba(223,187,119,.35); border-radius:999px; color:var(--ivory); background:none; font:inherit; font-size:.84rem; font-weight:700; text-decoration:none; cursor:pointer; }
-    .ens-ferramentas [data-rolar][aria-pressed="true"] { color:#20160c; background:var(--gold); }
     .ens-ferramentas a { margin-left:auto; color:var(--gold); }
     .ens-ferramentas [hidden] { display:none; }
     .ens-doc { flex:1 1 auto; min-height:0; overflow:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch; padding:18px 18px 40px; }
@@ -1000,12 +999,30 @@
 
     .ens-ferramentas { right:8px; bottom:8px; gap:2px; padding:3px; background:rgba(20,16,11,.82); }
     .ens-ferramentas button, .ens-ferramentas a { min-width:34px; min-height:32px; padding:0 7px; font-size:.78rem; }
-    .ens-ferramentas [data-rolar] { font-size:1rem; }
     .ens-doc { padding-bottom:64px; }
     .ens-panel.is-reading .ens-controls { grid-template-columns:52px 1fr 52px; }
     .ens-panel.is-reading .ens-times span:first-child { grid-column:1; grid-row:2; }
     .ens-panel.is-reading .ens-times span:last-child { grid-column:3; grid-row:2; text-align:right; }
     .ens-panel.is-reading .ens-buttons { grid-row:2; }
+
+    /* Letra acompanhando a música e modo telão. */
+    .ens-doc { position:relative; }
+    .ens-ferramentas [data-seguir][aria-pressed="true"] { color:#20160c; background:var(--gold); }
+    .ens-ferramentas [data-telao] { font-size:1.05rem; }
+    .ens-letra.tem-tempos .ens-l { opacity:.5; transition:opacity .35s ease, color .35s ease, text-shadow .35s ease; }
+    .ens-letra.tem-tempos .ens-l.foi { opacity:.38; }
+    .ens-letra.tem-tempos .ens-l.on { opacity:1; color:#ffe9b8; text-shadow:0 0 18px rgba(223,187,119,.55); }
+    .ens-sair-telao { display:none; }
+    .ens-panel.is-telao { width:100vw; max-width:none; height:100dvh; border:0; border-radius:0; }
+    .ens-panel.is-telao .ens-top, .ens-panel.is-telao .ens-tabs, .ens-panel.is-telao .ens-dots { display:none; }
+    .ens-panel.is-telao .ens-slide { padding:0; }
+    .ens-panel.is-telao .ens-leitura { border:0; border-radius:0; background:#050403; }
+    .ens-panel.is-telao .ens-doc { padding:12vh 6vw 28vh; -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 16%,#000 78%,transparent 100%); mask-image:linear-gradient(180deg,transparent 0,#000 16%,#000 78%,transparent 100%); }
+    .ens-panel.is-telao .ens-letra { font-size:calc(clamp(1.7rem, 4.6vw, 4.4rem) * var(--fator, 1)) !important; line-height:1.42; }
+    .ens-panel.is-telao .ens-letra p { margin-bottom:1.1em; }
+    .ens-panel.is-telao .ens-ferramentas { top:14px; bottom:auto; right:14px; }
+    .ens-panel.is-telao .ens-sair-telao { position:absolute; z-index:5; top:14px; left:14px; display:inline-grid; min-height:40px; place-items:center; padding:0 16px; border:1px solid rgba(223,187,119,.4); border-radius:999px; color:var(--ivory); background:rgba(20,16,11,.82); font:inherit; font-size:.85rem; font-weight:700; cursor:pointer; }
+    .ens-panel.is-telao .ens-controls { position:absolute; z-index:4; left:50%; bottom:max(14px, env(safe-area-inset-bottom)); width:min(620px, calc(100% - 24px)); transform:translateX(-50%); border:1px solid rgba(223,187,119,.25); border-radius:22px; background:rgba(12,9,6,.86); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
   </style>
 </head>
 <body>
@@ -2209,7 +2226,7 @@ NOV</strong>
       // 3) player
       const sheet = document.createElement('div'); sheet.className = 'ens-sheet'; sheet.hidden = true;
       sheet.setAttribute('role', 'dialog'); sheet.setAttribute('aria-modal', 'true'); sheet.setAttribute('aria-label', 'Player das músicas do ensaio');
-      sheet.innerHTML = `<div class="ens-backdrop" data-fechar></div><div class="ens-panel"><div class="ens-top"><span class="ens-grip"></span><span class="ens-top-info"><span class="ens-group"></span><b class="ens-top-title"></b></span><button class="ens-close" type="button" aria-label="Fechar player" data-fechar>×</button></div>
+      sheet.innerHTML = `<div class="ens-backdrop" data-fechar></div><div class="ens-panel"><button class="ens-sair-telao" type="button" data-sair-telao aria-label="Sair do modo telão">✕ Sair do telão</button><div class="ens-top"><span class="ens-grip"></span><span class="ens-top-info"><span class="ens-group"></span><b class="ens-top-title"></b></span><button class="ens-close" type="button" aria-label="Fechar player" data-fechar>×</button></div>
         <div class="ens-slides"></div>
         <div class="ens-controls"><input class="ens-progress" type="range" min="0" max="1000" value="0" step="1" aria-label="Posição da música"><div class="ens-times"><span data-atual>0:00</span><span data-resta>-0:00</span></div>
         <div class="ens-buttons"><button class="ens-btn" type="button" data-ant aria-label="Música anterior">${ICON.prev}</button><button class="ens-btn ens-main" type="button" data-tocar aria-label="Tocar">${ICON.play}</button><button class="ens-btn" type="button" data-prox aria-label="Próxima música">${ICON.next}</button></div>
@@ -2233,12 +2250,13 @@ NOV</strong>
         s.innerHTML = `<div class="ens-mini"><span class="ens-cover" style="--ens-grad:${m.grad}"></span><span><b></b><small></small></span></div>
           <div class="ens-hero"><div class="ens-cover" style="--ens-grad:${m.grad}"></div><h3 class="ens-slide-title"></h3><p class="ens-slide-artist"></p></div>
           <div class="ens-tabs" role="tablist">${abas.map(a => `<button class="ens-tab" type="button" role="tab" aria-selected="false" data-modo="${a}">${a}</button>`).join('')}</div>
-          <div class="ens-leitura" hidden><div class="ens-ferramentas"><button type="button" data-fonte="-1" aria-label="Diminuir letra">A−</button><button type="button" data-fonte="1" aria-label="Aumentar letra">A+</button><button type="button" data-rolar aria-pressed="false" aria-label="Rolar sozinho">⇣</button><a target="_blank" rel="noopener noreferrer" data-pdf aria-label="Abrir o PDF original">PDF</a></div><div class="ens-doc"></div></div>`;
+          <div class="ens-leitura" hidden><div class="ens-ferramentas"><button type="button" data-fonte="-1" aria-label="Diminuir letra">A−</button><button type="button" data-fonte="1" aria-label="Aumentar letra">A+</button><button type="button" data-seguir aria-pressed="true" aria-label="Letra acompanha a música">♪</button><button type="button" data-telao aria-label="Modo telão (tela cheia)">⛶</button><a target="_blank" rel="noopener noreferrer" data-pdf aria-label="Abrir o PDF original">PDF</a></div><div class="ens-doc"></div></div>`;
         s.querySelector('.ens-slide-title').textContent = m.titulo; s.querySelector('.ens-slide-artist').textContent = m.artista;
         s.querySelector('.ens-mini b').textContent = m.titulo; s.querySelector('.ens-mini small').textContent = m.artista;
         s.querySelectorAll('.ens-tab').forEach(t => t.addEventListener('click', () => { modo = t.dataset.modo; aplicarModo(m); }));
         s.querySelectorAll('[data-fonte]').forEach(b => b.addEventListener('click', () => mudarFonte(m, Number(b.dataset.fonte))));
-        s.querySelector('[data-rolar]').addEventListener('click', () => alternarRolagem(m));
+        s.querySelector('[data-seguir]').addEventListener('click', () => alternarSeguir());
+        s.querySelector('[data-telao]').addEventListener('click', () => alternarTelao());
         m.slide = s; slides.append(s);
       });
       const ehAcorde = tok => /^[(\[|]*[A-G](#|b)?(m|M|maj|min|dim|aug|sus|add|º|°|\+)?\d*(\(?[#b+-]?\d+\)?)*(\/[A-G](#|b)?)?[)\]|]*$/.test(tok);
@@ -2260,7 +2278,7 @@ NOV</strong>
         }
         return `<div class="ens-letra">${corpo.split(/\n\s*\n/).map(est => {
           const comp = /^composi[cç][aã]o/i.test(est.trim());
-          return `<p${comp ? ' class="ens-comp"' : ''}>${est.trim().split('\n').map(l => esc(l.trim())).join('<br>')}</p>`; }).join('')}</div>`;
+          return `<p${comp ? ' class="ens-comp"' : ''}>${est.trim().split('\n').map(l => comp ? esc(l.trim()) : `<span class="ens-l">${esc(l.trim())}</span>`).join('<br>')}</p>`; }).join('')}</div>`;
       }
       function ajustarCifra(m) {
         const pre = m.slide.querySelector('.ens-cifra'); if (!pre) return;
@@ -2268,7 +2286,7 @@ NOV</strong>
         const larg = m.slide.querySelector('.ens-doc').clientWidth - 24;
         const tams = pre.textContent.split('\n').map(l => l.trimEnd().length).filter(n => n).sort((a, b) => a - b);
         const maior = Math.max(20, tams[Math.floor(tams.length * .96) - 1] || 20);
-        pre.style.fontSize = Math.max(11, Math.min(17, larg / (maior * .61))) + 'px';   // mono: largura ≈ 0,61 em
+        pre.style.fontSize = Math.max(11, Math.min(painel.classList.contains('is-telao') ? 34 : 17, larg / (maior * .61))) + 'px';   // mono: largura ≈ 0,61 em
       }
       function mudarFonte(m, d) {
         if (modo === 'Cifra') {
@@ -2277,18 +2295,55 @@ NOV</strong>
         } else if (modo === 'Letra') {
           fonte.Letra = Math.max(.9, Math.min(1.8, +(fonte.Letra + d * .1).toFixed(2)));
           m.slide.querySelector('.ens-letra')?.style.setProperty('font-size', fonte.Letra + 'rem');
+          m.slide.querySelector('.ens-letra')?.style.setProperty('--fator', fonte.Letra / 1.12);
         }
         salvarFonte();
       }
-      let rolando = null;
-      function alternarRolagem(m, parar = false) {
-        const doc = m.slide.querySelector('.ens-doc'), bt = m.slide.querySelector('[data-rolar]');
-        if (rolando || parar) { cancelAnimationFrame(rolando?.id); rolando = null; musicas.forEach(x => { const b = x.slide.querySelector('[data-rolar]'); b.setAttribute('aria-pressed', 'false'); b.textContent = '⇣'; b.setAttribute('aria-label', 'Rolar sozinho'); }); return; }
-        let ultimo = performance.now(), acc = 0;
-        const passo = agora => { acc += (agora - ultimo) * .028; ultimo = agora; if (acc >= 1) { doc.scrollTop += Math.floor(acc); acc %= 1; }
-          if (doc.scrollTop + doc.clientHeight >= doc.scrollHeight - 2) return alternarRolagem(m, true); rolando.id = requestAnimationFrame(passo); };
-        rolando = { id: requestAnimationFrame(passo) }; bt.setAttribute('aria-pressed', 'true'); bt.textContent = '❚❚'; bt.setAttribute('aria-label', 'Parar a rolagem');
+      // Seguir a música: a letra (ou cifra) desce conforme o áudio. Com tempos por linha
+      // (letras/<id>.tempos.json), a linha cantada acende e fica no centro (karaokê).
+      let seguir = true; try { seguir = localStorage.getItem('ens-seguir') !== '0'; } catch (e) {}
+      let pausaSeguir = 0, ultimoT = -1;
+      const pintarSeguir = () => musicas.forEach(x => { const b = x.slide.querySelector('[data-seguir]'); b.setAttribute('aria-pressed', String(seguir)); });
+      function alternarSeguir() { seguir = !seguir; pausaSeguir = 0; ultimoT = -1; try { localStorage.setItem('ens-seguir', seguir ? '1' : '0'); } catch (e) {} pintarSeguir(); }
+      async function carregarTempos(r) {
+        if (r.tempos !== undefined || !r.id) return r.tempos;
+        try { const resp = await fetch(`letras/${r.id}.tempos.json`); r.tempos = resp.ok ? await resp.json() : null; } catch (e) { r.tempos = null; }
+        return r.tempos;
       }
+      function acompanhar() {
+        requestAnimationFrame(acompanhar);
+        if (!aberto) return;
+        const m = musicas[atual]; if (!m || !m.slide.classList.contains('is-reading')) return;
+        const doc = m.slide.querySelector('.ens-doc'), r = m.recursos.find(x => x.nome === m.modoMontado);
+        if (!r || doc.classList.contains('is-frame')) return;
+        const t = audio.currentTime || 0, d = audio.duration || 0;
+        const linhas = m.linhasEls && m.linhasEls[0]?.isConnected ? m.linhasEls : (m.linhasEls = [...doc.querySelectorAll('.ens-l')]);
+        let destino = null;
+        if (m.modoMontado === 'Letra' && Array.isArray(r.tempos) && linhas.length) {
+          let k = -1; r.tempos.forEach((tt, i) => { if (tt != null && tt <= t + .2) k = i; });
+          linhas.forEach((el, i) => { el.classList.toggle('on', i === k); el.classList.toggle('foi', i < k); });
+          const el = linhas[Math.max(0, k)]; destino = k < 0 ? 0 : el.offsetTop + el.offsetHeight / 2 - doc.clientHeight * .42;
+        } else if (d) {
+          destino = (t / d) * (doc.scrollHeight - doc.clientHeight);
+        }
+        const mudou = Math.abs(t - ultimoT) > .01; ultimoT = t;
+        if (!seguir || destino === null || performance.now() < pausaSeguir || (!mudou && audio.paused)) return;
+        destino = Math.max(0, Math.min(doc.scrollHeight - doc.clientHeight, destino));
+        const dif = destino - doc.scrollTop;
+        if (Math.abs(dif) > .5) doc.scrollTop += Math.abs(dif) > 900 ? dif : dif * .09;
+      }
+      requestAnimationFrame(acompanhar);
+      // se a pessoa rolar com o dedo/mouse, o acompanhamento espera 5 s e volta sozinho
+      slides.addEventListener('wheel', e => { if (e.target.closest('.ens-doc')) pausaSeguir = performance.now() + 5000; }, { passive: true });
+      slides.addEventListener('touchmove', e => { if (e.target.closest('.ens-doc')) pausaSeguir = performance.now() + 5000; }, { passive: true });
+      // Modo telão: tela cheia, letra bem grande, controles discretos.
+      function alternarTelao(forcar) {
+        const ligar = forcar ?? !painel.classList.contains('is-telao');
+        painel.classList.toggle('is-telao', ligar);
+        try { if (ligar && !document.fullscreenElement) sheet.requestFullscreen?.().catch(() => {}); else if (!ligar && document.fullscreenElement) document.exitFullscreen?.(); } catch (e) {}
+        requestAnimationFrame(() => musicas.forEach(x => x.modoMontado === 'Cifra' && ajustarCifra(x)));
+      }
+      document.addEventListener('fullscreenchange', () => { if (!document.fullscreenElement && painel.classList.contains('is-telao')) alternarTelao(false); });
       async function aplicarModo(m) {
         const abas = ['Ouvir', ...m.recursos.map(r => r.nome)];
         const efetivo = abas.includes(modo) ? modo : (modo !== 'Ouvir' && abas.includes('Letra') ? 'Letra' : 'Ouvir');
@@ -2296,17 +2351,20 @@ NOV</strong>
         const lendo = efetivo !== 'Ouvir';
         m.slide.classList.toggle('is-reading', lendo); m.slide.querySelector('.ens-leitura').hidden = !lendo;
         painel.classList.toggle('is-reading', lendo && m.i === atual);
-        if (rolando && m.i === atual) alternarRolagem(m, true);
+        if (!lendo && m.i === atual && painel.classList.contains('is-telao')) alternarTelao(false);
         if (!lendo || m.modoMontado === efetivo) return;
         const r = m.recursos.find(x => x.nome === efetivo), doc = m.slide.querySelector('.ens-doc');
         const pdf = m.slide.querySelector('[data-pdf]'); pdf.href = r.link || '#'; pdf.hidden = !r.link;
-        m.slide.querySelectorAll('[data-fonte], [data-rolar]').forEach(b => b.hidden = efetivo === 'Original');
+        m.slide.querySelectorAll('[data-fonte], [data-seguir]').forEach(b => b.hidden = efetivo === 'Original');
         m.modoMontado = efetivo; doc.scrollTop = 0;
         const texto = efetivo === 'Original' ? null : await carregarTexto(r);
+        if (efetivo === 'Letra') await carregarTempos(r);
         if (m.modoMontado !== efetivo) return;
         if (texto) {
-          doc.innerHTML = montarTexto(m, r, texto); doc.classList.remove('is-frame');
+          doc.innerHTML = montarTexto(m, r, texto); doc.classList.remove('is-frame'); m.linhasEls = null; ultimoT = -1;
+          doc.querySelector('.ens-letra')?.classList.toggle('tem-tempos', efetivo === 'Letra' && Array.isArray(r.tempos));
           m.slide.querySelector('.ens-letra')?.style.setProperty('font-size', fonte.Letra + 'rem');
+          m.slide.querySelector('.ens-letra')?.style.setProperty('--fator', fonte.Letra / 1.12);
           requestAnimationFrame(() => ajustarCifra(m));
         } else {
           doc.innerHTML = r.html; doc.classList.add('is-frame');          // sem texto extraído: mostra o documento original
@@ -2363,7 +2421,7 @@ NOV</strong>
         painel.animate([{ transform: painel.style.transform || 'none', opacity: 1 }, { transform: `translate(${para.left - de.left}px,${para.top - de.top}px) scale(${para.width / de.width},${para.height / de.height})`, borderRadius: '20px', opacity: 0 }], { duration: 300, easing: 'cubic-bezier(.4,0,.2,1)' }).finished.then(fim);
       }
       musicas.forEach(m => m.lista.addEventListener('click', e => abrir(m, !!e.target.closest('[data-play]'))));
-      sheet.addEventListener('click', e => { if (e.target.closest('[data-fechar]')) fechar(); });
+      sheet.addEventListener('click', e => { if (e.target.closest('[data-sair-telao]')) return alternarTelao(false); if (e.target.closest('[data-fechar]')) fechar(); });
       btTocar.addEventListener('click', () => audio.paused ? audio.play().catch(() => {}) : audio.pause());
       btAnt.addEventListener('click', () => selecionar(atual - 1)); btProx.addEventListener('click', () => selecionar(atual + 1));
       barra.addEventListener('input', () => { if (audio.duration) audio.currentTime = barra.value / 1000 * audio.duration; pintarTempo(); });
@@ -2371,7 +2429,7 @@ NOV</strong>
       ['play', 'pause'].forEach(ev => audio.addEventListener(ev, pintarBotao));
       audio.addEventListener('ended', () => { if (atual < musicas.length - 1) selecionar(atual + 1, { tocar: true }); else pintarBotao(); });
       document.addEventListener('keydown', e => { if (!aberto) return;
-        if (e.key === 'Escape') fechar(); else if (e.key === 'ArrowRight' && !e.target.closest('input')) selecionar(atual + 1); else if (e.key === 'ArrowLeft' && !e.target.closest('input')) selecionar(atual - 1); });
+        if (e.key === 'Escape') { if (painel.classList.contains('is-telao')) alternarTelao(false); else fechar(); } else if (e.key === 'ArrowRight' && !e.target.closest('input')) selecionar(atual + 1); else if (e.key === 'ArrowLeft' && !e.target.closest('input')) selecionar(atual - 1); });
       // arrastar para baixo (pela parte de cima) fecha
       const topo = sheet.querySelector('.ens-top'); let y0 = null;
       topo.addEventListener('pointerdown', e => { if (e.target.closest('button')) return; y0 = e.clientY; topo.setPointerCapture(e.pointerId); });
