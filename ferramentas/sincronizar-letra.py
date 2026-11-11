@@ -3,7 +3,7 @@
 
 Uso: python sincronizar.py <audio.mp3> <letra.txt> <saida.tempos.json> [modelo]
 """
-import json, re, sys, unicodedata, difflib, time
+import json, os, re, sys, unicodedata, difflib, time
 
 AUDIO, LETRA, SAIDA = sys.argv[1], sys.argv[2], sys.argv[3]
 MODELO = sys.argv[4] if len(sys.argv) > 4 else 'small'
@@ -20,10 +20,22 @@ ACORDE = re.compile(r'^[(\[|]*[A-G](#|b)?(m|M|maj|min|dim|aug|sus|add|º|°|\+)?
 
 def so_acordes(l):
     """Igual ao player: linha só de acordes (ou 'Cifras:') não entra na letra."""
-    if re.match(r'^\s*cifras?:', l, re.I):
+    t = l.strip()
+    if re.match(r'^(cifras?|composi[cç][aã]o)\b', t, re.I) and ':' in t:
+        return bool(re.match(r'^cifras?', t, re.I))
+    if re.match(r'^(refr[aã]o|ponte|coro|intro|final|verso|pr[eé].?refr[aã]o|solo|instrumental|interl[uú]dio|tag)\s*\d*x?:?$', t, re.I):
         return True
-    toks = [t for t in re.sub(r'\([^)]*\)', ' ', l).split() if not re.match(r'^(\d+x|x\d+|-+|\|+|\.+)$', t, re.I)]
-    return bool(toks) and sum(1 for t in toks if ACORDE.match(t)) / len(toks) >= .7
+    notas = [n for n in re.split(r'[\s,]+', t) if n]
+    if len(notas) >= 4 and all(re.match(r'^(do|re|mi|fa|sol|la|si)[#b]?$', n, re.I) for n in notas):
+        return True
+    sem = re.sub(r'\([^)]*\)', ' ', t)
+    sem = re.sub(r'^[^:]{1,20}:', ' ', sem)
+    sem = re.sub(r'\S+:', ' ', sem)
+    sem = re.sub(r'\bBus(\d)', r'Bsus\1', sem)
+    toks = [x for x in sem.split() if not re.match(r'^(\d+x|x\d+|-+|\|+|\.+)$', x, re.I)]
+    if not toks:
+        return t.endswith(':')
+    return sum(1 for x in toks if ACORDE.match(x)) / len(toks) >= .7
 
 
 def linhas_da_letra(texto):
@@ -48,14 +60,29 @@ def transcrever():
     import subprocess, numpy as np
     bruto = subprocess.run(['ffmpeg', '-v', 'error', '-i', AUDIO, '-ac', '1', '-ar', '16000', '-f', 's16le', '-'], capture_output=True, check=True).stdout
     onda = np.frombuffer(bruto, np.int16).astype(np.float32) / 32768.0
-    segs, info = modelo.transcribe(onda, language='pt', word_timestamps=True, vad_filter=False,
-                                   vad_parameters={'min_silence_duration_ms': 600}, beam_size=5, condition_on_previous_text=False)
     palavras = []
-    for s in segs:
-        for w in (s.words or []):
-            n = norm(w.word)
-            if n:
-                palavras.append((n, round(w.start, 2), round(w.end, 2), w.word.strip()))
+    if os.environ.get('BLOCOS'):
+        # blocos de 30 s reconhecidos um a um, com a letra como dica: o Whisper não "pula" trechos longos
+        unicas = list(dict.fromkeys(linhas_da_letra(open(LETRA, encoding='utf-8').read())))
+        dica = ' '.join(unicas)[:600]
+        passo = 30 * 16000
+        for ini in range(0, len(onda), passo):
+            segs, _ = modelo.transcribe(onda[ini:ini + passo], language='pt', word_timestamps=True, vad_filter=False,
+                                        beam_size=5, condition_on_previous_text=False, initial_prompt=dica)
+            base = ini / 16000
+            for s in segs:
+                for w in (s.words or []):
+                    n = norm(w.word)
+                    if n:
+                        palavras.append((n, round(base + w.start, 2), round(base + w.end, 2), w.word.strip()))
+    else:
+        segs, info = modelo.transcribe(onda, language='pt', word_timestamps=True, vad_filter=False,
+                                       beam_size=5, condition_on_previous_text=False)
+        for s in segs:
+            for w in (s.words or []):
+                n = norm(w.word)
+                if n:
+                    palavras.append((n, round(w.start, 2), round(w.end, 2), w.word.strip()))
     print(f'transcrição: {len(palavras)} palavras em {time.time() - t0:.0f}s', file=sys.stderr)
     return palavras
 
