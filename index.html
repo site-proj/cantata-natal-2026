@@ -2330,7 +2330,9 @@ NOV</strong>
         const linhas = m.linhasEls && m.linhasEls[0]?.isConnected ? m.linhasEls : (m.linhasEls = [...doc.querySelectorAll('.ens-l')]);
         let destino = null;
         if (m.modoMontado === 'Letra' && Array.isArray(r.tempos) && linhas.length) {
-          let k = -1; r.tempos.forEach((tt, i) => { if (tt != null && tt <= t + .2) k = i; });
+          // cada linha tem um tempo ou uma lista (refrão escrito uma vez e cantado várias): acende a que começou por último
+          let k = -1, ult = -1;
+          r.tempos.forEach((tt, i) => { [].concat(tt ?? []).forEach(v => { if (v <= t + .2 && v >= ult) { ult = v; k = i; } }); });
           linhas.forEach((el, i) => { el.classList.toggle('on', i === k); el.classList.toggle('foi', i < k); });
           const el = linhas[Math.max(0, k)]; destino = k < 0 ? 0 : el.offsetTop + el.offsetHeight / 2 - doc.clientHeight * .42;
         } else if (d) {
