@@ -962,7 +962,7 @@
     .ens-doc.is-frame { padding:0; }
     .ens-doc.is-frame iframe { display:block; width:100%; height:100%; min-height:100%; border:0; background:#fff; }
     .ens-doc.is-frame .rehearsal-resource-fallback { margin:0; padding:10px 14px; color:var(--muted); font-size:.82rem; }
-    .ens-letra { color:#f3e8d2; font-size:1.12rem; line-height:1.65; text-align:center; }
+    .ens-letra { color:#f3e8d2; font-size:1.4rem; line-height:1.6; text-align:center; }
     .ens-letra p { margin:0 0 1.25em; }
     .ens-letra .ens-comp { margin-top:1.6em; color:#8f8574; font-size:.78em; }
     .ens-cifra { margin:0; color:#eadfc8; font-family:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono","Courier New",monospace; font-size:14px; line-height:1.5; white-space:pre; }
@@ -1018,7 +1018,7 @@
     .ens-panel.is-telao .ens-slide { padding:0; }
     .ens-panel.is-telao .ens-leitura { border:0; border-radius:0; background:#050403; }
     .ens-panel.is-telao .ens-doc { padding:12vh 6vw 28vh; -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 16%,#000 78%,transparent 100%); mask-image:linear-gradient(180deg,transparent 0,#000 16%,#000 78%,transparent 100%); }
-    .ens-panel.is-telao .ens-letra { font-size:calc(clamp(1.7rem, 4.6vw, 4.4rem) * var(--fator, 1)) !important; line-height:1.42; }
+    .ens-panel.is-telao .ens-letra { font-size:calc(clamp(2rem, 5.2vw, 5rem) * var(--fator, 1)) !important; line-height:1.42; }
     .ens-panel.is-telao .ens-letra p { margin-bottom:1.1em; }
     .ens-panel.is-telao .ens-ferramentas { top:14px; bottom:auto; right:14px; }
     .ens-panel.is-telao .ens-sair-telao { position:absolute; z-index:5; top:14px; left:14px; display:inline-grid; min-height:40px; place-items:center; padding:0 16px; border:1px solid rgba(223,187,119,.4); border-radius:999px; color:var(--ivory); background:rgba(20,16,11,.82); font:inherit; font-size:.85rem; font-weight:700; cursor:pointer; }
@@ -2238,9 +2238,9 @@ NOV</strong>
       // Modos do player: "Ouvir" (capa grande) ou leitura (Letra / Cifra / Original). O modo escolhido
       // vale para todas as músicas: arrastando para o lado, a próxima abre no mesmo modo.
       let modo = 'Ouvir';
-      let fonte = { Letra: 1.12, Cifra: 0 };            // 0 = cifra ajusta à largura da tela
-      try { Object.assign(fonte, JSON.parse(localStorage.getItem('ens-fonte') || '{}')); } catch (e) {}
-      const salvarFonte = () => { try { localStorage.setItem('ens-fonte', JSON.stringify(fonte)); } catch (e) {} };
+      let fonte = { Letra: 1.4, Cifra: 0 };            // 0 = cifra ajusta à largura da tela
+      try { Object.assign(fonte, JSON.parse(localStorage.getItem('ens-fonte2') || '{}')); } catch (e) {}
+      const salvarFonte = () => { try { localStorage.setItem('ens-fonte2', JSON.stringify(fonte)); } catch (e) {} };
       const driveId = html => (html.match(/\/d\/([\w-]{20,})/) || [])[1];
       const linkOriginal = html => (html.match(/href="([^"]+)"/) || [])[1];
       musicas.forEach(m => {
@@ -2293,9 +2293,9 @@ NOV</strong>
           const atualPx = parseFloat(m.slide.querySelector('.ens-cifra')?.style.fontSize) || 14;
           fonte.Cifra = Math.max(10, Math.min(26, atualPx + d)); ajustarCifra(m);
         } else if (modo === 'Letra') {
-          fonte.Letra = Math.max(.9, Math.min(1.8, +(fonte.Letra + d * .1).toFixed(2)));
+          fonte.Letra = Math.max(1, Math.min(2.4, +(fonte.Letra + d * .1).toFixed(2)));
           m.slide.querySelector('.ens-letra')?.style.setProperty('font-size', fonte.Letra + 'rem');
-          m.slide.querySelector('.ens-letra')?.style.setProperty('--fator', fonte.Letra / 1.12);
+          m.slide.querySelector('.ens-letra')?.style.setProperty('--fator', fonte.Letra / 1.4);
         }
         salvarFonte();
       }
@@ -2364,7 +2364,7 @@ NOV</strong>
           doc.innerHTML = montarTexto(m, r, texto); doc.classList.remove('is-frame'); m.linhasEls = null; ultimoT = -1;
           doc.querySelector('.ens-letra')?.classList.toggle('tem-tempos', efetivo === 'Letra' && Array.isArray(r.tempos));
           m.slide.querySelector('.ens-letra')?.style.setProperty('font-size', fonte.Letra + 'rem');
-          m.slide.querySelector('.ens-letra')?.style.setProperty('--fator', fonte.Letra / 1.12);
+          m.slide.querySelector('.ens-letra')?.style.setProperty('--fator', fonte.Letra / 1.4);
           requestAnimationFrame(() => ajustarCifra(m));
         } else {
           doc.innerHTML = r.html; doc.classList.add('is-frame');          // sem texto extraído: mostra o documento original
