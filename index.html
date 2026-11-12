@@ -1043,6 +1043,10 @@
       .diary-reels::-webkit-scrollbar { display:none; }
       .diary-reels figure { flex:0 0 64%; scroll-snap-align:center; }
       .diary-reels video { max-height:none; }
+      /* vídeo da dança maior no celular: ocupa a largura do cartão e fica mais alto (4:3; em tela cheia aparece inteiro) */
+      .diary-danca { width:calc(100% + 32px); margin-inline:-16px; border-inline:0; border-radius:0; }
+      .diary-danca video { aspect-ratio:4/3; object-fit:cover; }
+      .diary-danca video:fullscreen { object-fit:contain; }
     }
     @media(min-width:701px){ .diary-reels-dica { display:none; }
     }
