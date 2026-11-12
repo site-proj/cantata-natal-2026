@@ -1049,6 +1049,26 @@
       .diary-22-video-largo .diary-22-video { border-radius:0; }
       #bastidores .gallery .preparation-video { width:calc(100% + 36px); margin-inline:-18px; border-inline:0; border-radius:0; }
     }
+    /* Bastidores: fotos em mosaico uniforme (mesmo recorte; tocar amplia a foto inteira). */
+    .diary-22-card:not(.diary-22-card-wide) .diary-22-photo { aspect-ratio:4/5; height:auto; object-fit:cover; }
+    .diary-22-card-wide:not(.diary-22-video-card) .diary-22-photo { aspect-ratio:16/9; object-fit:cover; }
+    .diary-22-grid { align-items:stretch; }
+    .diary-22-card:not(.diary-22-video-card) { display:flex; flex-direction:column; }
+    .diary-22-card:not(.diary-22-video-card) figcaption { flex:1; }
+    .diary-22-video-largo { width:min(100%, 860px) !important; justify-self:center; }
+    @media(max-width:700px){
+      .diary-22-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+      .diary-22-card-wide, .diary-22-card:not(.diary-22-card-wide):nth-child(3) { grid-column:1 / -1; }
+      .diary-22-card:not(.diary-22-card-wide):nth-child(3) .diary-22-photo { aspect-ratio:16/10; }
+      .diary-22-card:not(.diary-22-video-card) figcaption { padding:9px 11px 11px; font-size:.8rem; line-height:1.35; }
+      .diary-22-video-largo { width:calc(100% + 32px) !important; }
+      .diary-reels figure { flex-basis:58%; }
+    }
+    @media(min-width:701px){
+      .diary-22-video-compacto { width:min(100%, 780px) !important; grid-template-columns:minmax(0,1fr) minmax(0,1.9fr) !important; align-items:center; }
+      .diary-22-video-compacto figcaption { grid-column:1; grid-row:1; }
+      .diary-22-video-compacto .diary-22-video { grid-column:2; grid-row:1; }
+    }
     /* Música de abertura: toca ao abrir (ou no primeiro toque, quando o navegador bloqueia som automático). */
     .abertura-som { position:fixed; right:max(14px, env(safe-area-inset-right)); bottom:max(14px, env(safe-area-inset-bottom)); z-index:60; display:inline-flex; align-items:center; gap:8px; height:42px; min-width:42px; justify-content:center; padding:0 13px; border:1px solid rgba(223,187,119,.55); border-radius:999px; color:var(--gold); background:rgba(16,13,10,.86); box-shadow:0 8px 24px rgba(0,0,0,.4); font:600 .78rem/1 var(--sans); letter-spacing:.06em; cursor:pointer; -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); transition:opacity .4s, transform .4s; }
     .abertura-som[hidden] { display:none; }
@@ -1626,7 +1646,7 @@ NOV</strong>
             <figure class="diary-22-card"><button class="diary-22-photo-button" type="button" data-lightbox-src="images/ensaio-22-10-2026-louvor.jpeg" data-lightbox-alt="Equipe de louvor reunida no palco durante o ensaio"><img class="diary-22-photo" src="images/ensaio-22-10-2026-louvor.jpeg" alt="Equipe de louvor reunida no palco durante o ensaio" loading="lazy" decoding="async"></button><figcaption>Louvor reunido para mais um ensaio.</figcaption></figure>
             <figure class="diary-22-card"><button class="diary-22-photo-button" type="button" data-lightbox-src="images/ensaio-22-10-2026-musicos.jpeg" data-lightbox-alt="Músicos ensaiando juntos no palco"><img class="diary-22-photo" src="images/ensaio-22-10-2026-musicos.jpeg" alt="Músicos ensaiando juntos no palco" loading="lazy" decoding="async"></button><figcaption>Vozes e instrumentos em sintonia.</figcaption></figure>
             <figure class="diary-22-card"><button class="diary-22-photo-button" type="button" data-lightbox-src="images/ensaio-22-10-2026-equipe.jpeg" data-lightbox-alt="Equipe de louvor durante o ensaio, fotografada da plateia"><img class="diary-22-photo" src="images/ensaio-22-10-2026-equipe.jpeg" alt="Equipe de louvor durante o ensaio, fotografada da plateia" loading="lazy" decoding="async"></button><figcaption>Um registro do ensaio visto da plateia.</figcaption></figure>
-            <figure class="diary-22-card diary-22-card-wide diary-22-video-card"><video class="diary-22-video" controls playsinline preload="metadata" poster="images/ensaio-22-10-2026-louvor.jpeg" aria-label="Vídeo do ensaio de louvor"><source src="videos/ensaio-22-10-2026.mp4" type="video/mp4">Seu navegador não reproduz este vídeo. <a href="videos/ensaio-22-10-2026.mp4">Assistir ao ensaio</a>.</video><figcaption><strong>Vídeo do ensaio</strong><span>Um pouco da música ganhando vida.</span></figcaption></figure>
+            <figure class="diary-22-card diary-22-card-wide diary-22-video-card diary-22-video-largo diary-22-video-compacto"><video class="diary-22-video" controls playsinline preload="metadata" poster="images/ensaio-22-10-2026-louvor.jpeg" aria-label="Vídeo do ensaio de louvor"><source src="videos/ensaio-22-10-2026.mp4" type="video/mp4">Seu navegador não reproduz este vídeo. <a href="videos/ensaio-22-10-2026.mp4">Assistir ao ensaio</a>.</video><figcaption><strong>Vídeo do ensaio</strong><span>Um pouco da música ganhando vida.</span></figcaption></figure>
           </div>
         </section>
           <section class="diary-archive reveal" aria-labelledby="diary-archive-title">
