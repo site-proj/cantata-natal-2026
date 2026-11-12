@@ -1049,9 +1049,25 @@
       .diary-22-video-largo .diary-22-video { border-radius:0; }
       #bastidores .gallery .preparation-video { width:calc(100% + 36px); margin-inline:-18px; border-inline:0; border-radius:0; }
     }
+    /* Música de abertura: toca ao abrir (ou no primeiro toque, quando o navegador bloqueia som automático). */
+    .abertura-som { position:fixed; right:max(14px, env(safe-area-inset-right)); bottom:max(14px, env(safe-area-inset-bottom)); z-index:60; display:inline-flex; align-items:center; gap:8px; height:42px; min-width:42px; justify-content:center; padding:0 13px; border:1px solid rgba(223,187,119,.55); border-radius:999px; color:var(--gold); background:rgba(16,13,10,.86); box-shadow:0 8px 24px rgba(0,0,0,.4); font:600 .78rem/1 var(--sans); letter-spacing:.06em; cursor:pointer; -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); transition:opacity .4s, transform .4s; }
+    .abertura-som[hidden] { display:none; }
+    .abertura-som.is-fora, .abertura-som.is-fim { opacity:0; transform:translateY(12px); pointer-events:none; }
+    .abertura-som:focus-visible { outline:2px solid var(--gold); outline-offset:3px; }
+    .abertura-som-eq { display:inline-flex; align-items:flex-end; gap:2px; width:16px; height:14px; }
+    .abertura-som-eq i { width:3px; height:30%; border-radius:2px; background:currentColor; }
+    .abertura-som.is-tocando .abertura-som-eq i { animation:abertura-eq .9s ease-in-out infinite; }
+    .abertura-som.is-tocando .abertura-som-eq i:nth-child(2) { animation-delay:-.3s; }
+    .abertura-som.is-tocando .abertura-som-eq i:nth-child(3) { animation-delay:-.6s; }
+    @keyframes abertura-eq { 0%,100% { height:25%; } 50% { height:100%; } }
+    .abertura-som-txt { white-space:nowrap; }
+    .abertura-som.is-tocando { padding:0; }
+    .abertura-som.is-tocando .abertura-som-txt { display:none; }
+    @media (prefers-reduced-motion: reduce) { .abertura-som.is-tocando .abertura-som-eq i { animation:none; height:70%; } }
   </style>
 </head>
 <body>
+  <button class="abertura-som" type="button" data-abertura-som aria-pressed="false" aria-label="Tocar música de abertura"><span class="abertura-som-eq" aria-hidden="true"><i></i><i></i><i></i></span><span class="abertura-som-txt">Ouvir</span></button>
   <header class="nav">
     <div class="wrap nav-inner">
       <a class="brand" href="#inicio">Cantata de Natal · 2026</a>
@@ -2502,6 +2518,42 @@ NOV</strong>
       }
       // os áudios antigos (ocultos) param se o player novo começar a tocar
       audio.addEventListener('play', () => secao.querySelectorAll('[data-ens-original] audio').forEach(a => a.pause()));
+    })();
+  </script>
+  <script>
+    // Música de abertura (áudio do vídeo "Ensaio Cantata" de 11/11). Navegadores só deixam tocar som
+    // depois de um toque na página: tenta ao abrir e, se bloquear, toca no primeiro toque/tecla.
+    (() => {
+      const bt = document.querySelector('[data-abertura-som]'); if (!bt) return;
+      const txt = bt.querySelector('.abertura-som-txt');
+      const a = new Audio('audio/abertura-ensaio-cantata.mp3'); a.preload = 'auto'; a.volume = .7;
+      let parou = false, acabou = false;
+      const pintar = () => {
+        const toca = !a.paused;
+        bt.classList.toggle('is-tocando', toca); bt.setAttribute('aria-pressed', String(toca));
+        bt.setAttribute('aria-label', toca ? 'Pausar música de abertura' : 'Tocar música de abertura');
+        txt.textContent = 'Ouvir';
+      };
+      const tocar = () => a.play().then(pintar).catch(pintar);
+      a.addEventListener('play', pintar); a.addEventListener('pause', pintar);
+      a.addEventListener('ended', () => { acabou = true; bt.classList.add('is-fim'); setTimeout(() => { bt.hidden = true; }, 500); });
+      bt.addEventListener('click', () => {
+        if (a.paused) { parou = false; tocar(); } else { parou = true; a.pause(); }
+      });
+      const eventos = ['pointerdown', 'keydown', 'touchend'];
+      const destravar = e => {
+        if (e.target.closest && e.target.closest('[data-abertura-som]')) return;
+        eventos.forEach(t => removeEventListener(t, destravar, true));
+        if (!parou && !acabou && a.paused) tocar();
+      };
+      eventos.forEach(t => addEventListener(t, destravar, true));
+      // qualquer outro áudio ou vídeo do site (ensaios, bastidores) pausa a abertura
+      const playOriginal = HTMLMediaElement.prototype.play;
+      HTMLMediaElement.prototype.play = function () { if (this !== a && !a.paused) { parou = true; a.pause(); } return playOriginal.apply(this, arguments); };
+      // o botão só aparece enquanto a página inicial está na tela
+      const hero = document.getElementById('inicio');
+      if (hero && 'IntersectionObserver' in window) new IntersectionObserver(([en]) => bt.classList.toggle('is-fora', !en.isIntersecting), { threshold: .15 }).observe(hero);
+      pintar(); tocar();
     })();
   </script>
 </body>
