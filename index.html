@@ -1050,6 +1050,17 @@
     }
     @media(min-width:701px){ .diary-reels-dica { display:none; }
     }
+    /* Vídeos horizontais (16:9) dos Bastidores: grandes, na largura do cartão. */
+    .diary-22-video-card.diary-22-video-largo { width:100%; grid-template-columns:1fr; }
+    .diary-22-video-largo figcaption { grid-column:1; grid-row:1; }
+    .diary-22-video-largo .diary-22-video { grid-column:1; grid-row:2; width:100%; max-width:100%; height:auto; max-height:none; aspect-ratio:16/9; border-radius:8px; }
+    #bastidores .gallery .preparation-video { grid-column:1 / -1; width:min(100%, 820px); justify-self:center; }
+    @media(max-width:700px){
+      .diary-22-video-card.diary-22-video-largo { width:calc(100% + 32px); margin-inline:-16px; padding:12px 0 0; overflow:hidden; border-inline:0; border-radius:0; }
+      .diary-22-video-largo figcaption { padding:0 14px; }
+      .diary-22-video-largo .diary-22-video { border-radius:0; }
+      #bastidores .gallery .preparation-video { width:calc(100% + 36px); margin-inline:-18px; border-inline:0; border-radius:0; }
+    }
   </style>
 </head>
 <body>
@@ -1598,7 +1609,7 @@ NOV</strong>
             <figure class="diary-22-card"><button class="diary-22-photo-button" type="button" data-lightbox-src="images/ensaio-bastidores-encontro.jpg" data-lightbox-alt="Equipe reunida no palco e na plateia durante o ensaio"><img class="diary-22-photo" src="images/ensaio-bastidores-encontro.jpg" alt="Equipe reunida no palco e na plateia durante o ensaio" loading="lazy" decoding="async"></button><figcaption>Juntos em mais um encontro.</figcaption></figure>
             <figure class="diary-22-card"><button class="diary-22-photo-button" type="button" data-lightbox-src="images/ensaio-bastidores-vozes.jpg" data-lightbox-alt="Cantores ensaiando com microfones no palco"><img class="diary-22-photo" src="images/ensaio-bastidores-vozes.jpg" alt="Cantores ensaiando com microfones no palco" loading="lazy" decoding="async"></button><figcaption>Vozes que se unem em louvor.</figcaption></figure>
             <figure class="diary-22-card diary-22-card-wide"><button class="diary-22-photo-button" type="button" data-lightbox-src="images/ensaio-bastidores-equipe.jpg" data-lightbox-alt="Músicos e cantores reunidos no palco durante a preparação da Cantata"><img class="diary-22-photo" src="images/ensaio-bastidores-equipe.jpg" alt="Músicos e cantores reunidos no palco durante a preparação da Cantata" loading="lazy" decoding="async"></button><figcaption>Cada detalhe faz parte da preparação.</figcaption></figure>
-            <figure class="diary-22-card diary-22-card-wide diary-22-video-card"><video class="diary-22-video" controls playsinline preload="metadata" poster="images/ensaio-bastidores-equipe.jpg" aria-label="Vídeo do novo registro de ensaio de louvor"><source src="videos/ensaio-bastidores-louvor.mp4" type="video/mp4">Seu navegador não reproduz este vídeo. <a href="videos/ensaio-bastidores-louvor.mp4">Assistir ao ensaio</a>.</video><figcaption><strong>Vídeo do ensaio</strong><span>Um novo momento da nossa caminhada em música.</span></figcaption></figure>
+            <figure class="diary-22-card diary-22-card-wide diary-22-video-card diary-22-video-largo"><video class="diary-22-video" controls playsinline preload="metadata" poster="images/ensaio-bastidores-equipe.jpg" aria-label="Vídeo do novo registro de ensaio de louvor"><source src="videos/ensaio-bastidores-louvor.mp4" type="video/mp4">Seu navegador não reproduz este vídeo. <a href="videos/ensaio-bastidores-louvor.mp4">Assistir ao ensaio</a>.</video><figcaption><strong>Vídeo do ensaio</strong><span>Um novo momento da nossa caminhada em música.</span></figcaption></figure>
           </div>
         </section>
         <section class="diary-22 reveal" aria-labelledby="diary-22-title">
