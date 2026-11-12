@@ -1026,6 +1026,26 @@
     .ens-panel.is-telao .ens-ferramentas { top:14px; bottom:auto; right:14px; }
     .ens-panel.is-telao .ens-sair-telao { position:absolute; z-index:5; top:14px; left:14px; display:inline-grid; min-height:40px; place-items:center; padding:0 16px; border:1px solid rgba(223,187,119,.4); border-radius:999px; color:var(--ivory); background:rgba(20,16,11,.82); font:inherit; font-size:.85rem; font-weight:700; cursor:pointer; }
     .ens-panel.is-telao .ens-controls { position:absolute; z-index:4; left:50%; bottom:max(14px, env(safe-area-inset-bottom)); width:min(620px, calc(100% - 24px)); transform:translateX(-50%); border:1px solid rgba(223,187,119,.25); border-radius:22px; background:rgba(12,9,6,.86); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
+    /* Bastidores: ensaio de 11/11 (vídeos verticais das vozes e vídeo da dança). */
+    .diary-reels { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; }
+    .diary-reels .is-destaque { border-color:rgba(223,187,119,.6); }
+    .diary-reels figcaption strong { color:var(--gold); font-weight:700; }
+    .diary-reels figure, .diary-danca { min-width:0; margin:0; overflow:hidden; border:1px solid rgba(223,187,119,.28); border-radius:12px; background:#0b0907; box-shadow:0 8px 24px rgba(0,0,0,.18); }
+    .diary-reels video { display:block; width:100%; aspect-ratio:9/16; height:auto; background:#050403; object-fit:cover; }
+    .diary-reels figcaption { padding:9px 12px 11px; color:#e6d8be; font-size:.82rem; }
+    .diary-danca { margin-top:14px; }
+    .diary-danca video { display:block; width:100%; aspect-ratio:16/9; height:auto; background:#050403; object-fit:contain; }
+    .diary-danca figcaption { display:grid; gap:6px; padding:14px 16px 16px; color:#e6d8be; }
+    .diary-danca figcaption strong, .diary-reels figcaption { letter-spacing:.02em; }
+    .diary-danca figcaption strong { color:var(--gold); font-size:.72rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
+    @media(max-width:700px){
+      .diary-reels { display:flex; gap:10px; margin-inline:-16px; padding:0 16px 4px; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; }
+      .diary-reels::-webkit-scrollbar { display:none; }
+      .diary-reels figure { flex:0 0 64%; scroll-snap-align:center; }
+      .diary-reels video { max-height:none; }
+    }
+    @media(min-width:701px){ .diary-reels-dica { display:none; }
+    }
   </style>
 </head>
 <body>
@@ -1549,9 +1569,23 @@ NOV</strong>
       <div class="wrap">
         <div class="behind-head reveal"><div><div class="eyebrow">Por trás de cada momento</div><h2>Bastidores da Cantata</h2></div><p>Ensaios, encontros e a alegria de preparar uma noite especial, juntos.</p></div>
         <div class="behind-feed">
+        <section class="diary-22 diary-1111 reveal" aria-labelledby="diary-1111-title">
+          <header class="diary-22-heading">
+            <div class="eyebrow">Ensaio · 11/11</div>
+            <h3 id="diary-1111-title">Vozes e passos em preparação</h3>
+            <p>Louvor afinando as vozes e dança dando forma à coreografia da nossa Cantata.<span class="gallery-hint diary-reels-dica">Arraste para o lado para ver mais vídeos.</span></p>
+          </header>
+          <div class="diary-reels" aria-label="Vídeos do ensaio de louvor de 11 de novembro">
+            <figure class="is-destaque"><video controls playsinline preload="none" poster="images/ensaio-11-11-2026-cantata.jpg" aria-label="Vídeo resumo do ensaio da Cantata de 11 de novembro"><source src="videos/ensaio-11-11-2026-cantata.mp4" type="video/mp4">Seu navegador não reproduz este vídeo. <a href="videos/ensaio-11-11-2026-cantata.mp4">Assistir</a>.</video><figcaption><strong>Ensaio da Cantata</strong> · resumo da noite</figcaption></figure>
+            <figure><video controls playsinline preload="none" poster="images/ensaio-11-11-2026-vozes-1.jpg" aria-label="Vozes ensaiando com microfones, vídeo 1"><source src="videos/ensaio-11-11-2026-vozes-1.mp4" type="video/mp4">Seu navegador não reproduz este vídeo. <a href="videos/ensaio-11-11-2026-vozes-1.mp4">Assistir</a>.</video><figcaption>Vozes</figcaption></figure>
+            <figure><video controls playsinline preload="none" poster="images/ensaio-11-11-2026-vozes-2.jpg" aria-label="Vozes ensaiando com microfones, vídeo 2"><source src="videos/ensaio-11-11-2026-vozes-2.mp4" type="video/mp4">Seu navegador não reproduz este vídeo. <a href="videos/ensaio-11-11-2026-vozes-2.mp4">Assistir</a>.</video><figcaption>Em harmonia</figcaption></figure>
+            <figure><video controls playsinline preload="none" poster="images/ensaio-11-11-2026-vozes-3.jpg" aria-label="Vozes ensaiando com microfones, vídeo 3"><source src="videos/ensaio-11-11-2026-vozes-3.mp4" type="video/mp4">Seu navegador não reproduz este vídeo. <a href="videos/ensaio-11-11-2026-vozes-3.mp4">Assistir</a>.</video><figcaption>Um só som</figcaption></figure>
+          </div>
+          <figure class="diary-danca"><video controls playsinline preload="none" poster="images/ensaio-11-11-2026-danca.jpg" aria-label="Ensaio da coreografia da dança"><source src="videos/ensaio-11-11-2026-danca.mp4" type="video/mp4">Seu navegador não reproduz este vídeo. <a href="videos/ensaio-11-11-2026-danca.mp4">Assistir</a>.</video><figcaption><strong>Ensaio da dança</strong><span>Cada passo pensado para contar essa história.</span></figcaption></figure>
+        </section>
         <section class="diary-22 reveal" aria-labelledby="diary-novo-ensaio-title">
           <header class="diary-22-heading">
-            <div class="eyebrow">Novo registro de ensaio</div>
+            <div class="eyebrow">Registro de ensaio</div>
             <h3 id="diary-novo-ensaio-title">Vozes e instrumentos, um só propósito</h3>
             <p>Mais um encontro de louvor e preparação para a nossa Cantata.<span class="gallery-hint">Toque nas fotos para ampliar.</span></p>
           </header>
