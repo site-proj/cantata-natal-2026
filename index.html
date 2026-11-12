@@ -902,6 +902,18 @@
     .ens-progress::-moz-range-track { height:5px; border-radius:5px; background:linear-gradient(90deg,#f3e3bf var(--p),rgba(255,255,255,.14) var(--p)); }
     .ens-progress::-webkit-slider-thumb { width:14px; height:14px; margin-top:-4.5px; border:0; border-radius:50%; background:#fff6dc; -webkit-appearance:none; }
     .ens-progress::-moz-range-thumb { width:14px; height:14px; border:0; border-radius:50%; background:#fff6dc; }
+    /* Vozes (naipes): Todas / Soprano / Contralto / Tenor, escolha salva no aparelho. */
+    .ens-vozes { display:flex; align-items:center; justify-content:center; gap:6px; margin:0 auto 10px; flex-wrap:wrap; }
+    .ens-vozes-rot { color:#8f8574; font-size:.7rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; margin-right:2px; }
+    .ens-voz { position:relative; min-height:32px; padding:0 12px; border:1px solid rgba(223,187,119,.3); border-radius:999px; color:#d9cdb6; background:rgba(255,255,255,.03); font:inherit; font-size:.8rem; font-weight:700; cursor:pointer; }
+    .ens-voz[aria-pressed="true"] { color:#20160c; border-color:var(--gold); background:var(--gold); }
+    .ens-voz.falta:not([aria-pressed="true"]) { color:#8f8574; border-style:dashed; }
+    .ens-voz-aviso { margin:-4px 0 8px; color:#c3b9a8; font-size:.74rem; text-align:center; }
+    .ens-voz-aviso[hidden] { display:none; }
+    .ens-panel.is-reading .ens-vozes, .ens-panel.is-reading .ens-voz-aviso { grid-column:1 / -1; margin-bottom:4px; }
+    .ens-panel.is-reading .ens-voz { min-height:28px; padding:0 10px; font-size:.74rem; }
+    .ens-panel.is-telao .ens-vozes, .ens-panel.is-telao .ens-voz-aviso { display:none; }
+    @media(max-width:380px){ .ens-vozes-rot { display:none; } .ens-voz { padding:0 10px; } }
     .ens-times { display:flex; justify-content:space-between; color:#8f8574; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.78rem; }
     .ens-buttons { display:flex; align-items:center; justify-content:center; gap:34px; margin-top:6px; }
     .ens-btn { display:grid; width:52px; height:52px; place-items:center; border:0; border-radius:50%; color:var(--ivory); background:none; cursor:pointer; }
@@ -995,6 +1007,12 @@
     .ens-panel.is-reading .ens-vol-btn { width:30px; height:30px; }
     .ens-panel.is-reading .ens-vol-btn svg { width:18px; height:18px; }
     .ens-panel.is-reading .ens-volume { height:18px; }
+    /* vozes no topo dos controles da leitura; o resto desce uma linha */
+    .ens-panel.is-reading .ens-vozes { grid-row:1; }
+    .ens-panel.is-reading .ens-voz-aviso { grid-row:2; margin:0 0 4px; font-size:.7rem; }
+    .ens-panel.is-reading .ens-progress { grid-row:3; }
+    .ens-panel.is-reading .ens-times span:first-child, .ens-panel.is-reading .ens-times span:last-child, .ens-panel.is-reading .ens-buttons { grid-row:4; }
+    .ens-panel.is-reading .ens-vol { grid-row:5; }
 
     /* Letra acompanhando a música e modo telão. */
     .ens-doc { position:relative; }
@@ -2285,12 +2303,20 @@ NOV</strong>
         grade.dataset.ensOriginal = ''; grade.after(lista);
       });
       secao.classList.add('ens-on');
+      // Vozes: arquivos em audio/vozes/<nome-da-música>-<voz>.mp3, listados em audio/vozes/vozes.json
+      // ({"prefiro-crer-vania-marx": ["soprano", "tenor"]}). Voz que ainda não chegou toca a música completa.
+      const VOZES = ['Todas', 'Soprano', 'Contralto', 'Tenor'];
+      let voz = 'Todas', vozesDisp = {};
+      try { const v = localStorage.getItem('ens-voz'); if (VOZES.includes(v)) voz = v; } catch (e) {}
+      const slugDe = m => decodeURIComponent((m.src.split('/').pop() || '').replace(/\.mp3(\?.*)?$/i, ''));
+      const temVoz = (m, v) => v === 'Todas' || (vozesDisp[slugDe(m)] || []).includes(v.toLowerCase());
+      const srcDe = m => temVoz(m, voz) ? (voz === 'Todas' ? m.src : new URL(`audio/vozes/${slugDe(m)}-${voz.toLowerCase()}.mp3`, location.href).href) : m.src;
       // 3) player
       const sheet = document.createElement('div'); sheet.className = 'ens-sheet'; sheet.hidden = true;
       sheet.setAttribute('role', 'dialog'); sheet.setAttribute('aria-modal', 'true'); sheet.setAttribute('aria-label', 'Player das músicas do ensaio');
       sheet.innerHTML = `<div class="ens-backdrop" data-fechar></div><div class="ens-panel"><button class="ens-sair-telao" type="button" data-sair-telao aria-label="Sair do modo telão">✕ Sair do telão</button><div class="ens-top"><span class="ens-grip"></span><span class="ens-top-info"><span class="ens-group"></span><b class="ens-top-title"></b></span><button class="ens-close" type="button" aria-label="Fechar player" data-fechar>×</button></div>
         <div class="ens-slides"></div>
-        <div class="ens-controls"><input class="ens-progress" type="range" min="0" max="1000" value="0" step="1" aria-label="Posição da música"><div class="ens-times"><span data-atual>0:00</span><span data-resta>-0:00</span></div>
+        <div class="ens-controls"><div class="ens-vozes" role="group" aria-label="Escolha sua voz"><span class="ens-vozes-rot">Voz</span>${VOZES.map(v => `<button class="ens-voz" type="button" aria-pressed="false" data-voz="${v}">${v}</button>`).join('')}</div><p class="ens-voz-aviso" hidden></p><input class="ens-progress" type="range" min="0" max="1000" value="0" step="1" aria-label="Posição da música"><div class="ens-times"><span data-atual>0:00</span><span data-resta>-0:00</span></div>
         <div class="ens-buttons"><button class="ens-btn" type="button" data-ant aria-label="Música anterior">${ICON.prev}</button><button class="ens-btn ens-main" type="button" data-tocar aria-label="Tocar">${ICON.play}</button><button class="ens-btn" type="button" data-prox aria-label="Próxima música">${ICON.next}</button></div>
         <div class="ens-vol"><button class="ens-vol-btn" type="button" data-mudo aria-label="Silenciar" aria-pressed="false">${ICON.vol}</button><input class="ens-volume" type="range" min="0" max="100" value="100" step="1" aria-label="Volume"></div>
         <div class="ens-dots">${musicas.map(() => '<i></i>').join('')}</div></div></div>`;
@@ -2465,12 +2491,39 @@ NOV</strong>
         pontos.forEach((p, k) => p.classList.toggle('on', k === i));
         btAnt.disabled = i === 0; btProx.disabled = i === musicas.length - 1;
         aplicarModo(m);
-        if (mudou) { audio.src = m.src; pintarTempo(); }
+        if (mudou) { audio.src = srcDe(m); pintarTempo(); }
+        pintarVozes();
         if (continuar) audio.play().catch(() => {}); else if (mudou) audio.pause();
         if (rolar) slides.scrollTo({ left: i * slides.clientWidth, behavior: aberto ? 'smooth' : 'instant' });
         if ('mediaSession' in navigator) navigator.mediaSession.metadata = new MediaMetadata({ title: m.titulo, artist: m.artista, album: 'Cantata de Natal 2026 · ' + m.grupo });
         pintarBotao();
       }
+      const avisoVoz = sheet.querySelector('.ens-voz-aviso');
+      function pintarVozes() {
+        const m = musicas[atual];
+        sheet.querySelectorAll('.ens-voz').forEach(b => { const v = b.dataset.voz;
+          b.setAttribute('aria-pressed', String(v === voz)); b.classList.toggle('falta', !temVoz(m, v));
+          b.title = temVoz(m, v) ? '' : 'Em breve'; });
+        const falta = !temVoz(m, voz);
+        avisoVoz.hidden = !falta;
+        if (falta) avisoVoz.textContent = `${voz} desta música: em breve. Tocando a música completa.`;
+      }
+      function trocarVoz(v) {
+        voz = v; try { localStorage.setItem('ens-voz', v); } catch (e) {}
+        const novo = srcDe(musicas[atual]);
+        if (audio.src && audio.src !== novo) {
+          const t = audio.currentTime, tocando = !audio.paused;
+          audio.src = novo;
+          audio.addEventListener('loadedmetadata', () => { try { audio.currentTime = Math.min(t, audio.duration || t); } catch (e) {} if (tocando) audio.play().catch(() => {}); }, { once: true });
+        }
+        pintarVozes();
+      }
+      sheet.querySelectorAll('.ens-voz').forEach(b => b.addEventListener('click', () => trocarVoz(b.dataset.voz)));
+      fetch('audio/vozes/vozes.json').then(r => r.ok ? r.json() : {}).catch(() => ({})).then(d => {
+        vozesDisp = d && typeof d === 'object' ? d : {};
+        if (audio.src) { const novo = srcDe(musicas[atual]); if (novo !== audio.src && audio.paused) audio.src = novo; }
+        pintarVozes();
+      });
       // arrastar para o lado: o carrossel nativo encaixa e a música troca quando ele para
       let parada;
       slides.addEventListener('scroll', () => { clearTimeout(parada); parada = setTimeout(() => {
