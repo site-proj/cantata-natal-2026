@@ -862,6 +862,9 @@
     .ens-cover { position:relative; display:grid; aspect-ratio:1; place-items:center; overflow:hidden; border-radius:14px; background:var(--ens-grad); box-shadow:inset 0 0 0 1px rgba(255,255,255,.08); }
     .ens-cover::after { content:"✦"; color:rgba(255,248,230,.85); font-size:1.15em; text-shadow:0 0 14px rgba(255,236,190,.9); }
     .ens-card .ens-cover { width:64px; }
+    /* Capa da música: só dentro do player (a lista continua com o quadrado dourado). Se não carregar, volta o ✦. */
+    .ens-capa { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+    .ens-cover:has(.ens-capa)::after { content:none; }
     .ens-card-title { display:block; overflow:hidden; color:var(--ivory); font-size:1.02rem; font-weight:700; line-height:1.25; text-overflow:ellipsis; white-space:nowrap; }
     .ens-card-artist { display:block; overflow:hidden; margin-top:3px; color:#a99d88; font-size:.86rem; text-overflow:ellipsis; white-space:nowrap; }
     .ens-card-play { display:grid; width:44px; height:44px; place-items:center; border-radius:50%; color:#20160c; background:var(--gold); box-shadow:0 6px 16px rgba(223,187,119,.3); }
@@ -2268,7 +2271,8 @@ NOV</strong>
       const musicas = cartoes.map((card, i) => {
         const audio = card.querySelector('audio');
         const [titulo, ...resto] = (audio.getAttribute('aria-label') || '').replace(/^Ouvir\s+/, '').split(' — ');
-        return { i, card, titulo, artista: resto.join(' — '), src: audio.querySelector('source')?.src || audio.src, grupo: grupoDe(card), grad: GRADS[i % GRADS.length],
+        const src = audio.querySelector('source')?.src || audio.src;
+        return { i, card, titulo, artista: resto.join(' — '), src, capa: 'images/capas/' + src.split('/').pop().replace(/\.mp3$/i, '.jpg'), grupo: grupoDe(card), grad: GRADS[i % GRADS.length],
           recursos: [...card.querySelectorAll('.rehearsal-resource')].map(d => ({ nome: rotulo(d.querySelector('summary').textContent.trim()), html: d.querySelector('.rehearsal-resource-view')?.innerHTML || '' })) };
       });
       // 2) lista nova no lugar de cada grade antiga
@@ -2310,8 +2314,9 @@ NOV</strong>
         m.recursos.forEach(r => { r.id = driveId(r.html); r.link = linkOriginal(r.html) || (r.id ? `https://drive.google.com/file/d/${r.id}/view` : ''); });
         const s = document.createElement('section'); s.className = 'ens-slide'; s.setAttribute('aria-label', m.titulo);
         const abas = ['Ouvir', ...m.recursos.map(r => r.nome)];
-        s.innerHTML = `<div class="ens-mini"><span class="ens-cover" style="--ens-grad:${m.grad}"></span><span><b></b><small></small></span></div>
-          <div class="ens-hero"><div class="ens-cover" style="--ens-grad:${m.grad}"></div><h3 class="ens-slide-title"></h3><p class="ens-slide-artist"></p></div>
+        const capaImg = `<img class="ens-capa" src="${m.capa}" alt="" loading="lazy" decoding="async" onerror="this.remove()">`;
+        s.innerHTML = `<div class="ens-mini"><span class="ens-cover" style="--ens-grad:${m.grad}">${capaImg}</span><span><b></b><small></small></span></div>
+          <div class="ens-hero"><div class="ens-cover" style="--ens-grad:${m.grad}">${capaImg}</div><h3 class="ens-slide-title"></h3><p class="ens-slide-artist"></p></div>
           <div class="ens-tabs" role="tablist">${abas.map(a => `<button class="ens-tab" type="button" role="tab" aria-selected="false" data-modo="${a}">${a}</button>`).join('')}</div>
           <div class="ens-leitura" hidden><div class="ens-ferramentas"><button type="button" data-fonte="-1" aria-label="Diminuir letra">A−</button><button type="button" data-fonte="1" aria-label="Aumentar letra">A+</button><button type="button" data-seguir aria-pressed="true" aria-label="Letra acompanha a música">♪</button><button type="button" data-telao aria-label="Modo telão (tela cheia)">⛶</button><a target="_blank" rel="noopener noreferrer" data-pdf aria-label="Abrir o PDF original">PDF</a></div><div class="ens-doc"></div></div>`;
         s.querySelector('.ens-slide-title').textContent = m.titulo; s.querySelector('.ens-slide-artist').textContent = m.artista;
@@ -2468,7 +2473,7 @@ NOV</strong>
         if (mudou) { audio.src = m.src; pintarTempo(); }
         if (continuar) audio.play().catch(() => {}); else if (mudou) audio.pause();
         if (rolar) slides.scrollTo({ left: i * slides.clientWidth, behavior: aberto ? 'smooth' : 'instant' });
-        if ('mediaSession' in navigator) navigator.mediaSession.metadata = new MediaMetadata({ title: m.titulo, artist: m.artista, album: 'Cantata de Natal 2026 · ' + m.grupo });
+        if ('mediaSession' in navigator) navigator.mediaSession.metadata = new MediaMetadata({ title: m.titulo, artist: m.artista, album: 'Cantata de Natal 2026 · ' + m.grupo, artwork: [{ src: new URL(m.capa, location.href).href, sizes: '480x480', type: 'image/jpeg' }] });
         pintarBotao();
       }
       // arrastar para o lado: o carrossel nativo encaixa e a música troca quando ele para
