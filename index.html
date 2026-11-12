@@ -907,7 +907,15 @@
     .ens-vozes-rot { color:#8f8574; font-size:.7rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; margin-right:2px; }
     .ens-voz { position:relative; min-height:32px; padding:0 12px; border:1px solid rgba(223,187,119,.3); border-radius:999px; color:#d9cdb6; background:rgba(255,255,255,.03); font:inherit; font-size:.8rem; font-weight:700; cursor:pointer; }
     .ens-voz[aria-pressed="true"] { color:#20160c; border-color:var(--gold); background:var(--gold); }
-    .ens-voz.falta:not([aria-pressed="true"]) { color:#8f8574; border-style:dashed; }
+    .ens-parte { display:block; margin:.9em 0 .15em; color:var(--gold); font-size:.5em; font-weight:700; letter-spacing:.16em; text-transform:uppercase; line-height:1.3; }
+    .ens-letra p > .ens-parte:first-child { margin-top:0; }
+    .ens-exemplo { display:block; width:fit-content; margin:0 auto 1.2em; padding:4px 12px; border:1px dashed rgba(223,187,119,.45); border-radius:999px; color:#c3b9a8; font-size:.42em; font-weight:700; letter-spacing:.06em; }
+    .ens-letra.com-naipe .ens-l { opacity:.3; }
+    .ens-letra.com-naipe .ens-l.minha { opacity:.95; color:#f0d49a; }
+    .ens-letra.com-naipe.tem-tempos .ens-l.foi { opacity:.22; }
+    .ens-letra.com-naipe.tem-tempos .ens-l.minha.foi { opacity:.5; }
+    .ens-letra.com-naipe.tem-tempos .ens-l.on { opacity:.7; color:var(--ivory); }
+    .ens-letra.com-naipe.tem-tempos .ens-l.minha.on { opacity:1; color:#ffe9b8; text-shadow:0 0 18px rgba(223,187,119,.55); }
     .ens-voz-aviso { margin:-4px 0 8px; color:#c3b9a8; font-size:.74rem; text-align:center; }
     .ens-voz-aviso[hidden] { display:none; }
     .ens-panel.is-reading .ens-vozes, .ens-panel.is-reading .ens-voz-aviso { grid-column:1 / -1; margin-bottom:4px; }
@@ -2303,14 +2311,12 @@ NOV</strong>
         grade.dataset.ensOriginal = ''; grade.after(lista);
       });
       secao.classList.add('ens-on');
-      // Vozes: arquivos em audio/vozes/<nome-da-música>-<voz>.mp3, listados em audio/vozes/vozes.json
-      // ({"prefiro-crer-vania-marx": ["soprano", "tenor"]}). Voz que ainda não chegou toca a música completa.
+      // Naipes: tocar em Todas/Soprano/Contralto/Tenor abre a letra com a divisão vocal
+      // (letras/<id>.vozes.json) e a música original toca mais baixa (guia) para a pessoa cantar junto.
       const VOZES = ['Todas', 'Soprano', 'Contralto', 'Tenor'];
-      let voz = 'Todas', vozesDisp = {};
-      try { const v = localStorage.getItem('ens-voz'); if (VOZES.includes(v)) voz = v; } catch (e) {}
-      const slugDe = m => decodeURIComponent((m.src.split('/').pop() || '').replace(/\.mp3(\?.*)?$/i, ''));
-      const temVoz = (m, v) => v === 'Todas' || (vozesDisp[slugDe(m)] || []).includes(v.toLowerCase());
-      const srcDe = m => temVoz(m, voz) ? (voz === 'Todas' ? m.src : new URL(`audio/vozes/${slugDe(m)}-${voz.toLowerCase()}.mp3`, location.href).href) : m.src;
+      const GUIA = .5;                                   // volume da música com um naipe escolhido
+      let naipe = '';
+      try { const v = localStorage.getItem('ens-naipe'); if (VOZES.includes(v)) naipe = v; } catch (e) {}
       // 3) player
       const sheet = document.createElement('div'); sheet.className = 'ens-sheet'; sheet.hidden = true;
       sheet.setAttribute('role', 'dialog'); sheet.setAttribute('aria-modal', 'true'); sheet.setAttribute('aria-label', 'Player das músicas do ensaio');
@@ -2459,11 +2465,12 @@ NOV</strong>
         m.slide.querySelectorAll('[data-fonte], [data-seguir]').forEach(b => b.hidden = efetivo === 'Original');
         m.modoMontado = efetivo; doc.scrollTop = 0;
         const texto = efetivo === 'Original' ? null : await carregarTexto(r);
-        if (efetivo === 'Letra') await carregarTempos(r);
+        if (efetivo === 'Letra') { await carregarTempos(r); await carregarDivisao(r); }
         if (m.modoMontado !== efetivo) return;
         if (texto) {
           doc.innerHTML = montarTexto(m, r, texto); doc.classList.remove('is-frame'); m.linhasEls = null; ultimoT = -1;
           doc.querySelector('.ens-letra')?.classList.toggle('tem-tempos', efetivo === 'Letra' && Array.isArray(r.tempos));
+          if (efetivo === 'Letra') pintarDivisao(m);
           m.slide.querySelector('.ens-letra')?.style.setProperty('font-size', fonte.Letra + 'rem');
           m.slide.querySelector('.ens-letra')?.style.setProperty('--fator', fonte.Letra / 1.4);
           requestAnimationFrame(() => ajustarCifra(m));
@@ -2491,39 +2498,62 @@ NOV</strong>
         pontos.forEach((p, k) => p.classList.toggle('on', k === i));
         btAnt.disabled = i === 0; btProx.disabled = i === musicas.length - 1;
         aplicarModo(m);
-        if (mudou) { audio.src = srcDe(m); pintarTempo(); }
-        pintarVozes();
+        if (mudou) { audio.src = m.src; pintarTempo(); }
+        pintarVozes(); carregarDivisao(letraDe(m)).then(() => { if (m.i === atual) { pintarDivisao(m); pintarVozes(); } });
         if (continuar) audio.play().catch(() => {}); else if (mudou) audio.pause();
         if (rolar) slides.scrollTo({ left: i * slides.clientWidth, behavior: aberto ? 'smooth' : 'instant' });
         if ('mediaSession' in navigator) navigator.mediaSession.metadata = new MediaMetadata({ title: m.titulo, artist: m.artista, album: 'Cantata de Natal 2026 · ' + m.grupo });
         pintarBotao();
       }
       const avisoVoz = sheet.querySelector('.ens-voz-aviso');
-      function pintarVozes() {
-        const m = musicas[atual];
-        sheet.querySelectorAll('.ens-voz').forEach(b => { const v = b.dataset.voz;
-          b.setAttribute('aria-pressed', String(v === voz)); b.classList.toggle('falta', !temVoz(m, v));
-          b.title = temVoz(m, v) ? '' : 'Em breve'; });
-        const falta = !temVoz(m, voz);
-        avisoVoz.hidden = !falta;
-        if (falta) avisoVoz.textContent = `${voz} desta música: em breve. Tocando a música completa.`;
+      const letraDe = m => m.recursos.find(r => r.nome === 'Letra');
+      async function carregarDivisao(r) {
+        if (!r || r.divisao !== undefined || !r.id) return r && r.divisao;
+        try { const resp = await fetch(`letras/${r.id}.vozes.json`); r.divisao = resp.ok ? await resp.json() : null; } catch (e) { r.divisao = null; }
+        return r.divisao;
       }
-      function trocarVoz(v) {
-        voz = v; try { localStorage.setItem('ens-voz', v); } catch (e) {}
-        const novo = srcDe(musicas[atual]);
-        if (audio.src && audio.src !== novo) {
-          const t = audio.currentTime, tocando = !audio.paused;
-          audio.src = novo;
-          audio.addEventListener('loadedmetadata', () => { try { audio.currentTime = Math.min(t, audio.duration || t); } catch (e) {} if (tocando) audio.play().catch(() => {}); }, { once: true });
+      const NOMES = { S: 'Sopranos', C: 'Contraltos', T: 'Tenores' };
+      const nomeParte = p => { p = String(p || '').trim(); if (!p) return '';
+        if (/^todos$/i.test(p)) return 'Todos'; if (/^abertura/i.test(p)) return 'Abertura';
+        if (/^solo/i.test(p)) { const n = p.split(':')[1]; return n ? `Solo · ${n.trim()}` : 'Solo'; }
+        const ns = p.toUpperCase().split(/[+,\s]+/).map(x => NOMES[x]).filter(Boolean);
+        return ns.length > 1 ? ns.slice(0, -1).join(', ') + ' e ' + ns[ns.length - 1] : (ns[0] || p); };
+      const cantaNaipe = (p, nv) => { p = String(p || '').trim().toUpperCase();
+        if (nv === 'Todas' || p === 'TODOS') return true; if (/^(SOLO|ABERTURA)/.test(p)) return false;
+        return p.split(/[+,\s]+/).includes(nv[0]); };
+      // marca a letra montada: rótulo no início de cada trecho e destaque das linhas do naipe
+      function pintarDivisao(m) {
+        const letra = m.slide.querySelector('.ens-letra'); if (!letra) return;
+        const r = letraDe(m), div = r && r.divisao, partes = div && Array.isArray(div.partes) ? div.partes : null;
+        if (partes && !letra.dataset.divisao) {
+          let ant = null;
+          letra.querySelectorAll('.ens-l').forEach((el, i) => { const p = partes[i] ?? ant; el.dataset.parte = p ?? '';
+            if (p && p !== ant) { const pr = el.previousSibling; if (pr && pr.nodeName === 'BR') pr.remove();
+              el.insertAdjacentHTML('beforebegin', `<span class="ens-parte">${esc(nomeParte(p))}</span>`); }
+            ant = p; });
+          if (div.exemplo) letra.insertAdjacentHTML('afterbegin', '<span class="ens-exemplo">Divisão de exemplo · aguardando a do regente</span>');
+          letra.dataset.divisao = '1'; m.linhasEls = null;
         }
-        pintarVozes();
+        const ativo = !!(naipe && partes);
+        letra.classList.toggle('com-naipe', ativo);
+        letra.querySelectorAll('.ens-l').forEach(el => el.classList.toggle('minha', ativo && cantaNaipe(el.dataset.parte, naipe)));
       }
-      sheet.querySelectorAll('.ens-voz').forEach(b => b.addEventListener('click', () => trocarVoz(b.dataset.voz)));
-      fetch('audio/vozes/vozes.json').then(r => r.ok ? r.json() : {}).catch(() => ({})).then(d => {
-        vozesDisp = d && typeof d === 'object' ? d : {};
-        if (audio.src) { const novo = srcDe(musicas[atual]); if (novo !== audio.src && audio.paused) audio.src = novo; }
-        pintarVozes();
-      });
+      function pintarVozes() {
+        const m = musicas[atual], r = letraDe(m);
+        sheet.querySelectorAll('.ens-voz').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.voz === naipe)));
+        const semDivisao = naipe && r && r.divisao === null;
+        avisoVoz.hidden = !(semDivisao || (naipe && semBarra));
+        avisoVoz.textContent = semDivisao ? 'Divisão vocal desta música: em breve.' : 'No iPhone, abaixe o volume pelos botões do aparelho.';
+        aplicarVolume();
+      }
+      async function escolherNaipe(v) {
+        naipe = naipe === v ? '' : v;                    // tocar de novo no mesmo naipe desliga
+        try { localStorage.setItem('ens-naipe', naipe); } catch (e) {}
+        const m = musicas[atual];
+        if (naipe && letraDe(m) && modo !== 'Letra') { modo = 'Letra'; await aplicarModo(m); }
+        await carregarDivisao(letraDe(m)); pintarDivisao(m); pintarVozes();
+      }
+      sheet.querySelectorAll('.ens-voz').forEach(b => b.addEventListener('click', () => escolherNaipe(b.dataset.voz)));
       // arrastar para o lado: o carrossel nativo encaixa e a música troca quando ele para
       let parada;
       slides.addEventListener('scroll', () => { clearTimeout(parada); parada = setTimeout(() => {
@@ -2556,20 +2586,22 @@ NOV</strong>
       const volEl = sheet.querySelector('.ens-volume'), btMudo = sheet.querySelector('[data-mudo]');
       audio.volume = .5; const semBarra = Math.abs(audio.volume - .5) > .01;   // iPhone/iPad: volume só pelos botões do aparelho
       let vol = 1; try { const v = parseFloat(localStorage.getItem('ens-volume')); if (v >= 0 && v <= 1) vol = v; } catch (e) {}
-      audio.volume = vol; sheet.querySelector('.ens-vol').classList.toggle('sem-barra', semBarra);
+      sheet.querySelector('.ens-vol').classList.toggle('sem-barra', semBarra);
+      function aplicarVolume() { audio.volume = Math.max(0, Math.min(1, vol * (naipe ? GUIA : 1))); }
+      aplicarVolume();
       function pintarVolume() {
-        const v = audio.muted ? 0 : audio.volume;
+        const v = audio.muted ? 0 : vol;
         volEl.value = Math.round(v * 100); volEl.style.setProperty('--p', v * 100 + '%');
         btMudo.innerHTML = v === 0 ? ICON.mudo : v < .5 ? ICON.volBaixo : ICON.vol;
         btMudo.setAttribute('aria-pressed', String(v === 0)); btMudo.setAttribute('aria-label', v === 0 ? 'Ativar som' : 'Silenciar');
       }
       volEl.addEventListener('input', () => {
-        const v = volEl.value / 100; audio.volume = v; audio.muted = v === 0;
+        const v = volEl.value / 100; vol = v; aplicarVolume(); audio.muted = v === 0;
         if (v > 0) { try { localStorage.setItem('ens-volume', String(v)); } catch (e) {} }
         pintarVolume();
       });
       btMudo.addEventListener('click', () => {
-        if (audio.muted || audio.volume === 0) { audio.muted = false; if (audio.volume === 0) audio.volume = .6; } else audio.muted = true;
+        if (audio.muted || vol === 0) { audio.muted = false; if (vol === 0) { vol = .6; aplicarVolume(); } } else audio.muted = true;
         pintarVolume();
       });
       pintarVolume();
