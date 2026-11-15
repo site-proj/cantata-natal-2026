@@ -2325,11 +2325,17 @@ NOV</strong>
         grade.dataset.ensOriginal = ''; grade.after(lista);
       });
       secao.classList.add('ens-on');
-      // Naipes: tocar em Todas/Soprano/Contralto/Tenor abre a letra com a divisão vocal
+      // Naipes: tocar em Todas/Soprano/Contralto/Tenor abre a letra (com a divisão vocal, quando houver)
       // (letras/<id>.vozes.json) e a música original toca mais baixa (guia) para a pessoa cantar junto.
       const VOZES = ['Todas', 'Soprano', 'Contralto', 'Tenor'];
-      const GUIA = .5;                                   // volume da música com um naipe escolhido
+      const GUIA = .5;                                   // volume da música com um naipe escolhido (quando não há kit de vozes)
       let naipe = '';
+      // Kits de vozes: audio/vozes/<nome-da-música>-<naipe>.mp3 (base baixa + voz do naipe em destaque, no mesmo
+      // tempo da música original), listados em audio/vozes/vozes.json. Com kit, o naipe toca o próprio áudio.
+      let kits = {};
+      const slugDe = m => decodeURIComponent((m.src.split('/').pop() || '').replace(/\.mp3(\?.*)?$/i, ''));
+      const temKit = (m, v) => !!v && v !== 'Todas' && (kits[slugDe(m)] || []).includes(v.toLowerCase());
+      const srcDe = m => temKit(m, naipe) ? new URL(`audio/vozes/${slugDe(m)}-${naipe.toLowerCase()}.mp3`, location.href).href : m.src;
       try { const v = localStorage.getItem('ens-naipe'); if (VOZES.includes(v)) naipe = v; } catch (e) {}
       // 3) player
       const sheet = document.createElement('div'); sheet.className = 'ens-sheet'; sheet.hidden = true;
@@ -2513,7 +2519,7 @@ NOV</strong>
         pontos.forEach((p, k) => p.classList.toggle('on', k === i));
         btAnt.disabled = i === 0; btProx.disabled = i === musicas.length - 1;
         aplicarModo(m);
-        if (mudou) { audio.src = m.src; pintarTempo(); }
+        if (mudou) { audio.src = srcDe(m); pintarTempo(); }
         pintarVozes(); carregarDivisao(letraDe(m)).then(() => { if (m.i === atual) { pintarDivisao(m); pintarVozes(); } });
         if (continuar) audio.play().catch(() => {}); else if (mudou) audio.pause();
         if (rolar) slides.scrollTo({ left: i * slides.clientWidth, behavior: aberto ? 'smooth' : 'instant' });
@@ -2553,19 +2559,39 @@ NOV</strong>
         letra.classList.toggle('com-naipe', ativo);
         letra.querySelectorAll('.ens-l').forEach(el => el.classList.toggle('minha', ativo && cantaNaipe(el.dataset.parte, naipe)));
       }
+      // a música de fundo só fica mais baixa quando há divisão na letra mas ainda não há kit de vozes
+      const usaGuia = () => { const m = musicas[atual], r = m && letraDe(m);
+        return !!naipe && !temKit(m, naipe) && !!(r && r.divisao && Array.isArray(r.divisao.partes)); };
       function pintarVozes() {
-        const m = musicas[atual], r = letraDe(m);
-        sheet.querySelectorAll('.ens-voz').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.voz === naipe)));
-        const semDivisao = naipe && r && r.divisao === null;
-        avisoVoz.hidden = !(semDivisao || (naipe && semBarra));
-        avisoVoz.textContent = semDivisao ? 'Divisão vocal desta música: em breve.' : 'No iPhone, abaixe o volume pelos botões do aparelho.';
+        const m = musicas[atual], r = letraDe(m), algumKit = (kits[slugDe(m)] || []).length > 0;
+        sheet.querySelectorAll('.ens-voz').forEach(b => { const v = b.dataset.voz;
+          b.setAttribute('aria-pressed', String(v === naipe));
+          b.classList.toggle('falta', v !== 'Todas' && !temKit(m, v) && !(r && r.divisao)); });
+        const temDivisao = !!(r && r.divisao);
+        const emBreve = naipe && naipe !== 'Todas' && !temKit(m, naipe) && !temDivisao && r && r.divisao !== undefined;
+        avisoVoz.hidden = !(emBreve || (usaGuia() && semBarra));
+        avisoVoz.textContent = emBreve ? (algumKit ? `Voz de ${naipe} desta música: em breve.` : 'Vozes desta música: em breve.') : 'No iPhone, abaixe o volume pelos botões do aparelho.';
         aplicarVolume();
       }
+      // troca o áudio (original ou kit do naipe) sem perder o ponto da música
+      function trocarAudio() {
+        const novo = srcDe(musicas[atual]);
+        if (!audio.src || audio.src === novo) return;
+        const t = audio.currentTime, tocando = !audio.paused;
+        audio.src = novo;
+        audio.addEventListener('loadedmetadata', () => { try { audio.currentTime = Math.min(t, audio.duration || t); } catch (e) {} if (tocando) audio.play().catch(() => {}); }, { once: true });
+      }
+      fetch('audio/vozes/vozes.json').then(r => r.ok ? r.json() : {}).catch(() => ({})).then(d => {
+        kits = d && typeof d === 'object' ? d : {};
+        if (audio.src && audio.paused) trocarAudio();
+        if (musicas[atual]) pintarVozes();
+      });
       async function escolherNaipe(v) {
         naipe = naipe === v ? '' : v;                    // tocar de novo no mesmo naipe desliga
         try { localStorage.setItem('ens-naipe', naipe); } catch (e) {}
         const m = musicas[atual];
         if (naipe && letraDe(m) && modo !== 'Letra') { modo = 'Letra'; await aplicarModo(m); }
+        trocarAudio();
         await carregarDivisao(letraDe(m)); pintarDivisao(m); pintarVozes();
       }
       sheet.querySelectorAll('.ens-voz').forEach(b => b.addEventListener('click', () => escolherNaipe(b.dataset.voz)));
@@ -2602,7 +2628,7 @@ NOV</strong>
       audio.volume = .5; const semBarra = Math.abs(audio.volume - .5) > .01;   // iPhone/iPad: volume só pelos botões do aparelho
       let vol = 1; try { const v = parseFloat(localStorage.getItem('ens-volume')); if (v >= 0 && v <= 1) vol = v; } catch (e) {}
       sheet.querySelector('.ens-vol').classList.toggle('sem-barra', semBarra);
-      function aplicarVolume() { audio.volume = Math.max(0, Math.min(1, vol * (naipe ? GUIA : 1))); }
+      function aplicarVolume() { audio.volume = Math.max(0, Math.min(1, vol * (usaGuia() ? GUIA : 1))); }
       aplicarVolume();
       function pintarVolume() {
         const v = audio.muted ? 0 : vol;
