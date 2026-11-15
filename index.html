@@ -920,7 +920,7 @@
     .ens-letra.com-naipe.tem-tempos .ens-l.on { opacity:.7; color:var(--ivory); }
     .ens-letra.com-naipe.tem-tempos .ens-l.minha.on { opacity:1; color:#ffe9b8; text-shadow:0 0 18px rgba(223,187,119,.55); }
     .ens-voz-aviso { margin:-4px 0 8px; color:#c3b9a8; font-size:.74rem; text-align:center; }
-    .ens-voz-aviso[hidden] { display:none; }
+    .ens-voz-aviso[hidden], .ens-vozes[hidden] { display:none; }
     .ens-panel.is-reading .ens-vozes, .ens-panel.is-reading .ens-voz-aviso { grid-column:1 / -1; margin-bottom:4px; }
     .ens-panel.is-reading .ens-voz { min-height:28px; padding:0 10px; font-size:.74rem; }
     .ens-panel.is-telao .ens-vozes, .ens-panel.is-telao .ens-voz-aviso { display:none; }
@@ -2342,7 +2342,7 @@ NOV</strong>
       sheet.setAttribute('role', 'dialog'); sheet.setAttribute('aria-modal', 'true'); sheet.setAttribute('aria-label', 'Player das músicas do ensaio');
       sheet.innerHTML = `<div class="ens-backdrop" data-fechar></div><div class="ens-panel"><button class="ens-sair-telao" type="button" data-sair-telao aria-label="Sair do modo telão">✕ Sair do telão</button><div class="ens-top"><span class="ens-grip"></span><span class="ens-top-info"><span class="ens-group"></span><b class="ens-top-title"></b></span><button class="ens-close" type="button" aria-label="Fechar player" data-fechar>×</button></div>
         <div class="ens-slides"></div>
-        <div class="ens-controls"><div class="ens-vozes" role="group" aria-label="Escolha sua voz"><span class="ens-vozes-rot">Voz</span>${VOZES.map(v => `<button class="ens-voz" type="button" aria-pressed="false" data-voz="${v}">${v}</button>`).join('')}</div><p class="ens-voz-aviso" hidden></p><input class="ens-progress" type="range" min="0" max="1000" value="0" step="1" aria-label="Posição da música"><div class="ens-times"><span data-atual>0:00</span><span data-resta>-0:00</span></div>
+        <div class="ens-controls"><div class="ens-vozes" hidden role="group" aria-label="Escolha sua voz"><span class="ens-vozes-rot">Voz</span>${VOZES.map(v => `<button class="ens-voz" type="button" aria-pressed="false" data-voz="${v}">${v}</button>`).join('')}</div><p class="ens-voz-aviso" hidden></p><input class="ens-progress" type="range" min="0" max="1000" value="0" step="1" aria-label="Posição da música"><div class="ens-times"><span data-atual>0:00</span><span data-resta>-0:00</span></div>
         <div class="ens-buttons"><button class="ens-btn" type="button" data-ant aria-label="Música anterior">${ICON.prev}</button><button class="ens-btn ens-main" type="button" data-tocar aria-label="Tocar">${ICON.play}</button><button class="ens-btn" type="button" data-prox aria-label="Próxima música">${ICON.next}</button></div>
         <div class="ens-vol"><button class="ens-vol-btn" type="button" data-mudo aria-label="Silenciar" aria-pressed="false">${ICON.vol}</button><input class="ens-volume" type="range" min="0" max="100" value="100" step="1" aria-label="Volume"></div>
         <div class="ens-dots">${musicas.map(() => '<i></i>').join('')}</div></div></div>`;
@@ -2564,6 +2564,9 @@ NOV</strong>
         return !!naipe && !temKit(m, naipe) && !!(r && r.divisao && Array.isArray(r.divisao.partes)); };
       function pintarVozes() {
         const m = musicas[atual], r = letraDe(m), algumKit = (kits[slugDe(m)] || []).length > 0;
+        // a linha de vozes só aparece nas músicas que têm kit de vozes
+        sheet.querySelector('.ens-vozes').hidden = !algumKit;
+        if (!algumKit) { avisoVoz.hidden = true; aplicarVolume(); return; }
         sheet.querySelectorAll('.ens-voz').forEach(b => { const v = b.dataset.voz;
           b.setAttribute('aria-pressed', String(v === naipe));
           b.classList.toggle('falta', v !== 'Todas' && !temKit(m, v) && !(r && r.divisao)); });
