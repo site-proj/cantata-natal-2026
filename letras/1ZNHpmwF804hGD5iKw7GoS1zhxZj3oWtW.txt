@@ -2,143 +2,143 @@ O Azeite
 Isadora Pompeo
 Composição de: Isadora
 
-Tom: E
+Tom: D
 
 Afinação: E A D G B E
 
-[Intro] E      A   E     A
+[Intro] D      G   D     G
 
 [Primeira Parte]
 
-E                              A
+D                              G
 O que eu tô fazendo com Tua Presença?
-E                                  A
+D                                  G
 Eu sou o vaso mas a honra tá no azeite
-  C#m7                         A
+  Bm7                          G
 Não faz sentido estar exposto aqui
-C#m7                  A
+Bm7                   G
 Eu não sirvo pra decoração
-E                                A
+D                                G
 Tua Presença é o que eu mais desejo
-E                                A
+D                                G
 E se estou rachado pode me quebrar
 
 [Pré-Refrão]
 
- C#m7                       A
+ Bm7                        G
 É que eu não sirvo pra decoração
-  C#m7         B       A
+  Bm7          A       G
 Eu quero carregar a Tua unção
 
 [Refrão]
 
-    E
+    D
 O azeite não acaba
-          A
+          G
 E se tem vaso tem azeite
-         C#m
+         Bm
 Eu não preciso estar exposto
-                 A
+                 G
 Eu só quero ser cheio, cheio
-    E
+    D
 O azeite não acaba
-          A
+          G
 E se tem vaso tem azeite
 
-          C#m
+          Bm
 Eu não preciso estar exposto
-                 A
+                 G
 Eu só quero ser cheio, cheio
-    E
+    D
 Cheio de Ti
 
-( E   A    E   A )
+( D   G    D   G )
 
 [Segunda Parte]
 
-E                               A
+D                               G
 Tua Presença é o que eu mais desejo
-E                               A
+D                               G
 E se estou rachado pode me quebrar
 
 [Pré-Refrão]
 
- C#m7                       A
+ Bm7                        G
 É que eu não sirvo pra decoração
-  C#m7         B       A
+  Bm7          A       G
 Eu quero carregar a Tua unção
 
 [Refrão]
 
-    E
+    D
 O azeite não acaba
-          A
+          G
 E se tem vaso tem azeite
-          C#m
+          Bm
 Eu não preciso estar exposto
-                 A
+                 G
 Eu só quero ser cheio, cheio
-    E
+    D
 O azeite não acaba
-          A
+          G
 E se tem vaso tem azeite
-          C#m
+          Bm
 Eu não preciso estar exposto
-                 A
+                 G
 Eu só quero ser cheio, cheio
 
 [Ponte]
 
-                 B                C#m
+                 A                Bm
 E eu nunca encontrei ninguém mais Belo
 
-              E/G#         A
+              D/F#         G
 Nunca me senti tão completo
-              B              C#m
+              A              Bm
 Se preciso ser quebrado inteiro
-      A E/G#    A E/G# C#m B
+      G D/F#    G D/F# Bm  A
 Eu que_ro, que_ro
-                 B               C#m
+                 A               Bm
 Eu nunca encontrei ninguém mais Belo
-              E/G#         A
+              D/F#         G
 Nunca me senti tão completo
-              B              C#m
+              A              Bm
 Se preciso ser quebrado inteiro
-      A E/G#    A E/G# A
+      G D/F#    G D/F# G
 Eu que_ro, que_ro
-    B        C#m A
+    A        Bm  G
 Eu quero, quero
-    B        C#m A
+    A        Bm  G
 Eu quero, quero
-    B C#m A
+    A Bm  G
 Eu quero
 
 [Refrão]
 
-    E
+    D
 O azeite não acaba
-          A
+          G
 E se tem vaso tem azeite
-          C#m
+          Bm
 Eu não preciso estar exposto
-                 A
+                 G
 Eu só quero ser cheio, cheio
-    E
+    D
 O azeite não acaba
-          A
+          G
 E se tem vaso tem azeite
-          C#m
+          Bm
 Eu não preciso estar exposto
-                 A
+                 G
 Eu só quero ser cheio, cheio
-      E
+      D
 E o azeite não acaba
-          A/E
+          G/D
 E se tem vaso tem azeite
-          C#m
+          Bm
 Eu não preciso estar exposto
-              A
+              G
 Eu quero ser cheio, cheio
 
-        E
+        D
 Cheio
