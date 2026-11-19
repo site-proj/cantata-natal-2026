@@ -920,7 +920,7 @@
     .ens-letra.com-naipe.tem-tempos .ens-l.on { opacity:.7; color:var(--ivory); }
     .ens-letra.com-naipe.tem-tempos .ens-l.minha.on { opacity:1; color:#ffe9b8; text-shadow:0 0 18px rgba(223,187,119,.55); }
     .ens-voz-aviso { margin:-4px 0 8px; color:#c3b9a8; font-size:.74rem; text-align:center; }
-    .ens-voz-aviso[hidden], .ens-vozes[hidden] { display:none; }
+    .ens-voz-aviso[hidden], .ens-vozes[hidden], .ens-voz[hidden] { display:none; }
     .ens-panel.is-reading .ens-vozes, .ens-panel.is-reading .ens-voz-aviso { grid-column:1 / -1; margin-bottom:4px; }
     .ens-panel.is-reading .ens-voz { min-height:28px; padding:0 10px; font-size:.74rem; }
     .ens-panel.is-telao .ens-vozes, .ens-panel.is-telao .ens-voz-aviso { display:none; }
@@ -2353,6 +2353,7 @@ NOV</strong>
       const temKit = (m, v) => !!v && v !== 'Todas' && (kits[slugDe(m)] || []).includes(v.toLowerCase());
       // Kits "livres" (listados em _livres): outra montagem da música, tocam do começo, sem karaokê sincronizado.
       const kitLivre = (m, v) => temKit(m, v) && (kits._livres || []).includes(slugDe(m));
+      const vozUnica = m => (kits._livres || []).includes(slugDe(m));
       const srcDe = m => temKit(m, naipe) ? new URL(`audio/vozes/${slugDe(m)}-${naipe.toLowerCase()}.mp3`, location.href).href : m.src;
       try { const v = localStorage.getItem('ens-naipe'); if (VOZES.includes(v)) naipe = v; } catch (e) {}
       // 3) player
@@ -2587,8 +2588,11 @@ NOV</strong>
         // a linha de vozes só aparece nas músicas que têm kit de vozes
         sheet.querySelector('.ens-vozes').hidden = !algumKit;
         if (!algumKit) { avisoVoz.hidden = true; aplicarVolume(); return; }
+        const unica = vozUnica(m);                      // kit livre (ex.: Jesus): um botão só, "Vozes"
         sheet.querySelectorAll('.ens-voz').forEach(b => { const v = b.dataset.voz;
-          b.setAttribute('aria-pressed', String(v === naipe));
+          b.hidden = unica && (v === 'Contralto' || v === 'Tenor');
+          b.textContent = unica && v === 'Soprano' ? 'Vozes' : v;
+          b.setAttribute('aria-pressed', String(unica && v === 'Soprano' ? !!naipe && naipe !== 'Todas' : v === naipe));
           b.classList.toggle('falta', v !== 'Todas' && !temKit(m, v) && !(r && r.divisao)); });
         const temDivisao = !!(r && r.divisao);
         const emBreve = naipe && naipe !== 'Todas' && !temKit(m, naipe) && !temDivisao && r && r.divisao !== undefined;
@@ -2611,7 +2615,8 @@ NOV</strong>
         if (musicas[atual]) pintarVozes();
       });
       async function escolherNaipe(v) {
-        naipe = naipe === v ? '' : v;                    // tocar de novo no mesmo naipe desliga
+        const umaVoz = vozUnica(musicas[atual]) && v === 'Soprano' && naipe && naipe !== 'Todas';
+        naipe = naipe === v || umaVoz ? '' : v;                    // tocar de novo no mesmo naipe desliga
         try { localStorage.setItem('ens-naipe', naipe); } catch (e) {}
         const m = musicas[atual];
         if (naipe && letraDe(m) && modo !== 'Letra') { modo = 'Letra'; await aplicarModo(m); }
