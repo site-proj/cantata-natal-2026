@@ -26,7 +26,12 @@ aprovado e não repita o reprovado.
 
 ## 2. Fluxo de publicação (aprovado)
 
-1. Desenvolva no branch de trabalho da sessão; nunca direto em `main`.
+1. **Antes de qualquer mudança, atualize-se com o site no ar**: `git fetch origin main` e
+   parta do `main` mais recente. O site muda entre conversas (outras sessões publicam);
+   nunca trabalhe nem proponha em cima de uma versão antiga.
+   Desenvolva no branch de trabalho da sessão; nunca direto em `main`.
+1a. **Publique só o que foi pedido/aprovado.** Se o branch tiver algo pendente que não foi
+   aprovado, não junte na publicação; pergunte ou reverta.
 2. Commits em português, título curto com a área na frente: `Ensaios: ...`,
    `Seu Olhar: ...`, `Abertura: ...`, `Figurino: ...`. Corpo com bullets do que muda.
    Enquanto não aprovado, termine com `(Ainda não publicado: aguardando aprovação.)`.
@@ -61,6 +66,11 @@ aprovado e não repita o reprovado.
 - ❌ Inspiração no estilo "showreel" genérico (prompt-motion) — não gostou.
 - ❌ **"Salto" ao rolar** (efeito de tela cheia / mudança de altura do hero no celular) —
   pediu para remover; visualmente estranho. Use altura estável (`svh`).
+- ❌ Botões **"Como chegar" / "Agenda de ensaios"** abaixo da data na página inicial —
+  descartados (19/11). Não propor de novo.
+- ❌ **Prévia de link para WhatsApp** (imagem `og:image`) e ícone de estrela do site —
+  descartados (19/11). Não propor de novo.
+- O menu tem 6 abas: Início, Ensaios, Escala, Figurino, Bastidores, Seu Olhar.
 - O título termina na mesma altura de antes no celular; o botão "Sobre a Cantata" não
   pode encostar nas figuras. Remova assets não usados (PNGs antigos).
 
@@ -99,6 +109,9 @@ aprovado e não repita o reprovado.
   cada repetição do refrão (`letras/<id>.tempos.json`). Detalhes técnicos em
   [references/karaoke.md](references/karaoke.md).
 - ❌ Player antigo com PDF pequeno e difícil de enxergar.
+- Correções de letra: altere o `.txt` da letra **e** o da cifra da mesma música (mantendo
+  os acordes). Se só o texto muda e o número de linhas é o mesmo, o `.tempos.json`
+  continua valendo.
 
 ### Artes e vídeos de divulgação
 - ✅ Contagem regressiva em vídeo (a partir de 37 dias para trás) **com a identidade da
