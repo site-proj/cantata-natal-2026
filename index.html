@@ -2351,6 +2351,8 @@ NOV</strong>
       let kits = {};
       const slugDe = m => decodeURIComponent((m.src.split('/').pop() || '').replace(/\.mp3(\?.*)?$/i, ''));
       const temKit = (m, v) => !!v && v !== 'Todas' && (kits[slugDe(m)] || []).includes(v.toLowerCase());
+      // Kits "livres" (listados em _livres): outra montagem da música, tocam do começo, sem karaokê sincronizado.
+      const kitLivre = (m, v) => temKit(m, v) && (kits._livres || []).includes(slugDe(m));
       const srcDe = m => temKit(m, naipe) ? new URL(`audio/vozes/${slugDe(m)}-${naipe.toLowerCase()}.mp3`, location.href).href : m.src;
       try { const v = localStorage.getItem('ens-naipe'); if (VOZES.includes(v)) naipe = v; } catch (e) {}
       // 3) player
@@ -2461,7 +2463,9 @@ NOV</strong>
         const t = audio.currentTime || 0, d = audio.duration || 0;
         const linhas = m.linhasEls && m.linhasEls[0]?.isConnected ? m.linhasEls : (m.linhasEls = [...doc.querySelectorAll('.ens-l')]);
         let destino = null;
-        if (m.modoMontado === 'Letra' && Array.isArray(r.tempos) && linhas.length) {
+        const sincroniza = m.modoMontado === 'Letra' && Array.isArray(r.tempos) && !kitLivre(m, naipe);
+        const letraEl = doc.querySelector('.ens-letra'); if (letraEl && letraEl.classList.contains('tem-tempos') !== sincroniza) letraEl.classList.toggle('tem-tempos', sincroniza);
+        if (sincroniza && linhas.length) {
           // cada linha tem um tempo ou uma lista (refrão escrito uma vez e cantado várias): acende a que começou por último
           let k = -1, ult = -1;
           r.tempos.forEach((tt, i) => { [].concat(tt ?? []).forEach(v => { if (v <= t + .2 && v >= ult) { ult = v; k = i; } }); });
@@ -2596,7 +2600,8 @@ NOV</strong>
       function trocarAudio() {
         const novo = srcDe(musicas[atual]);
         if (!audio.src || audio.src === novo) return;
-        const t = audio.currentTime, tocando = !audio.paused;
+        const m = musicas[atual], livre = kitLivre(m, naipe) || audio.src.includes(`/vozes/${slugDe(m)}-`) && (kits._livres || []).includes(slugDe(m));
+        const t = livre ? 0 : audio.currentTime, tocando = !audio.paused;   // kit livre: troca começa do início
         audio.src = novo;
         audio.addEventListener('loadedmetadata', () => { try { audio.currentTime = Math.min(t, audio.duration || t); } catch (e) {} if (tocando) audio.play().catch(() => {}); }, { once: true });
       }
